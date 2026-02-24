@@ -1,0 +1,13 @@
+Compound,Lattice Parameter a (A),Oxygen Parameter x,Anion Vacancy (delta),B-O Distance (A),B-O-B Angle (deg),Conductivity Type
+Lu2Ti2O7,9.99,0.33,-,-,-,Semiconducting
+Bi2Sn2O7,10.7428,-,-,2.065,-,Semiconducting (Lone-pair active)
+Nd2Ir2O7,10.1980,0.3347,Defect (Cation/Anion),1.999,128.8,Metallic (Defect)
+Pr2Ir2O7,10.4159,0.3310,0,2.025,130.77,Metallic
+Bi2Ir2O7,10.3256,0.32985,0.185,2.003,131.38,Metallic
+(BiY)Ir2O7,10.2478,0.33363,0.036,2.004,129.36,Metallic
+(BiPb)Ir2O7,10.2897,0.2956,0.5,2.001,132.33,Metallic (F43m)
+Pb2Ir2O7,10.2645,0.2997,0.532,1.967,133.41,Metallic (F43m)
+Gd2Zr2O7 (#A1ZO),10.53931,0.34093,-,-,-,Semiconducting
+#A3ZO,10.56785,0.33438,-,-,-,High-Entropy
+#A5ZO,10.66488,0.33931,-,-,-,High-Entropy
+#A7ZO,10.58564,0.33133,-,-,-,High-Entropy
