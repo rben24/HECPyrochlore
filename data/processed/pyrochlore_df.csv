@@ -1,0 +1,42 @@
+Composition,Sample A,Sample B,TPS Cond W/m/K,Deviation,Synthesis Method,Relative Density %,Is Single Phase,Corrected Cond W/m/K,Lattice Parameter (Angstrom),Notes,Lattice Parameter a (A),Oxygen Parameter x,Anion Vacancy (delta),B-O Distance (A),B-O-B Angle (deg),Conductivity Type
+YbHo Ti HP,"Yb,Ho",Ti,1.5253,0.014399,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,0.9627,Yes,1.709241789,10.07653,,,,,,,
+YbHoTb Ti HP,"Yb,Ho,Tb",Ti,1.7887,0.012586,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,0.9006,Yes,2.195121013,10.09559,,,,,,,
+YbHoTbNd Ti HP,"Yb,Ho,Tb,Nd",Ti,1.6582,0.014754,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,0.9377,Yes,1.924107258,10.11292,,,,,,,
+YbHoTbNdPr Ti HP,"Yb,Ho,Tb,Nd,Pr",Ti,1.5326,0.041654,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,,No,,10.18264,,,,,,,
+PrSmGdHoLu TI SDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.5663,0.021983,SSS 1400C 20 Hr powder then 1600C 40 Hr,0.9152,Yes,1.890909262,10.17812,,,,,,,
+SmEuGdTbDy Ti SDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.0263,0.010614,SSS 1400C 20 Hr powder then 1600C 40 Hr,0.9277,Yes,2.358862271,10.184691,,,,,,,
+PrNdGdYbLu Ti SDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.4074,0.0071195,SSS 1400C 20 Hr powder then 1600C 40 Hr,0.9353,Yes,1.65363365,10.175423,,,,,,,
+PrSmGdHoLu Ti HPSDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.6402,0.0072793,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,0.9519,Yes,1.861954207,10.17788,,,,,,,
+PrNdGdYbLu Ti HPSDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.5372,0.050293,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,0.9334,Yes,1.803578213,10.17459,,,,,,,
+SmEuGdTbDy Ti HPSDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.1861,0.010599,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,0.9596,Yes,2.405474741,10.18337,,,,,,,
+PrSmGdHoLu Ti CDTF,"Pr,Sm,Gd,Ho,Lu",Ti,1.5632,0.017468,SSS 1600C 40 Hr,0.923,Yes,1.8634952,10.17813232,,,,,,,
+PrNdGdYbLu CDTF,"Pr,Nd,Gd,Yb,Lu",Ti,1.3101,0.0076589,SSS 1600C 40 Hr,0.9043,Yes,1.624552602,10.17715823,,,,,,,
+SmEuGdTbDy Ti CDTF,"Sm,Eu,Gd,Tb,Dy",Ti,1.9556,0.029175,SSS 1600C 40 Hr,0.8998,Yes,2.389176079,10.18087481,,,,,,,
+SmEuGdTbDy SPS,"Sm,Eu,Gd,Tb,Dy",Ti,2.0866,0.042452,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,0.9632,Yes,2.291152684,10.186104,,,,,,,
+PrNdGdYbLu SPS,"Pr,Nd,Gd,Yb,Lu",Ti,1.4789,0.0034275,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,0.9543,Yes,1.681864434,10.173943,,,,,,,
+PrSmGdHoLu SPS,"Pr,Sm,Gd,Ho,Lu",Ti,1.5631,0.01238,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,0.9879,Yes,1.682809943,10.182036,,,,,,,
+LaLuTiZr TF,"La, Lu","Ti, Zr",1.0087,0.011419,SSS 1600C 40 Hr,,No,,10.36904,,,,,,,
+LaGdLuTiZr TF,"La,Gd,Lu","Ti, Zr",0.86389,0.01676,SSS 1600C 40 Hr,0.9415,Yes,1.034831808,10.37753523,,,,,,,
+LaGdLuTiZr HP,"La,Gd,Lu","Ti, Zr",1.0483,0.009033167,,0.8467,Yes,1.481488392,,,,,,,,
+LaEuLuTiZr TF,"La,Eu,Lu","Ti, Zr",1.020142857,0.009140625,SSS 1600C 40 Hr,0.9617,Yes,1.189878697,10.38009,,,,,,,
+PrYbTiZr TF,"Pr,Yb","Ti, Zr",0.99236,0.023474676,SSS 1600C 40 Hr,0.9571,Yes,1.164752183,10.36939,,,,,,,
+PrYbTiHf TF,"Pr, Yb","Ti, Hf",0.8213,0.002160688,SSS 1600C 40 Hr,0.9183,Yes,1.019879562,10.34771,,,,,,,
+LaGdLuTiHf TF,"La,Gd,Lu","Ti, Hf",0.643571429,0.002535302,SSS 1600C 40 Hr,0.9446,Yes,0.76148419,10.36585,,,,,,,
+LaGdLu TiZr SM 2500 1500 20,"La,Gd,Lu","Ti, Zr",0.7585,0.009056963,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,0.9394,Yes,0.908429078,10.35687,,,,,,,
+PrYb SM 2500 1500 20,"Pr,Yb","Ti, Zr",1.015142857,0.004763809,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,0.9412,Yes,1.222737666,10.37021,,,,,,,
+LaGdLuTiHf SM 2500 1500 20,"La,Gd,Lu","Ti, Hf",0.878971429,0.005456245,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,0.9248,Yes,1.082090082,10.36733,,,,,,,
+PrYb TiHf SM 2500 1500 20,"Pr, Yb","Ti, Hf",0.899971429,0.027600399,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,0.9495,Yes,1.065738943,10.37763,,,,,,,
+LaYTiZr TF,"La, Y","Ti, Zr",1.052428571,0.00430472,SSS 1600C 40 Hr,,No,,10.36109,,,,,,,
+LaSmYTiZr TF,"La,Sm,Y","Ti, Zr",1.024692308,0.003830738,SSS 1600C 40 Hr,0.929,Yes,1.259031603,10.3711,Not Equiatomic. 20% Sm the rest are balanced for max size disorder (Ti>Zr and Y>La),,,,,,
+Lu2Ti2O7,,,,,,,,,,,9.99,0.33,-,-,-,Semiconducting
+Bi2Sn2O7,,,,,,,,,,,10.7428,-,-,2.065,-,Semiconducting (Lone-pair active)
+Nd2Ir2O7,,,,,,,,,,,10.198,0.3347,Defect (Cation/Anion),1.999,128.8,Metallic (Defect)
+Pr2Ir2O7,,,,,,,,,,,10.4159,0.3310,0,2.025,130.77,Metallic
+Bi2Ir2O7,,,,,,,,,,,10.3256,0.32985,0.185,2.003,131.38,Metallic
+(BiY)Ir2O7,,,,,,,,,,,10.2478,0.33363,0.036,2.004,129.36,Metallic
+(BiPb)Ir2O7,,,,,,,,,,,10.2897,0.2956,0.5,2.001,132.33,Metallic (F43m)
+Pb2Ir2O7,,,,,,,,,,,10.2645,0.2997,0.532,1.967,133.41,Metallic (F43m)
+Gd2Zr2O7 (#A1ZO),,,,,,,,,,,10.53931,0.34093,-,-,-,Semiconducting
+#A3ZO,,,,,,,,,,,10.56785,0.33438,-,-,-,High-Entropy
+#A5ZO,,,,,,,,,,,10.66488,0.33931,-,-,-,High-Entropy
+#A7ZO,,,,,,,,,,,10.58564,0.33133,-,-,-,High-Entropy
