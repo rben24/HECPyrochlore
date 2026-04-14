@@ -1,0 +1,58 @@
+{
+  "task": "thermal_cond",
+  "best_model": "GradientBoosting",
+  "feature_names": [
+    "a_site_n_elements",
+    "a_site_entropy",
+    "a_site_mean_radius",
+    "a_site_radius_variance",
+    "a_site_radius_std",
+    "a_site_delta",
+    "a_site_en_mean",
+    "a_site_en_variance",
+    "a_site_mean_atomic_num",
+    "a_site_mean_molar_mass",
+    "b_site_n_elements",
+    "b_site_entropy",
+    "b_site_mean_radius",
+    "b_site_radius_variance",
+    "b_site_radius_std",
+    "b_site_delta",
+    "b_site_en_mean",
+    "b_site_en_variance",
+    "b_site_mean_atomic_num",
+    "b_site_mean_molar_mass",
+    "a_b_radius_ratio",
+    "total_entropy",
+    "total_delta",
+    "phonon_scattering_factor",
+    "lattice_parameter"
+  ],
+  "test_metrics": {
+    "RMSE": 0.15463722399446886,
+    "MAE": 0.13327678012285646,
+    "R2": 0.9186287299447466
+  },
+  "cv_summary": {
+    "RandomForest": {
+      "mean_r2": 0.7866049584639003,
+      "std_r2": 0.11926078833541572,
+      "mean_rmse": 0.14824663864206594
+    },
+    "GradientBoosting": {
+      "mean_r2": 0.9040810879280607,
+      "std_r2": 0.05025513888850297,
+      "mean_rmse": 0.09921309339017702
+    },
+    "ExtraTrees": {
+      "mean_r2": 0.8029517724679301,
+      "std_r2": 0.09239932994146324,
+      "mean_rmse": 0.14501906303933998
+    },
+    "Ridge": {
+      "mean_r2": 0.8391659763192632,
+      "std_r2": 0.09800518206592905,
+      "mean_rmse": 0.12809623571744383
+    }
+  }
+}

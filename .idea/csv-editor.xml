@@ -3,6 +3,13 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
+        <entry key="C:\Users\Delluser\Downloads\HECPyrochlore_project\HECPyrochlore\data\raw\Sample_Properties_Safin_Feb_2026.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\processed\pyrochlore_df.csv">
           <value>
             <Attribute>

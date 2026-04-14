@@ -1,0 +1,56 @@
+============================================================
+  LATTICE PARAMETER — VALIDATION REPORT
+============================================================
+
+  Best model   : GradientBoosting
+  CV folds     : 5
+  Features     : 24
+
+── Test-set Metrics ────────────────────────────────────────
+  RMSE  : 0.01919
+  MAE   : 0.01243
+  R2    : 0.96906
+
+── Cross-Validation Summary (all models) ───────────────────
+  RandomForest
+    R²   : 0.9154 ± 0.1088
+    RMSE : 0.02141 ± 0.01665
+    MAE  : 0.01434 ± 0.01022
+  GradientBoosting
+    R²   : 0.9671 ± 0.0365
+    RMSE : 0.01387 ± 0.00936
+    MAE  : 0.01036 ± 0.00644
+  ExtraTrees
+    R²   : 0.9303 ± 0.0849
+    RMSE : 0.01997 ± 0.01433
+    MAE  : 0.01402 ± 0.00914
+  Ridge
+    R²   : 0.9591 ± 0.0227
+    RMSE : 0.01807 ± 0.00538
+    MAE  : 0.01354 ± 0.00370
+
+── Top-15 Features by Permutation Importance ────────────────
+  Rank  Feature                               Perm Imp   ±       Std    Tree MDI
+  ------------------------------------------------------------------------
+  1     b_site_mean_molar_mass                0.057877  ±  0.031259    0.131557
+  2     b_site_n_elements                     0.047178  ±  0.023415    0.163221
+  3     b_site_mean_radius                    0.036425  ±  0.019455    0.065248
+  4     b_site_delta                          0.033627  ±  0.017510    0.115361
+  5     b_site_en_mean                        0.032114  ±  0.016935    0.099384
+  6     b_site_entropy                        0.028424  ±  0.015719    0.088665
+  7     b_site_radius_variance                0.018216  ±  0.010040    0.065500
+  8     total_entropy                         0.018149  ±  0.011501    0.013774
+  9     total_delta                           0.016001  ±  0.009032    0.022590
+  10    a_site_radius_std                     0.013833  ±  0.007329    0.038204
+  11    a_site_en_variance                    0.012124  ±  0.006687    0.001485
+  12    a_site_mean_atomic_num                0.012009  ±  0.006853    0.003998
+  13    a_site_mean_radius                    0.011828  ±  0.004538    0.015645
+  14    b_site_radius_std                     0.011604  ±  0.006507    0.025919
+  15    a_site_mean_molar_mass                0.009429  ±  0.004688    0.004626
+
+── Feature-Group Analysis ───────────────────────────────────
+  A-site      : mean perm-imp = 0.00780  | top feature = a_site_radius_std
+  B-site      : mean perm-imp = 0.02696  | top feature = b_site_mean_molar_mass
+  Cross-site  : mean perm-imp = 0.01112  | top feature = total_entropy
+
+============================================================
