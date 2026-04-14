@@ -55,14 +55,22 @@ def create_intial_dataset():
     exp_df = pd.read_csv(exp_file_path)
     data_file_path = '../../data/raw/notebookLM_dataset.csv'
     data_df = pd.read_csv(data_file_path)
+    data2_fp = '../../data/raw/Pyrocholore_Data_Jordan.csv'
+    data2_df = pd.read_csv(data2_fp)
 
     exp_df.drop_duplicates(inplace=True)
     data_df.drop_duplicates(inplace=True)
+    data_df.drop_duplicates(inplace=True)
 
     df = combine_df(exp_df, data_df)
+    df = combine_df(df, data2_df)
 
     df.to_csv('../../data/processed/pyrochlore_df.csv', index=False)
     logging.info('Saved pyrochlore_df.csv to data/processed\n')
+
+def load_raw(path: str) -> pd.DataFrame:
+    """Load raw CSV dataset from path."""
+    return pd.read_csv(path)
 
 if __name__ == "__main__":
     create_intial_dataset()

@@ -20,6 +20,8 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 from config import ModelConfig
+from src.data.make_dataset import make_dataset
+
 
 
 class ModelTrainer:
@@ -226,3 +228,94 @@ class ModelTrainer:
         with open(filepath, 'wb') as f:
             pickle.dump(self.scaler, f)
         print(f"Scaler saved to: {filepath}")
+
+
+#----------------------------------------------------------
+# src/build_models/train_model.py
+from src.data.make_dataset import load_raw
+from src.data.process_dataset import basic_process, get_train_test
+from src.utils.globals import DATA_PATH, TARGET_COL, RANDOM_STATE, TEST_SIZE
+from src.feat# src/build_models/train_model.py
+from src.data.make_dataset import load_raw
+from src.data.process_dataset import basic_process, get_train_test
+from src.utils.globals import DATA_PATH, TARGET_COL, RANDOM_STATE, TEST_SIZE
+from src.features.feature_extraction import evaluate_feature_methods
+from src.build_models.evaluate_model import evaluate_regressor
+from src.build_models.predict_model import predict_and_format
+
+import numpy as np
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.svm import SVR
+from sklearn.model_selection import GridSearchCV
+
+def build_candidate_models(random_state=RANDOM_STATE):
+    models = {
+        "linear": LinearRegression(),
+        "random_forest": RandomForestRegressor(n_estimators=200, random_state=random_state),
+        "svr": SVR()
+    }
+    return models
+
+def hyperparameter_tune(model, X, y, param_grid=None, cv=3, scoring="neg_mean_squared_error"):
+    if not param_grid:
+        return model
+    gs = GridSearchCV(model, param_grid=param_grid, cv=cv, scoring=scoring, n_jobs=-1)
+    gs.fit(X, y)
+    return gs.best_estimator_
+
+def train_and_select_best(X_train, X_test, y_train, y_test, feature_candidates, models=None):
+    if models is None:
+        models = build_candidate_models()
+
+    best_score = np.inf  # lower is better (RMSE)
+    best = {"model_name": None, "estimator": None, "features": None, "metrics": None}
+
+    for feat_key, feat_info in feature_candidates.items():
+        if "X_train" in feat_info:
+            Xtr = feat_info["X_train"]
+            Xte = feat_info["X_test"]
+            feat_names = list(Xtr.columns)
+        elif "selected_features" in feat_info:
+            feat_names = feat_info["selected_features"]
+            Xtr = X_train[feat_names]
+            Xte = X_test[feat_names]
+        else:
+            continue
+
+        for model_name, estimator in models.items():
+            est = estimator
+            if model_name == "random_forest":
+                est = hyperparameter_tune(estimator, Xtr, y_train,
+                                          param_grid={"n_estimators": [100, 200]}, cv=3)
+            est.fit(Xtr, y_train)
+            metrics = evaluate_regressor(est, Xte, y_test)
+            score = metrics.get("rmse", np.inf)
+            if score < best_score:
+                best_score = score
+                best.update({"model_name": model_name, "estimator": est, "features": feat_names, "metrics": metrics})
+
+    return best
+
+def main():
+    df = load_raw(DATA_PATH)
+    X, y = basic_process(df, TARGET_COL)
+    X_train, X_test, y_train, y_test = get_train_test(X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE)
+
+    estimator_for_feat = LinearRegression()
+    feature_candidates = evaluate_feature_methods(X_train, X_test, y_train, y_test, estimator=estimator_for_feat, top_k=10)
+
+    best = train_and_select_best(X_train, X_test, y_train, y_test, feature_candidates)
+
+    print("Best model:", best["model_name"])
+    print("Features used (sample):", best["features"][:10] if best["features"] else None)
+    print("Metrics:", best["metrics"])
+
+    if best["estimator"] is not None and best["features"] is not None:
+        X_test_sel = X_test[best["features"]]
+        preds_df = predict_and_format(best["estimator"], X_test_sel)
+        print("Predictions sample:\n", preds_df.head())
+
+if __name__ == "__main__":
+    main()
