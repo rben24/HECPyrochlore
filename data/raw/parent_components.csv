@@ -1,0 +1,10 @@
+Parent Compound,Chemical Formula,A-site Cations,B-site Cations,Thermal Conductivity (W/m·K),Crystal Structure,Key Properties,Source
+Lanthanide Zirconates,A₂Zr₂O₇,"La,Nd,Sm,Eu,Gd,Y",Zr,0.9,Pyrochlore (Fd-3m),"High thermal stability, excellent sintering resistance, ionic conductivity, nuclear waste immobilization, low phonon thermal transport",a
+Lanthanide Hafnates,A₂Hf₂O₇,"La,Nd,Sm,Eu,Gd,Y",Hf,1.0,Pyrochlore (Fd-3m),"Enhanced mechanical properties, higher density than zirconates, superior thermal barrier coating potential, improved fracture resistance",b
+Lanthanide Stannates,A₂Sn₂O₇,"La,Nd,Sm,Eu,Gd,Y",Sn,1.3,Pyrochlore (Fd-3m),"Photocatalytic ability, scintillator host behavior, variable electrical conductivity, phase evolution at 1300C",c
+Lanthanide Titanates,A₂Ti₂O₇,"Ho,Y,Dy,Gd,Eu",Ti,0.75,Pyrochlore (Fd-3m),"Excellent mechanical properties, low thermal conductivity, lattice distortion design, TiO2 composite formation capability",d
+Mixed B-site Zirconates,A₂B₂O₇,"La,Nd,Sm,Eu,Gd,Y","Zr,Hf,Sn",0.9,Pyrochlore (Fd-3m),"Configurational entropy-stabilized, homogeneous cation distribution, tunable multi-functional properties, enhanced fracture toughness",r
+Seven-Element Zirconate,A₂Zr₂O₇,"La,Nd,Sm,Eu,Gd,Dy,Ho",Zr,0.85,Pyrochlore (Fd-3m),"Maximum configurational entropy, reactive spark plasma sintering compatibility, excellent phase stability, superior thermal barrier coating candidate",f
+Rare-Earth Titanate Composites,A₂Ti₂O₇,"Ho,Y,Dy,Gd,Eu",Ti,0.65,Pyrochlore (Fd-3m),"Excellent mechanical and thermal properties, enhanced fracture toughness, composite microstructure benefits",g
+Zirconate with Ce Doping,A₂Zr₂O₇,"La,Nd,Sm,Gd,Yb","Zr,Ce",0.9,Pyrochlore (Fd-3m),"Significantly enhanced fracture toughness, improved oxidation resistance, mixed-valence cation effects",h
+Stannate with Lanthanides,A₂Sn₂O₇,"Gd,Nd,La,Pr,Sm",Sn,1.15,Pyrochlore (Fd-3m),"Single-phase formation at 1300C, excellent phase stability, thermal barrier coating material, nanoparticle synthesis capability",i

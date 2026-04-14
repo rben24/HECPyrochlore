@@ -7,54 +7,54 @@
   Features     : 25
 
 ── Test-set Metrics ────────────────────────────────────────
-  RMSE  : 0.15464
-  MAE   : 0.13328
-  R2    : 0.91863
+  RMSE  : 0.13389
+  MAE   : 0.10167
+  R2    : 0.88878
 
 ── Cross-Validation Summary (all models) ───────────────────
   RandomForest
-    R²   : 0.7866 ± 0.1193
-    RMSE : 0.14825 ± 0.05619
-    MAE  : 0.12823 ± 0.04845
+    R²   : 0.5167 ± 0.2747
+    RMSE : 0.24189 ± 0.04558
+    MAE  : 0.18675 ± 0.03909
   GradientBoosting
-    R²   : 0.9041 ± 0.0503
-    RMSE : 0.09921 ± 0.02503
-    MAE  : 0.08460 ± 0.02677
+    R²   : 0.7713 ± 0.0862
+    RMSE : 0.17033 ± 0.02598
+    MAE  : 0.14479 ± 0.02620
   ExtraTrees
-    R²   : 0.8030 ± 0.0924
-    RMSE : 0.14502 ± 0.04814
-    MAE  : 0.11622 ± 0.03970
+    R²   : 0.4946 ± 0.4028
+    RMSE : 0.23482 ± 0.06068
+    MAE  : 0.17739 ± 0.03631
   Ridge
-    R²   : 0.8392 ± 0.0980
-    RMSE : 0.12810 ± 0.04781
-    MAE  : 0.10477 ± 0.05107
+    R²   : 0.2080 ± 0.5077
+    RMSE : 0.30645 ± 0.08524
+    MAE  : 0.22763 ± 0.06509
 
 ── Top-15 Features by Permutation Importance ─────────────────
   Rank  Feature                               Perm Imp   ±       Std    Tree MDI
   ------------------------------------------------------------------------
-  1     a_b_radius_ratio                      0.123025  ±  0.062331    0.175785
-  2     a_site_delta                          0.046781  ±  0.042915    0.098803
-  3     b_site_en_mean                        0.035346  ±  0.033293    0.147926
-  4     b_site_mean_atomic_num                0.028295  ±  0.028297    0.104716
-  5     phonon_scattering_factor              0.021248  ±  0.021134    0.043991
-  6     a_site_radius_std                     0.018906  ±  0.022896    0.048442
-  7     a_site_radius_variance                0.017267  ±  0.025961    0.092957
-  8     b_site_entropy                        0.014721  ±  0.018618    0.073507
-  9     a_site_en_mean                        0.012220  ±  0.008294    0.010673
-  10    b_site_mean_radius                    0.011117  ±  0.011662    0.045162
-  11    total_delta                           0.008895  ±  0.016430    0.034421
-  12    b_site_en_variance                    0.007783  ±  0.009420    0.016363
-  13    a_site_mean_molar_mass                0.007306  ±  0.006503    0.006403
-  14    a_site_en_variance                    0.007081  ±  0.007878    0.012551
-  15    b_site_n_elements                     0.005814  ±  0.006799    0.006344
+  1     lattice_parameter                     1.880154  ±  0.726192    0.776323
+  2     a_site_en_mean                        0.071503  ±  0.035072    0.047036
+  3     a_site_mean_atomic_num                0.025425  ±  0.014608    0.025946
+  4     b_site_en_mean                        0.014435  ±  0.024212    0.022000
+  5     a_site_mean_molar_mass                0.008993  ±  0.006003    0.006790
+  6     a_b_radius_ratio                      0.008013  ±  0.006869    0.015745
+  7     b_site_radius_std                     0.006077  ±  0.005275    0.001613
+  8     phonon_scattering_factor              0.005571  ±  0.006665    0.004267
+  9     total_delta                           0.003831  ±  0.003787    0.017417
+  10    a_site_en_variance                    0.003543  ±  0.003821    0.008025
+  11    a_site_entropy                        0.003249  ±  0.001838    0.000633
+  12    a_site_radius_std                     0.003056  ±  0.002339    0.010535
+  13    b_site_mean_radius                    0.002674  ±  0.022149    0.017202
+  14    a_site_delta                          0.002591  ±  0.002275    0.009661
+  15    b_site_radius_variance                0.001470  ±  0.003402    0.003734
 
 ── Physical Interpretation ──────────────────────────────────
   Features are ranked by how much they reduce model R²
   when randomly shuffled (permutation importance).
 
   Key feature groups:
-  A-site compositional     : mean = 0.01199  | top = a_site_delta
-  B-site compositional     : mean = 0.01088  | top = b_site_en_mean
-  Cross-site / lattice     : mean = 0.03174  | top = a_b_radius_ratio
+  A-site compositional     : mean = 0.01190  | top = a_site_en_mean
+  B-site compositional     : mean = -0.00253  | top = b_site_en_mean
+  Cross-site / lattice     : mean = 0.37817  | top = lattice_parameter
 
 ============================================================
