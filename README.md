@@ -27,6 +27,7 @@ HECPyrochlore/
     ├── predict_thermal.py        ★ Predict thermal conductivity interactively
     ├── validate_lattice.py       ★ Full validation + feature importance report
     ├── validate_thermal.py       ★ Full validation + feature importance report
+    ├── data_validation.py        ★ Add more validation output
     │
     ├── lattice_param/            ← auto-created on first run
     │   ├── lattice_param_model.pkl

@@ -2,20 +2,26 @@
 """
 validate_thermal.py
 ===================
-Driver script — trains and validates the **thermal conductivity** model.
+Driver script — trains, validates, and diagnoses the **thermal conductivity** model.
 
 Outputs
 -------
-  • Console: CV scores, test-set metrics, top features
-  • models/thermal_cond/thermal_parity.png
-  • models/thermal_cond/thermal_cv_comparison.png
-  • models/thermal_cond/thermal_feature_importance.png
-  • models/thermal_cond/thermal_validation_report.txt
+  models/thermal_cond/
+    thermal_parity.png                  — predicted vs actual
+    thermal_cv_comparison.png           — model comparison
+    thermal_feature_importance.png      — permutation + tree MDI
+    thermal_residuals.png               — 4-panel residual diagnostics
+    thermal_influence.png               — Cook's D + leverage plot
+    thermal_target_distribution.png     — histogram, KDE, box-plot
+    thermal_feature_vs_target.png       — top-6 features vs target
+    thermal_correlation_heatmap.png     — feature–feature Pearson r
+    thermal_validation_report.txt       — full text report
 
 Usage
 -----
   python models/validate_thermal.py
   python models/validate_thermal.py --splits 5
+  python models/validate_thermal.py --no-validation   # skip data-validation plots
 """
 
 import argparse
@@ -30,13 +36,17 @@ _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent
 sys.path.insert(0, str(_PROJECT))
 
-from src.data.load_data import get_thermal_dataset
+from src.data.load_data import get_thermal_dataset, load_combined, clean_and_engineer
+from src.features.build_features import THERMAL_EXTRA_FEATURES
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
     plot_parity, plot_cv_comparison,
 )
+from data_validation import run_data_validation   # same directory as this script
 
-TASK = 'thermal_cond'
+import pandas as pd
+
+TASK     = 'thermal_cond'
 SAVE_DIR = _PROJECT / 'models' / TASK
 
 
@@ -45,6 +55,8 @@ def main():
         description='Validate thermal conductivity ML model.')
     parser.add_argument('--splits', type=int, default=5,
                         help='Number of CV folds (default: 5)')
+    parser.add_argument('--no-validation', action='store_true',
+                        help='Skip data-validation diagnostics (faster)')
     args = parser.parse_args()
 
     print()
@@ -67,8 +79,8 @@ def main():
         verbose=True,
     )
 
-    # ── Plots ─────────────────────────────────────────────────────────────────
-    print("\n[plots] Generating figures …")
+    # ── Standard plots ────────────────────────────────────────────────────────
+    print("\n[plots] Generating standard figures …")
     plot_parity(
         results['y_test'], results['y_pred'],
         title='Thermal Conductivity — Parity Plot',
@@ -90,7 +102,49 @@ def main():
     # ── Text report ───────────────────────────────────────────────────────────
     _write_report(results, feat_names, args.splits)
 
+    # ── Data validation & diagnostic plots ────────────────────────────────────
+    if not args.no_validation:
+        print("\n[validation] Running data validation & diagnostic plots …")
+        df_full = _build_full_df(feat_names)
+        sample_labels = _get_sample_labels(feat_names)
+
+        run_data_validation(
+            df=df_full,
+            feat_cols=feat_names,
+            target_col='TPS Cond W/m/K',
+            task_label='Thermal Conductivity',
+            save_dir=SAVE_DIR,
+            y_true=results['y_test'],
+            y_pred=results['y_pred'],
+            sample_labels=sample_labels,
+        )
+
     print("\n[done] All outputs written to:", SAVE_DIR)
+
+
+# ── Helpers ───────────────────────────────────────────────────────────────────
+
+def _build_full_df(feat_names):
+    df = clean_and_engineer(load_combined(verbose=False), verbose=False)
+    target = 'TPS Cond W/m/K'
+    feat_cols = [c for c in feat_names if c in df.columns]
+    df_sub = df.dropna(subset=[target])
+    df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
+    base_feats = [c for c in feat_cols if c != 'lattice_parameter']
+    feat_mask  = df_sub[base_feats].notna().all(axis=1)
+    df_sub = df_sub[feat_mask].copy()
+    if 'lattice_parameter' in df_sub.columns:
+        mean_lat = df_sub['lattice_parameter'].mean()
+        df_sub['lattice_parameter'] = df_sub['lattice_parameter'].fillna(mean_lat)
+    return df_sub.reset_index(drop=True)
+
+
+def _get_sample_labels(feat_names):
+    df_sub = _build_full_df(feat_names)
+    if 'Composition' in df_sub.columns:
+        return df_sub['Composition'].fillna('').tolist()
+    return [f"({a})₂({b})₂O₇"
+            for a, b in zip(df_sub.get('Sample A', []), df_sub.get('Sample B', []))]
 
 
 def _write_report(results, feat_names, n_splits):
@@ -149,7 +203,6 @@ def _write_report(results, feat_names, n_splits):
         "",
         "  Key feature groups:",
     ]
-
     groups = {
         'A-site compositional': [f for f in feat_names if 'a_site' in f],
         'B-site compositional': [f for f in feat_names if 'b_site' in f],
@@ -166,7 +219,20 @@ def _write_report(results, feat_names, n_splits):
             top_feat = sub.iloc[0]['feature']
             lines.append(f"  {grp:<25}: mean = {mean_imp:.5f}  | top = {top_feat}")
 
-    lines += ["", "=" * 60]
+    lines += [
+        "",
+        "── Diagnostic Plots Generated ───────────────────────────────",
+        "  thermal_parity.png                — predicted vs actual",
+        "  thermal_cv_comparison.png         — model CV comparison",
+        "  thermal_feature_importance.png    — permutation + MDI importance",
+        "  thermal_residuals.png             — 4-panel residual diagnostics",
+        "  thermal_influence.png             — Cook's D + leverage",
+        "  thermal_target_distribution.png   — histogram + KDE + box-plot",
+        "  thermal_feature_vs_target.png     — top-6 features vs target",
+        "  thermal_correlation_heatmap.png   — feature–feature Pearson r",
+        "",
+        "=" * 60,
+    ]
 
     with open(report_path, 'w') as f:
         f.write('\n'.join(lines))
