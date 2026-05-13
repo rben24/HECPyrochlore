@@ -1,0 +1,25 @@
+Gives error:
+C:\Users\Delluser\PycharmProjects\HECPyrochlore\.venv\Lib\site-packages\sklearn\utils\parallel.py:144: UserWarning: `sklearn.utils.parallel.delayed` should be used with `sklearn.utils.parallel.Parallel` to make it possible to propagate the scikit-learn configuration of the current thread to the joblib workers.
+  warnings.warn(
+
+TODO:
+- provide option to input lattice parameter or thermal coeff instead of composition so both can be tested (PROGRESS)
+- add data validation code (ADDED)
+- add more graphs and visualizations (PROGRESS)
+- make separate UI
+- iterate through different numbers of features, maybe through SFS
+- split mixed pyrochlore compounds (multiple elements per site) into individual compositions, calc for each, then weighted avg
+- add more lattice parameter (ADDED - ICSD dataset)
+- feature engineering
+
+
+Sourcs:
+[1] Pitike, K. et al., Chem. Mater., 34, 1459-1472 (2022) doi.org/10.1021/acs.chemmater.1c02361
+[2] Li, F. etal., Journal of Advanced Ceramics, 8(4), 576-582 (2019) doi.org/10.1007/s40145-019-0342-4
+[3] Write, A. et al., Scripta Materialia, 181, 76-81 (2020) doi.org/10.1016/j.scriptamat.2020.02.011
+    *** PULL DATA TABLE FROM THIS ONE
+ICSD - UTK Chemical Database
+https://research-ebsco-com.utk.idm.oclc.org/c/4zvegk/ebook-viewer/pdf/m7zyetwlzz/page/pp_4092?location=https%25253A%25252F%25252Fresearch-ebsco-com.utk.idm.oclc.org%25252Fc%25252F4zvegk%25252Fsearch%25252Fdetails%25252Fm7zyetwlzz%25253Frequest-context%25253Dplink%252526db%25253Dnlebk%252526db%25253Dnlabk
+    Comprehensive Nuclear Materials 6.19.3.1 Minerals and Natural Analogs/Oxides/Pyrochlore Group
+http://abulafia.mt.ic.ac.uk/shannon/ptable.php
+    Shannon radius

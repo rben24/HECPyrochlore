@@ -11,8 +11,12 @@ of high-entropy pyrochlore oxides (A₂B₂O₇) from composition alone.
 HECPyrochlore/
 ├── data/
 │   ├── raw/
-│   │   └── Sample_Properties_Safin_Feb_2026.csv   ← experimental data
+│   │   ├── Sample_Properties_Safin_Feb_2026.csv   ← experimental data
+│   │   ├── HECPyrochlore_latt_data_ICSD.csv       ← pulled from UTK ICSD database
+│   │   ├── notebookLM_dataset.csv                 ← NotebookLM extraction
+│   │   └── Jordan_pyrochlore_data.csv             ← pulled data from Jordan
 │   └── processed/
+│       └── comined_pyrochlore.csv
 │
 ├── src/
 │   ├── features/
