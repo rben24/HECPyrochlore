@@ -5,6 +5,9 @@
   Best model      : GradientBoosting
   CV folds        : 5
   Features        : 28
+  Compound types  : pristine, high_entropy
+  Train samples   : ?
+  Test samples    : ?
 
 ── Test-set Metrics ────────────────────────────────────────
   RMSE  : 0.04016
