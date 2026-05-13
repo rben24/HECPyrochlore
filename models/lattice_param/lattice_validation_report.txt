@@ -2,63 +2,63 @@
   LATTICE PARAMETER — VALIDATION REPORT
 ============================================================
 
-  Best model      : GradientBoosting
+  Best model      : Ridge
   CV folds        : 5
-  Features        : 28
+  Features        : 33
   Compound types  : pristine, high_entropy
   Train samples   : ?
   Test samples    : ?
 
 ── Test-set Metrics ────────────────────────────────────────
-  RMSE  : 0.04016
-  MAE   : 0.02309
-  R2    : 0.95133
+  RMSE  : 0.01185
+  MAE   : 0.00778
+  R2    : -9.47506
 
 ── Cross-Validation Summary (all models) ───────────────────
   RandomForest
-    R²   : 0.9277 ± 0.0426
-    RMSE : 0.05185 ± 0.01717
-    MAE  : 0.03532 ± 0.01048
+    R²   : -5.5167 ± 6.3273
+    RMSE : 0.01010 ± 0.00376
+    MAE  : 0.00913 ± 0.00363
   GradientBoosting
-    R²   : 0.9482 ± 0.0202
-    RMSE : 0.04449 ± 0.00786
-    MAE  : 0.02852 ± 0.00233
+    R²   : -6.5368 ± 7.9783
+    RMSE : 0.01052 ± 0.00494
+    MAE  : 0.00850 ± 0.00371
   ExtraTrees
-    R²   : 0.9356 ± 0.0329
-    RMSE : 0.04934 ± 0.01370
-    MAE  : 0.03396 ± 0.00823
+    R²   : -6.7193 ± 8.1550
+    RMSE : 0.01040 ± 0.00395
+    MAE  : 0.00952 ± 0.00370
   Ridge
-    R²   : 0.9427 ± 0.0240
-    RMSE : 0.04714 ± 0.01271
-    MAE  : 0.03287 ± 0.00826
+    R²   : -5.3101 ± 6.5872
+    RMSE : 0.00946 ± 0.00379
+    MAE  : 0.00817 ± 0.00288
 
 ── Top-20 Features by Permutation Importance ─────────────────
   Rank  Feature                               Perm Imp   ±       Std    Tree MDI
   ------------------------------------------------------------------------
-  1     b_site_mean_radius                    1.106056  ±  0.176324    0.664253
-  2     a_site_mean_radius                    0.070050  ±  0.018841    0.105767
-  3     b_site_en_mean                        0.055533  ±  0.013919    0.093426
-  4     a_site_en_mean                        0.012993  ±  0.008662    0.039427
-  5     a_b_radius_ratio                      0.004707  ±  0.005945    0.016494
-  6     mass_site_contrast                    0.002633  ±  0.005573    0.013393
-  7     total_entropy                         0.001780  ±  0.000812    0.001070
-  8     b_site_delta                          0.001342  ±  0.000643    0.004575
-  9     a_site_entropy                        0.001316  ±  0.000531    0.000510
-  10    b_site_en_variance                    0.001220  ±  0.000729    0.001154
-  11    a_site_mean_atomic_num                0.000292  ±  0.001676    0.004664
-  12    phonon_scattering_factor              0.000199  ±  0.000534    0.000592
-  13    b_site_radius_std                     0.000085  ±  0.000191    0.000215
-  14    b_site_entropy                        0.000067  ±  0.000098    0.000039
-  15    a_site_mean_molar_mass                0.000065  ±  0.003417    0.010966
-  16    b_site_radius_variance                0.000057  ±  0.000058    0.000214
-  17    b_site_n_elements                     0.000022  ±  0.000223    0.000242
-  18    a_site_n_elements                     0.000006  ±  0.000003    0.000003
-  19    b_site_mean_molar_mass                0.000006  ±  0.008087    0.017863
-  20    total_delta                          -0.000106  ±  0.001287    0.005011
+  1     a_site_mean_atomic_num                0.144474  ±  0.253541      N/A   
+  2     a_site_mean_molar_mass                0.122862  ±  0.235269      N/A   
+  3     a_site_mean_radius                    0.063013  ±  0.064819      N/A   
+  4     a_b_radius_ratio                      0.035260  ±  0.047232      N/A   
+  5     b_site_n_elements                     0.000000  ±  0.000000      N/A   
+  6     b_site_VEC                            0.000000  ±  0.000000      N/A   
+  7     b_site_entropy                        0.000000  ±  0.000000      N/A   
+  8     a_site_VEC                            0.000000  ±  0.000000      N/A   
+  9     b_site_en_variance                   -0.004755  ±  0.003641      N/A   
+  10    radius_gamma                         -0.012729  ±  0.009747      N/A   
+  11    a_site_delta                         -0.013943  ±  0.037539      N/A   
+  12    b_site_en_mean                       -0.018895  ±  0.014469      N/A   
+  13    a_site_omega                         -0.020863  ±  0.058411      N/A   
+  14    total_delta                          -0.028027  ±  0.041279      N/A   
+  15    b_site_delta                         -0.040663  ±  0.031139      N/A   
+  16    b_site_mean_radius                   -0.047243  ±  0.036178      N/A   
+  17    a_site_radius_variance               -0.049244  ±  0.097599      N/A   
+  18    b_site_mixing_enthalpy               -0.056879  ±  0.043558      N/A   
+  19    en_site_contrast                     -0.082101  ±  0.062923      N/A   
+  20    a_site_entropy                       -0.113867  ±  0.256133      N/A   
 
 ── Feature-Group Analysis ───────────────────────────────────
-  A-site      : mean perm-imp = 0.00811  | top feature = a_site_mean_radius
-  B-site      : mean perm-imp = 0.11627  | top feature = b_site_mean_radius
-  Cross-site  : mean perm-imp = 0.00040  | top feature = a_b_radius_ratio
+  A-site      : mean perm-imp = -0.10996  | top feature = a_site_mean_atomic_num
+  B-site      : mean perm-imp = -0.27924  | top feature = b_site_n_elements
+  Cross-site  : mean perm-imp = -0.18850  | top feature = a_b_radius_ratio
 
 ============================================================

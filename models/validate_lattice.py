@@ -62,7 +62,7 @@ def main():
 
     print()
     print("╔══════════════════════════════════════════════════════╗")
-    print("║   Lattice Parameter — Validation & Feature Report    ║")
+    print("║   Lattice Parameter — Validation & Feature Report   ║")
     print("╚══════════════════════════════════════════════════════╝")
 
     X, y, feat_names = get_lattice_dataset(

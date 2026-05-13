@@ -1,67 +1,72 @@
 {
   "task": "lattice_param",
-  "best_model": "GradientBoosting",
+  "best_model": "Ridge",
   "feature_names": [
     "a_site_n_elements",
     "a_site_entropy",
     "a_site_mean_radius",
     "a_site_radius_variance",
-    "a_site_radius_std",
     "a_site_delta",
     "a_site_en_mean",
     "a_site_en_variance",
     "a_site_mean_atomic_num",
     "a_site_mean_molar_mass",
+    "a_site_VEC",
+    "a_site_mixing_enthalpy",
+    "a_site_omega",
     "b_site_n_elements",
     "b_site_entropy",
     "b_site_mean_radius",
     "b_site_radius_variance",
-    "b_site_radius_std",
     "b_site_delta",
     "b_site_en_mean",
     "b_site_en_variance",
     "b_site_mean_atomic_num",
     "b_site_mean_molar_mass",
+    "b_site_VEC",
+    "b_site_mixing_enthalpy",
+    "b_site_omega",
     "a_b_radius_ratio",
     "total_entropy",
     "total_delta",
     "phonon_scattering_factor",
-    "n_total_elements",
-    "site_asymmetry",
     "en_site_contrast",
-    "mass_site_contrast"
+    "mass_site_contrast",
+    "site_asymmetry",
+    "radius_gamma",
+    "latt_param_calc"
   ],
   "compound_types": [
     "pristine",
     "high_entropy"
   ],
-  "n_train": 135,
-  "n_test": 34,
+  "n_train": 10,
+  "n_test": 3,
   "test_metrics": {
-    "RMSE": 0.04015910063409691,
-    "MAE": 0.02308548644009189,
-    "R2": 0.9513325327539388
+    "RMSE": 0.011851173807123664,
+    "MAE": 0.007776866447594344,
+    "R2": -9.475061326763008
   },
   "cv_summary": {
     "RandomForest": {
-      "mean_r2": 0.9276957887232147,
-      "std_r2": 0.04256184225537164,
-      "mean_rmse": 0.05185245448417962
+      "mean_r2": -5.5167251801503,
+      "std_r2": 6.32734313670086,
+      "mean_rmse": 0.010097676907526248
     },
     "GradientBoosting": {
-      "mean_r2": 0.9481853364242021,
-      "std_r2": 0.020172724531936016,
-      "mean_rmse": 0.04448612013028873
+      "mean_r2": -6.5367945410706625,
+      "std_r2": 7.978334554654208,
+      "mean_rmse": 0.010521219300677528
     },
     "ExtraTrees": {
-      "mean_r2": 0.9356160892623204,
-      "std_r2": 0.032938086648538444,
-      "mean_rmse": 0.0493368536710627
+      "mean_r2": -6.719265570181084,
+      "std_r2": 8.155021404937134,
+      "mean_rmse": 0.010404374560397132
     },
     "Ridge": {
-      "mean_r2": 0.9426626761597916,
-      "std_r2": 0.024038416911941137,
-      "mean_rmse": 0.04714104654812358
+      "mean_r2": -5.310106563514594,
+      "std_r2": 6.587216306413436,
+      "mean_rmse": 0.009460807599079336
     }
   }
 }
