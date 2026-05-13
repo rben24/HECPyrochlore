@@ -2,27 +2,30 @@
 """
 validate_lattice.py
 ===================
-Driver script — trains, validates, and diagnoses the **lattice parameter** model.
+Driver script — trains and validates the **lattice parameter** model.
+
+Now uses the expanded dataset that includes ICSD literature entries
+(pristine single-element and multi-element high-entropy pyrochlores).
+Non-pyrochlore entries are automatically excluded by the data loader.
 
 Outputs
 -------
-  models/lattice_param/
-    lattice_parity.png                  — predicted vs actual
-    lattice_cv_comparison.png           — model comparison
-    lattice_feature_importance.png      — permutation + tree MDI
-    lattice_residuals.png               — 4-panel residual diagnostics
-    lattice_influence.png               — Cook's D + leverage plot
-    lattice_target_distribution.png     — histogram, KDE, box-plot
-    lattice_feature_vs_target.png       — top-6 features vs target
-    lattice_correlation_heatmap.png     — feature–feature Pearson r
-    lattice_validation_report.txt       — full text report
+  • Console: CV scores, test-set metrics, compound-type breakdown, top features
+  • models/lattice_param/lattice_parity.png
+  • models/lattice_param/lattice_cv_comparison.png
+  • models/lattice_param/lattice_feature_importance.png
+  • models/lattice_param/lattice_validation_report.txt
 
 Usage
 -----
   python models/validate_lattice.py
   python models/validate_lattice.py --splits 10
-  python models/validate_lattice.py --no-validation   # skip data-validation plots
+  python models/validate_lattice.py --types pristine          # pristine only
+  python models/validate_lattice.py --types high_entropy      # HEC only
+  python models/validate_lattice.py --types pristine high_entropy  # both (default)
 """
+
+from __future__ import annotations
 
 import argparse
 import sys
@@ -36,15 +39,11 @@ _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent
 sys.path.insert(0, str(_PROJECT))
 
-from src.data.load_data import get_lattice_dataset, load_combined, clean_and_engineer
-from src.features.build_features import FEATURE_COLS
+from src.data.load_data import get_lattice_dataset
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
     plot_parity, plot_cv_comparison,
 )
-from data_validation import run_data_validation   # same directory as this script
-
-import pandas as pd
 
 TASK     = 'lattice_param'
 SAVE_DIR = _PROJECT / 'models' / TASK
@@ -55,33 +54,35 @@ def main():
         description='Validate lattice parameter ML model.')
     parser.add_argument('--splits', type=int, default=5,
                         help='Number of CV folds (default: 5)')
-    parser.add_argument('--no-validation', action='store_true',
-                        help='Skip data-validation diagnostics (faster)')
+    parser.add_argument('--types', nargs='+',
+                        default=['pristine', 'high_entropy'],
+                        choices=['pristine', 'high_entropy'],
+                        help='Compound types to include (default: both)')
     args = parser.parse_args()
 
     print()
     print("╔══════════════════════════════════════════════════════╗")
-    print("║   Lattice Parameter — Validation & Feature Report   ║")
+    print("║   Lattice Parameter — Validation & Feature Report    ║")
     print("╚══════════════════════════════════════════════════════╝")
 
-    # ── Load data ─────────────────────────────────────────────────────────────
-    X, y, feat_names = get_lattice_dataset(verbose=True)
-    print(f"\n  Samples : {len(y)}")
-    print(f"  Features: {len(feat_names)}")
-    print(f"  Target  : Lattice Parameter (Å)  "
+    X, y, feat_names = get_lattice_dataset(
+        verbose=True, compound_types=args.types)
+
+    print(f"\n  Samples  : {len(y)}")
+    print(f"  Features : {len(feat_names)}")
+    print(f"  Target   : Lattice Parameter (Å)  "
           f"range [{y.min():.4f}, {y.max():.4f}]")
 
-    # ── Train & evaluate ──────────────────────────────────────────────────────
     results = train_and_evaluate(
         X, y, feat_names,
         task_name=TASK,
         n_splits=args.splits,
         save_dir=SAVE_DIR,
         verbose=True,
+        compound_types=args.types,
     )
 
-    # ── Standard plots ────────────────────────────────────────────────────────
-    print("\n[plots] Generating standard figures …")
+    print("\n[plots] Generating figures …")
     plot_parity(
         results['y_test'], results['y_pred'],
         title='Lattice Parameter — Parity Plot',
@@ -96,62 +97,15 @@ def main():
     plot_feature_importance(
         results['fi_df'],
         title=f"Lattice Parameter — Feature Importance ({results['best_name']})",
-        top_n=min(15, len(feat_names)),
+        top_n=min(20, len(feat_names)),
         save_path=SAVE_DIR / 'lattice_feature_importance.png',
     )
 
-    # ── Text report ───────────────────────────────────────────────────────────
-    _write_report(results, feat_names, args.splits)
-
-    # ── Data validation & diagnostic plots ────────────────────────────────────
-    if not args.no_validation:
-        print("\n[validation] Running data validation & diagnostic plots …")
-        # Build a DataFrame of the full training data for validation
-        df_full = _build_full_df(feat_names)
-        # Sample labels for outlier annotation (composition strings)
-        sample_labels = _get_sample_labels()
-
-        run_data_validation(
-            df=df_full,
-            feat_cols=feat_names,
-            target_col='Lattice Parameter (Angstrom)',
-            task_label='Lattice Parameter',
-            save_dir=SAVE_DIR,
-            y_true=results['y_test'],
-            y_pred=results['y_pred'],
-            sample_labels=sample_labels,
-        )
-
+    _write_report(results, feat_names, args.splits, args.types)
     print("\n[done] All outputs written to:", SAVE_DIR)
 
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
-
-def _build_full_df(feat_names):
-    """Return the full engineered DataFrame used for the lattice dataset."""
-    df = clean_and_engineer(load_combined(verbose=False), verbose=False)
-    target = 'Lattice Parameter (Angstrom)'
-    df_sub = df.dropna(subset=[target])
-    df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
-    feat_mask = df_sub[feat_names].notna().all(axis=1)
-    return df_sub[feat_mask].reset_index(drop=True)
-
-
-def _get_sample_labels():
-    """Return composition ID strings for each row in the lattice dataset."""
-    df = clean_and_engineer(load_combined(verbose=False), verbose=False)
-    target = 'Lattice Parameter (Angstrom)'
-    df_sub = df.dropna(subset=[target])
-    df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
-    feat_mask = df_sub[FEATURE_COLS].notna().all(axis=1)
-    df_sub = df_sub[feat_mask].reset_index(drop=True)
-    if 'Composition' in df_sub.columns:
-        return df_sub['Composition'].fillna('').tolist()
-    return [f"({a})₂({b})₂O₇"
-            for a, b in zip(df_sub.get('Sample A', []), df_sub.get('Sample B', []))]
-
-
-def _write_report(results, feat_names, n_splits):
+def _write_report(results, feat_names, n_splits, compound_types):
     report_path = SAVE_DIR / 'lattice_validation_report.txt'
     fi = results['fi_df']
     cv = results['cv_results']
@@ -161,9 +115,12 @@ def _write_report(results, feat_names, n_splits):
         "  LATTICE PARAMETER — VALIDATION REPORT",
         "=" * 60,
         "",
-        f"  Best model   : {results['best_name']}",
-        f"  CV folds     : {n_splits}",
-        f"  Features     : {len(feat_names)}",
+        f"  Best model      : {results['best_name']}",
+        f"  CV folds        : {n_splits}",
+        f"  Features        : {len(feat_names)}",
+        f"  Compound types  : {', '.join(compound_types)}",
+        f"  Train samples   : {results.get('n_train', '?')}",
+        f"  Test samples    : {results.get('n_test', '?')}",
         "",
         "── Test-set Metrics ────────────────────────────────────────",
     ]
@@ -187,12 +144,14 @@ def _write_report(results, feat_names, n_splits):
 
     lines += [
         "",
-        "── Top-15 Features by Permutation Importance ────────────────",
-        f"  {'Rank':<5} {'Feature':<35} {'Perm Imp':>10}  {'±':>2}  {'Std':>8}  {'Tree MDI':>10}",
+        "── Top-20 Features by Permutation Importance ─────────────────",
+        f"  {'Rank':<5} {'Feature':<35} {'Perm Imp':>10}  {'±':>2}  "
+        f"{'Std':>8}  {'Tree MDI':>10}",
         "  " + "-" * 72,
     ]
-    for rank, row in fi.head(15).iterrows():
-        tree_str = f"{row['tree_importance']:.6f}" if not np.isnan(row['tree_importance']) else "   N/A   "
+    for rank, row in fi.head(20).iterrows():
+        tree_str = (f"{row['tree_importance']:.6f}"
+                    if not np.isnan(row['tree_importance']) else "   N/A   ")
         lines.append(
             f"  {rank+1:<5} {row['feature']:<35} {row['perm_importance']:>10.6f}  ±  "
             f"{row['perm_std']:>8.6f}  {tree_str:>10}"
@@ -203,36 +162,26 @@ def _write_report(results, feat_names, n_splits):
         "── Feature-Group Analysis ───────────────────────────────────",
     ]
     groups = {
-        'A-site':    [f for f in feat_names if 'a_site' in f],
-        'B-site':    [f for f in feat_names if 'b_site' in f],
-        'Cross-site': [f for f in feat_names if f in
-                       ('a_b_radius_ratio', 'total_entropy', 'total_delta',
-                        'phonon_scattering_factor')],
+        'A-site':          [f for f in feat_names if 'a_site' in f],
+        'B-site':          [f for f in feat_names if 'b_site' in f],
+        'Cross-site':      [f for f in feat_names if f in (
+                            'a_b_radius_ratio', 'total_entropy', 'total_delta',
+                            'phonon_scattering_factor', 'n_total_elements',
+                            'site_asymmetry', 'en_site_contrast',
+                            'mass_site_contrast')],
     }
     for grp, cols in groups.items():
         sub = fi[fi['feature'].isin(cols)]
         if len(sub):
             mean_imp = sub['perm_importance'].mean()
-            top_feat = sub.iloc[0]['feature'] if len(sub) > 0 else 'N/A'
-            lines.append(f"  {grp:<12}: mean perm-imp = {mean_imp:.5f}  "
-                         f"| top feature = {top_feat}")
+            top_feat = sub.iloc[0]['feature']
+            lines.append(
+                f"  {grp:<12}: mean perm-imp = {mean_imp:.5f}  "
+                f"| top feature = {top_feat}"
+            )
 
-    lines += [
-        "",
-        "── Diagnostic Plots Generated ───────────────────────────────",
-        "  lattice_parity.png                — predicted vs actual",
-        "  lattice_cv_comparison.png         — model CV comparison",
-        "  lattice_feature_importance.png    — permutation + MDI importance",
-        "  lattice_residuals.png             — 4-panel residual diagnostics",
-        "  lattice_influence.png             — Cook's D + leverage",
-        "  lattice_target_distribution.png   — histogram + KDE + box-plot",
-        "  lattice_feature_vs_target.png     — top-6 features vs target",
-        "  lattice_correlation_heatmap.png   — feature–feature Pearson r",
-        "",
-        "=" * 60,
-    ]
-
-    with open(report_path, 'w') as f:
+    lines += ["", "=" * 60]
+    with open(report_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
     print(f"  Saved: {report_path}")
     print('\n' + '\n'.join(lines))

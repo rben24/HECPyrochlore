@@ -234,7 +234,7 @@ def _write_report(results, feat_names, n_splits):
         "=" * 60,
     ]
 
-    with open(report_path, 'w') as f:
+    with open(report_path, 'w', encoding='utf-8') as f:
         f.write('\n'.join(lines))
     print(f"  Saved: {report_path}")
     print('\n' + '\n'.join(lines))

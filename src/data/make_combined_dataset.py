@@ -1,30 +1,41 @@
 """
 make_combined_dataset.py
 ========================
-Combines all three raw data sources into a single unified dataset:
+Combines all four raw data sources into a single unified dataset:
 
-  1. Sample_Properties_Safin_Feb_2026.csv  — HEC experimental data (A/B site,
-       thermal conductivity, lattice param, density, synthesis)
+  1. Sample_Properties_Safin_Feb_2026.csv  — HEC experimental data
   2. notebookLM_dataset.csv               — Binary pyrochlore lattice data
-       (Compound formula → parsed A/B site, lattice param, structural params)
   3. parent_components.csv                — Literature family data
-       (A/B cation lists, representative thermal conductivity)
+  4. HECPyrochlore_latt_data_ICSD.csv     — ICSD pyrochlore database
 
-Each source is parsed into a canonical schema before merging:
+Every row is classified as one of:
+  pristine       — exactly 1 element on the A-site AND 1 on the B-site
+  high_entropy   — ≥2 elements on A-site OR B-site (or both)
+  non_pyrochlore — fails pyrochlore sanity checks (excluded from training)
 
-  Composition | Sample A | Sample B | TPS Cond W/m/K | Lattice Parameter (Angstrom)
-  | Relative Density % | Is Single Phase | Synthesis Method | data_source
+Only pristine and high_entropy rows are written to the processed dataset.
+
+Canonical schema
+----------------
+  Composition | Sample A | Sample B | TPS Cond W/m/K
+  | Lattice Parameter (Angstrom) | Relative Density %
+  | Is Single Phase | Synthesis Method | data_source
   | b_o_distance | b_o_b_angle | oxygen_param_x
+  | compound_type | a_stoich_json | b_stoich_json
 
 Run directly:
   python src/data/make_combined_dataset.py
 """
 
+from __future__ import annotations
+
 import re
-import pandas as pd
-import numpy as np
+import json
 import logging
+import numpy as np
+import pandas as pd
 from pathlib import Path
+from typing import Dict, Tuple
 
 logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
 log = logging.getLogger(__name__)
@@ -37,7 +48,21 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_FILE = OUT_DIR / 'combined_pyrochlore.csv'
 
-# ── canonical column schema ───────────────────────────────────────────────────
+# ── element sets (shared with load_icsd.py) ───────────────────────────────────
+KNOWN_A: frozenset = frozenset({
+    'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
+    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
+})
+KNOWN_B: frozenset = frozenset({
+    'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
+})
+
+# Pyrochlore stability window for r_A/r_B (Shannon ionic radii)
+# Outside this range → likely defect-fluorite or other polymorph
+_RA_RB_MIN = 1.40
+_RA_RB_MAX = 1.90
+
+# ── canonical columns ─────────────────────────────────────────────────────────
 CANONICAL_COLS = [
     'Composition',
     'Sample A',
@@ -51,173 +76,97 @@ CANONICAL_COLS = [
     'b_o_distance',
     'b_o_b_angle',
     'oxygen_param_x',
+    'compound_type',
+    'a_stoich_json',
+    'b_stoich_json',
 ]
 
+# ── compound-type constants ───────────────────────────────────────────────────
+PRISTINE       = 'pristine'
+HIGH_ENTROPY   = 'high_entropy'
+NON_PYROCHLORE = 'non_pyrochlore'
 
-# ── helpers ───────────────────────────────────────────────────────────────────
+
+# ── shared helpers ────────────────────────────────────────────────────────────
 
 def _clean_element_list(raw: str) -> str:
-    """Normalise element strings: strip whitespace, remove subscripts."""
+    """Normalise element strings: strip whitespace, remove unicode superscripts."""
     if pd.isna(raw):
         return np.nan
-    # remove numeric suffixes like ³⁺ or subscripts
     cleaned = re.sub(r'[⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉⁺⁻]+', '', str(raw))
-    # split on comma, strip each element
     parts = [p.strip() for p in cleaned.split(',') if p.strip()]
     return ','.join(parts)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SOURCE 1: Experimental HEC data (Safin Feb 2026)
-# ─────────────────────────────────────────────────────────────────────────────
-
-def load_safin() -> pd.DataFrame:
-    path = RAW_DIR / 'Sample_Properties_Safin_Feb_2026.csv'
-    df = pd.read_csv(path, na_values=['NA', '', 'N/A'])
-    log.info(f"Safin: {len(df)} rows loaded from {path.name}")
-
-    out = pd.DataFrame()
-    out['Composition']                = df['ID'].fillna('').astype(str)
-    out['Sample A']                   = df['Sample A'].apply(_clean_element_list)
-    out['Sample B']                   = df['Sample B'].apply(_clean_element_list)
-    out['TPS Cond W/m/K']             = pd.to_numeric(df['TPS Cond W/m/K'], errors='coerce')
-    out['Lattice Parameter (Angstrom)'] = pd.to_numeric(df['Lattice Parameter (Angstrom)'], errors='coerce')
-    out['Relative Density %']         = pd.to_numeric(df['Relative Density %'], errors='coerce')
-    out['Is Single Phase']            = df['Is Single Phase'].str.strip().str.lower().map(
-                                            {'yes': 'Yes', 'no': 'No'})
-    out['Synthesis Method']           = df['Synthesis Method'].fillna('')
-    out['data_source']                = 'safin_experimental'
-    out['b_o_distance']               = np.nan
-    out['b_o_b_angle']                = np.nan
-    out['oxygen_param_x']             = np.nan
-
-    log.info(f"Safin: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice values, "
-             f"{out['TPS Cond W/m/K'].notna().sum()} thermal values")
-    return out
+def _parse_sample_str(sample_str: str) -> Dict[str, float]:
+    """
+    Convert a comma-separated element string to an equiatomic fraction dict.
+    e.g. "La,Gd,Lu" → {'La': 0.333, 'Gd': 0.333, 'Lu': 0.333}
+    """
+    if pd.isna(sample_str) or str(sample_str).strip() == '':
+        return {}
+    elems = [e.strip() for e in str(sample_str).split(',') if e.strip()]
+    if not elems:
+        return {}
+    frac = 1.0 / len(elems)
+    return {e: frac for e in elems}
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SOURCE 2: notebookLM binary pyrochlore dataset
-# ─────────────────────────────────────────────────────────────────────────────
-
-# Map from formula-style compound name → (A elements, B elements)
-# Keys are lowercase stripped of spaces for matching
-_NLM_FORMULA_MAP = {
-    'lu2ti2o7':      ('Lu',        'Ti'),
-    'bi2sn2o7':      ('Bi',        'Sn'),
-    'nd2ir2o7':      ('Nd',        'Ir'),
-    'pr2ir2o7':      ('Pr',        'Ir'),
-    'bi2ir2o7':      ('Bi',        'Ir'),
-    '(biy)ir2o7':    ('Bi,Y',      'Ir'),
-    '(bipb)ir2o7':   ('Bi,Pb',     'Ir'),
-    'pb2ir2o7':      ('Pb',        'Ir'),
-    'gd2zr2o7':      ('Gd',        'Zr'),
-    # high-entropy labelled entries from the combined df
-    '#a3zo':         ('Nd,Sm,Eu,Gd,Dy',         'Zr'),   # 3-element A-site ZO
-    '#a5zo':         ('La,Nd,Sm,Eu,Gd,Dy,Ho',   'Zr'),   # 5 (approximate)
-    '#a7zo':         ('La,Nd,Sm,Eu,Gd,Dy,Ho',   'Zr'),   # 7-element
-}
-
-def _parse_nlm_compound(compound: str):
-    """Return (a_str, b_str) from a compound name string."""
-    key = compound.strip().lower().replace(' ', '').split('(')[0]
-    # try direct map
-    for pattern, ab in _NLM_FORMULA_MAP.items():
-        if pattern in key or key.startswith(pattern.split('(')[0]):
-            return ab
-    # fallback: try to parse A2X2O7 style
-    m = re.match(r'([a-z]+)2([a-z]+)2o7', key)
-    if m:
-        a_raw, b_raw = m.group(1).capitalize(), m.group(2).capitalize()
-        return a_raw, b_raw
-    return np.nan, np.nan
+def _comp_to_fractions_json(sample_str: str) -> str:
+    """Return JSON string of equiatomic mole fractions for a Sample A/B string."""
+    return json.dumps(_parse_sample_str(sample_str))
 
 
-def load_nlm() -> pd.DataFrame:
-    path = RAW_DIR / 'notebookLM_dataset.csv'
-    df = pd.read_csv(path, na_values=['-', '', 'NA'])
-    log.info(f"NLM: {len(df)} rows loaded from {path.name}")
+def classify_sample(sample_a: str, sample_b: str) -> str:
+    """
+    Classify a compound given its Sample A and Sample B strings.
 
-    rows = []
-    for _, row in df.iterrows():
-        compound = str(row['Compound']).strip()
-        a_str, b_str = _parse_nlm_compound(compound)
+    Rules
+    -----
+    non_pyrochlore  : any element in A-site is not in KNOWN_A, or any element
+                      in B-site is not in KNOWN_B, or either site is empty
+    pristine        : exactly 1 element on A-site AND 1 on B-site
+    high_entropy    : ≥2 elements on either or both sites
 
-        lattice = pd.to_numeric(row.get('Lattice Parameter a (A)', np.nan), errors='coerce')
-        bo_dist = pd.to_numeric(row.get('B-O Distance (A)', np.nan), errors='coerce')
-        bob_ang = pd.to_numeric(row.get('B-O-B Angle (deg)', np.nan), errors='coerce')
-        ox_x    = pd.to_numeric(row.get('Oxygen Parameter x', np.nan), errors='coerce')
+    Parameters
+    ----------
+    sample_a : comma-separated A-site element symbols
+    sample_b : comma-separated B-site element symbols
 
-        rows.append({
-            'Composition':                  compound,
-            'Sample A':                     a_str,
-            'Sample B':                     b_str,
-            'TPS Cond W/m/K':               np.nan,   # not in this source
-            'Lattice Parameter (Angstrom)': lattice,
-            'Relative Density %':           np.nan,
-            'Is Single Phase':              np.nan,
-            'Synthesis Method':             '',
-            'data_source':                  'notebookLM_literature',
-            'b_o_distance':                 bo_dist,
-            'b_o_b_angle':                  bob_ang,
-            'oxygen_param_x':               ox_x,
-        })
+    Returns
+    -------
+    One of 'pristine', 'high_entropy', 'non_pyrochlore'
+    """
+    a_elems = [e.strip() for e in str(sample_a).split(',') if e.strip()] \
+              if not pd.isna(sample_a) else []
+    b_elems = [e.strip() for e in str(sample_b).split(',') if e.strip()] \
+              if not pd.isna(sample_b) else []
 
-    out = pd.DataFrame(rows)
-    # Drop rows where we couldn't parse A or B (and have no lattice param either)
-    out = out[out['Lattice Parameter (Angstrom)'].notna() | out['Sample A'].notna()]
-    log.info(f"NLM: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice values parsed")
-    return out
+    # Must have at least one element on each site
+    if not a_elems or not b_elems:
+        return NON_PYROCHLORE
 
+    # All A-site elements must be recognised rare-earth / Y cations
+    if any(e not in KNOWN_A for e in a_elems):
+        return NON_PYROCHLORE
 
-# ─────────────────────────────────────────────────────────────────────────────
-# SOURCE 3: Parent components literature families
-# ─────────────────────────────────────────────────────────────────────────────
+    # All B-site elements must be recognised transition-metal cations
+    if any(e not in KNOWN_B for e in b_elems):
+        return NON_PYROCHLORE
 
-def load_parent_components() -> pd.DataFrame:
-    path = RAW_DIR / 'parent_components.csv'
-    df = pd.read_csv(path, na_values=['', 'NA'])
-    log.info(f"Parent components: {len(df)} rows loaded from {path.name}")
+    n_a = len(a_elems)
+    n_b = len(b_elems)
 
-    rows = []
-    for _, row in df.iterrows():
-        # A-site: already a comma-separated element list
-        a_raw = _clean_element_list(str(row.get('A-site Cations', '')))
-        b_raw = _clean_element_list(str(row.get('B-site Cations', '')))
-
-        # Thermal conductivity is given as a range string like "0.8-1.2" or "<1.0"
-        # → take the midpoint / strip < sign
-        tc_raw = str(row.get('Thermal Conductivity (W/m·K)', '')).strip()
-        tc_val = _parse_tc_range(tc_raw)
-
-        # Build a readable composition label
-        comp_label = str(row.get('Parent Compound', '')).strip()
-
-        rows.append({
-            'Composition':                  comp_label,
-            'Sample A':                     a_raw,
-            'Sample B':                     b_raw,
-            'TPS Cond W/m/K':               tc_val,
-            'Lattice Parameter (Angstrom)': np.nan,   # not in this source
-            'Relative Density %':           np.nan,
-            'Is Single Phase':              'Yes',    # all listed as pyrochlore single-phase
-            'Synthesis Method':             '',
-            'data_source':                  'parent_components_literature',
-            'b_o_distance':                 np.nan,
-            'b_o_b_angle':                  np.nan,
-            'oxygen_param_x':               np.nan,
-        })
-
-    out = pd.DataFrame(rows)
-    log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values parsed")
-    return out
+    if n_a == 1 and n_b == 1:
+        return PRISTINE
+    return HIGH_ENTROPY
 
 
 def _parse_tc_range(tc_str: str) -> float:
-    """Parse strings like '<1.0', '0.8-1.2', '1.1-1.5' to a midpoint float."""
-    if not tc_str or tc_str in ('nan', '-', ''):
+    """Parse strings like '<1.0', '0.8-1.2', '1.1' to a midpoint float."""
+    if not tc_str or str(tc_str).strip() in ('nan', '-', ''):
         return np.nan
-    tc_str = tc_str.replace('<', '').replace('>', '').strip()
+    tc_str = str(tc_str).replace('<', '').replace('>', '').strip()
     if '-' in tc_str:
         parts = tc_str.split('-')
         try:
@@ -230,68 +179,257 @@ def _parse_tc_range(tc_str: str) -> float:
         return np.nan
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# MERGE
-# ─────────────────────────────────────────────────────────────────────────────
+# ── Source 1: Safin experimental data ────────────────────────────────────────
+
+def load_safin() -> pd.DataFrame:
+    path = RAW_DIR / 'Sample_Properties_Safin_Feb_2026.csv'
+    df = pd.read_csv(path, na_values=['NA', '', 'N/A'])
+    log.info(f"Safin: {len(df)} rows from {path.name}")
+
+    out = pd.DataFrame()
+    out['Composition']                  = df['ID'].fillna('').astype(str)
+    out['Sample A']                     = df['Sample A'].apply(_clean_element_list)
+    out['Sample B']                     = df['Sample B'].apply(_clean_element_list)
+    out['TPS Cond W/m/K']               = pd.to_numeric(df['TPS Cond W/m/K'], errors='coerce')
+    out['Lattice Parameter (Angstrom)'] = pd.to_numeric(
+                                            df['Lattice Parameter (Angstrom)'], errors='coerce')
+    out['Relative Density %']           = pd.to_numeric(df['Relative Density %'], errors='coerce')
+    out['Is Single Phase']              = df['Is Single Phase'].str.strip().str.lower().map(
+                                            {'yes': 'Yes', 'no': 'No'})
+    out['Synthesis Method']             = df['Synthesis Method'].fillna('')
+    out['data_source']                  = 'safin_experimental'
+    out['b_o_distance']                 = np.nan
+    out['b_o_b_angle']                  = np.nan
+    out['oxygen_param_x']               = np.nan
+
+    # Classify each row
+    out['compound_type'] = out.apply(
+        lambda r: classify_sample(r['Sample A'], r['Sample B']), axis=1)
+
+    # Stoich JSON (equiatomic for Safin data)
+    out['a_stoich_json'] = out['Sample A'].apply(_comp_to_fractions_json)
+    out['b_stoich_json'] = out['Sample B'].apply(_comp_to_fractions_json)
+
+    n_excl = (out['compound_type'] == NON_PYROCHLORE).sum()
+    if n_excl:
+        log.info(f"Safin: {n_excl} rows classified as non-pyrochlore (kept but flagged)")
+    log.info(
+        f"Safin: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice, "
+        f"{out['TPS Cond W/m/K'].notna().sum()} thermal values"
+    )
+    return out
+
+
+# ── Source 2: notebookLM binary pyrochlore dataset ───────────────────────────
+
+_NLM_FORMULA_MAP = {
+    'lu2ti2o7':  ('Lu', 'Ti'),
+    'nd2ir2o7':  ('Nd', 'Ir'),
+    'pr2ir2o7':  ('Pr', 'Ir'),
+    'gd2zr2o7':  ('Gd', 'Zr'),
+}
+
+def _parse_nlm_compound(compound: str) -> Tuple[str, str]:
+    key = compound.strip().lower().replace(' ', '')
+    for pattern, ab in _NLM_FORMULA_MAP.items():
+        if key.startswith(pattern.split('(')[0]):
+            return ab
+    m = re.match(r'([a-z]+)2([a-z]+)2o7', key)
+    if m:
+        return m.group(1).capitalize(), m.group(2).capitalize()
+    return np.nan, np.nan
+
+
+def load_nlm() -> pd.DataFrame:
+    path = RAW_DIR / 'notebookLM_dataset.csv'
+    df = pd.read_csv(path, na_values=['-', '', 'NA'])
+    log.info(f"NLM: {len(df)} rows from {path.name}")
+
+    rows = []
+    for _, row in df.iterrows():
+        compound = str(row['Compound']).strip()
+        a_str, b_str = _parse_nlm_compound(compound)
+
+        # Skip Bi/Pb — no ionic radius data
+        if isinstance(a_str, str) and any(e in a_str for e in ['Bi', 'Pb']):
+            continue
+        if isinstance(b_str, str) and any(e in b_str for e in ['Bi', 'Pb']):
+            continue
+
+        ctype = classify_sample(a_str, b_str) if isinstance(a_str, str) else NON_PYROCHLORE
+
+        rows.append({
+            'Composition':                  compound,
+            'Sample A':                     a_str,
+            'Sample B':                     b_str,
+            'TPS Cond W/m/K':               np.nan,
+            'Lattice Parameter (Angstrom)': pd.to_numeric(
+                                              row.get('Lattice Parameter a (A)', np.nan),
+                                              errors='coerce'),
+            'Relative Density %':           np.nan,
+            'Is Single Phase':              np.nan,
+            'Synthesis Method':             '',
+            'data_source':                  'notebookLM_literature',
+            'b_o_distance':                 pd.to_numeric(
+                                              row.get('B-O Distance (A)', np.nan), errors='coerce'),
+            'b_o_b_angle':                  pd.to_numeric(
+                                              row.get('B-O-B Angle (deg)', np.nan), errors='coerce'),
+            'oxygen_param_x':               pd.to_numeric(
+                                              row.get('Oxygen Parameter x', np.nan), errors='coerce'),
+            'compound_type':                ctype,
+            'a_stoich_json':                _comp_to_fractions_json(a_str),
+            'b_stoich_json':                _comp_to_fractions_json(b_str),
+        })
+
+    out = pd.DataFrame(rows)
+    out = out[out['Lattice Parameter (Angstrom)'].notna() | out['Sample A'].notna()]
+    log.info(f"NLM: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice values parsed")
+    return out
+
+
+# ── Source 3: Parent components literature ────────────────────────────────────
+
+def load_parent_components() -> pd.DataFrame:
+    path = RAW_DIR / 'parent_components.csv'
+    df = pd.read_csv(path, na_values=['', 'NA'])
+    log.info(f"Parent components: {len(df)} rows from {path.name}")
+
+    rows = []
+    for _, row in df.iterrows():
+        a_raw = _clean_element_list(str(row.get('A-site Cations', '')))
+        b_raw = _clean_element_list(str(row.get('B-site Cations', '')))
+        tc_val = _parse_tc_range(str(row.get('Thermal Conductivity (W/m·K)', '')))
+        ctype = classify_sample(a_raw, b_raw)
+        rows.append({
+            'Composition':                  str(row.get('Parent Compound', '')).strip(),
+            'Sample A':                     a_raw,
+            'Sample B':                     b_raw,
+            'TPS Cond W/m/K':               tc_val,
+            'Lattice Parameter (Angstrom)': np.nan,
+            'Relative Density %':           np.nan,
+            'Is Single Phase':              'Yes',
+            'Synthesis Method':             '',
+            'data_source':                  'parent_components_literature',
+            'b_o_distance':                 np.nan,
+            'b_o_b_angle':                  np.nan,
+            'oxygen_param_x':               np.nan,
+            'compound_type':                ctype,
+            'a_stoich_json':                _comp_to_fractions_json(a_raw),
+            'b_stoich_json':                _comp_to_fractions_json(b_raw),
+        })
+
+    out = pd.DataFrame(rows)
+    log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values")
+    return out
+
+
+# ── Source 4: ICSD database (NEW) ────────────────────────────────────────────
+
+def load_icsd_source() -> pd.DataFrame:
+    """Thin wrapper that calls the dedicated ICSD loader."""
+    try:
+        from src.data.load_icsd import load_icsd
+    except ImportError:
+        import sys
+        sys.path.insert(0, str(_PROJECT))
+        from src.data.load_icsd import load_icsd
+
+    icsd_path = RAW_DIR / 'HECPyrochlore_latt_data_ICSD.csv'
+    df = load_icsd(filepath=icsd_path, verbose=True)
+    log.info(
+        f"ICSD: {len(df)} usable rows "
+        f"({(df['compound_type']=='pristine').sum()} pristine, "
+        f"{(df['compound_type']=='high_entropy').sum()} high-entropy)"
+    )
+    return df
+
+
+# ── Build combined dataset ────────────────────────────────────────────────────
 
 def build_combined_dataset(save: bool = True) -> pd.DataFrame:
-    """Load, parse, and combine all three sources."""
+    """
+    Load, classify, and combine all four sources.
+
+    Pyrochlore classification summary is printed for each source.
+    Only 'pristine' and 'high_entropy' rows are retained in the output.
+    """
     print()
-    print("=" * 62)
+    print("=" * 66)
     print("  Building Combined Pyrochlore Dataset")
-    print("=" * 62)
+    print("=" * 66)
 
     frames = []
 
-    # Source 1
-    try:
-        frames.append(load_safin())
-    except FileNotFoundError as e:
-        log.warning(f"Skipping Safin data: {e}")
-
-    # Source 2
-    try:
-        frames.append(load_nlm())
-    except FileNotFoundError as e:
-        log.warning(f"Skipping NLM data: {e}")
-
-    # Source 3
-    try:
-        frames.append(load_parent_components())
-    except FileNotFoundError as e:
-        log.warning(f"Skipping parent components: {e}")
+    for loader, label in [
+        (load_safin,           'Safin experimental'),
+        (load_nlm,             'notebookLM literature'),
+        (load_parent_components, 'Parent components'),
+        (load_icsd_source,     'ICSD database'),
+    ]:
+        try:
+            frm = loader()
+            frames.append(frm)
+        except FileNotFoundError as e:
+            log.warning(f"Skipping {label}: {e}")
 
     if not frames:
         raise RuntimeError("No data sources found — check data/raw/ directory.")
 
-    combined = pd.concat(frames, ignore_index=True)[CANONICAL_COLS]
+    # Align to canonical columns (ICSD has extra columns; keep them)
+    all_cols = CANONICAL_COLS + [c for frm in frames
+                                  for c in frm.columns
+                                  if c not in CANONICAL_COLS]
+    combined = pd.concat(frames, ignore_index=True)
+
+    # Ensure all canonical cols exist
+    for col in CANONICAL_COLS:
+        if col not in combined.columns:
+            combined[col] = np.nan
 
     # Drop rows where BOTH Sample A and Sample B are missing
     combined = combined[combined['Sample A'].notna() | combined['Sample B'].notna()]
 
-    # Remove entries with Bi or Pb (lone-pair active, incompatible feature table)
-    has_exotic = combined['Sample A'].fillna('').str.contains(r'\b(Bi|Pb)\b', regex=True)
-    n_before = len(combined)
-    combined = combined[~has_exotic].reset_index(drop=True)
-    n_dropped = n_before - len(combined)
-    if n_dropped:
-        log.info(f"Dropped {n_dropped} rows with Bi/Pb (no ionic radius data)")
+    # Remove Bi/Pb entirely (incompatible ionic radius tables)
+    has_exotic = combined['Sample A'].fillna('').str.contains(r'\b(?:Bi|Pb)\b', regex=True)
+    combined = combined[~has_exotic]
 
+    # ── Exclude non-pyrochlores from training data ────────────────────────────
+    n_total   = len(combined)
+    non_pyro  = combined[combined['compound_type'] == NON_PYROCHLORE]
+    combined  = combined[combined['compound_type'] != NON_PYROCHLORE].reset_index(drop=True)
+
+    # ── Summary table ─────────────────────────────────────────────────────────
     print()
-    print(f"  {'Source':<35} {'Rows':>5}  {'Lattice':>8}  {'Thermal':>8}")
-    print("  " + "-" * 60)
+    print(f"  {'Source':<38} {'Rows':>5}  {'Lattice':>8}  "
+          f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
+    print("  " + "-" * 78)
     for src, grp in combined.groupby('data_source'):
-        lat = grp['Lattice Parameter (Angstrom)'].notna().sum()
-        tc  = grp['TPS Cond W/m/K'].notna().sum()
-        print(f"  {src:<35} {len(grp):>5}  {lat:>8}  {tc:>8}")
-    print("  " + "-" * 60)
+        lat  = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        tc   = grp['TPS Cond W/m/K'].notna().sum()
+        pri  = (grp['compound_type'] == PRISTINE).sum()
+        he   = (grp['compound_type'] == HIGH_ENTROPY).sum()
+        print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
+    print("  " + "-" * 78)
     lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
     tc_total  = combined['TPS Cond W/m/K'].notna().sum()
-    print(f"  {'TOTAL':<35} {len(combined):>5}  {lat_total:>8}  {tc_total:>8}")
+    pri_total = (combined['compound_type'] == PRISTINE).sum()
+    he_total  = (combined['compound_type'] == HIGH_ENTROPY).sum()
+    excl      = len(non_pyro)
+    print(f"  {'TOTAL (pyrochlore)':<38} {len(combined):>5}  "
+          f"{lat_total:>8}  {tc_total:>8}  {pri_total:>9}  {he_total:>5}")
+    print(f"  {'Non-pyrochlore (excluded)':<38} {excl:>5}")
     print()
 
+    # Save only canonical columns (drop ICSD-specific extras from CSV)
+    out_cols = [c for c in CANONICAL_COLS if c in combined.columns]
+    # Keep extra info columns if present
+    extra = [c for c in combined.columns if c not in CANONICAL_COLS
+             and c in ('compound_type', 'icsd_collection',
+                        'n_icsd_duplicates', 'a_stoich_json', 'b_stoich_json')]
+    out_cols = out_cols + extra
+
     if save:
-        combined.to_csv(OUTPUT_FILE, index=False)
+        combined[out_cols].to_csv(OUTPUT_FILE, index=False)
         log.info(f"Saved combined dataset → {OUTPUT_FILE}")
 
     return combined
@@ -299,7 +437,7 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
 
 if __name__ == '__main__':
     df = build_combined_dataset(save=True)
-    print("Sample rows:\n")
+    print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
               'TPS Cond W/m/K', 'Lattice Parameter (Angstrom)',
-              'data_source']].to_string(index=False))
+              'compound_type', 'data_source']].to_string(index=False))

@@ -61,7 +61,7 @@ def _check_elements(comp_str: str, radii_table: dict, site: str):
 def _print_banner():
     print()
     print("╔══════════════════════════════════════════════════════╗")
-    print("║     HEC Pyrochlore — Lattice Parameter Predictor    ║")
+    print("║     HEC Pyrochlore — Lattice Parameter Predictor     ║")
     print("╚══════════════════════════════════════════════════════╝")
     print()
 

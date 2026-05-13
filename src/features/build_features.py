@@ -1,76 +1,130 @@
 """
 Feature Engineering for Pyrochlore Oxide Dataset
+=================================================
 Calculates compositional, thermodynamic, and structural features
 from A-site and B-site cation compositions.
+
+Key change vs. original
+-----------------------
+``parse_composition`` now supports **non-equiatomic** compositions by reading
+pre-computed mole-fraction dicts from the ``a_stoich_json`` / ``b_stoich_json``
+columns that are written by the ICSD loader.  If those columns are absent (or
+NaN), it falls back to the original equiatomic assumption so backward
+compatibility with the Safin / NLM / parent-component sources is preserved.
+
+New features added
+------------------
+  n_total_elements   : total distinct cation count across both sites
+  site_asymmetry     : |n_A - n_B|  (degree of site-compositional imbalance)
+  en_site_contrast   : |ēn_A - ēn_B|  (electronegativity contrast across sites)
+  mass_site_contrast : |M̄_A - M̄_B|  (molar-mass contrast across sites)
 """
 
+from __future__ import annotations
+
+import json
 import pandas as pd
 import numpy as np
-from typing import Dict, List, Tuple, Optional
+from typing import Dict, Optional
 import warnings
 
 warnings.filterwarnings('ignore')
 
-# ── Physical property tables ─────────────────────────────────────────────────
+# ── Physical property tables ──────────────────────────────────────────────────
 
-# Shannon ionic radii (Angstroms, 8-coord for A-site, 6-coord for B-site)
-IONIC_RADII_8 = {  # A-site: 8-coordination
+# Shannon ionic radii (Å) — 8-coord for A-site, 6-coord for B-site
+IONIC_RADII_8: Dict[str, float] = {
     'La': 1.160, 'Ce': 1.143, 'Pr': 1.126, 'Nd': 1.109, 'Sm': 1.079,
     'Eu': 1.066, 'Gd': 1.053, 'Tb': 1.040, 'Dy': 1.027, 'Ho': 1.015,
     'Er': 1.004, 'Tm': 0.994, 'Yb': 0.985, 'Lu': 0.977, 'Y':  1.019,
 }
 
-IONIC_RADII_6 = {  # B-site: 6-coordination
+IONIC_RADII_6: Dict[str, float] = {
     'Ti': 0.605, 'Zr': 0.720, 'Hf': 0.710, 'Sn': 0.690, 'Ir': 0.625,
     'Ce': 0.870, 'Nb': 0.640,
 }
 
 # Molar masses (g/mol)
-MOLAR_MASSES = {
+MOLAR_MASSES: Dict[str, float] = {
     'La': 138.91, 'Ce': 140.12, 'Pr': 140.91, 'Nd': 144.24, 'Pm': 145.00,
     'Sm': 150.36, 'Eu': 151.96, 'Gd': 157.25, 'Tb': 158.93, 'Dy': 162.50,
     'Ho': 164.93, 'Er': 167.26, 'Tm': 168.93, 'Yb': 173.04, 'Lu': 174.97,
     'Y':   88.91, 'Ti':  47.87, 'Zr':  91.22, 'Hf': 178.49, 'Sn': 118.71,
-    'Ir': 192.22, 'O':   16.00,
+    'Ir': 192.22, 'Nb':  92.91, 'O':   16.00,
 }
 
 # Pauling electronegativity
-ELECTRONEGATIVITY = {
+ELECTRONEGATIVITY: Dict[str, float] = {
     'La': 1.10, 'Ce': 1.12, 'Pr': 1.13, 'Nd': 1.14, 'Sm': 1.17,
     'Eu': 1.20, 'Gd': 1.20, 'Tb': 1.22, 'Dy': 1.23, 'Ho': 1.24,
     'Er': 1.24, 'Tm': 1.25, 'Yb': 1.10, 'Lu': 1.27, 'Y':  1.22,
     'Ti': 1.54, 'Zr': 1.33, 'Hf': 1.30, 'Sn': 1.96, 'Ir': 2.20,
+    'Nb': 1.60,
 }
 
-# Atomic number (proxy for electron configuration effects)
-ATOMIC_NUMBER = {
+# Atomic numbers
+ATOMIC_NUMBER: Dict[str, int] = {
     'La': 57, 'Ce': 58, 'Pr': 59, 'Nd': 60, 'Sm': 62, 'Eu': 63,
     'Gd': 64, 'Tb': 65, 'Dy': 66, 'Ho': 67, 'Er': 68, 'Tm': 69,
     'Yb': 70, 'Lu': 71, 'Y': 39, 'Ti': 22, 'Zr': 40, 'Hf': 72,
-    'Sn': 50, 'Ir': 77,
+    'Sn': 50, 'Ir': 77, 'Nb': 41,
 }
 
 R_GAS = 8.314  # J/(mol·K)
 
 
-# ── Parser ───────────────────────────────────────────────────────────────────
+# ── Composition parser ────────────────────────────────────────────────────────
 
-def parse_composition(comp_str: str) -> Dict[str, float]:
+def parse_composition(
+    comp_str: str,
+    stoich_json: Optional[str] = None,
+) -> Dict[str, float]:
     """
-    Parse a comma-separated element string into equiatomic fractions.
-    E.g. "La,Gd,Lu" -> {'La': 0.333, 'Gd': 0.333, 'Lu': 0.333}
+    Convert a composition description to a mole-fraction dict.
+
+    Priority order
+    --------------
+    1. If ``stoich_json`` is a non-empty JSON string (written by the ICSD
+       loader), parse it directly — this preserves the true non-equiatomic
+       fractions (e.g. Gd₁.₉Ce₀.₁Ti₂O₇).
+    2. Otherwise, fall back to splitting ``comp_str`` on commas and assuming
+       equiatomic fractions — identical to the original behaviour used for
+       the Safin / parent-component / NLM datasets.
+
+    Parameters
+    ----------
+    comp_str    : comma-separated element symbols, e.g. "La,Gd,Lu"
+    stoich_json : optional JSON string from a_stoich_json / b_stoich_json,
+                  e.g. '{"Gd": 0.95, "Ce": 0.05}'
+
+    Returns
+    -------
+    Dict mapping element symbol → mole fraction (values sum to 1)
     """
+    # --- try JSON stoichiometry first ---
+    if stoich_json and not pd.isna(stoich_json):
+        try:
+            raw = json.loads(str(stoich_json))
+            total = sum(raw.values())
+            if total > 0:
+                return {e: v / total for e, v in raw.items()}
+        except (json.JSONDecodeError, TypeError, ValueError):
+            pass
+
+    # --- equiatomic fallback ---
     if pd.isna(comp_str) or str(comp_str).strip() == '':
         return {}
     elements = [e.strip() for e in str(comp_str).split(',') if e.strip()]
     n = len(elements)
+    if n == 0:
+        return {}
     return {elem: 1.0 / n for elem in elements}
 
 
 # ── Per-site feature calculators ─────────────────────────────────────────────
 
 def configurational_entropy(comp: Dict[str, float]) -> float:
-    """S_config = -R * Σ x_i ln(x_i)  [J/(mol·K)]"""
+    """S_config = -R × Σ xᵢ ln(xᵢ)   [J/(mol·K)]"""
     if not comp:
         return np.nan
     fracs = [f for f in comp.values() if f > 0]
@@ -78,98 +132,122 @@ def configurational_entropy(comp: Dict[str, float]) -> float:
 
 
 def mean_radius(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
+    """Composition-weighted mean ionic radius."""
     vals = [radii_table.get(e, np.nan) * f for e, f in comp.items()]
-    if any(np.isnan(v) for v in vals):
+    if any(np.isnan(v) for v in vals) or not vals:
         return np.nan
-    return sum(vals)
+    return float(sum(vals))
 
 
 def radius_variance(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
+    """Composition-weighted variance of ionic radii."""
     r_mean = mean_radius(comp, radii_table)
     if np.isnan(r_mean):
         return np.nan
-    return sum(f * (radii_table.get(e, np.nan) - r_mean) ** 2
-               for e, f in comp.items())
+    return float(sum(
+        f * (radii_table.get(e, np.nan) - r_mean) ** 2
+        for e, f in comp.items()
+    ))
 
 
 def radius_std(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
     var = radius_variance(comp, radii_table)
-    return np.nan if np.isnan(var) else np.sqrt(var)
+    return np.nan if np.isnan(var) else float(np.sqrt(var))
 
 
 def delta_parameter(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
-    """δ = sqrt(Σ x_i*(1 - r_i/r_mean)^2) — lattice distortion index"""
+    """δ = √(Σ xᵢ(1 − rᵢ/r̄)²)  — lattice distortion index."""
     r_mean = mean_radius(comp, radii_table)
     if np.isnan(r_mean) or r_mean == 0:
         return np.nan
-    return np.sqrt(sum(f * (1 - radii_table.get(e, np.nan) / r_mean) ** 2
-                       for e, f in comp.items()))
+    return float(np.sqrt(sum(
+        f * (1 - radii_table.get(e, np.nan) / r_mean) ** 2
+        for e, f in comp.items()
+    )))
 
 
 def en_mean(comp: Dict[str, float]) -> float:
     vals = [ELECTRONEGATIVITY.get(e, np.nan) * f for e, f in comp.items()]
-    if any(np.isnan(v) for v in vals):
+    if any(np.isnan(v) for v in vals) or not vals:
         return np.nan
-    return sum(vals)
+    return float(sum(vals))
 
 
 def en_variance(comp: Dict[str, float]) -> float:
     mu = en_mean(comp)
     if np.isnan(mu):
         return np.nan
-    return sum(f * (ELECTRONEGATIVITY.get(e, np.nan) - mu) ** 2
-               for e, f in comp.items())
+    return float(sum(
+        f * (ELECTRONEGATIVITY.get(e, np.nan) - mu) ** 2
+        for e, f in comp.items()
+    ))
 
 
 def mean_atomic_number(comp: Dict[str, float]) -> float:
     vals = [ATOMIC_NUMBER.get(e, np.nan) * f for e, f in comp.items()]
-    if any(np.isnan(v) for v in vals):
+    if any(np.isnan(v) for v in vals) or not vals:
         return np.nan
-    return sum(vals)
+    return float(sum(vals))
 
 
 def mean_molar_mass(comp: Dict[str, float]) -> float:
     vals = [MOLAR_MASSES.get(e, np.nan) * f for e, f in comp.items()]
-    if any(np.isnan(v) for v in vals):
+    if any(np.isnan(v) for v in vals) or not vals:
         return np.nan
-    return sum(vals)
+    return float(sum(vals))
 
 
-# ── Full-composition features ────────────────────────────────────────────────
+# ── Cross-site feature calculators ───────────────────────────────────────────
 
 def a_site_b_site_radius_ratio(r_a: float, r_b: float) -> float:
-    """r_A / r_B — governs pyrochlore stability field"""
+    """r_A / r_B — governs pyrochlore stability field (ideal: 1.46–1.78)."""
     if np.isnan(r_a) or np.isnan(r_b) or r_b == 0:
         return np.nan
     return r_a / r_b
 
 
 def phonon_scattering_factor(s_config: float, delta: float) -> float:
-    """Higher → more phonon scattering → lower thermal conductivity"""
+    """S_config × δ_total — composite proxy for phonon scattering strength."""
     if np.isnan(s_config) or np.isnan(delta):
         return np.nan
     return s_config * delta
 
 
-def theoretical_density(a_comp: Dict, b_comp: Dict, lattice_a: float) -> float:
-    """ρ_th = Z·M / (V·N_A),  Z=8 formula units, V in cm³"""
+def theoretical_density(
+    a_comp: Dict[str, float],
+    b_comp: Dict[str, float],
+    lattice_a: float,
+) -> float:
+    """ρ_th = Z·M / (V·N_A),  Z = 8 formula units per unit cell."""
     if np.isnan(lattice_a) or lattice_a <= 0:
         return np.nan
     M_a = 2 * sum(MOLAR_MASSES.get(e, np.nan) * f for e, f in a_comp.items())
     M_b = 2 * sum(MOLAR_MASSES.get(e, np.nan) * f for e, f in b_comp.items())
     M_o = 7 * MOLAR_MASSES['O']
-    M = M_a + M_b + M_o
-    V = (lattice_a * 1e-8) ** 3  # cm³
+    M   = M_a + M_b + M_o
+    V   = (lattice_a * 1e-8) ** 3   # cm³
     return (8 * M) / (V * 6.022e23)
 
 
 # ── Row-level feature builder ─────────────────────────────────────────────────
 
 def build_features_for_row(row: pd.Series) -> Dict[str, float]:
-    """Compute all engineered features for one data row."""
-    a_comp = parse_composition(row.get('Sample A', ''))
-    b_comp = parse_composition(row.get('Sample B', ''))
+    """
+    Compute all engineered features for one data row.
 
+    Reads ``a_stoich_json`` / ``b_stoich_json`` when present so that
+    non-equiatomic ICSD entries are handled correctly.
+    """
+    a_comp = parse_composition(
+        row.get('Sample A', ''),
+        stoich_json=row.get('a_stoich_json', None),
+    )
+    b_comp = parse_composition(
+        row.get('Sample B', ''),
+        stoich_json=row.get('b_stoich_json', None),
+    )
+
+    # Lattice parameter (may come from different column names)
     lattice_a = row.get('Lattice Parameter (Angstrom)', np.nan)
     if pd.isna(lattice_a):
         lattice_a = row.get('Lattice Parameter a (A)', np.nan)
@@ -178,7 +256,7 @@ def build_features_for_row(row: pd.Series) -> Dict[str, float]:
     except (TypeError, ValueError):
         lattice_a = np.nan
 
-    # ── A-site
+    # ── A-site features ───────────────────────────────────────────────────────
     a_S   = configurational_entropy(a_comp)
     a_r   = mean_radius(a_comp, IONIC_RADII_8)
     a_var = radius_variance(a_comp, IONIC_RADII_8)
@@ -190,7 +268,7 @@ def build_features_for_row(row: pd.Series) -> Dict[str, float]:
     a_M   = mean_molar_mass(a_comp)
     a_n   = len(a_comp)
 
-    # ── B-site
+    # ── B-site features ───────────────────────────────────────────────────────
     b_S   = configurational_entropy(b_comp)
     b_r   = mean_radius(b_comp, IONIC_RADII_6)
     b_var = radius_variance(b_comp, IONIC_RADII_6)
@@ -202,17 +280,27 @@ def build_features_for_row(row: pd.Series) -> Dict[str, float]:
     b_M   = mean_molar_mass(b_comp)
     b_n   = len(b_comp)
 
-    # ── Cross-site
-    r_ratio = a_site_b_site_radius_ratio(a_r, b_r)
-    total_S = (a_S if not np.isnan(a_S) else 0) + (b_S if not np.isnan(b_S) else 0)
-    total_delta = (a_del if not np.isnan(a_del) else 0) + (b_del if not np.isnan(b_del) else 0)
-    phonon_factor = phonon_scattering_factor(total_S, total_delta)
+    # ── Cross-site features ───────────────────────────────────────────────────
+    r_ratio     = a_site_b_site_radius_ratio(a_r, b_r)
+    total_S     = (a_S if not np.isnan(a_S) else 0.0) + \
+                  (b_S if not np.isnan(b_S) else 0.0)
+    total_delta = (a_del if not np.isnan(a_del) else 0.0) + \
+                  (b_del if not np.isnan(b_del) else 0.0)
+    phonon_fac  = phonon_scattering_factor(total_S, total_delta)
 
-    # ── Lattice-derived
+    # New cross-site contrast features
+    n_total        = float(a_n + b_n)
+    site_asymmetry = float(abs(a_n - b_n))
+    en_contrast    = abs(a_en - b_en) if not (np.isnan(a_en) or np.isnan(b_en)) \
+                     else np.nan
+    mass_contrast  = abs(a_M - b_M) if not (np.isnan(a_M) or np.isnan(b_M)) \
+                     else np.nan
+
+    # ── Lattice-derived features ──────────────────────────────────────────────
     lattice_vol = lattice_a ** 3 if not np.isnan(lattice_a) else np.nan
-    rho_th = theoretical_density(a_comp, b_comp, lattice_a)
+    rho_th      = theoretical_density(a_comp, b_comp, lattice_a)
 
-    feat = {
+    return {
         # A-site
         'a_site_n_elements':       float(a_n),
         'a_site_entropy':          a_S,
@@ -236,29 +324,31 @@ def build_features_for_row(row: pd.Series) -> Dict[str, float]:
         'b_site_mean_atomic_num':  b_Z,
         'b_site_mean_molar_mass':  b_M,
         # Cross-site
-        'a_b_radius_ratio':        r_ratio,
-        'total_entropy':           total_S,
-        'total_delta':             total_delta,
-        'phonon_scattering_factor': phonon_factor,
-        # Lattice
-        'lattice_parameter':       lattice_a,
-        'lattice_volume':          lattice_vol,
-        'density_theoretical':     rho_th,
+        'a_b_radius_ratio':         r_ratio,
+        'total_entropy':            total_S,
+        'total_delta':              total_delta,
+        'phonon_scattering_factor': phonon_fac,
+        'n_total_elements':         n_total,
+        'site_asymmetry':           site_asymmetry,
+        'en_site_contrast':         en_contrast,
+        'mass_site_contrast':       mass_contrast,
+        # Lattice-derived (used in thermal model only)
+        'lattice_parameter':        lattice_a,
+        'lattice_volume':           lattice_vol,
+        'density_theoretical':      rho_th,
     }
-    return feat
 
 
 def add_engineered_features(df: pd.DataFrame) -> pd.DataFrame:
-    """Add all engineered features to a DataFrame."""
-    records = []
-    for _, row in df.iterrows():
-        records.append(build_features_for_row(row))
+    """Add all engineered features as new columns to a DataFrame."""
+    records = [build_features_for_row(row) for _, row in df.iterrows()]
     feat_df = pd.DataFrame(records, index=df.index)
     return pd.concat([df, feat_df], axis=1)
 
 
-# ── Feature name helpers ──────────────────────────────────────────────────────
+# ── Feature-name lists ────────────────────────────────────────────────────────
 
+# Core compositional features (no lattice parameter)
 FEATURE_COLS = [
     'a_site_n_elements', 'a_site_entropy', 'a_site_mean_radius',
     'a_site_radius_variance', 'a_site_radius_std', 'a_site_delta',
@@ -270,21 +360,42 @@ FEATURE_COLS = [
     'b_site_mean_molar_mass',
     'a_b_radius_ratio', 'total_entropy', 'total_delta',
     'phonon_scattering_factor',
+    # new cross-site contrast features
+    'n_total_elements', 'site_asymmetry', 'en_site_contrast', 'mass_site_contrast',
 ]
 
-LATTICE_EXTRA_FEATURES = FEATURE_COLS  # no lattice_parameter itself
+LATTICE_EXTRA_FEATURES = FEATURE_COLS   # lattice_param itself is the target
 THERMAL_EXTRA_FEATURES = FEATURE_COLS + ['lattice_parameter']
 
 
+# ── Smoke test ────────────────────────────────────────────────────────────────
+
 if __name__ == '__main__':
-    # Quick sanity check
-    test = pd.Series({
+    # Test 1: equiatomic (Safin-style)
+    test_eq = pd.Series({
         'Sample A': 'Pr,Sm,Gd,Ho,Lu',
         'Sample B': 'Ti',
         'Lattice Parameter (Angstrom)': 10.178,
         'TPS Cond W/m/K': 1.566,
     })
-    feats = build_features_for_row(test)
-    print("Feature engineering smoke test — PrSmGdHoLu / Ti:")
-    for k, v in feats.items():
+    feats_eq = build_features_for_row(test_eq)
+    print("Equiatomic PrSmGdHoLu / Ti:")
+    for k, v in feats_eq.items():
         print(f"  {k:35s}: {v:.6g}" if not np.isnan(v) else f"  {k:35s}: NaN")
+
+    # Test 2: non-equiatomic (ICSD-style)
+    import json as _json
+    test_ne = pd.Series({
+        'Sample A': 'Ce,Gd',
+        'Sample B': 'Ce,Ti',
+        'a_stoich_json': _json.dumps({'Ce': 0.05, 'Gd': 0.95}),
+        'b_stoich_json': _json.dumps({'Ce': 0.05, 'Ti': 0.95}),
+        'Lattice Parameter (Angstrom)': 10.171,
+    })
+    feats_ne = build_features_for_row(test_ne)
+    print("\nNon-equiatomic Gd₁.₉Ce₀.₁Ti₂O₇:")
+    for k, v in feats_ne.items():
+        print(f"  {k:35s}: {v:.6g}" if not np.isnan(v) else f"  {k:35s}: NaN")
+
+    print(f"\nTotal feature count: {len(FEATURE_COLS)} (compositional) "
+          f"+ 1 lattice = {len(THERMAL_EXTRA_FEATURES)} (thermal)")

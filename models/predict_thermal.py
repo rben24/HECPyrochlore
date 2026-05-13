@@ -56,7 +56,7 @@ TASK_LAT = 'lattice_param'
 def _print_banner():
     print()
     print("╔══════════════════════════════════════════════════════╗")
-    print("║   HEC Pyrochlore — Thermal Conductivity Predictor   ║")
+    print("║   HEC Pyrochlore — Thermal Conductivity Predictor    ║")
     print("╚══════════════════════════════════════════════════════╝")
     print()
 

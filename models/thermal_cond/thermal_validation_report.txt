@@ -57,4 +57,14 @@
   B-site compositional     : mean = -0.00253  | top = b_site_en_mean
   Cross-site / lattice     : mean = 0.37817  | top = lattice_parameter
 
+── Diagnostic Plots Generated ───────────────────────────────
+  thermal_parity.png                — predicted vs actual
+  thermal_cv_comparison.png         — model CV comparison
+  thermal_feature_importance.png    — permutation + MDI importance
+  thermal_residuals.png             — 4-panel residual diagnostics
+  thermal_influence.png             — Cook's D + leverage
+  thermal_target_distribution.png   — histogram + KDE + box-plot
+  thermal_feature_vs_target.png     — top-6 features vs target
+  thermal_correlation_heatmap.png   — feature–feature Pearson r
+
 ============================================================

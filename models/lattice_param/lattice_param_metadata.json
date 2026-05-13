@@ -1,6 +1,6 @@
 {
   "task": "lattice_param",
-  "best_model": "RandomForest",
+  "best_model": "GradientBoosting",
   "feature_names": [
     "a_site_n_elements",
     "a_site_entropy",
@@ -25,33 +25,43 @@
     "a_b_radius_ratio",
     "total_entropy",
     "total_delta",
-    "phonon_scattering_factor"
+    "phonon_scattering_factor",
+    "n_total_elements",
+    "site_asymmetry",
+    "en_site_contrast",
+    "mass_site_contrast"
   ],
+  "compound_types": [
+    "pristine",
+    "high_entropy"
+  ],
+  "n_train": 135,
+  "n_test": 34,
   "test_metrics": {
-    "RMSE": 0.03675720476510561,
-    "MAE": 0.01958405353437114,
-    "R2": 0.8454620542450341
+    "RMSE": 0.04015910063409691,
+    "MAE": 0.02308548644009189,
+    "R2": 0.9513325327539388
   },
   "cv_summary": {
     "RandomForest": {
-      "mean_r2": 0.5614662012149212,
-      "std_r2": 0.6100819246852075,
-      "mean_rmse": 0.048995742593962874
+      "mean_r2": 0.9276957887232147,
+      "std_r2": 0.04256184225537164,
+      "mean_rmse": 0.05185245448417962
     },
     "GradientBoosting": {
-      "mean_r2": 0.3957311837655578,
-      "std_r2": 1.0091040170561887,
-      "mean_rmse": 0.05250342152677075
+      "mean_r2": 0.9481853364242021,
+      "std_r2": 0.020172724531936016,
+      "mean_rmse": 0.04448612013028873
     },
     "ExtraTrees": {
-      "mean_r2": 0.4274993707873086,
-      "std_r2": 0.7819401472088083,
-      "mean_rmse": 0.055567567455599
+      "mean_r2": 0.9356160892623204,
+      "std_r2": 0.032938086648538444,
+      "mean_rmse": 0.0493368536710627
     },
     "Ridge": {
-      "mean_r2": 0.43569763501222986,
-      "std_r2": 0.7583005550445173,
-      "mean_rmse": 0.05753859385761369
+      "mean_r2": 0.9426626761597916,
+      "std_r2": 0.024038416911941137,
+      "mean_rmse": 0.04714104654812358
     }
   }
 }

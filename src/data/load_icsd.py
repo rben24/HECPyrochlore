@@ -55,12 +55,23 @@ log = logging.getLogger(__name__)
 # Rare-earth / Y cations that occupy the 8-coordinated A-site
 KNOWN_A: frozenset[str] = frozenset({
     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
+    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y', 'Bi', 'Pb', 'Ca',
 })
 
 # Transition-metal cations that occupy the 6-coordinated B-site
 KNOWN_B: frozenset[str] = frozenset({
-    'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
+    # Group IV
+    'Ti', 'Zr', 'Hf', 'Sn',
+    # Group V
+    'V', 'Nb', 'Ta',
+    # Group VI
+    'Cr', 'Mo', 'W',
+    # Group VII
+    'Mn', 'Re',
+    # Group VIII/IX (transition metals and 5d metals)
+    'Fe', 'Co', 'Ni', 'Ru', 'Os', 'Rh', 'Ir',
+    # Post-transition
+    'Pb', 'Pt',
 })
 
 # Ce can sit on either site depending on oxidation state; handled separately
@@ -297,7 +308,7 @@ def load_icsd(
     Parameters
     ----------
     filepath : path to ``HECPyrochlore_latt_data_ICSD_.csv``
-               (defaults to ``data/raw/HECPyrochlore_latt_data_ICSD_.csv``
+               (defaults to ``data/raw/HECPyrochlore_latt_data_ICSD.csv``
                relative to the project root)
     verbose  : print a summary table
 
@@ -320,13 +331,13 @@ def load_icsd(
     if filepath is None:
         _HERE = Path(__file__).resolve().parent
         _PROJECT = _HERE.parent.parent
-        filepath = _PROJECT / 'data' / 'raw' / 'HECPyrochlore_latt_data_ICSD_.csv'
+        filepath = _PROJECT / 'data' / 'raw' / 'HECPyrochlore_latt_data_ICSD.csv'
     filepath = Path(filepath)
 
     if not filepath.exists():
         raise FileNotFoundError(
             f"ICSD dataset not found at {filepath}.\n"
-            f"Place the file at data/raw/HECPyrochlore_latt_data_ICSD_.csv "
+            f"Place the file at data/raw/HECPyrochlore_latt_data_ICSD.csv "
             f"or pass the path explicitly."
         )
 
