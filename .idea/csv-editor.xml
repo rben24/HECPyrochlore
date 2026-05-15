@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\raw\HECPyrochlore_latt_data_ICSD.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\raw\Jordan_pyrochlore_data.csv">
           <value>
             <Attribute>

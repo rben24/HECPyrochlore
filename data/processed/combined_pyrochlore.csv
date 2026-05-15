@@ -99,18 +99,32 @@ Samarium dysprosium titanium oxide (1/1/2/7),"Dy,Sm",Ti,,10.175,,Yes,,icsd_liter
 Didysprosium heptaoxodititanate- 0.05 Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1208,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.02439024390243903, ""Ti"": 0.9756097560975611}",223419,1.0
 Didysprosium heptaoxodititanate- 0.1 Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1143,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",223929,1.0
 Didysprosium heptaoxodititanate - 0.15  Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1077,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.06976744186046512, ""Ti"": 0.9302325581395349}",223930,1.0
-Didysprosium heptaoxodihafnate,Dy,Hf,,10.43055,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Hf"": 1.0}",218113|245138,2.0
+Didysprosium(III) dihafnium(IV) oxide,Dy,Hf,,10.39,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Hf"": 1.0}",245138,1.0
+Didysprosium heptaoxodihafnate,Dy,Hf,,10.4711,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Hf"": 1.0}",218113,1.0
 Didysprosium dimolybdate(IV),Dy,Mo,,10.2728,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Mo"": 1.0}",291026,1.0
-Didysprosium diruthenium(IV) heptaoxide,Dy,Ru,,10.1658,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ru"": 1.0}",176953|78151,2.0
-Didysprosium distanate,Dy,Sn,,10.4021,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Sn"": 1.0}",82960|204111,2.0
-Didysprosium dititanium oxide,Dy,Ti,,10.136535454545454,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112534|134709|154156|154157|154158|154159|188553|191617|222913|249063|249064,11.0
+Didysprosium diruthenate(IV),Dy,Ru,,10.1625,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ru"": 1.0}",78151,1.0
+Didysprosium diruthenium(IV) heptaoxide,Dy,Ru,,10.1691,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ru"": 1.0}",176953,1.0
+Didysprosium distanate,Dy,Sn,,10.3979,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Sn"": 1.0}",82960,1.0
+Didysprosium ditin heptaoxide,Dy,Sn,,10.4063,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Sn"": 1.0}",204111,1.0
+Didysprosium heptaoxodititanate,Dy,Ti,,10.1081,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112538,1.0
+Didysprosium heptaoxodititanate,Dy,Ti,,10.1109,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112537,1.0
+Didysprosium di-titanate,Dy,Ti,,10.2925,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",134711,1.0
+Didysprosium dititanium oxide,Dy,Ti,,10.137895,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112534|154156|154157|154158|154159|188553|191617|222913|249063|249064,10.0
+Didysprosium di-titanate,Dy,Ti,,10.12294,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",134709,1.0
+Didysprosium heptaoxodititanate,Dy,Ti,,10.1045,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112540,1.0
+Didysprosium heptaoxodititanate,Dy,Ti,,10.1062,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112539,1.0
 Didysprosium divanadate(IV),Dy,V,,10.0381,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""V"": 1.0}",160863|160864,2.0
 Dysprosium zirconium oxide (2/2/7),Dy,Zr,,10.4588,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Zr"": 1.0}",217895,1.0
 Samarium erbium dititanate,"Er,Sm",Ti,,10.156,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Er"": 0.5}","{""Ti"": 1.0}",148750,1.0
 Dierbium dimanganate(IV),Er,Mn,,9.875,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Mn"": 1.0}",202517,1.0
 Dierbium diruthenate(IV),Er,Ru,,10.1063,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ru"": 1.0}",97533,1.0
-Dierbium distannate,Er,Sn,,10.354133333333333,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",82962|84749|204113,3.0
-Dierbium dititanate,Er,Ti,,10.088888857142857,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",24152|24209|134712|148753|150211|188878|188879|191615|249070|249071|252238|156425|181209|181210,14.0
+Dierbium distannate,Er,Sn,,10.3504,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",84749,1.0
+Dierbium distannate,Er,Sn,,10.3504,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",82962,1.0
+Dierbium ditin heptaoxide,Er,Sn,,10.3616,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",204113,1.0
+Dierbium di-titanate,Er,Ti,,10.2557,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",134714,1.0
+Dierbium dititanate,Er,Ti,,10.090608333333334,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",24152|24209|148753|150211|188878|188879|191615|249070|249071|156425|181209|181210,12.0
+Dierbium heptaoxodititanate,Er,Ti,,10.077044,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",252238,1.0
+Dierbium di-titanate,Er,Ti,,10.0801,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",134712,1.0
 Dierbium divanadate(IV),Er,V,,9.9924,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""V"": 1.0}",160866,1.0
 Erbium zirconium oxide (2/2/7),Er,Zr,,10.4108,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Zr"": 1.0}",217897,1.0
 Yttrium europium zirconium tin oxide (1.98/0.02/1/1/7),"Eu,Y","Sn,Zr",,10.35,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.99, ""Eu"": 0.01}","{""Zr"": 0.5, ""Sn"": 0.5}",154368,1.0
@@ -127,15 +141,21 @@ Yttrium europium titanium oxide,"Eu,Y",Ti,,10.157,,Yes,,icsd_literature,,,,high_
 Europium iron(III) dititanate,Eu,"Fe,Ti",,10.1722,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 1.0}","{""Fe"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",8819,1.0
 Europium iron(III) dititanate,Eu,"Fe,Ti",,10.157,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 1.0}","{""Fe"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",8820,1.0
 Europium hafnium oxide (2.1/1.9/6.95),Eu,Hf,,10.503525,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Hf"": 1.0}",173953|119417|156142|158839,4.0
-Europium diiridate(IV),Eu,Ir,,10.2408375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ir"": 1.0}",124896|124897|124898|124899|135031|156437|173948|239645,8.0
+Europium diiridate(IV),Eu,Ir,,10.236099999999999,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ir"": 1.0}",124896|124897|124898|124899|135031|173948|239645,7.0
+Dieuropium diiridate(IV),Eu,Ir,,10.274,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ir"": 1.0}",156437,1.0
 Dieuropium dimolybdate(IV),Eu,Mo,,10.375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Mo"": 1.0}",173946,1.0
 Dieuropium diplatinate,Eu,Pt,,10.293,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Pt"": 1.0}",173952,1.0
-Dieuropium diruthenate(IV),Eu,Ru,,10.256633333333333,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ru"": 1.0}",173947|176947|109306,3.0
-Dieuropium distannate,Eu,Sn,,10.48054,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Sn"": 1.0}",84754|165931|173949|204109,4.0
-Dieuropium dititanate,Eu,Ti,,10.202905454545453,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ti"": 1.0}",8818|48170|83596|92767|128618|173945|188551|191620|196405|200797|264724,11.0
-Dieuropium dizirconate,Eu,Zr,,10.55204,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Zr"": 1.0}",34479|108765|130791|130792|130793|173950|189342|119384|156139|180493,10.0
+Dieuropium diruthenate(IV),Eu,Ru,,10.252,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ru"": 1.0}",173947|109306,2.0
+Dieuropium diruthenium(IV) heptaoxide,Eu,Ru,,10.2659,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ru"": 1.0}",176947,1.0
+Dieuropium distannate,Eu,Sn,,10.477486666666666,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Sn"": 1.0}",84754|165931|173949,3.0
+Dieuropium ditin heptaoxide,Eu,Sn,,10.4897,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Sn"": 1.0}",204109,1.0
+Dieuropium dititanate,Eu,Ti,,10.204551,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ti"": 1.0}",48170|83596|92767|128618|173945|188551|191620|196405|200797|264724,10.0
+Dieuropium dititanate,Eu,Ti,,10.18645,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ti"": 1.0}",8818,1.0
+Dieuropium dizirconate,Eu,Zr,,10.55462857142857,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Zr"": 1.0}",34479|108765|173950|189342|119384|156139|180493,7.0
+Europium zirconium heptaoxide,Eu,Zr,,10.546,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Zr"": 1.0}",130791|130792|130793,3.0
 Gadolinium neodymium dizirconate (0.4/1.6/1),"Gd,Nd",Zr,,10.6092,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",160163,1.0
 Neodymium gadolinium dizirconate,"Gd,Nd",Zr,,10.61575,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.5, ""Gd"": 0.5}","{""Zr"": 1.0}",186179,1.0
+Samarium gadolinium dititanate,"Gd,Sm",Ti,,,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Gd"": 0.5}","{""Ti"": 1.0}",148749,1.0
 Gadolinium-1.4 terbium-0.6 dizirconate,"Gd,Tb",Zr,,10.5036,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.7, ""Tb"": 0.3}","{""Zr"": 1.0}",250763,1.0
 Lanthanum gadolinium zirconium oxide (0.4/1.6/2/7),"Gd,La",Zr,,10.5934,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Gd"": 0.8}","{""Zr"": 1.0}",230560,1.0
 Gadolinium neodymium dizirconate (1.6/0.4/1),"Gd,Nd",Zr,,10.5688,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Nd"": 0.2}","{""Zr"": 1.0}",160162,1.0
@@ -150,12 +170,27 @@ Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.31934,,Yes,,icsd_literature,,,,high_e
 Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.36858,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.6, ""Ti"": 0.4}",258284,1.0
 Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.42276,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",258277|258283,2.0
 Digadolinium dihafnium heptaoxide,Gd,Hf,,10.519988,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Hf"": 1.0}",213372|258282|119418|156143|158840,5.0
-Digadolinium dimolybdate(IV),Gd,Mo,,10.30677,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Mo"": 1.0}",34166|159774|159775|159776|159777|291027,6.0
-Digadolinium diplatinum heptaoxide,Gd,Pt,,10.261389999999999,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pt"": 1.0}",48347|264487,2.0
-Digadolinium diruthenate(IV),Gd,Ru,,10.235566666666667,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",79332|127152|176950,3.0
-Digadolinium distannate,Gd,Sn,,10.45609,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Sn"": 1.0}",84753|204115,2.0
-Digadolinium dititanate,Gd,Ti,,10.188074599999998,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",4657|19687|24207|33466|126420|134710|145342|145864|148752|150210|154160|154161|154162|154163|167918|188552|191619|196406|213838|213839|214706|235987|258281|258286|264719,25.0
-Digadolinium dizirconate,Gd,Zr,,10.532914117647058,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",35077|35083|35114|35131|160158|165813|165814|165815|165816|185395|207492|212861|213855|217894|261759|119385|156140,17.0
+Digadolinium dimolybdate(IV),Gd,Mo,,10.301004,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Mo"": 1.0}",34166|159774|159775|159776|159777,5.0
+Digadolinium dimolybdate(IV),Gd,Mo,,10.3356,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Mo"": 1.0}",291027,1.0
+Digadolinium diplatinate(IV),Gd,Pt,,10.2595,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pt"": 1.0}",264487,1.0
+Digadolinium diplatinum heptaoxide,Gd,Pt,,10.26328,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pt"": 1.0}",48347,1.0
+Digadolinium diruthenate(IV),Gd,Ru,,10.2281,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",79332,1.0
+Gadolinium ruthenium oxide,Gd,Ru,,10.239,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",127152,1.0
+Digadolinium diruthenium(IV) heptaoxide,Gd,Ru,,10.2396,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",176950,1.0
+Digadolinium distannate,Gd,Sn,,10.45438,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Sn"": 1.0}",84753,1.0
+Digadolinium ditin heptaoxide,Gd,Sn,,10.4578,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Sn"": 1.0}",204115,1.0
+Digadolinium dititanate,Gd,Ti,,10.1894,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",201296,1.0
+Digadolinium dititanate,Gd,Ti,,10.1894,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",201307,1.0
+Digadolinium dititanate,Gd,Ti,,10.1855,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",201312,1.0
+Digadolinium di-titanate,Gd,Ti,,10.35983,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",134713,1.0
+Digadolinium dititanate,Gd,Ti,,10.188420652173916,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",4657|19687|24207|33466|126420|145342|145864|148752|150210|154160|154161|154162|154163|188552|191619|196406|213838|213839|214706|235987|258281|258286|264719,23.0
+Digadolinium dititanate,Gd,Ti,,10.184,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",167918,1.0
+Digadolinium di-titanate,Gd,Ti,,10.18419,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",134710,1.0
+Digadolinium dizirconate,Gd,Zr,,10.533295999999998,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",35077|35083|35114|35131|160158|165813|165814|165815|165816|207492|212861|213855|217894|119385|156140,15.0
+Digadolinium dizirconate,Gd,Zr,,10.5401,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",261759,1.0
+Digadolinium dizirconate,Gd,Zr,,10.52,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",185395,1.0
+Digadolinium dizirconate,Gd,Zr,,10.5249,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",261758,1.0
+Digadolinium dizirconate,Gd,Zr,,10.586,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",185396,1.0
 Holmium neodymium zirconate (0.2/1.8/2),"Ho,Nd",Zr,,10.6049,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.1, ""Nd"": 0.9}","{""Zr"": 1.0}",261855,1.0
 Holmium neodymium zirconate (0.4/1.6/2),"Ho,Nd",Zr,,10.5871,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",261856,1.0
 Holmium neodymium zirconate (0.6/1.4/2),"Ho,Nd",Zr,,10.5652,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.3, ""Nd"": 0.7}","{""Zr"": 1.0}",261857,1.0
@@ -165,17 +200,25 @@ Holmium neodymium zirconate (1/1/2),"Ho,Nd",Zr,,10.5093,,Yes,,icsd_literature,,,
 Samarium holmium titanium oxide (1/1/2/7),"Ho,Sm",Ti,,10.162,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",144745,1.0
 Holmium titanium iron oxide (2/1.85/0.15/7),Ho,"Fe,Ti",,10.1013,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Ti"": 0.925, ""Fe"": 0.075}",112535,1.0
 Holmium iron heptaoxodititanate (1.8/0.2/7),Ho,"Fe,Ti",,10.0804,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Fe"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",112536,1.0
+Diholmium manganese ruthenium heptaoxide,Ho,"Mn,Ru",,10.0368,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",169612,1.0
+Diholmium manganese ruthenium heptaoxide,Ho,"Mn,Ru",,10.0366,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",169613,1.0
 Diholmium manganese ruthenium heptaoxide,Ho,"Mn,Ru",,10.0491,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",169610,1.0
+Diholmium manganese ruthenium heptaoxide,Ho,"Mn,Ru",,10.0369,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",169611,1.0
 Diholmium dimolybdate,Ho,Mo,,10.26902,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Mo"": 1.0}",34170,1.0
-Diholmium diruthenate(IV),Ho,Ru,,10.147400000000001,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ru"": 1.0}",96730|176954,2.0
-Diholmium distannate,Ho,Sn,,10.3743,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",82961|84748|204117,3.0
-Holmium titanium oxide (2.1/1.9/6.95),Ho,Ti,,10.115577363636364,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ti"": 1.0}",112533|188880|188881|191616|205098|249077|249078|252236|146122|180591|180592,11.0
+Diholmium diruthenate(IV),Ho,Ru,,10.1417,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ru"": 1.0}",96730,1.0
+Diholmium diruthenium(IV) heptaoxide,Ho,Ru,,10.1531,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ru"": 1.0}",176954,1.0
+Diholmium distannate,Ho,Sn,,10.3726,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",84748,1.0
+Diholmium distannate,Ho,Sn,,10.3726,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",82961,1.0
+Diholmium ditin heptaoxide,Ho,Sn,,10.3777,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",204117,1.0
+Holmium titanium oxide (2.1/1.9/6.95),Ho,Ti,,10.116793000000001,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ti"": 1.0}",112533|188880|188881|191616|205098|249077|249078|146122|180591|180592,10.0
+Diholmium heptaoxodititanate,Ho,Ti,,10.103421,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ti"": 1.0}",252236,1.0
 Holmium zirconium oxide (2/2/7),Ho,Zr,,10.4167,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Zr"": 1.0}",217896,1.0
 Yttrium lanthanum titanium oxide (1.95/0.05/2/7),"La,Y",Ti,,10.10199,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""La"": 0.025}","{""Ti"": 1.0}",173057,1.0
 Yttrium lanthanum titanium oxide (1.9/0.1/2/7),"La,Y",Ti,,10.109195,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",173049|173058,2.0
 Yttrium lanthanum titanium oxide (1.8/0.2/2/7),"La,Y",Ti,,10.10901,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""La"": 0.1}","{""Ti"": 1.0}",173059,1.0
 Yttrium lanthanum titanium oxide (1.75/0.22/2/7),"La,Y",Ti,,10.132525000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",173050|173052,2.0
-Yttrium lanthanum titanium oxide (1.73/0.23/2/7),"La,Y",Ti,,10.12388,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",173054|173060,2.0
+Yttrium lanthanum titanium oxide (1.75/0.25/2/7),"La,Y",Ti,,10.11306,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.875, ""La"": 0.125}","{""Ti"": 1.0}",173060,1.0
+Yttrium lanthanum titanium oxide (1.73/0.23/2/7),"La,Y",Ti,,10.1347,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",173054,1.0
 Yttrium lanthanum titanium oxide (1.7/0.3/2/7),"La,Y",Ti,,10.11981,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.85, ""La"": 0.15}","{""Ti"": 1.0}",173061,1.0
 Yttrium lanthanum titanium oxide (1.65/0.35/2/7),"La,Y",Ti,,10.12344,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.825, ""La"": 0.175}","{""Ti"": 1.0}",173062,1.0
 Lanthanum yttrium dihafnate (0.4/1.6/1),"La,Y",Hf,,10.5148,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Y"": 0.8}","{""Hf"": 1.0}",173794,1.0
@@ -188,32 +231,71 @@ Lanthanum yttrium dizirconate (1.6/0.4/1),"La,Y",Zr,,10.7484,,Yes,,icsd_literatu
 Yttrium lanthanum titanium oxide (0.35/1.65/2/7),"La,Y",Ti,,10.1315,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.175, ""La"": 0.825}","{""Ti"": 1.0}",173064,1.0
 Yttrium lanthanum titanium oxide (0.3/1.7/2/7),"La,Y",Ti,,10.1316,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.15, ""La"": 0.85}","{""Ti"": 1.0}",173066,1.0
 Yttrium lanthanum titanium oxide (0.25/1.75/2/7),"La,Y",Ti,,10.1145,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.125, ""La"": 0.875}","{""Ti"": 1.0}",173068,1.0
-Lanthanum dihafnate,La,Hf,,10.770800000000001,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Hf"": 1.0}",173790|218109,2.0
+Dilanthanum heptaoxodihafnate,La,Hf,,10.7688,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Hf"": 1.0}",218109,1.0
+Lanthanum dihafnate,La,Hf,,10.7728,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Hf"": 1.0}",173790,1.0
 Dilanthanum diruthenium(IV) heptaoxide,La,Ru,,10.3967,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Ru"": 1.0}",176946,1.0
-Dilanthanum distannate,La,Sn,,10.699575,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",24195|82956|167144|204105,4.0
-Dilanthanum dizirconate,La,Zr,,10.8023496,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",26762|26768|26779|26851|26853|51573|130794|130795|130796|140547|147738|150206|153222|173795|184089|189341|189344|207489|248878|253061|253063|15165|47621|49600|180491,25.0
+Dilanthanum ditin(IV) oxide,La,Sn,,10.69255,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",24195|167144,2.0
+Dilanthanum distannate,La,Sn,,10.7026,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",82956,1.0
+Dilanthanum ditin heptaoxide,La,Sn,,10.7106,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",204105,1.0
+Dilanthanum dizirconate,La,Zr,,10.875,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",248648,1.0
+Lanthanum dizirconate,La,Zr,,10.892,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184093,1.0
+Lanthanum dizirconate,La,Zr,,10.91,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184094,1.0
+Lanthanum dizirconate,La,Zr,,10.915,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184095,1.0
+Lanthanum dizirconate,La,Zr,,10.921,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184096,1.0
+Lanthanum dizirconate,La,Zr,,10.927,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184097,1.0
+Dilanthanum dizirconate,La,Zr,,10.906,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",248649,1.0
+Lanthanum dizirconate,La,Zr,,10.933,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184098,1.0
+Lanthanum dizirconate,La,Zr,,10.939,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184099,1.0
+Lanthanum dizirconate,La,Zr,,10.945,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184100,1.0
+Lanthanum dizirconate,La,Zr,,10.951,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184101,1.0
+Lanthanum dizirconate,La,Zr,,10.957,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184102,1.0
+Dilanthanum dizirconate,La,Zr,,10.799191578947369,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",26762|26768|26779|26851|26853|51573|147738|150206|153222|189341|189344|207489|248878|253061|253063|15165|47621|49600|180491,19.0
+Lanthanum zirconium heptaoxide,La,Zr,,10.81235,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",130794|130795|130796|140547|173795|184089,6.0
+Lanthanum dizirconate,La,Zr,,10.828,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184090,1.0
+Lanthanum dizirconate,La,Zr,,10.848,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184091,1.0
+Lanthanum dizirconate,La,Zr,,10.869,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",184092,1.0
 Dilutetium diiridate(IV),Lu,Ir,,10.099,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ir"": 1.0}",35849|144826,2.0
 Dilutetium dimanganate(IV),Lu,Mn,,9.82684,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mn"": 1.0}",56518,1.0
 Dilutetium heptaoxodimolybdate,Lu,Mo,,10.1478,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mo"": 1.0}",117790,1.0
 Dilutetium diruthenate(IV),Lu,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ru"": 1.0}",109308,1.0
-Dilutetium distannate,Lu,Sn,,10.2961,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Sn"": 1.0}",82965|204106,2.0
+Dilutetium distannate,Lu,Sn,,10.2917,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Sn"": 1.0}",82965,1.0
+Dilutetium ditin heptaoxide,Lu,Sn,,10.3005,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Sn"": 1.0}",204106,1.0
 Dilutetium dititanate,Lu,Ti,,10.018242631578948,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ti"": 1.0}",24205|188869|188870|188871|191612|249084|119363|119364|119365|154079|154080|154081|155572|155573|155574|223078|223079|223080|250252,19.0
 Dilutetium divanadate(IV),Lu,V,,9.934475,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""V"": 1.0}",32688|159286|159290|160599,4.0
 Neodymium yttrium dizirconate (0.4/1.6/1),"Nd,Y",Zr,,10.531,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.2, ""Y"": 0.8}","{""Zr"": 1.0}",174191,1.0
 Neodymium yttrium dizirconate (0.8/1.2/1),"Nd,Y",Zr,,10.532,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",174190,1.0
 Neodymium yttrium zirconate (1.6/0.4/1),"Nd,Y",Zr,,10.609,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",174188,1.0
+Neodymium hafnate,Nd,Hf,,10.6389,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Hf"": 1.0}",257687,1.0
 Dineodymium heptaoxodihafnate,Nd,Hf,,10.6469,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Hf"": 1.0}",218111,1.0
 Neodymium iridium oxide (2/2/7),Nd,Ir,,10.37255,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ir"": 1.0}",239644|259364,2.0
 Dineodymium dimolybdate(IV),Nd,Mo,,10.4836,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Mo"": 1.0}",291030,1.0
 Dineodymium diplatinum(IV) oxide,Nd,Pt,,10.4041,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Pt"": 1.0}",402456,1.0
-Dineodymium diruthenate(IV),Nd,Ru,,10.342575,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",4816|79327|82304|91085|161572|176951|195795|78133,8.0
-Dineodymium distannate,Nd,Sn,,10.571,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Sn"": 1.0}",82958|204108,2.0
-Dineodymium dizirconate,Nd,Zr,,10.664559565217392,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",26799|26802|26805|26854|62793|62794|153227|160164|174187|189340|189343|207491|212858|213450|213451|213452|213453|249974|259150|261854|119329|180492|191573,23.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3388,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195801,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3394,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195799,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.342,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195798,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3412,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195797,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.344,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195796,1.0
+Dineodymium diruthenate(IV),Nd,Ru,,10.339974999999999,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",79327|82304|91085|78133,4.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3544,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",4816,1.0
+Dineodymium diruthenate(IV),Nd,Ru,,10.3417,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",161572,1.0
+Dineodymium diruthenium(IV) heptaoxide,Nd,Ru,,10.3302,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",176951,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3544,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195795,1.0
+Dineodymium heptaoxodiruthenate(IV),Nd,Ru,,10.3373,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",195800,1.0
+Dineodymium distannate,Nd,Sn,,10.5671,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Sn"": 1.0}",82958,1.0
+Dineodymium ditin heptaoxide,Nd,Sn,,10.5749,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Sn"": 1.0}",204108,1.0
+Dineodymium dizirconate,Nd,Zr,,10.704,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",248646,1.0
+Neodymium zirconium oxide (2/2/7),Nd,Zr,,10.6735,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",259150,1.0
+Dineodymium dizirconate,Nd,Zr,,10.664153181818183,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",26799|26802|26805|26854|62793|62794|153227|160164|174187|189340|189343|207491|212858|213450|213451|213452|213453|249974|261854|119329|180492|191573,22.0
+Neodymium zirconium oxide (2/2/7),Nd,Zr,,10.6611,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",259149,1.0
 Dipraseodymium heptaoxodihafnate,Pr,Hf,,10.6965,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Hf"": 1.0}",218110,1.0
-Dipraseodymium diiridium heptaoxide,Pr,Ir,,10.407933333333332,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",135032|156436|239646,3.0
+Dipraseodymium diiridium heptaoxide,Pr,Ir,,10.4139,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",135032|239646,2.0
+Dipraseodymium diiridate(IV),Pr,Ir,,10.396,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",156436,1.0
 Dipraseodymium diruthenate(IV),Pr,Ru,,10.37385,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ru"": 1.0}",82303|163397|221580|78123,4.0
-Dipraseodymium distannate,Pr,Sn,,10.6068,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",82957|84744|204114,3.0
-Dipraseodymium dizirconate,Pr,Zr,,10.703985124999999,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Zr"": 1.0}",150207|193859|249972|429190|429191|429192|219179|219180,8.0
+Dipraseodymium distannate,Pr,Sn,,10.6004,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",84744,1.0
+Dipraseodymium distannate,Pr,Sn,,10.6004,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",82957,1.0
+Dipraseodymium ditin heptaoxide,Pr,Sn,,10.6196,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",204114,1.0
+Dipraseodymium dizirconate,Pr,Zr,,10.707704428571429,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Zr"": 1.0}",150207|249972|429190|429191|429192|219179|219180,7.0
+Praseodymium zirconium oxide (1.95/2/7),Pr,Zr,,10.67795,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Zr"": 1.0}",193859,1.0
 Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.098,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""Sm"": 0.025}","{""Ti"": 1.0}",128619,1.0
 Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.105,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Sm"": 0.05}","{""Ti"": 1.0}",128620,1.0
 Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.113,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""Sm"": 0.1}","{""Ti"": 1.0}",128621,1.0
@@ -223,21 +305,36 @@ Samarium ytterbium titanium oxide (1/1/2/7),"Sm,Yb",Ti,,10.133,,Yes,,icsd_litera
 Samarium cobalt titanium oxide (1.89/0.11/2/6.95),Sm,"Co,Ti",,10.215,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Co"": 0.05213270142180095, ""Ti"": 0.9478672985781991}",99982,1.0
 Samarium chromium(III) tantalum(V) oxide (2/0.846/1.154/7),Sm,"Cr,Ta",,10.34059,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Cr"": 0.423, ""Ta"": 0.577}",142248,1.0
 Samarium hafnium oxide (2.1/1.9/6.95),Sm,Hf,,10.5703,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Hf"": 1.0}",119416|119419|156141|156144|158838|158841,6.0
-Disamarium dimolybdate(IV),Sm,Mo,,10.406533333333334,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Mo"": 1.0}",108766|108769|291028,3.0
+Disamarium dimolybdate(IV),Sm,Mo,,10.4,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Mo"": 1.0}",108766|108769,2.0
+Disamarium dimolybdate(IV),Sm,Mo,,10.4196,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Mo"": 1.0}",291028,1.0
 Samarium nickel titanium oxide (1.89/0.11/2/6.95),Sm,"Ni,Ti",,10.219,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Ni"": 0.05213270142180095, ""Ti"": 0.9478672985781991}",99986,1.0
-Disamarium diruthenium(IV) heptaoxide,Sm,Ru,,10.278849999999998,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ru"": 1.0}",176949|78142,2.0
-Disamarium ditin(IV) oxide,Sm,Sn,,10.513316666666666,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Sn"": 1.0}",24194|84755|204118,3.0
-Disamarium dititanate,Sm,Ti,,10.227225,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",24208|128624|134726|148751|150209|191621|213145|214705,8.0
+Disamarium diruthenate(IV),Sm,Ru,,10.2732,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ru"": 1.0}",78142,1.0
+Disamarium diruthenium(IV) heptaoxide,Sm,Ru,,10.2845,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ru"": 1.0}",176949,1.0
+Disamarium ditin(IV) oxide,Sm,Sn,,10.509975,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Sn"": 1.0}",24194|84755,2.0
+Disamarium ditin heptaoxide,Sm,Sn,,10.52,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Sn"": 1.0}",204118,1.0
+Disamarium di-titanate,Sm,Ti,,10.4158,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",134733,1.0
+Disamarium dititanate,Sm,Ti,,10.226514285714286,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",24208|128624|148751|150209|191621|213145|214705,7.0
+Disamarium di-titanate,Sm,Ti,,10.2322,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",134726,1.0
 Disamarium dizirconate,Sm,Zr,,10.59001111111111,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Zr"": 1.0}",150208|249976|258907|261415|119322|119381|119382|156137|156138,9.0
 Diterbium heptaoxodihafnate,Tb,Hf,,10.4716,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Hf"": 1.0}",218112,1.0
-Diterbium dimolybdate(IV),Tb,Mo,,10.152892,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Mo"": 1.0}",159770|159771|159772|159773|182567,5.0
-Diterbium diruthenate(IV),Tb,Ru,,10.225200000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ru"": 1.0}",82305|176952,2.0
+Terbium manganese ruthenium oxide (1.94/1/1/7),Tb,"Mn,Ru",,10.0501,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",186270,1.0
+Terbium manganese ruthenium oxide (1.94/1/1/7),Tb,"Mn,Ru",,10.0441,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",186271,1.0
+Diterbium dimolybdate(IV),Tb,Mo,,10.113,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Mo"": 1.0}",159770|159771|159772|159773,4.0
+Terbium molybdenum oxide (2/2/6.95),Tb,Mo,,10.31246,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Mo"": 1.0}",182567,1.0
+Diterbium diruthenate(IV),Tb,Ru,,10.2063,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ru"": 1.0}",82305,1.0
+Diterbium diruthenium(IV) heptaoxide,Tb,Ru,,10.2441,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ru"": 1.0}",176952,1.0
 Terbium tin zirconium oxide,Tb,"Sn,Zr",,10.423759,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 1.0}","{""Sn"": 0.9, ""Zr"": 0.1}",133286,1.0
-Terbium distannate,Tb,Sn,,10.292275,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",82959|159786|159787|159788|159789|159790|159791|204116,8.0
+Terbium distannate,Tb,Sn,,10.247666666666667,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",159786|159787|159788|159789|159790|159791,6.0
+Diterbium distannate,Tb,Sn,,10.4235,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",82959,1.0
+Diterbium ditin heptaoxide,Tb,Sn,,10.4287,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",204116,1.0
 Terbium dititanate,Tb,Ti,,10.052223000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ti"": 1.0}",139376|159781|159782|159783|159784|159785|191618|249087|249088|69461,10.0
+Diterbium dititanate,Tb,Ti,,10.13315,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ti"": 1.0}",151747,1.0
 Thulium iridium oxide (2/2/7),Tm,Ir,,10.135,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ir"": 1.0}",144825,1.0
+Dithulium heptaoxodimanganate(IV),Tm,Mn,,9.84959,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Mn"": 1.0}",195759,1.0
 Dithulium diruthenate(IV),Tm,Ru,,10.096,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ru"": 1.0}",109307,1.0
-Dithulium ditin heptaoxide,Tm,Sn,,10.228980000000002,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",82963|84750|147480|147481|204112,5.0
+Dithulium ditin heptaoxide,Tm,Sn,,10.163633333333335,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",84750|147480|147481,3.0
+Dithulium distannate,Tm,Sn,,10.3262,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",82963,1.0
+Dithulium ditin heptaoxide,Tm,Sn,,10.3278,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",204112,1.0
 Dithulium dititanate,Tm,Ti,,10.0675,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ti"": 1.0}",191614|249092|249093,3.0
 Thulium heptaoxodivanadate(IV),Tm,V,,9.973,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""V"": 1.0}",32690,1.0
 Yttrium chromium(III) tantalum(V) oxide (2/1.016/0.984/7),Y,"Cr,Ta",,10.20068,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Cr"": 0.508, ""Ta"": 0.492}",142247,1.0
@@ -248,24 +345,44 @@ Diyttrium titanium iridate,Y,"Ir,Ti",,10.212,,Yes,,icsd_literature,,,,high_entro
 Diyttrium titanium iridate,Y,"Ir,Ti",,10.218,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.9, ""Ti"": 0.1}",759799,1.0
 Diyttrium titanium iridate,Y,"Ir,Ti",,10.228,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.95, ""Ti"": 0.05}",759798,1.0
 Diyttrium titanium iridate,Y,"Ir,Ti",,10.242,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.975, ""Ti"": 0.025}",759797,1.0
-Diyttrium diiridate(IV),Y,Ir,,10.174033333333334,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ir"": 1.0}",135030|187534|759796,3.0
+Diyttrium diiridate(IV),Y,Ir,,10.1058,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ir"": 1.0}",187534,1.0
+Diyttrium diiridium heptaoxide,Y,Ir,,10.20815,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ir"": 1.0}",135030|759796,2.0
 Diyttrium zirconium manganese(IV) heptaoxide,Y,"Mn,Zr",,10.4507,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.95, ""Mn"": 0.05}",46127,1.0
 Diyttrium zirconium manganese(IV) heptaoxide,Y,"Mn,Zr",,10.4468,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.9, ""Mn"": 0.1}",46128,1.0
-Diyttrium dimanganate(IV),Y,Mn,,9.908193333333335,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mn"": 1.0}",56516|139773|202516,3.0
+Diyttrium dimanganate(IV),Y,Mn,,9.902,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mn"": 1.0}",202516,1.0
+Diyttrium dimanganate(IV),Y,Mn,,9.911290000000001,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mn"": 1.0}",56516|139773,2.0
 Diyttrium dimolybdenum(IV) oxide,Y,Mo,,10.23,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mo"": 1.0}",202522,1.0
 Diyttrium dirhodium(IV) heptaoxide,Y,Rh,,10.11833,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Rh"": 1.0}",220880,1.0
-Diyttrium diruthenate(IV),Y,Ru,,10.138549999999999,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ru"": 1.0}",79733|73799,2.0
+Diyttrium diruthenate(IV),Y,Ru,,10.1342,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ru"": 1.0}",73799,1.0
+Diyttrium diruthenate(IV),Y,Ru,,10.1429,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ru"": 1.0}",79733,1.0
 Yttrium titanium tin oxide (2/1.5/0.5/7),Y,"Sn,Ti",,10.3162,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.75, ""Sn"": 0.25}",160112,1.0
 Diyttrium heptaoxotitanostannate,Y,"Sn,Ti",,10.2532,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.5, ""Sn"": 0.5}",160113,1.0
 Diyttrium zirconium tin heptaoxide,Y,"Sn,Zr",,10.3,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.5, ""Sn"": 0.5}",154222,1.0
 Yttrium titanium tin oxide (2/0.5/1.5/7),Y,"Sn,Ti",,10.197,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.25, ""Sn"": 0.75}",160114,1.0
 Yttrium tin zirconium oxide (2/1.8/0.2/7),Y,"Sn,Zr",,10.38564,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Sn"": 0.9, ""Zr"": 0.1}",237258,1.0
-Diyttrium distannate,Y,Sn,,10.335252857142857,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Sn"": 1.0}",24193|74706|84803|84805|157673|208186|160115,7.0
-Diyttrium dititanate,Y,Ti,,10.118511454545455,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",14242|24206|34883|34885|42702|48174|66874|83593|93770|128613|134732|154152|154153|154154|154155|157666|157667|173048|191622|196407|239724|160111,22.0
+Diyttrium distannate,Y,Sn,,10.329078333333333,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Sn"": 1.0}",24193|84803|84805|157673|208186|160115,6.0
+Diyttrium distannate,Y,Sn,,10.3723,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Sn"": 1.0}",74706,1.0
+Diyttrium di-titanate,Y,Ti,,10.2861,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",134729,1.0
+Diyttrium dititanate,Y,Ti,,10.119516761904762,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",14242|24206|34883|34885|42702|48174|66874|83593|93770|128613|154152|154153|154154|154155|157666|157667|173048|191622|196407|239724|160111,21.0
+Diyttrium di-titanate,Y,Ti,,10.0974,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",134732,1.0
 Diyttrium divanadate(IV),Y,V,,10.01434,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""V"": 1.0}",160600|160865,2.0
 Diyttrium dizirconium heptaoxide,Y,Zr,,10.4531,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Zr"": 1.0}",46126,1.0
 Diytterbium diiridate(IV),Yb,Ir,,10.104,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ir"": 1.0}",35850,1.0
+Diytterbium diruthenium(IV) heptaoxide,Yb,Ru,,10.0628,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",208185,1.0
+Diytterbium diruthenium(IV) heptaoxide,Yb,Ru,,10.0663,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",208183,1.0
 Diytterbium diruthenate(IV),Yb,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",82306,1.0
-Diytterbium distannate,Yb,Sn,,10.3096,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Sn"": 1.0}",82964|204107,2.0
-Diytterbium dititanate,Yb,Ti,,10.054812621621622,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",24722|121049|122289|122290|122291|122292|122293|122295|122297|122298|122299|122300|122301|122303|122304|122305|122306|122307|134731|138128|138129|161405|173750|186195|186196|188872|188873|188874|188876|188877|191613|214707|249099|249100|252237|119368|154077,37.0
+Diytterbium diruthenium(IV) heptaoxide,Yb,Ru,,10.0638,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",208184,1.0
+Diytterbium distannate,Yb,Sn,,10.3046,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Sn"": 1.0}",82964,1.0
+Diytterbium ditin heptaoxide,Yb,Sn,,10.3146,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Sn"": 1.0}",204107,1.0
+Diytterbium dititanate,Yb,Ti,,10.013399999999999,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",190686|190691|190696,3.0
+Diytterbium dititanate,Yb,Ti,,10.133798,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",24809,1.0
+Diytterbium dititanate,Yb,Ti,,10.00932,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",190684|190689|190694,3.0
+Diytterbium dititanate,Yb,Ti,,10.018542,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",5986|5987|190687|190692|190697,5.0
+Diytterbium di-titanate,Yb,Ti,,10.1904,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",134730,1.0
+Diytterbium dititanate,Yb,Ti,,10.01274,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",5984|5985,2.0
+Diytterbium dititanate,Yb,Ti,,10.026146666666667,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",190688|190693|190698,3.0
+Diytterbium dititanate,Yb,Ti,,10.056260685714285,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",24722|121049|122289|122290|122291|122292|122293|122295|122297|122298|122299|122300|122301|122303|122304|122305|122306|122307|138128|138129|161405|173750|186195|186196|188872|188873|188874|188876|188877|191613|214707|249099|249100|119368|154077,35.0
+Diytterbium heptaoxodititanate,Yb,Ti,,10.034243,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",252237,1.0
+Diytterbium di-titanate,Yb,Ti,,10.0247,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",134731,1.0
+Diytterbium dititanate,Yb,Ti,,10.010396666666667,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",190685|190690|190695,3.0
 Ytterbium heptaoxodivanadate(IV),Yb,V,,9.945,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""V"": 1.0}",32689,1.0

@@ -19,6 +19,7 @@ import warnings
 import sys
 from pathlib import Path
 from typing import Tuple, List
+from src.globals import PRISTINE, HIGH_ENTROPY, NON_PYROCHLORE
 
 warnings.filterwarnings('ignore')
 
@@ -31,9 +32,9 @@ from src.features.build_features import add_engineered_features, FEATURE_COLS
 COMBINED_FILE = _PROJECT / 'data' / 'processed' / 'combined_pyrochlore.csv'
 
 # Compound-type constants (mirror make_combined_dataset.py)
-PRISTINE       = 'pristine'
-HIGH_ENTROPY   = 'high_entropy'
-NON_PYROCHLORE = 'non_pyrochlore'
+# PRISTINE       = 'pristine'
+# HIGH_ENTROPY   = 'high_entropy'
+# NON_PYROCHLORE = 'non_pyrochlore'
 _VALID_TYPES   = {PRISTINE, HIGH_ENTROPY}
 
 

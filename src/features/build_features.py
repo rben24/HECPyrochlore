@@ -43,19 +43,21 @@ import warnings
 import numpy as np
 import pandas as pd
 from typing import Dict, List, Optional, Tuple
+from .. import globals
 
 warnings.filterwarnings('ignore')
 
-# ── Element sets ──────────────────────────────────────────────────────────────
+# # ── Element sets ──────────────────────────────────────────────────────────────
+#
+# KNOWN_A: frozenset = frozenset({
+#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
+#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
+# })
+# KNOWN_B: frozenset = frozenset({
+#     'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
+# })
 
-KNOWN_A: frozenset = frozenset({
-    'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
-})
-KNOWN_B: frozenset = frozenset({
-    'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
-})
-
+REF_DENSITY = 1 # g/cm³ of water
 # ── Physical property tables ──────────────────────────────────────────────────
 
 IONIC_RADII_8: Dict[str, float] = {
@@ -122,6 +124,7 @@ _VEGARD_K_B = 3.2702
 _VEGARD_K_0 = 6.1433
 
 R_GAS = 8.314   # J/(mol·K)
+K_B = 1.380694 * np.float_power(10,-23) # J/K
 
 
 # ── Formula parser ─────────────────────────────────────────────────────────────
@@ -151,9 +154,9 @@ def _parse_pymatgen_formula(
     pmg = PmgComp(formula)
     raw = {str(el): float(amt) for el, amt in pmg.items() if str(el) != 'O'}
 
-    a_raw = {e: v for e, v in raw.items() if e in KNOWN_A and e != 'Ce'}
-    b_raw = {e: v for e, v in raw.items() if e in KNOWN_B and e != 'Ce'}
-    unkn  = {e: v for e, v in raw.items() if e not in KNOWN_A and e not in KNOWN_B}
+    a_raw = {e: v for e, v in raw.items() if e in globals.KNOWN_A and e != 'Ce'}
+    b_raw = {e: v for e, v in raw.items() if e in globals.KNOWN_B and e != 'Ce'}
+    unkn  = {e: v for e, v in raw.items() if e not in globals.KNOWN_A and e not in globals.KNOWN_B}
     ce_amt = raw.get('Ce', 0.0)
 
     if ce_amt > 0.0:
@@ -219,10 +222,10 @@ def _w(comp, table):
 
 
 def configurational_entropy(comp: Dict[str, float]) -> float:
-    """S_config = −R Σ xᵢ ln xᵢ  [J/(mol·K)]"""
+    """S_config = −K_boltman Σ xᵢ ln xᵢ  [J/(mol·K)]"""
     if not comp:
         return np.nan
-    return float(-R_GAS * sum(f * np.log(f) for f in comp.values() if f > 0))
+    return float(-K_B * sum(f * np.log(f) for f in comp.values() if f > 0))
 
 
 def mean_radius(comp: Dict[str, float], radii: Dict[str, float]) -> float:
@@ -323,6 +326,10 @@ def theoretical_density(a_comp, b_comp, lattice_a: float) -> float:
        + 7 * MOLAR_MASSES['O'])
     V = (lattice_a * 1e-8) ** 3
     return float(8 * M / (V * 6.022e23))
+
+def rel_to_calc_density(rel_density: float) -> float:
+    """act_dens = rel_density * ref_density  [g/cm³]"""
+    return rel_density * REF_DENSITY
 
 
 def _safe_add(a: float, b: float) -> float:
