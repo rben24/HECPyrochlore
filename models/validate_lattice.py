@@ -42,7 +42,8 @@ sys.path.insert(0, str(_PROJECT))
 from src.data.load_data import get_lattice_dataset
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
-    plot_parity, plot_cv_comparison,
+    plot_parity, plot_cv_comparison, plot_r2_vs_cv_folds,
+    plot_r2_vs_feature_count,
 )
 
 TASK     = 'lattice_param'
@@ -80,6 +81,7 @@ def main():
         save_dir=SAVE_DIR,
         verbose=True,
         compound_types=args.types,
+        top_n_features=8,
     )
 
     print("\n[plots] Generating figures …")
@@ -100,6 +102,17 @@ def main():
         top_n=min(20, len(feat_names)),
         save_path=SAVE_DIR / 'lattice_feature_importance.png',
     )
+    # plot_r2_vs_feature_count(
+    #     X, y, feat_names,
+    #     task_name='property',
+    #     save_path=SAVE_DIR / 'r2_vs_features.png'
+    # )
+    # plot_r2_vs_cv_folds(
+    #     X, y, feat_names,
+    #     task_name='property',
+    #     top_n_features=10,
+    #     save_path=SAVE_DIR / 'r2_vs_folds.png'
+    # )
 
     _write_report(results, feat_names, args.splits, args.types)
     print("\n[done] All outputs written to:", SAVE_DIR)

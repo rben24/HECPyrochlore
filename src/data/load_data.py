@@ -19,6 +19,16 @@ import warnings
 import sys
 from pathlib import Path
 from typing import Tuple, List
+import logging
+
+logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
+log = logging.getLogger(__name__)
+
+_HERE    = Path(__file__).resolve().parent
+_PROJECT = _HERE.parent.parent
+OUT_DIR  = _PROJECT / 'data' / 'processed'
+OUTPUT_FILE_L = OUT_DIR / 'engineered_pyrochlore_latt.csv'
+OUTPUT_FILE_T = OUT_DIR / 'engineered_pyrochlore_therm.csv'
 
 warnings.filterwarnings('ignore')
 
@@ -36,6 +46,22 @@ HIGH_ENTROPY   = 'high_entropy'
 NON_PYROCHLORE = 'non_pyrochlore'
 _VALID_TYPES   = {PRISTINE, HIGH_ENTROPY}
 
+DROP_COLUMNS = [
+    'Relative Density %', 'Synthesis Method', 'b_o_distance',
+    'b_o_b_angle', 'oxygen_param_x', 'icsd_collection',
+    'n_icsd_duplicates', 'lattice_parameter', 'TPS Cond W/m/K',
+    'Is Single Phase',
+]
+
+MEAN_COLUMNS = [
+    'lattice_volume', 'density_theoretical', 'density_calc',
+    'Temperature',
+]
+
+FEATURE_COLS_ADD = [
+    'Temperature', 'density_calc', 'lattice_volume',
+    'density_theoretical'
+]
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 
@@ -129,10 +155,20 @@ def get_lattice_dataset(
     df_sub = df_sub.dropna(subset=[target])
     df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
 
-    feat_mask = df_sub[FEATURE_COLS].notna().all(axis=1)
+    # Deal with NaN columns
+    df_sub = df_sub.drop(columns=DROP_COLUMNS)
+    for col in MEAN_COLUMNS:
+        if col in df_sub.columns:
+            col_mean = df_sub[col].mean()
+            df_sub.fillna(value={col: col_mean})
+
+    df_sub.to_csv(OUTPUT_FILE_L, index=False)
+    log.info(f"Saved combined dataset → {OUTPUT_FILE_L}")
+
+    feat_mask = df_sub[FEATURE_COLS + FEATURE_COLS_ADD].notna().all(axis=1)
     df_sub = df_sub[feat_mask]
 
-    X = df_sub[FEATURE_COLS].values.astype(float)
+    X = df_sub[FEATURE_COLS + FEATURE_COLS_ADD].values.astype(float)
     y = df_sub[target].values.astype(float)
 
     if verbose:

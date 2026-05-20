@@ -6,59 +6,47 @@
   CV folds        : 5
   Features        : 28
   Compound types  : pristine, high_entropy
-  Train samples   : ?
-  Test samples    : ?
+  Train samples   : 371
+  Test samples    : 93
 
 ── Test-set Metrics ────────────────────────────────────────
-  RMSE  : 0.04016
-  MAE   : 0.02309
-  R2    : 0.95133
+  RMSE  : 0.05265
+  MAE   : 0.03495
+  R2    : 0.95349
 
 ── Cross-Validation Summary (all models) ───────────────────
   RandomForest
-    R²   : 0.9277 ± 0.0426
-    RMSE : 0.05185 ± 0.01717
-    MAE  : 0.03532 ± 0.01048
+    R²   : 0.9296 ± 0.0216
+    RMSE : 0.07845 ± 0.01024
+    MAE  : 0.04912 ± 0.00692
   GradientBoosting
-    R²   : 0.9482 ± 0.0202
-    RMSE : 0.04449 ± 0.00786
-    MAE  : 0.02852 ± 0.00233
+    R²   : 0.9387 ± 0.0251
+    RMSE : 0.07266 ± 0.01619
+    MAE  : 0.04451 ± 0.00930
   ExtraTrees
-    R²   : 0.9356 ± 0.0329
-    RMSE : 0.04934 ± 0.01370
-    MAE  : 0.03396 ± 0.00823
+    R²   : 0.9367 ± 0.0273
+    RMSE : 0.07346 ± 0.01405
+    MAE  : 0.04741 ± 0.00660
   Ridge
-    R²   : 0.9427 ± 0.0240
-    RMSE : 0.04714 ± 0.01271
-    MAE  : 0.03287 ± 0.00826
+    R²   : 0.8408 ± 0.0617
+    RMSE : 0.11864 ± 0.02690
+    MAE  : 0.08030 ± 0.01387
 
 ── Top-20 Features by Permutation Importance ─────────────────
   Rank  Feature                               Perm Imp   ±       Std    Tree MDI
   ------------------------------------------------------------------------
-  1     b_site_mean_radius                    1.106056  ±  0.176324    0.664253
-  2     a_site_mean_radius                    0.070050  ±  0.018841    0.105767
-  3     b_site_en_mean                        0.055533  ±  0.013919    0.093426
-  4     a_site_en_mean                        0.012993  ±  0.008662    0.039427
-  5     a_b_radius_ratio                      0.004707  ±  0.005945    0.016494
-  6     mass_site_contrast                    0.002633  ±  0.005573    0.013393
-  7     total_entropy                         0.001780  ±  0.000812    0.001070
-  8     b_site_delta                          0.001342  ±  0.000643    0.004575
-  9     a_site_entropy                        0.001316  ±  0.000531    0.000510
-  10    b_site_en_variance                    0.001220  ±  0.000729    0.001154
-  11    a_site_mean_atomic_num                0.000292  ±  0.001676    0.004664
-  12    phonon_scattering_factor              0.000199  ±  0.000534    0.000592
-  13    b_site_radius_std                     0.000085  ±  0.000191    0.000215
-  14    b_site_entropy                        0.000067  ±  0.000098    0.000039
-  15    a_site_mean_molar_mass                0.000065  ±  0.003417    0.010966
-  16    b_site_radius_variance                0.000057  ±  0.000058    0.000214
-  17    b_site_n_elements                     0.000022  ±  0.000223    0.000242
-  18    a_site_n_elements                     0.000006  ±  0.000003    0.000003
-  19    b_site_mean_molar_mass                0.000006  ±  0.008087    0.017863
-  20    total_delta                          -0.000106  ±  0.001287    0.005011
+  1     b_site_en_mean                        0.438943  ±  0.058531    0.559908
+  2     a_site_mean_radius                    0.214589  ±  0.041502    0.186212
+  3     b_site_mean_molar_mass                0.106558  ±  0.022797    0.065864
+  4     b_site_mean_atomic_num                0.093791  ±  0.019518    0.053501
+  5     b_site_mean_radius                    0.051355  ±  0.008747    0.043338
+  6     a_site_en_mean                        0.037227  ±  0.006204    0.022889
+  7     a_b_radius_ratio                      0.021158  ±  0.004516    0.037274
+  8     en_site_contrast                      0.002904  ±  0.003030    0.031015
 
 ── Feature-Group Analysis ───────────────────────────────────
-  A-site      : mean perm-imp = 0.00811  | top feature = a_site_mean_radius
-  B-site      : mean perm-imp = 0.11627  | top feature = b_site_mean_radius
-  Cross-site  : mean perm-imp = 0.00040  | top feature = a_b_radius_ratio
+  A-site      : mean perm-imp = 0.12591  | top feature = a_site_mean_radius
+  B-site      : mean perm-imp = 0.17266  | top feature = b_site_en_mean
+  Cross-site  : mean perm-imp = 0.01203  | top feature = a_b_radius_ratio
 
 ============================================================

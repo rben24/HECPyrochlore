@@ -120,28 +120,33 @@ def compute_feature_importance(model: Any, X_val: np.ndarray, y_val: np.ndarray,
 # ── Main training pipeline ───────────────────────────────────────────────────
 
 def train_and_evaluate(
-    X: np.ndarray,
-    y: np.ndarray,
-    feature_names: List[str],
-    task_name: str = 'property',
-    n_splits: int = 5,
-    test_size: float = 0.20,
-    random_state: int = 42,
-    save_dir: Optional[Path] = None,
-    verbose: bool = True,
-    compound_types: Optional[List[str]] = None,
+        X: np.ndarray,
+        y: np.ndarray,
+        feature_names: List[str],
+        task_name: str = 'property',
+        n_splits: int = 6,
+        test_size: float = 0.20,
+        random_state: int = 42,
+        save_dir: Optional[Path] = None,
+        verbose: bool = True,
+        compound_types: Optional[List[str]] = None,
+        top_n_features: Optional[int] = None,
 ) -> Dict:
     """
-    Full training pipeline:
+    Full training pipeline with optional feature selection:
       1. Hold-out split (test_size)
-      2. K-fold CV on training portion for all 4 models
-      3. Retrain best model on full training set
-      4. Evaluate on hold-out test set
-      5. Compute permutation + tree feature importances
-      6. Persist model, scaler, and metadata JSON
+      2. Select top N features (optional)
+      3. K-fold CV on training portion for all 4 models
+      4. Retrain best model on full training set
+      5. Evaluate on hold-out test set
+      6. Compute permutation + tree feature importances
+      7. Persist model, scaler, and metadata JSON
 
     Parameters
     ----------
+    top_n_features : int, optional (default=10)
+        If set, only the top N features by importance are used for training.
+        Set to None to use all features.
     compound_types : list of compound types used (for metadata / reporting only)
     """
     save_dir = save_dir or (MODELS_DIR / task_name)
@@ -153,14 +158,38 @@ def train_and_evaluate(
     X_tr, X_te, y_tr, y_te = train_test_split(
         X_scaled, y, test_size=test_size, random_state=random_state)
 
+    # ─── FEATURE SELECTION  ───────
+    selected_feature_names = feature_names
+    selected_feature_indices = np.arange(len(feature_names))
+
+    if top_n_features is not None and top_n_features < len(feature_names):
+        # Quick importance estimation on training set
+        rf_temp = RandomForestRegressor(n_estimators=100, max_depth=10,
+                                        random_state=random_state, n_jobs=-1)
+        rf_temp.fit(X_tr, y_tr)
+
+        # Get top N features
+        importances = rf_temp.feature_importances_
+        selected_feature_indices = np.argsort(importances)[-top_n_features:][::-1]
+
+        selected_feature_names = [feature_names[i] for i in selected_feature_indices]
+        X_tr = X_tr[:, selected_feature_indices]
+        X_te = X_te[:, selected_feature_indices]
+
+        if verbose:
+            print(f"  Selected {top_n_features} top features:")
+            for i, fname in enumerate(selected_feature_names, 1):
+                print(f"    {i}. {fname}")
+
     if verbose:
         ctype_str = ', '.join(compound_types) if compound_types else 'all'
-        print(f"\n{'='*58}")
+        print(f"\n{'=' * 58}")
         print(f"  Training pipeline : {task_name.upper()}")
         print(f"  Compound types    : {ctype_str}")
+        print(f"  Features          : {len(selected_feature_names)}")
         print(f"  Train: {len(X_tr)}  |  Test: {len(X_te)}")
         print(f"  {n_splits}-fold CV on training set")
-        print(f"{'='*58}")
+        print(f"{'=' * 58}")
 
     models = build_models(random_state)
     cv_results: Dict = {}
@@ -181,33 +210,36 @@ def train_and_evaluate(
     test_metrics = evaluate_predictions(y_te, y_pred)
 
     if verbose:
-        print(f"\n{'='*58}")
+        print(f"\n{'=' * 58}")
         print(f"  Best model : {best_name}")
         print(f"  Test-set metrics:")
         for k, v in test_metrics.items():
             print(f"    {k}: {v:.4f}")
-        print(f"{'='*58}\n")
+        print(f"{'=' * 58}\n")
 
-    fi_df = compute_feature_importance(best_model, X_te, y_te, feature_names)
+    # IMPORTANT: Pass selected_feature_names, not the original feature_names
+    # fi_df = compute_feature_importance(best_model, X_te, y_te, selected_feature_names)
+    fi_df = compute_feature_importance(best_model, X_te, y_te, selected_feature_names)
 
     # Persist
     pickle.dump(best_model, open(save_dir / f'{task_name}_model.pkl', 'wb'))
-    pickle.dump(scaler,     open(save_dir / f'{task_name}_scaler.pkl', 'wb'))
+    pickle.dump(scaler, open(save_dir / f'{task_name}_scaler.pkl', 'wb'))
 
     meta = {
-        'task':          task_name,
-        'best_model':    best_name,
-        'feature_names': feature_names,
+        'task': task_name,
+        'best_model': best_name,
+        'feature_names': selected_feature_names,
+        'selected_indices': [int(i) for i in selected_feature_indices],  # Store indices for reference
         'compound_types': compound_types or ['pristine', 'high_entropy'],
-        'n_train':       int(len(X_tr)),
-        'n_test':        int(len(X_te)),
-        'test_metrics':  test_metrics,
+        'n_train': int(len(X_tr)),
+        'n_test': int(len(X_te)),
+        'test_metrics': test_metrics,
         'cv_summary': {
             name: {
-                'mean_r2':   float(cv_results[name]['test_r2'].mean()),
-                'std_r2':    float(cv_results[name]['test_r2'].std()),
+                'mean_r2': float(cv_results[name]['test_r2'].mean()),
+                'std_r2': float(cv_results[name]['test_r2'].std()),
                 'mean_rmse': float(-cv_results[name]
-                                   ['test_neg_root_mean_squared_error'].mean()),
+                ['test_neg_root_mean_squared_error'].mean()),
             }
             for name in cv_results
         },
@@ -215,17 +247,20 @@ def train_and_evaluate(
     json.dump(meta, open(save_dir / f'{task_name}_metadata.json', 'w'), indent=2)
 
     return {
-        'best_model':    best_model,
-        'best_name':     best_name,
-        'scaler':        scaler,
-        'cv_results':    cv_results,
-        'test_metrics':  test_metrics,
-        'fi_df':         fi_df,
-        'X_test':        X_te,
-        'y_test':        y_te,
-        'y_pred':        y_pred,
-        'feature_names': feature_names,
-        'save_dir':      save_dir,
+        'best_model':           best_model,
+        'best_name':            best_name,
+        'scaler':               scaler,
+        'cv_results':           cv_results,
+        'test_metrics':         test_metrics,
+        'fi_df':                fi_df,
+        'X_test':               X_te,
+        'y_test':               y_te,
+        'y_pred':               y_pred,
+        'feature_names':        selected_feature_names,
+        'selected_indices':     selected_feature_indices,
+        'save_dir':             save_dir,
+        'n_train':              int(len(X_tr)),
+        'n_test':               int(len(X_te)),
     }
 
 
@@ -317,6 +352,242 @@ def plot_cv_comparison(cv_results: Dict, title: str,
     axes[1].set_xticklabels(names, rotation=20)
     axes[1].set_ylabel('CV RMSE')
     axes[1].set_title('Cross-Validation RMSE')
+
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
+        print(f"  Saved: {save_path}")
+    plt.close(fig)
+
+# ── Extra plots for hyperparameter tuning ─────────────────────────────────────
+
+def plot_r2_vs_feature_count(
+        X: np.ndarray,
+        y: np.ndarray,
+        feature_names: List[str],
+        task_name: str = 'property',
+        test_size: float = 0.20,
+        random_state: int = 42,
+        save_path: Optional[Path] = None,
+):
+    """
+    Train models with increasing numbers of top features.
+    Plot R² (test, train, CV mean) vs. number of features.
+
+    Parameters
+    ----------
+    X : np.ndarray
+        Feature matrix
+    y : np.ndarray
+        Target vector
+    feature_names : List[str]
+        Names of all features
+    task_name : str
+        Name of task (for plot title)
+    test_size : float
+        Test split size
+    random_state : int
+        Random seed
+    save_path : Path, optional
+        Where to save the figure
+    """
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    X_tr, X_te, y_tr, y_te = train_test_split(
+        X_scaled, y, test_size=test_size, random_state=random_state)
+
+    # Get initial feature importance to sort features
+    rf_temp = RandomForestRegressor(n_estimators=100, max_depth=10,
+                                    random_state=random_state, n_jobs=-1)
+    rf_temp.fit(X_tr, y_tr)
+    importances = rf_temp.feature_importances_
+    sorted_indices = np.argsort(importances)[::-1]
+
+    # Test different feature counts
+    feature_counts = list(range(1, len(feature_names) + 1))
+    results = {
+        'RandomForest': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'GradientBoosting': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'ExtraTrees': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'Ridge': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+    }
+
+    models = build_models(random_state)
+
+    for n_feat in feature_counts:
+        # Select top n features
+        top_indices = sorted_indices[:n_feat]
+        X_tr_subset = X_tr[:, top_indices]
+        X_te_subset = X_te[:, top_indices]
+
+        for model_name, model in models.items():
+            # Train on full training set
+            model.fit(X_tr_subset, y_tr)
+            y_pred_train = model.predict(X_tr_subset)
+            y_pred_test = model.predict(X_te_subset)
+
+            train_r2 = r2_score(y_tr, y_pred_train)
+            test_r2 = r2_score(y_te, y_pred_test)
+
+            results[model_name]['train_r2'].append(train_r2)
+            results[model_name]['test_r2'].append(test_r2)
+
+            # CV on training set
+            cv_res = cross_validate_model(model, X_tr_subset, y_tr,
+                                          n_splits=5, random_state=random_state)
+            cv_r2 = cv_res['test_r2'].mean()
+            results[model_name]['cv_r2'].append(cv_r2)
+
+    # Plot
+    fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+    fig.suptitle(f'{task_name.upper()}: R² vs. Number of Features',
+                 fontsize=14, fontweight='bold')
+
+    colours = ['steelblue', 'darkorange', 'forestgreen', 'firebrick']
+    model_names = list(results.keys())
+
+    for idx, (ax, metric) in enumerate([
+        (axes[0, 0], 'train_r2'),
+        (axes[0, 1], 'test_r2'),
+        (axes[1, 0], 'cv_r2'),
+    ]):
+        for color, name in zip(colours, model_names):
+            ax.plot(feature_counts, results[name][metric],
+                    marker='o', label=name, color=color, linewidth=2)
+
+        ax.set_xlabel('Number of Features', fontsize=11)
+        ax.set_ylabel('R²', fontsize=11)
+        ax.set_title(f'{metric.replace("_", " ").title()}', fontsize=12, fontweight='bold')
+        ax.legend(loc='best', fontsize=9)
+        ax.grid(True, alpha=0.3)
+        ax.set_xticks(range(0, len(feature_counts) + 1, max(1, len(feature_counts) // 10)))
+
+    # Combined view in bottom-right
+    for color, name in zip(colours, model_names):
+        axes[1, 1].plot(feature_counts, results[name]['test_r2'],
+                        marker='o', label=f'{name} (test)',
+                        color=color, linewidth=2, linestyle='-')
+        axes[1, 1].plot(feature_counts, results[name]['cv_r2'],
+                        marker='s', label=f'{name} (CV)',
+                        color=color, linewidth=2, linestyle='--', alpha=0.7)
+
+    axes[1, 1].set_xlabel('Number of Features', fontsize=11)
+    axes[1, 1].set_ylabel('R²', fontsize=11)
+    axes[1, 1].set_title('Test vs. CV R² Comparison', fontsize=12, fontweight='bold')
+    axes[1, 1].legend(loc='best', fontsize=8, ncol=2)
+    axes[1, 1].grid(True, alpha=0.3)
+    axes[1, 1].set_xticks(range(0, len(feature_counts) + 1, max(1, len(feature_counts) // 10)))
+
+    plt.tight_layout()
+    if save_path:
+        plt.savefig(save_path, dpi=150, bbox_inches='tight')
+        print(f"  Saved: {save_path}")
+    plt.close(fig)
+
+
+def plot_r2_vs_cv_folds(
+        X: np.ndarray,
+        y: np.ndarray,
+        feature_names: List[str],
+        task_name: str = 'property',
+        test_size: float = 0.20,
+        random_state: int = 42,
+        save_path: Optional[Path] = None,
+        top_n_features: int = 10,
+):
+    """
+    Train models with increasing numbers of CV folds.
+    Plot R² (CV mean and std) vs. number of folds.
+
+    Parameters
+    ----------
+    X : np.ndarray
+        Feature matrix
+    y : np.ndarray
+        Target vector
+    feature_names : List[str]
+        Names of all features
+    task_name : str
+        Name of task (for plot title)
+    test_size : float
+        Test split size
+    random_state : int
+        Random seed
+    save_path : Path, optional
+        Where to save the figure
+    top_n_features : int
+        Number of top features to use (default 10)
+    """
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    X_tr, X_te, y_tr, y_te = train_test_split(
+        X_scaled, y, test_size=test_size, random_state=random_state)
+
+    # Feature selection
+    rf_temp = RandomForestRegressor(n_estimators=100, max_depth=10,
+                                    random_state=random_state, n_jobs=-1)
+    rf_temp.fit(X_tr, y_tr)
+    importances = rf_temp.feature_importances_
+    top_indices = np.argsort(importances)[-top_n_features:][::-1]
+    X_tr = X_tr[:, top_indices]
+    X_te = X_te[:, top_indices]
+
+    # Test different fold counts
+    fold_counts = list(range(2, 21))  # 2 to 20 folds
+    results = {
+        'RandomForest': {'mean_r2': [], 'std_r2': []},
+        'GradientBoosting': {'mean_r2': [], 'std_r2': []},
+        'ExtraTrees': {'mean_r2': [], 'std_r2': []},
+        'Ridge': {'mean_r2': [], 'std_r2': []},
+    }
+
+    models = build_models(random_state)
+
+    for n_splits in fold_counts:
+        for model_name, model in models.items():
+            cv_res = cross_validate_model(model, X_tr, y_tr,
+                                          n_splits=n_splits, random_state=random_state)
+            cv_r2_mean = cv_res['test_r2'].mean()
+            cv_r2_std = cv_res['test_r2'].std()
+
+            results[model_name]['mean_r2'].append(cv_r2_mean)
+            results[model_name]['std_r2'].append(cv_r2_std)
+
+    # Plot
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    fig.suptitle(f'{task_name.upper()}: R² vs. Number of CV Folds (Top {top_n_features} Features)',
+                 fontsize=14, fontweight='bold')
+
+    colours = ['steelblue', 'darkorange', 'forestgreen', 'firebrick']
+    model_names = list(results.keys())
+
+    # Left: Mean R² with error bars
+    for color, name in zip(colours, model_names):
+        axes[0].errorbar(fold_counts, results[name]['mean_r2'],
+                         yerr=results[name]['std_r2'],
+                         marker='o', label=name, color=color, linewidth=2,
+                         capsize=4, capthick=1.5)
+
+    axes[0].set_xlabel('Number of CV Folds', fontsize=11)
+    axes[0].set_ylabel('Mean R² ± Std Dev', fontsize=11)
+    axes[0].set_title('Cross-Validation R² with Error Bars', fontsize=12, fontweight='bold')
+    axes[0].legend(loc='best', fontsize=10)
+    axes[0].grid(True, alpha=0.3)
+    axes[0].set_xticks(fold_counts[::2])
+
+    # Right: Stability (std dev)
+    for color, name in zip(colours, model_names):
+        axes[1].plot(fold_counts, results[name]['std_r2'],
+                     marker='s', label=name, color=color, linewidth=2)
+
+    axes[1].set_xlabel('Number of CV Folds', fontsize=11)
+    axes[1].set_ylabel('Standard Deviation of R²', fontsize=11)
+    axes[1].set_title('CV Stability (Lower is Better)', fontsize=12, fontweight='bold')
+    axes[1].legend(loc='best', fontsize=10)
+    axes[1].grid(True, alpha=0.3)
+    axes[1].set_xticks(fold_counts[::2])
 
     plt.tight_layout()
     if save_path:

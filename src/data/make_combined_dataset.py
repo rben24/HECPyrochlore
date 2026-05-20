@@ -36,6 +36,8 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple
+from .. import globals
+from pymatgen.core import Composition
 
 logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
 log = logging.getLogger(__name__)
@@ -48,19 +50,19 @@ OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_FILE = OUT_DIR / 'combined_pyrochlore.csv'
 
-# ── element sets (shared with load_icsd.py) ───────────────────────────────────
-KNOWN_A: frozenset = frozenset({
-    'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
-})
-KNOWN_B: frozenset = frozenset({
-    'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
-})
-
-# Pyrochlore stability window for r_A/r_B (Shannon ionic radii)
-# Outside this range → likely defect-fluorite or other polymorph
-_RA_RB_MIN = 1.40
-_RA_RB_MAX = 1.90
+# # ── element sets (shared with load_icsd.py) ───────────────────────────────────
+# KNOWN_A: frozenset = frozenset({
+#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
+#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
+# })
+# KNOWN_B: frozenset = frozenset({
+#     'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
+# })
+#
+# # Pyrochlore stability window for r_A/r_B (Shannon ionic radii)
+# # Outside this range → likely defect-fluorite or other polymorph
+# _RA_RB_MIN = 1.40
+# _RA_RB_MAX = 1.90
 
 # ── canonical columns ─────────────────────────────────────────────────────────
 CANONICAL_COLS = [
@@ -79,12 +81,14 @@ CANONICAL_COLS = [
     'compound_type',
     'a_stoich_json',
     'b_stoich_json',
+    'Temperature',
+    'density_calc',
 ]
 
-# ── compound-type constants ───────────────────────────────────────────────────
-PRISTINE       = 'pristine'
-HIGH_ENTROPY   = 'high_entropy'
-NON_PYROCHLORE = 'non_pyrochlore'
+# # ── compound-type constants ───────────────────────────────────────────────────
+# PRISTINE       = 'pristine'
+# HIGH_ENTROPY   = 'high_entropy'
+# NON_PYROCHLORE = 'non_pyrochlore'
 
 
 # ── shared helpers ────────────────────────────────────────────────────────────
@@ -144,22 +148,22 @@ def classify_sample(sample_a: str, sample_b: str) -> str:
 
     # Must have at least one element on each site
     if not a_elems or not b_elems:
-        return NON_PYROCHLORE
+        return globals.NON_PYROCHLORE
 
     # All A-site elements must be recognised rare-earth / Y cations
-    if any(e not in KNOWN_A for e in a_elems):
-        return NON_PYROCHLORE
+    if any(e not in globals.KNOWN_A for e in a_elems):
+        return globals.NON_PYROCHLORE
 
     # All B-site elements must be recognised transition-metal cations
-    if any(e not in KNOWN_B for e in b_elems):
-        return NON_PYROCHLORE
+    if any(e not in globals.KNOWN_B for e in b_elems):
+        return globals.NON_PYROCHLORE
 
     n_a = len(a_elems)
     n_b = len(b_elems)
 
     if n_a == 1 and n_b == 1:
-        return PRISTINE
-    return HIGH_ENTROPY
+        return globals.PRISTINE
+    return globals.HIGH_ENTROPY
 
 
 def _parse_tc_range(tc_str: str) -> float:
@@ -210,7 +214,10 @@ def load_safin() -> pd.DataFrame:
     out['a_stoich_json'] = out['Sample A'].apply(_comp_to_fractions_json)
     out['b_stoich_json'] = out['Sample B'].apply(_comp_to_fractions_json)
 
-    n_excl = (out['compound_type'] == NON_PYROCHLORE).sum()
+    out['Temperature'] = np.nan
+    out['density_calc'] = np.nan
+
+    n_excl = (out['compound_type'] == globals.NON_PYROCHLORE).sum()
     if n_excl:
         log.info(f"Safin: {n_excl} rows classified as non-pyrochlore (kept but flagged)")
     log.info(
@@ -250,13 +257,13 @@ def load_nlm() -> pd.DataFrame:
         compound = str(row['Compound']).strip()
         a_str, b_str = _parse_nlm_compound(compound)
 
-        # Skip Bi/Pb — no ionic radius data
-        if isinstance(a_str, str) and any(e in a_str for e in ['Bi', 'Pb']):
-            continue
-        if isinstance(b_str, str) and any(e in b_str for e in ['Bi', 'Pb']):
-            continue
+        # # Skip Bi/Pb — no ionic radius data
+        # if isinstance(a_str, str) and any(e in a_str for e in ['Bi', 'Pb']):
+        #     continue
+        # if isinstance(b_str, str) and any(e in b_str for e in ['Bi', 'Pb']):
+        #     continue
 
-        ctype = classify_sample(a_str, b_str) if isinstance(a_str, str) else NON_PYROCHLORE
+        ctype = classify_sample(a_str, b_str) if isinstance(a_str, str) else globals.NON_PYROCHLORE
 
         rows.append({
             'Composition':                  compound,
@@ -279,6 +286,8 @@ def load_nlm() -> pd.DataFrame:
             'compound_type':                ctype,
             'a_stoich_json':                _comp_to_fractions_json(a_str),
             'b_stoich_json':                _comp_to_fractions_json(b_str),
+            'Temperature':                  np.nan,
+            'density_calc':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
@@ -316,6 +325,8 @@ def load_parent_components() -> pd.DataFrame:
             'compound_type':                ctype,
             'a_stoich_json':                _comp_to_fractions_json(a_raw),
             'b_stoich_json':                _comp_to_fractions_json(b_raw),
+            'Temperature':                  np.nan,
+            'density_calc':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
@@ -323,7 +334,7 @@ def load_parent_components() -> pd.DataFrame:
     return out
 
 
-# ── Source 4: ICSD database (NEW) ────────────────────────────────────────────
+# ── Source 4: ICSD database  ───────────────────────────────────────────────
 
 def load_icsd_source() -> pd.DataFrame:
     """Thin wrapper that calls the dedicated ICSD loader."""
@@ -343,6 +354,46 @@ def load_icsd_source() -> pd.DataFrame:
     )
     return df
 
+# ── Source 5: Jordan Thermal Dataset ──────────────────────────────────────────
+
+def load_jordan_source() -> pd.DataFrame:
+    path = RAW_DIR / 'Jordan_pyrochlore_data.csv'
+    df = pd.read_csv(path, na_values=['', 'NA'])
+    log.info(f"Jordan components: {len(df)} rows from {path.name}")
+
+    rows = []
+    for _, row in df.iterrows():
+        try:
+            comp = Composition(str(row.get('Composition, ''')))
+        except:
+            comp = np.nan
+        # a_raw = _clean_element_list(str(row.get('A-site Cations', '')))
+        # b_raw = _clean_element_list(str(row.get('B-site Cations', '')))
+        # tc_val = _parse_tc_range(str(row.get('Thermal Conductivity (W/m·K)', '')))
+        # ctype = classify_sample(a_raw, b_raw)
+        rows.append({
+            'Composition':                  comp,
+            'Sample A':                     np.nan, # a_raw,
+            'Sample B':                     np.nan, # b_raw,
+            'TPS Cond W/m/K':               np.nan, # tc_val,
+            'Lattice Parameter (Angstrom)': np.nan,
+            'Relative Density %':           np.nan,
+            'Is Single Phase':              'Yes',
+            'Synthesis Method':             '',
+            'data_source':                  'Jordan_pyrochlore_data',
+            'b_o_distance':                 np.nan,
+            'b_o_b_angle':                  np.nan,
+            'oxygen_param_x':               np.nan,
+            'compound_type':                np.nan, # ctype,
+            'a_stoich_json':                np.nan, # _comp_to_fractions_json(a_raw),
+            'b_stoich_json':                np.nan, # _comp_to_fractions_json(b_raw),
+            'Temperature':                  row.get('Start Temp'),
+            'density_calc':                 np.nan,
+        })
+
+    out = pd.DataFrame(rows)
+    log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values")
+    return out
 
 # ── Build combined dataset ────────────────────────────────────────────────────
 
@@ -389,14 +440,14 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
     # Drop rows where BOTH Sample A and Sample B are missing
     combined = combined[combined['Sample A'].notna() | combined['Sample B'].notna()]
 
-    # Remove Bi/Pb entirely (incompatible ionic radius tables)
-    has_exotic = combined['Sample A'].fillna('').str.contains(r'\b(?:Bi|Pb)\b', regex=True)
-    combined = combined[~has_exotic]
+    # # Remove Bi/Pb entirely (incompatible ionic radius tables)
+    # has_exotic = combined['Sample A'].fillna('').str.contains(r'\b(?:Bi|Pb)\b', regex=True)
+    # combined = combined[~has_exotic]
 
     # ── Exclude non-pyrochlores from training data ────────────────────────────
     n_total   = len(combined)
-    non_pyro  = combined[combined['compound_type'] == NON_PYROCHLORE]
-    combined  = combined[combined['compound_type'] != NON_PYROCHLORE].reset_index(drop=True)
+    non_pyro  = combined[combined['compound_type'] == globals.NON_PYROCHLORE]
+    combined  = combined[combined['compound_type'] != globals.NON_PYROCHLORE].reset_index(drop=True)
 
     # ── Summary table ─────────────────────────────────────────────────────────
     print()
@@ -406,14 +457,14 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
     for src, grp in combined.groupby('data_source'):
         lat  = grp['Lattice Parameter (Angstrom)'].notna().sum()
         tc   = grp['TPS Cond W/m/K'].notna().sum()
-        pri  = (grp['compound_type'] == PRISTINE).sum()
-        he   = (grp['compound_type'] == HIGH_ENTROPY).sum()
+        pri  = (grp['compound_type'] == globals.PRISTINE).sum()
+        he   = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
         print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
     print("  " + "-" * 78)
     lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
     tc_total  = combined['TPS Cond W/m/K'].notna().sum()
-    pri_total = (combined['compound_type'] == PRISTINE).sum()
-    he_total  = (combined['compound_type'] == HIGH_ENTROPY).sum()
+    pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
+    he_total  = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
     excl      = len(non_pyro)
     print(f"  {'TOTAL (pyrochlore)':<38} {len(combined):>5}  "
           f"{lat_total:>8}  {tc_total:>8}  {pri_total:>9}  {he_total:>5}")
