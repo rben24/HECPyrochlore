@@ -47,6 +47,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple, Optional
+from pymatgen.core import Composition
 from .. import globals
 
 log = logging.getLogger(__name__)
@@ -101,7 +102,7 @@ log = logging.getLogger(__name__)
 #
 
 # ── lattice-parameter parser ─────────────────────────────────────────────────
-
+latt_err = []
 def _parse_lattice(cell_str: str) -> Optional[float]:
     """
     Extract the cubic lattice parameter *a* from a CellParameter string.
@@ -115,7 +116,9 @@ def _parse_lattice(cell_str: str) -> Optional[float]:
         a_str = re.sub(r'\([^)]*\)', '', first_token)   # strip "(3)" etc.
         a = float(a_str)
         if globals.LATTICE_MIN <= a <= globals.LATTICE_MAX:
+
             return a
+        latt_err.append(cell_str)
         return None
     except Exception:
         return None
@@ -136,53 +139,52 @@ def _parse_icsd_formula(
     normalised to 1).  Normalisation to mole fractions happens later in
     ``build_features.py`` via ``parse_composition``.
 
-    Ce assignment strategy
+    Ambigious Element assignment strategy (for element 'X')
     ~~~~~~~~~~~~~~~~~~~~~~
-    If Ce appears together with other A-site lanthanides → A-site.
-    If Ce appears together with known B-site cations only → B-site.
-    If Ce is the sole cation on both → treated as A-site (Ce³⁺ default).
+    If X appears together with other A-site lanthanides → A-site.
+    If X appears together with known B-site cations only → B-site.
+    If X is the sole cation on both → treated as A-site (X³⁺ default).
     """
     if pd.isna(formula_str):
         return {}, {}, {}
 
-    s = str(formula_str).strip().replace('(', ' ').replace(')', ' ')
+    try:
+        comp = Composition(formula_str)
+    except Exception:
+        return {}, {}, {}
 
-    # Tokenise: pairs of (ElementSymbol, stoichiometry)
-    tokens = re.findall(r'([A-Z][a-z]?)\s*([\d\.]+)?', s)
-    raw: Dict[str, float] = {}
-    for elem, stoich in tokens:
-        if elem == 'O':
-            continue
-        amt = float(stoich) if stoich else 1.0
-        raw[elem] = raw.get(elem, 0.0) + amt
+        # Remove oxygen, get element amounts
+    raw = {str(elem): amt for elem, amt in comp.items() if str(elem) != 'O'}
 
     if not raw:
         return {}, {}, {}
 
-    # Separate into tentative A / B / unknown (Ce is held aside)
     a_comp: Dict[str, float] = {}
     b_comp: Dict[str, float] = {}
     unknown: Dict[str, float] = {}
-    ce_amt: float = 0.0
+    ambiguous: Dict[str, float] = {}
 
-    for elem, amt in raw.items():
-        if elem == globals.CE_AMBIGUOUS:
-            ce_amt = amt
-        elif elem in globals.KNOWN_A:
-            a_comp[elem] = amt
-        elif elem in globals.KNOWN_B:
-            b_comp[elem] = amt
+    for elem_str, amt in raw.items():
+        if elem_str in globals.KNOWN_AMBIGUOUS:
+            ambiguous[elem_str] = amt
+        elif elem_str in globals.KNOWN_A and elem_str not in globals.KNOWN_B:
+            a_comp[elem_str] = amt
+        elif elem_str in globals.KNOWN_B and elem_str not in globals.KNOWN_A:
+            b_comp[elem_str] = amt
         else:
-            unknown[elem] = amt
+            unknown[elem_str] = amt
 
-    # Resolve Ce
-    if ce_amt > 0:
-        if a_comp:          # other lanthanides present → Ce on A-site
-            a_comp[globals.CE_AMBIGUOUS] = ce_amt
-        elif b_comp:        # only B-site neighbours → Ce on B-site
-            b_comp[globals.CE_AMBIGUOUS] = ce_amt
-        else:               # lone Ce → default A-site (Ce³⁺)
-            a_comp[globals.CE_AMBIGUOUS] = ce_amt
+    # Resolve ambiguous using stoichiometry
+    for elem_str, amt in ambiguous.items():
+        a_total = sum(a_comp.values())
+        b_total = sum(b_comp.values())
+
+        if (2.0 - a_total) > (2.0 - b_total):
+            a_comp[elem_str] = amt
+        elif (2.0 - b_total) > (2.0 - a_total):
+            b_comp[elem_str] = amt
+        else:
+            a_comp[elem_str] = amt  # tie-breaker
 
     return a_comp, b_comp, unknown
 
@@ -351,8 +353,8 @@ def load_icsd(
             f"or pass the path explicitly."
         )
 
-    df_raw = pd.read_csv(filepath, encoding='latin-1')
-    df_raw['temp_val'] = pd.to_numeric(df_raw['Temperature'], errors='coerce')
+    df_raw = pd.read_csv(filepath)#, encoding='latin-1')
+    # df_raw['temp_val'] = pd.to_numeric(df_raw['Temperature'], errors='coerce')
     df_raw['density_calc'] = pd.to_numeric(df_raw['CalculatedDensity'], errors='coerce')
     df_raw['lattice_a'] = df_raw['CellParameter'].apply(_parse_lattice)
 
@@ -370,7 +372,7 @@ def load_icsd(
             a_comp, b_comp, unknown,
             row['lattice_a'],
             row.get('StructureType', ''),
-            row['temp_val'],
+            row['Temperature'],
         )
 
         if ctype == globals.NON_PYROCHLORE:
@@ -380,11 +382,17 @@ def load_icsd(
         a_frac = _comp_to_fractions(a_comp)
         b_frac = _comp_to_fractions(b_comp)
 
+        # Pretty formula from pymatgen for consistency
+        try:
+            pretty = Composition(str(row['StructuredFormula'])).reduced_formula
+        except Exception:
+            pretty = str(row.get('StructuredFormula', ''))
+
         records.append({
-            'Composition':                  str(row.get('ChemicalName', '')).strip(),
+            'Composition':                  pretty,#str(row.get('ChemicalName', '')).strip(),
             'Sample A':                     _comp_to_str(a_comp),
             'Sample B':                     _comp_to_str(b_comp),
-            'TPS Cond W/m/K':               np.nan,
+            'Thermal Conductivity W/m/K':   np.nan,
             'Lattice Parameter (Angstrom)': row['lattice_a'],
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
@@ -399,7 +407,7 @@ def load_icsd(
             'a_stoich_json':                json.dumps(a_frac),
             'b_stoich_json':                json.dumps(b_frac),
             '_comp_key':                    _composition_key(a_comp, b_comp),
-            'Temperature':                  str(row['temp_val']),
+            'Temperature':                  row['Temperature'],
             'density_calc':                 row['density_calc'],
         })
 
@@ -414,11 +422,16 @@ def load_icsd(
 
     df = pd.DataFrame(records)
 
+    # Remove temperature values beyond range of ROOM_TEMP (300K) ± 15K
+    low = globals.ROOM_TEMP - 15
+    high = globals.ROOM_TEMP + 15
+    df = df[(df['Temperature'] >= low) & (df['Temperature'] <= high)]
+
     # --- deduplicate: average lattice param for same composition ---
     # Aggregate by composition key
     agg_rows = []
-    # for key, grp in df.groupby('_comp_key'):
-    for key, grp in df.groupby(['_comp_key', 'Temperature']):
+    for key, grp in df.groupby('_comp_key'):
+    # for key, grp in df.groupby(['_comp_key', 'Temperature']):
         base = grp.iloc[0].copy()
         base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
         base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
@@ -466,3 +479,4 @@ if __name__ == '__main__':
     print(f"Unkown error({len(unknown_err)}): {unknown_err}")
     print(f"Structure error({len(struct_err)}): {struct_err}")
     print(f"Stoich error({len(stoic_err)}): {stoic_err}")
+    print(f"Lattice error({len(latt_err)}): {latt_err}")

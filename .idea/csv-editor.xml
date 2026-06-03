@@ -17,7 +17,14 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\data\processed\test_comb.csv">
+        <entry key="\data\processed\hec_pyrochlore.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\processed\pristine_pyrochlore.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -39,6 +46,41 @@
           </value>
         </entry>
         <entry key="\data\raw\Sample_Properties_Safin_Feb_2026.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\aflow_pyrochlore_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\aflow_pyrochlore_data_comb.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\aflow_pyrochlore_data_extra.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\aflow_pyrochlore_data_thermal.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\mp_pyrochlore_query.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

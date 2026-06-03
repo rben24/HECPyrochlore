@@ -2,6 +2,12 @@ Gives error:
 C:\Users\Delluser\PycharmProjects\HECPyrochlore\.venv\Lib\site-packages\sklearn\utils\parallel.py:144: UserWarning: `sklearn.utils.parallel.delayed` should be used with `sklearn.utils.parallel.Parallel` to make it possible to propagate the scikit-learn configuration of the current thread to the joblib workers.
   warnings.warn(
 
+Rule of Mixture
+ex: (Sn.3Ho.7)2(Ti.6Hf.4)O7 => use fractional parts of each single phase version
+    (Sn2Ti2O7.val * (.3*.6) + Sn2Hf2O7.val * (.3*.4) + Ho2Ti2O7.val * (.7*.6) + Ho2Hf2O7.val * (.7*.4)) /
+        ((.3*.6) + (.3*.6) + (.3*.6) + (.3*.6))
+        to get RoM value for the HEC
+
 TODO:
 - provide option to input lattice parameter or thermal coeff instead of composition so both can be tested (PROGRESS)
 - add data validation code (ADDED)

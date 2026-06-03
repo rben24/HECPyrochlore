@@ -71,7 +71,7 @@ def evaluate_predictions(y_true: np.ndarray,
 
 
 def cross_validate_model(model: Any, X: np.ndarray, y: np.ndarray,
-                         n_splits: int = 5,
+                         n_splits: int = 6,
                          random_state: int = 42) -> Dict[str, np.ndarray]:
     kf = KFold(n_splits=n_splits, shuffle=True, random_state=random_state)
     scoring = ['neg_root_mean_squared_error', 'neg_mean_absolute_error', 'r2']

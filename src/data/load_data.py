@@ -32,8 +32,8 @@ OUTPUT_FILE_T = OUT_DIR / 'engineered_pyrochlore_therm.csv'
 
 warnings.filterwarnings('ignore')
 
-_HERE    = Path(__file__).resolve().parent
-_PROJECT = _HERE.parent.parent
+# _HERE    = Path(__file__).resolve().parent
+# _PROJECT = _HERE.parent.parent
 sys.path.insert(0, str(_PROJECT))
 
 from src.features.build_features import add_engineered_features, FEATURE_COLS

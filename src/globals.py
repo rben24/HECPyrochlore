@@ -8,6 +8,7 @@ import numpy as np
 
 # Rare-earth / Y cations that occupy the 8-coordinated A-site
 # pulled from pymatgen using is_metal() and common_oxidation_state of 3
+# **Also, there can possibly be metals with oxidation state 2+ in A site
 KNOWN_A: frozenset[str] = frozenset({
     'Ac', 'Al', 'Am', 'Au', 'Bi', 'Bk', 'Ce', 'Cf', 'Cm', 'Co',
     'Cr', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Ga', 'Gd', 'Ho',
@@ -22,16 +23,10 @@ KNOWN_B: frozenset[str] = frozenset({
     'Re', 'Ru', 'Sn', 'Tc', 'Th', 'Ti', 'W', 'Zr'
 })
 
-# # ── element sets (shared with load_icsd.py) ───────────────────────────────────
-# KNOWN_A: frozenset = frozenset({
-#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
-# })
-# KNOWN_B: frozenset = frozenset({
-#     'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
-# })
-
-# Ce can sit on either site depending on oxidation state; handled separately
+# Some elements can sit on either site depending on oxidation state; handled separately
+KNOWN_AMBIGUOUS = [
+    'Ce', 'Ir', 'Sn', 'Ru',
+]
 CE_AMBIGUOUS = 'Ce'
 
 # Pyrochlore structure-type identifiers used in the ICSD file
@@ -42,8 +37,8 @@ PYROCHLORE_STRUCTURE_TYPES: frozenset[str] = frozenset({
 })
 
 # Physical bounds
-LATTICE_MIN = 9.5    # Å
-LATTICE_MAX = 11.5   # Å
+LATTICE_MIN = 8.0    # Å
+LATTICE_MAX = 13.5   # Å
 TEMP_MIN    = 285.0  # K
 TEMP_MAX    = 305.0  # K
 A_STOICH_RANGE = (1.5, 2.5)
@@ -64,3 +59,70 @@ NON_PYROCHLORE = 'non_pyrochlore'
 
 K_B = 1.380649 * np.float_power(10, -23) # Boltzmann constant J/K
 R_GAS = 8.314  # J/(mol·K)
+ROOM_TEMP = 300 # K (technically 298.15K by IUPAC)
+
+# ── Column Names ─────────────────────────────────────────────────────────────
+
+# Single Phase columns
+PRISTINE_COLS = [
+    'Composition',
+    'Sample A',
+    'Sample B',
+    'Thermal Conductivity (W/m/K)',
+    'Lattice Parameter (Angstrom)',
+    'Density',
+    'Energy per Atom',
+    'Formation Energy per Atom',
+    'Enthalpy',
+    'Magnetic Moment',
+    'Band Gap',
+    'Band Gap Type',
+    'Valence',
+    'Bulk Modulus (VRH)',
+    'Shear Modulus (VRH)',
+    'Youngs Modulus (VRH)',
+    'Poisson Ratio',
+    'AEL Debye Temperature',
+    'Temperature',
+    'Thermal Expansion',
+    'Energy Above Hull',
+    'Synthesis Method',
+    'compound_type',
+    'data_source',
+]
+
+# High Entropy Columns
+HEC_COLS = [
+    'Composition',
+    'Sample A',
+    'Sample B',
+    'a_stoich_json',
+    'b_stoich_json',
+    'Lattice Parameter (Angstrom)',
+    'Thermal Conductivity (W/m/K)',
+    'compound_type',
+    'Temperature',
+    'data_source',
+]
+
+# Canonical Columns
+CANONICAL_COLS = [
+    'Composition',
+    'Sample A',
+    'Sample B',
+    'Thermal Conductivity (W/m/K)',
+    'Lattice Parameter (Angstrom)',
+    'Relative Density %',
+    'Is Single Phase',
+    'Synthesis Method',
+    'data_source',
+    'b_o_distance',
+    'b_o_b_angle',
+    'oxygen_param_x',
+    'compound_type',
+    'a_stoich_json',
+    'b_stoich_json',
+    'Temperature',
+    'Thermal Expansion',
+    'density_calc',
+]

@@ -31,11 +31,12 @@ from __future__ import annotations
 
 import re
 import json
+import math
 import logging
 import numpy as np
 import pandas as pd
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 from .. import globals
 from pymatgen.core import Composition
 
@@ -49,6 +50,8 @@ OUT_DIR  = _PROJECT / 'data' / 'processed'
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 OUTPUT_FILE = OUT_DIR / 'combined_pyrochlore.csv'
+BASE_OUTPUT_FILE = OUT_DIR / 'pristine_pyrochlore.csv'
+HEC_OUTPUT_FILE = OUT_DIR / 'hec_pyrochlore.csv'
 
 # # ── element sets (shared with load_icsd.py) ───────────────────────────────────
 # KNOWN_A: frozenset = frozenset({
@@ -65,25 +68,9 @@ OUTPUT_FILE = OUT_DIR / 'combined_pyrochlore.csv'
 # _RA_RB_MAX = 1.90
 
 # ── canonical columns ─────────────────────────────────────────────────────────
-CANONICAL_COLS = [
-    'Composition',
-    'Sample A',
-    'Sample B',
-    'TPS Cond W/m/K',
-    'Lattice Parameter (Angstrom)',
-    'Relative Density %',
-    'Is Single Phase',
-    'Synthesis Method',
-    'data_source',
-    'b_o_distance',
-    'b_o_b_angle',
-    'oxygen_param_x',
-    'compound_type',
-    'a_stoich_json',
-    'b_stoich_json',
-    'Temperature',
-    'density_calc',
-]
+CANONICAL_COLS = globals.CANONICAL_COLS
+PRISTINE_COLS = globals.PRISTINE_COLS
+HEC_COLS = globals.HEC_COLS
 
 # # ── compound-type constants ───────────────────────────────────────────────────
 # PRISTINE       = 'pristine'
@@ -118,7 +105,20 @@ def _parse_sample_str(sample_str: str) -> Dict[str, float]:
 
 def _comp_to_fractions_json(sample_str: str) -> str:
     """Return JSON string of equiatomic mole fractions for a Sample A/B string."""
-    return json.dumps(_parse_sample_str(sample_str))
+    d = _parse_sample_str(sample_str)
+    if d is None:
+        return json.dumps({})
+        # convert keys to str and values to native Python floats; skip NaN/inf
+    safe = {}
+    for k, v in (d.items() if isinstance(d, dict) else []):
+        try:
+            val = float(v)
+            if math.isfinite(val):
+                safe[str(k)] = val
+        except Exception:
+            # skip non-numeric values
+            safe[str(k)] = str(v)
+    return json.dumps(safe)
 
 
 def classify_sample(sample_a: str, sample_b: str) -> str:
@@ -185,16 +185,16 @@ def _parse_tc_range(tc_str: str) -> float:
 
 # ── Source 1: Safin experimental data ────────────────────────────────────────
 
-def load_safin() -> pd.DataFrame:
+def load_safin(columns: List) -> pd.DataFrame:
     path = RAW_DIR / 'Sample_Properties_Safin_Feb_2026.csv'
     df = pd.read_csv(path, na_values=['NA', '', 'N/A'])
     log.info(f"Safin: {len(df)} rows from {path.name}")
 
-    out = pd.DataFrame()
+    out = pd.DataFrame({c: np.nan for c in columns}, index=df.index)
     out['Composition']                  = df['ID'].fillna('').astype(str)
     out['Sample A']                     = df['Sample A'].apply(_clean_element_list)
     out['Sample B']                     = df['Sample B'].apply(_clean_element_list)
-    out['TPS Cond W/m/K']               = pd.to_numeric(df['TPS Cond W/m/K'], errors='coerce')
+    out['Thermal Conductivity (W/m/K)'] = pd.to_numeric(df['TPS Cond W/m/K'], errors='coerce')
     out['Lattice Parameter (Angstrom)'] = pd.to_numeric(
                                             df['Lattice Parameter (Angstrom)'], errors='coerce')
     out['Relative Density %']           = pd.to_numeric(df['Relative Density %'], errors='coerce')
@@ -202,9 +202,6 @@ def load_safin() -> pd.DataFrame:
                                             {'yes': 'Yes', 'no': 'No'})
     out['Synthesis Method']             = df['Synthesis Method'].fillna('')
     out['data_source']                  = 'safin_experimental'
-    out['b_o_distance']                 = np.nan
-    out['b_o_b_angle']                  = np.nan
-    out['oxygen_param_x']               = np.nan
 
     # Classify each row
     out['compound_type'] = out.apply(
@@ -214,15 +211,18 @@ def load_safin() -> pd.DataFrame:
     out['a_stoich_json'] = out['Sample A'].apply(_comp_to_fractions_json)
     out['b_stoich_json'] = out['Sample B'].apply(_comp_to_fractions_json)
 
-    out['Temperature'] = np.nan
-    out['density_calc'] = np.nan
+    # out['Temperature'] = np.nan
+    # out['density_calc'] = np.nan
+
+    # print(out)
+    # exit(0)
 
     n_excl = (out['compound_type'] == globals.NON_PYROCHLORE).sum()
     if n_excl:
         log.info(f"Safin: {n_excl} rows classified as non-pyrochlore (kept but flagged)")
     log.info(
         f"Safin: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice, "
-        f"{out['TPS Cond W/m/K'].notna().sum()} thermal values"
+        f"{out['Thermal Conductivity (W/m/K)'].notna().sum()} thermal values"
     )
     return out
 
@@ -269,7 +269,7 @@ def load_nlm() -> pd.DataFrame:
             'Composition':                  compound,
             'Sample A':                     a_str,
             'Sample B':                     b_str,
-            'TPS Cond W/m/K':               np.nan,
+            'Thermal Conductivity (W/m/K)': np.nan,
             'Lattice Parameter (Angstrom)': pd.to_numeric(
                                               row.get('Lattice Parameter a (A)', np.nan),
                                               errors='coerce'),
@@ -313,7 +313,7 @@ def load_parent_components() -> pd.DataFrame:
             'Composition':                  str(row.get('Parent Compound', '')).strip(),
             'Sample A':                     a_raw,
             'Sample B':                     b_raw,
-            'TPS Cond W/m/K':               tc_val,
+            'Thermal Conductivity (W/m/K)': tc_val,
             'Lattice Parameter (Angstrom)': np.nan,
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
@@ -330,7 +330,7 @@ def load_parent_components() -> pd.DataFrame:
         })
 
     out = pd.DataFrame(rows)
-    log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values")
+    log.info(f"Parent components: {out['Thermal Conductivity (W/m/K)'].notna().sum()} thermal values")
     return out
 
 
@@ -375,7 +375,7 @@ def load_jordan_source() -> pd.DataFrame:
             'Composition':                  comp,
             'Sample A':                     np.nan, # a_raw,
             'Sample B':                     np.nan, # b_raw,
-            'TPS Cond W/m/K':               np.nan, # tc_val,
+            'Thermal Conductivity (W/m/K)': np.nan, # tc_val,
             'Lattice Parameter (Angstrom)': np.nan,
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
@@ -388,12 +388,53 @@ def load_jordan_source() -> pd.DataFrame:
             'a_stoich_json':                np.nan, # _comp_to_fractions_json(a_raw),
             'b_stoich_json':                np.nan, # _comp_to_fractions_json(b_raw),
             'Temperature':                  row.get('Start Temp'),
+            'Thermal Expansion':            row.get('CTE Value', np.nan),
             'density_calc':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
     log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values")
     return out
+
+# ── Source 6: Aflow Dataset ──────────────────────────────────────────
+
+def load_aflow_source() -> pd.DataFrame:
+    """Thin wrapper that calls the dedicated aflow loader."""
+    try:
+        from src.data.load_aflow import load_aflow
+    except ImportError:
+        import sys
+        sys.path.insert(0, str(_PROJECT))
+        from src.data.load_aflow import load_aflow
+
+    aflow_path = RAW_DIR / 'aflow_pyrochlore_data_comb.csv'
+    df = load_aflow(filepath=aflow_path, verbose=True)
+    log.info(
+        f"AFlow: {len(df)} usable rows "
+        f"({(df['compound_type']=='pristine').sum()} pristine, "
+        f"{(df['compound_type']=='high_entropy').sum()} high-entropy)"
+    )
+    return df
+
+# ── Source 7: Materials Project Dataset ──────────────────────────────────────────
+
+def load_mp_source() -> pd.DataFrame:
+    """Thin wrapper that calls the dedicated materials project loader."""
+    try:
+        from src.data.load_mp import load_mp
+    except ImportError:
+        import sys
+        sys.path.insert(0, str(_PROJECT))
+        from src.data.load_mp import load_mp
+
+    mp_path = RAW_DIR / 'mp_pyrochlore_query.csv'
+    df = load_mp(filepath=mp_path, verbose=True)
+    log.info(
+        f"MP: {len(df)} usable rows "
+        f"({(df['compound_type']=='pristine').sum()} pristine, "
+        f"{(df['compound_type']=='high_entropy').sum()} high-entropy)"
+    )
+    return df
 
 # ── Build combined dataset ────────────────────────────────────────────────────
 
@@ -411,14 +452,17 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
 
     frames = []
 
-    for loader, label in [
-        (load_safin,           'Safin experimental'),
-        (load_nlm,             'notebookLM literature'),
-        (load_parent_components, 'Parent components'),
-        (load_icsd_source,     'ICSD database'),
+    for loader, arg, label in [
+        (load_safin, CANONICAL_COLS,    'Safin experimental'),
+        (load_nlm, None,                'notebookLM literature'),
+        (load_parent_components, None,  'Parent components'),
+        (load_icsd_source, None,        'ICSD database'),
     ]:
         try:
-            frm = loader()
+            if arg == None:
+                frm = loader()
+            else:
+                frm = loader(arg)
             frames.append(frm)
         except FileNotFoundError as e:
             log.warning(f"Skipping {label}: {e}")
@@ -456,13 +500,13 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
     print("  " + "-" * 78)
     for src, grp in combined.groupby('data_source'):
         lat  = grp['Lattice Parameter (Angstrom)'].notna().sum()
-        tc   = grp['TPS Cond W/m/K'].notna().sum()
+        tc   = grp['Thermal Conductivity (W/m/K)'].notna().sum()
         pri  = (grp['compound_type'] == globals.PRISTINE).sum()
         he   = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
         print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
     print("  " + "-" * 78)
     lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
-    tc_total  = combined['TPS Cond W/m/K'].notna().sum()
+    tc_total  = combined['Thermal Conductivity (W/m/K)'].notna().sum()
     pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
     he_total  = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
     excl      = len(non_pyro)
@@ -485,10 +529,310 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
 
     return combined
 
+# ── Build single phase dataset ────────────────────────────────────────────────────
+
+def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
+    """
+    Load, classify, and combine all pristine/single phase pyrochlores from all sources.
+
+    Pyrochlore classification summary is printed for each source.
+    Only 'pristine' rows are retained in the output.
+    """
+    print()
+    print("=" * 66)
+    print("  Building Single Phase Pyrochlore Dataset")
+    print("=" * 66)
+
+    frames = []
+
+    for loader, arg, label in [
+        # (load_safin, PRISTINE_COLS, 'Safin experimental'),
+        # (load_nlm, None, 'notebookLM literature'),
+        # (load_parent_components, None, 'Parent components'),
+        (load_icsd_source, None, 'ICSD database'),
+        (load_aflow_source, None, 'AFlow database'),
+        (load_mp_source, None, 'Materials Project Database'),
+        # (load_jordan_source, None, 'Jordan\'s data'),
+    ]:
+        try:
+            if arg == None:
+                frm = loader()
+            else:
+                frm = loader(arg)
+            frames.append(frm)
+        except FileNotFoundError as e:
+            log.warning(f"Skipping {label}: {e}")
+
+    if not frames:
+        raise RuntimeError("No data sources found — check data/raw/ directory.")
+
+    # Align to canonical columns
+    # all_cols = PRISTINE_COLS + [c for frm in frames
+    #                               for c in frm.columns
+    #                               if c not in CANONICAL_COLS]
+    combined = pd.concat(frames, ignore_index=True)
+
+    # Ensure all single phase cols exist
+    for col in PRISTINE_COLS:
+        if col not in combined.columns:
+            combined[col] = np.nan
+
+    # Drop rows where BOTH Sample A and Sample B are missing
+    combined = combined[combined['Sample A'].notna() | combined['Sample B'].notna()]
+
+    # ── Exclude non-pyrochlores from training data ────────────────────────────
+    n_total = len(combined)
+    non_pyro = combined[combined['compound_type'] == globals.NON_PYROCHLORE]
+    combined = combined[combined['compound_type'] != globals.NON_PYROCHLORE].reset_index(drop=True)
+
+    # ── Summary table before filtering to pristine ────────────────────────────
+    print()
+    print(f"  {'Source':<38} {'Rows':>5}  {'Lattice':>8}  "
+          f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
+    print("  " + "-" * 78)
+    for src, grp in combined.groupby('data_source'):
+        lat = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        tc = grp['Thermal Conductivity (W/m/K)'].notna().sum()
+        pri = (grp['compound_type'] == globals.PRISTINE).sum()
+        he = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
+        print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
+    print("  " + "-" * 78)
+    lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
+    tc_total = combined['Thermal Conductivity (W/m/K)'].notna().sum()
+    pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
+    he_total = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
+    excl = len(non_pyro)
+    print(f"  {'TOTAL (pyrochlore)':<38} {len(combined):>5}  "
+          f"{lat_total:>8}  {tc_total:>8}  {pri_total:>9}  {he_total:>5}")
+    print(f"  {'Non-pyrochlore (excluded)':<38} {excl:>5}")
+    print()
+
+    # ── Filter to PRISTINE only and select PRISTINE_COLS ────────────────────
+    combined = combined[combined['compound_type'] == globals.PRISTINE].reset_index(drop=True)
+
+    # Select only PRISTINE_COLS that exist in the dataframe
+    out_cols = [c for c in PRISTINE_COLS if c in combined.columns]
+    combined = combined[out_cols]
+
+
+    # ------- Deduplication ------------------------------------
+    group_keys = ['Sample A', 'Sample B']
+
+    # helper aggregators
+    def concat_strings_col(series):
+        vals = series.dropna().astype(str).unique()
+        return ', '.join(vals) if len(vals) else np.nan
+
+    def first_nonnull(series):
+        nonnull = series.dropna()
+        return nonnull.iloc[0] if len(nonnull) else np.nan
+
+    # separate numeric and non-numeric (keep group keys out of non-numeric processing)
+    numeric_cols = combined.select_dtypes(include='number').columns.tolist()
+    other_cols = [c for c in combined.columns if c not in numeric_cols + group_keys]
+
+    # we'll build aggregated rows per group manually to apply the 'DFT' logic
+    out_rows = []
+    for keys, grp in combined.groupby(group_keys, as_index=False):
+        # keys is a tuple of group key values in same order as group_keys
+        # decide which rows to use for averaging
+        has_dft = grp['Synthesis Method'].eq('DFT').any()
+        if has_dft:
+            use_grp = grp[grp['Synthesis Method'].eq('DFT')]
+        else:
+            use_grp = grp
+
+        agg_row = dict(zip(group_keys, keys))
+
+        # numeric means (pandas will yield NaN if all NaN)
+        for col in numeric_cols:
+            agg_row[col] = use_grp[col].mean()
+
+        # non-numeric processing
+        for col in other_cols:
+            if col == 'Band Gap Type' or col == 'data_source':
+                agg_row[col] = concat_strings_col(use_grp[col])
+            elif col == 'Synthesis Method':
+                # prefer 'DFT' if present, else first non-null, else NaN
+                if has_dft:
+                    agg_row[col] = 'DFT'
+                else:
+                    agg_row[col] = first_nonnull(use_grp[col])
+            else:
+                agg_row[col] = first_nonnull(use_grp[col])
+
+        out_rows.append(agg_row)
+
+    result = pd.DataFrame(out_rows)
+
+    # Optional: ensure column order matches original
+    combined = result[combined.columns.tolist()]
+
+    print(f"  Filtered to PRISTINE compounds: {len(combined)} rows")
+    print(f"  Output columns: {len(out_cols)}")
+    print()
+
+    if save:
+        combined.to_csv(BASE_OUTPUT_FILE, index=False)
+        log.info(f"Saved pristine dataset → {BASE_OUTPUT_FILE}")
+
+    return combined
+
+# ── Build high entropy dataset ────────────────────────────────────────────────────
+
+def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
+    """
+    Load, classify, and combine all HEC pyrochlores from all sources.
+
+    Pyrochlore classification summary is printed for each source.
+    Only 'high entropy' rows are retained in the output.
+    """
+    print()
+    print("=" * 66)
+    print("  Building High Entorpy Pyrochlore Dataset")
+    print("=" * 66)
+
+    frames = []
+
+    for loader, arg, label in [
+        (load_safin, CANONICAL_COLS, 'Safin experimental'),
+        (load_nlm, None, 'notebookLM literature'),
+        # (load_parent_components, None, 'Parent components'),
+        (load_icsd_source, None, 'ICSD database'),
+        # (load_aflow_source, None, 'AFlow database'),
+        # (load_mp_source, None, 'Materials Project Database'),
+        # (load_jordan_source, None, 'Jordan\'s data'),
+    ]:
+        try:
+            if arg == None:
+                frm = loader()
+            else:
+                frm = loader(arg)
+            frames.append(frm)
+        except FileNotFoundError as e:
+            log.warning(f"Skipping {label}: {e}")
+
+    if not frames:
+        raise RuntimeError("No data sources found — check data/raw/ directory.")
+
+    # Align to canonical columns
+    # all_cols = CANONICAL_COLS + [c for frm in frames
+    #                               for c in frm.columns
+    #                               if c not in CANONICAL_COLS]
+    combined = pd.concat(frames, ignore_index=True)
+
+    # Ensure all hec cols exist
+    for col in HEC_COLS:
+        if col not in combined.columns:
+            combined[col] = np.nan
+
+    # Drop rows where BOTH Sample A and Sample B are missing
+    combined = combined[combined['Sample A'].notna() | combined['Sample B'].notna()]
+
+    # ── Exclude non-pyrochlores from training data ────────────────────────────
+    n_total = len(combined)
+    non_pyro = combined[combined['compound_type'] == globals.NON_PYROCHLORE]
+    combined = combined[combined['compound_type'] != globals.NON_PYROCHLORE].reset_index(drop=True)
+
+    # ── Summary table before filtering to pristine ────────────────────────────
+    print()
+    print(f"  {'Source':<38} {'Rows':>5}  {'Lattice':>8}  "
+          f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
+    print("  " + "-" * 78)
+    for src, grp in combined.groupby('data_source'):
+        lat = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        tc = grp['Thermal Conductivity (W/m/K)'].notna().sum()
+        pri = (grp['compound_type'] == globals.PRISTINE).sum()
+        he = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
+        print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
+    print("  " + "-" * 78)
+    lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
+    tc_total = combined['Thermal Conductivity (W/m/K)'].notna().sum()
+    pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
+    he_total = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
+    excl = len(non_pyro)
+    print(f"  {'TOTAL (pyrochlore)':<38} {len(combined):>5}  "
+          f"{lat_total:>8}  {tc_total:>8}  {pri_total:>9}  {he_total:>5}")
+    print(f"  {'Non-pyrochlore (excluded)':<38} {excl:>5}")
+    print()
+
+    # ── Filter to HIGH_ENTROPY only and select HEC_COLS ────────────────────
+    combined = combined[combined['compound_type'] == globals.HIGH_ENTROPY].reset_index(drop=True)
+
+    # Select only HEC_COLS that exist in the dataframe
+    out_cols = [c for c in HEC_COLS if c in combined.columns]
+    combined = combined[out_cols]
+
+    '''
+    # ------- Deduplication ------------------------------------
+    group_keys = ['Sample A', 'Sample B']
+
+    # helper aggregators
+    def concat_strings_col(series):
+        vals = series.dropna().astype(str).unique()
+        return ', '.join(vals) if len(vals) else np.nan
+
+    def first_nonnull(series):
+        nonnull = series.dropna()
+        return nonnull.iloc[0] if len(nonnull) else np.nan
+
+    # separate numeric and non-numeric (keep group keys out of non-numeric processing)
+    numeric_cols = combined.select_dtypes(include='number').columns.tolist()
+    other_cols = [c for c in combined.columns if c not in numeric_cols + group_keys]
+
+    # we'll build aggregated rows per group manually to apply the 'DFT' logic
+    out_rows = []
+    for keys, grp in combined.groupby(group_keys, as_index=False):
+        # keys is a tuple of group key values in same order as group_keys
+        # decide which rows to use for averaging
+        has_dft = grp['Synthesis Method'].eq('DFT').any()
+        if has_dft:
+            use_grp = grp[grp['Synthesis Method'].eq('DFT')]
+        else:
+            use_grp = grp
+
+        agg_row = dict(zip(group_keys, keys))
+
+        # numeric means (pandas will yield NaN if all NaN)
+        for col in numeric_cols:
+            agg_row[col] = use_grp[col].mean()
+
+        # non-numeric processing
+        for col in other_cols:
+            if col == 'Band Gap Type' or col == 'data_source':
+                agg_row[col] = concat_strings_col(use_grp[col])
+            elif col == 'Synthesis Method':
+                # prefer 'DFT' if present, else first non-null, else NaN
+                if has_dft:
+                    agg_row[col] = 'DFT'
+                else:
+                    agg_row[col] = first_nonnull(use_grp[col])
+            else:
+                agg_row[col] = first_nonnull(use_grp[col])
+
+        out_rows.append(agg_row)
+
+    result = pd.DataFrame(out_rows)
+
+    # Optional: ensure column order matches original
+    combined = result[combined.columns.tolist()]
+    '''
+    print(f"  Filtered to High Entropy compounds: {len(combined)} rows")
+    print(f"  Output columns: {len(out_cols)}")
+    print()
+
+    if save:
+        combined.to_csv(HEC_OUTPUT_FILE, index=False)
+        log.info(f"Saved high entropy dataset → {HEC_OUTPUT_FILE}")
+
+    return combined
+
 
 if __name__ == '__main__':
-    df = build_combined_dataset(save=True)
+    # df = build_combined_dataset(save=True)
+    # df = build_single_phase_dataset(save=True)
+    df = build_high_entropy_dataset(save=True)
     print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
-              'TPS Cond W/m/K', 'Lattice Parameter (Angstrom)',
+              'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Angstrom)',
               'compound_type', 'data_source']].to_string(index=False))
