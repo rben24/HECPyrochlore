@@ -48,7 +48,7 @@ import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple, Optional
 from pymatgen.core import Composition
-from .. import globals
+from src import globals
 
 log = logging.getLogger(__name__)
 

@@ -1,186 +1,166 @@
 """
 Rule of Mixtures Calculator for High Entropy Pyrochlores
 =========================================================
-Composition format: (A1_x A2_y ...)(B1_p B2_q ...)O7
-Example: (Sn0.3 Ho0.7)2 (Ti0.6 Hf0.4)2 O7
+Data source  : pristine_pyrochlore.csv  (loaded at import time via load_pristine_db())
+Site fractions: a_stoich_json / b_stoich_json columns in the input DataFrame
 
-All single-phase pyrochlore values are stored in PYROCHLORE_DB.
-Add or update entries as needed.
+Primary entry points
+--------------------
+  rom_from_dataframe(df)          – batch ROM over a DataFrame
+  full_report(a_site, b_site)     – detailed single-composition report
+  reload_db(csv_path)             – reload PYROCHLORE_DB at runtime
 """
 
-from itertools import product
-from dataclasses import dataclass, field
-from typing import Dict, List, Tuple
+import json
 import math
-import re
+import warnings
+from itertools import product
+from dataclasses import dataclass
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple, Union
 
+import pandas as pd
 
+# ── Paths ──────────────────────────────────────────────────────────────────────
+_HERE         = Path(__file__).resolve().parent
+_PROJECT      = _HERE.parent.parent
+DATA          = _PROJECT / 'data' / 'processed'
+PRISTINE_DATA = DATA / 'pristine_pyrochlore.csv'
+HEC_DATA      = DATA / 'hec_pyrochlore.csv'
 
 
 # =============================================================================
-# SINGLE-PHASE PYROCHLORE DATABASE
-# Each entry: "A2B2O7" -> property dict
-# Sources: literature values; update as needed
+# PROPERTIES DATACLASS
 # =============================================================================
 
 @dataclass
 class PyrochloreProperties:
     """Properties for a single-phase A2B2O7 pyrochlore."""
-    lattice_parameter: float = None      # Angstroms
-    ionic_radius_A: float = None         # Angstroms (8-coord)
-    ionic_radius_B: float = None         # Angstroms (6-coord)
-    electronegativity_A: float = None    # Pauling scale
-    electronegativity_B: float = None    # Pauling scale
-    charge_A: int = 3                    # formal oxidation state
-    charge_B: int = 4                    # formal oxidation state
-    formation_enthalpy: float = None     # kJ/mol (if available)
-    bulk_modulus: float = None           # GPa (if available)
-    shear_modulus: float = None          # GPa (if available)
-    thermal_conductivity: float = None   # W/m·K (if available)
-    thermal_expansion: float = None      # °C⁻¹ (if available)
-
-
-# fmt: off
-PYROCHLORE_DB: Dict[str, PyrochloreProperties] = {
-    # ---- Sn-A site pyrochlores ----
-    "Sn2Ti2O7": PyrochloreProperties(
-        lattice_parameter=9.926,
-        ionic_radius_A=1.22,   # Sn2+ 8-coord (use Sn4+ if appropriate: 0.81)
-        ionic_radius_B=0.605,  # Ti4+ 6-coord
-        electronegativity_A=1.96,
-        electronegativity_B=1.54,
-        charge_A=2, charge_B=4,
-    ),}
-# fmt: on
+    lattice_parameter:    float = None   # Å
+    ionic_radius_A:       float = None   # Å  (8-coord)
+    ionic_radius_B:       float = None   # Å  (6-coord)
+    electronegativity_A:  float = None   # Pauling
+    electronegativity_B:  float = None   # Pauling
+    charge_A:             int   = 3      # formal oxidation state
+    charge_B:             int   = 4
+    formation_enthalpy:   float = None   # kJ/mol
+    bulk_modulus:         float = None   # GPa
+    shear_modulus:        float = None   # GPa
+    youngs_modulus:       float = None   # GPa
+    thermal_conductivity: float = None   # W/m·K
+    thermal_expansion:    float = None   # °C⁻¹
 
 
 # =============================================================================
-# COMPOSITION PARSER
-# Parses "(A1_x A2_y)(B1_p B2_q)O7" into structured dicts
+# CSV → PYROCHLORE_DB LOADER
 # =============================================================================
 
-def parse_composition(composition: str) -> Tuple[Dict[str, float], Dict[str, float]]:
+# Maps PyrochloreProperties fields → candidate CSV column names (case-insensitive).
+_COL_MAP: Dict[str, str] = {
+    "lattice_parameter":    "lattice parameter (angstrom)",
+    "ionic_radius_A":       "ionic radius a (angstrom)",
+    "ionic_radius_B":       "ionic radius b (angstrom)",
+    "electronegativity_A":  "electronegativity a",
+    "electronegativity_B":  "electronegativity b",
+    # "charge_A":             ["charge_a", "valence_a", "oxidation_state_a"],
+    # "charge_B":             ["charge_b", "valence_b", "oxidation_state_b"],
+    "formation_enthalpy":   "formation energy per atom",
+    "bulk_modulus":         "bulk modulus (vrh)",
+    "shear_modulus":        "shear modulus (vrh)",
+    "youngs_modulus":       "youngs modulus (vrh)",
+    "thermal_conductivity": "thermal conductivity (w/m/k)",
+    "thermal_expansion":    "thermal_expansion",
+}
+
+# Candidate column names for the A2B2O7 compound key (checked in order)
+_KEY_COL = "composition"
+
+def load_pristine_db(
+    csv_path: Union[str, Path] = PRISTINE_DATA,
+) -> Dict[str, PyrochloreProperties]:
     """
-    Parse a high-entropy pyrochlore composition string.
+    Build PYROCHLORE_DB from a CSV of single-phase pyrochlore data.
 
-    Accepted formats:
-        (Sn0.3Ho0.7)2(Ti0.6Hf0.4)2O7
-        (Sn.3Ho.7)(Ti.6Hf.4)          <- fractions without leading zero also OK
-        Sn0.3Ho0.7 / Ti0.6Hf0.4       <- slash-separated A/B
-
-    Returns:
-        a_site : dict  {element: fraction}   (fractions sum to ~1)
-        b_site : dict  {element: fraction}
-    """
-    # Normalize: remove spaces, uppercase first letter of each element
-    comp = composition.replace(" ", "")
-
-    # Try parenthesis format first
-    paren_pattern = re.findall(r'\(([^)]+)\)', comp)
-    if len(paren_pattern) >= 2:
-        a_str, b_str = paren_pattern[0], paren_pattern[1]
-    elif '/' in comp:
-        parts = comp.split('/')
-        a_str, b_str = parts[0].strip('()'), parts[1].strip('()')
-    else:
-        raise ValueError(
-            "Cannot parse composition. Use format: (A1xA2y)(B1pB2q) or A1x.../B1p..."
-        )
-
-    def parse_site(s: str) -> Dict[str, float]:
-        # Match element symbol followed by optional decimal fraction
-        tokens = re.findall(r'([A-Z][a-z]?)(\d*\.?\d*)', s)
-        site = {}
-        for elem, frac in tokens:
-            if elem:
-                site[elem] = float(frac) if frac else 1.0
-        # Normalize so fractions sum to 1
-        total = sum(site.values())
-        return {k: v / total for k, v in site.items()}
-
-    return parse_site(a_str), parse_site(b_str)
-
-
-# =============================================================================
-# CORE RULE OF MIXTURES ENGINE
-# =============================================================================
-
-def rule_of_mixtures(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    prop_getter,                  # callable(PyrochloreProperties) -> float
-    prop_name: str = "property",
-    verbose: bool = False,
-) -> float:
-    """
-    Core rule-of-mixtures calculation.
-
-    For composition (A1_x A2_y)(B1_p B2_q)O7:
-        ROM = Σ_{i,j} (x_i * p_j * val_ij) / Σ_{i,j} (x_i * p_j)
-
-    Parameters
-    ----------
-    a_site      : {element: fraction} for A-site
-    b_site      : {element: fraction} for B-site
-    prop_getter : function that extracts the desired float from PyrochloreProperties
-    prop_name   : label for verbose output
-    verbose     : print contribution breakdown
+    CSV requirements
+    ----------------
+    • A column named exactly (case-insensitive) ``Composition`` whose
+      values are formatted as "A2B2O7" (e.g. "Gd2Zr2O7").
+    • Any subset of columns listed in _COL_MAP. Unrecognised columns
+      are silently ignored.
 
     Returns
     -------
-    Weighted average value (float), or None if no data found.
+    dict  {formula_str: PyrochloreProperties}
     """
-    numerator = 0.0
-    denominator = 0.0
-    missing = []
+    csv_path = Path(csv_path)
+    if not csv_path.exists():
+        warnings.warn(
+            f"[load_pristine_db] CSV not found at:\n  {csv_path}\n"
+            "  PYROCHLORE_DB will be empty — all ROM results will be NaN.",
+            stacklevel=2,
+        )
+        return {}
 
-    if verbose:
-        print(f"\n  Rule of Mixtures — {prop_name}")
-        print(f"  {'Phase':<20} {'Weight':>8}  {'Value':>10}  {'Contribution':>14}")
-        print("  " + "-" * 58)
+    df = pd.read_csv(csv_path)
 
-    for (a_elem, a_frac), (b_elem, b_frac) in product(
-        a_site.items(), b_site.items()
-    ):
-        key = f"{a_elem}2{b_elem}2O7"
-        weight = a_frac * b_frac
+    # Build a lowercase → original-case column map for case-insensitive lookup
+    col_map: Dict[str, str] = {c.strip().lower(): c for c in df.columns}
 
-        if key not in PYROCHLORE_DB:
-            missing.append(key)
-            if verbose:
-                print(f"  {key:<20} {weight:>8.4f}  {'MISSING':>10}")
+    # Locate the compound-key column
+    key_col_lower = _KEY_COL.lower()
+    if key_col_lower not in col_map:
+        raise ValueError(
+            f"[load_pristine_db] Key column '{_KEY_COL}' not found in {csv_path.name}.\n"
+            f"  Available columns: {list(df.columns)}"
+        )
+    key_col = col_map[key_col_lower]
+
+    # Resolve _COL_MAP entries against actual CSV columns (case-insensitive)
+    resolved: Dict[str, str] = {}          # field_name → actual CSV column name
+    for field_name, csv_col in _COL_MAP.items():
+        actual = col_map.get(csv_col.strip().lower())
+        if actual is not None:
+            resolved[field_name] = actual
+        else:
+            warnings.warn(
+                f"[load_pristine_db] Column '{csv_col}' not found in CSV "
+                f"(field: {field_name}) — will be None for all entries.",
+                stacklevel=2,
+            )
+
+    db: Dict[str, PyrochloreProperties] = {}
+
+    for _, row in df.iterrows():
+        key = str(row[key_col]).strip()
+        if not key or key.lower() == "nan":
             continue
 
-        val = prop_getter(PYROCHLORE_DB[key])
-        if val is None:
-            missing.append(f"{key}({prop_name}=None)")
-            if verbose:
-                print(f"  {key:<20} {weight:>8.4f}  {'N/A':>10}")
-            continue
+        kwargs: Dict[str, Optional[float]] = {}
+        for field_name, actual_col in resolved.items():
+            raw = row[actual_col]
+            try:
+                val = float(raw)
+                kwargs[field_name] = None if math.isnan(val) else val
+            except (ValueError, TypeError):
+                kwargs[field_name] = None
 
-        contribution = weight * val
-        numerator += contribution
-        denominator += weight
+        db[key] = PyrochloreProperties(**kwargs)
 
-        if verbose:
-            print(f"  {key:<20} {weight:>8.4f}  {val:>10.4f}  {contribution:>14.6f}")
+    return db
 
-    if missing:
-        print(f"  ⚠  Missing DB entries / values: {missing}")
 
-    if denominator == 0:
-        return None
+# Load at import time.  Call reload_db() to refresh without restarting.
+PYROCHLORE_DB: Dict[str, PyrochloreProperties] = load_pristine_db()
 
-    result = numerator / denominator
-    if verbose:
-        print(f"  {'':20} {'':>8}  {'ROM =':>10}  {result:>14.6f}")
 
-    return result
-
+def reload_db(csv_path: Union[str, Path] = PRISTINE_DATA) -> None:
+    """Reload PYROCHLORE_DB from *csv_path* in place (no restart needed)."""
+    global PYROCHLORE_DB
+    PYROCHLORE_DB = load_pristine_db(csv_path)
+    print(f"[reload_db] Loaded {len(PYROCHLORE_DB)} entries from {Path(csv_path).name}")
 
 # =============================================================================
-# HELPER: build composition label
+# HELPERS
 # =============================================================================
 
 def composition_label(a_site: Dict[str, float], b_site: Dict[str, float]) -> str:
@@ -190,372 +170,417 @@ def composition_label(a_site: Dict[str, float], b_site: Dict[str, float]) -> str
 
 
 # =============================================================================
-# PROPERTY-SPECIFIC CALCULATION FUNCTIONS
+# CORE RULE OF MIXTURES ENGINE
 # =============================================================================
 
-def calc_lattice_parameter(
+def rule_of_mixtures(
     a_site: Dict[str, float],
     b_site: Dict[str, float],
+    prop_getter,
+    prop_name: str = "property",
     verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures lattice parameter (Å)."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.lattice_parameter,
-        prop_name="Lattice Parameter (Å)",
-        verbose=verbose,
-    )
-
-
-def calc_ionic_radius_A(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures mean ionic radius on A-site (Å, 8-coord)."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.ionic_radius_A,
-        prop_name="Ionic Radius A-site (Å)",
-        verbose=verbose,
-    )
-
-
-def calc_ionic_radius_B(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures mean ionic radius on B-site (Å, 6-coord)."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.ionic_radius_B,
-        prop_name="Ionic Radius B-site (Å)",
-        verbose=verbose,
-    )
-
-
-def calc_electronegativity_A(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures mean Pauling electronegativity on A-site."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.electronegativity_A,
-        prop_name="Electronegativity A-site",
-        verbose=verbose,
-    )
-
-
-def calc_electronegativity_B(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures mean Pauling electronegativity on B-site."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.electronegativity_B,
-        prop_name="Electronegativity B-site",
-        verbose=verbose,
-    )
-
-
-def calc_radius_ratio(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
+) -> Optional[float]:
     """
-    Pyrochlore stability criterion: r_A / r_B.
-    Stable pyrochlore: 1.46 ≤ r_A/r_B ≤ 1.78
+    Weighted-average rule of mixtures over all (A_i, B_j) endpoint pairs.
+
+        ROM = Σ_{i,j} (x_i · p_j · val_ij) / Σ_{i,j} (x_i · p_j)
+
+    Endpoints with missing DB entries or None property values are skipped
+    and their weight is excluded from the denominator.
     """
-    r_A = calc_ionic_radius_A(a_site, b_site, verbose=verbose)
-    r_B = calc_ionic_radius_B(a_site, b_site, verbose=verbose)
-    if r_A is None or r_B is None or r_B == 0:
+    numerator   = 0.0
+    denominator = 0.0
+    missing: List[str] = []
+
+    if verbose:
+        print(f"\n  Rule of Mixtures — {prop_name}")
+        print(f"  {'Phase':<22} {'Weight':>8}  {'Value':>10}  {'Contrib':>12}")
+        print("  " + "─" * 58)
+
+    for (a_elem, a_frac), (b_elem, b_frac) in product(
+        a_site.items(), b_site.items()
+    ):
+        key    = f"{a_elem}2{b_elem}2O7"
+        weight = a_frac * b_frac
+
+        if key not in PYROCHLORE_DB:
+            missing.append(key)
+            if verbose:
+                print(f"  {key:<22} {weight:>8.4f}  {'MISSING':>10}")
+            continue
+
+        val = prop_getter(PYROCHLORE_DB[key])
+        if val is None:
+            missing.append(f"{key}[{prop_name}=None]")
+            if verbose:
+                print(f"  {key:<22} {weight:>8.4f}  {'N/A':>10}")
+            continue
+
+        contribution = weight * val
+        numerator   += contribution
+        denominator += weight
+
+        if verbose:
+            print(f"  {key:<22} {weight:>8.4f}  {val:>10.4f}  {contribution:>12.6f}")
+
+    if missing and verbose:
+        print(f"  ⚠  Skipped: {missing}")
+
+    if denominator == 0.0:
         return None
-    return r_A / r_B
+
+    result = numerator / denominator
+    if verbose:
+        print(f"  {'ROM =':>44}  {result:>12.6f}")
+
+    return result
 
 
-def calc_lattice_distortion_A(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
+# =============================================================================
+# PROPERTY CALCULATORS
+# =============================================================================
+
+def calc_lattice_parameter(a_site, b_site, verbose=False):
+    """ROM lattice parameter (Å)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.lattice_parameter, "Lattice Parameter (Å)", verbose)
+
+def calc_ionic_radius_A(a_site, b_site, verbose=False):
+    """ROM mean A-site ionic radius (Å, 8-coord)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.ionic_radius_A, "Ionic Radius A (Å)", verbose)
+
+def calc_ionic_radius_B(a_site, b_site, verbose=False):
+    """ROM mean B-site ionic radius (Å, 6-coord)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.ionic_radius_B, "Ionic Radius B (Å)", verbose)
+
+def calc_electronegativity_A(a_site, b_site, verbose=False):
+    """ROM mean A-site Pauling electronegativity."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.electronegativity_A, "Electronegativity A", verbose)
+
+def calc_electronegativity_B(a_site, b_site, verbose=False):
+    """ROM mean B-site Pauling electronegativity."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.electronegativity_B, "Electronegativity B", verbose)
+
+def calc_electronegativity_difference(a_site, b_site, verbose=False):
+    """ROM mean |χ_A − χ_B|."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: abs(p.electronegativity_A - p.electronegativity_B)
+                  if p.electronegativity_A is not None and p.electronegativity_B is not None
+                  else None,
+        "|Δχ| A−B", verbose)
+
+def calc_bulk_modulus(a_site, b_site, verbose=False):
+    """ROM bulk modulus (GPa)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.bulk_modulus, "Bulk Modulus (GPa)", verbose)
+
+def calc_shear_modulus(a_site, b_site, verbose=False):
+    """ROM shear modulus (GPa)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.shear_modulus, "Shear Modulus (GPa)", verbose)
+
+def calc_thermal_conductivity(a_site, b_site, verbose=False):
+    """ROM thermal conductivity (W/m·K)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.thermal_conductivity, "Thermal Conductivity (W/m·K)", verbose)
+
+def calc_thermal_expansion(a_site, b_site, verbose=False):
+    """ROM thermal expansion coefficient (°C⁻¹)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.thermal_expansion, "Thermal Expansion (°C⁻¹)", verbose)
+
+def calc_radius_ratio(a_site, b_site, verbose=False):
+    """r_A / r_B stability criterion. Pyrochlore stable: 1.46–1.78."""
+    r_A = calc_ionic_radius_A(a_site, b_site, verbose)
+    r_B = calc_ionic_radius_B(a_site, b_site, verbose)
+    return (r_A / r_B) if (r_A and r_B) else None
+
+def calc_lattice_distortion_A(a_site, b_site, verbose=False):
     """
-    A-site lattice distortion δ_A (Warren–Cowley-style RMS deviation):
-        δ_A = sqrt( Σ x_i * (r_i - <r_A>)^2 ) / <r_A>
-
-    Uses ROM ionic radii from the database, weighted by site fractions only.
+    A-site RMS lattice distortion:
+        δ_A = sqrt(Σ x_i (r_i − <r_A>)²) / <r_A>
+    r_i is averaged over available B-site partners for each A element.
     """
-    # Get mean A-site radius from ROM
-    r_A_mean = calc_ionic_radius_A(a_site, b_site, verbose=False)
+    r_A_mean = calc_ionic_radius_A(a_site, b_site)
     if r_A_mean is None:
         return None
-
-    # Collect per-element A-site radii (average over B-site partners)
     variance = 0.0
     for a_elem, a_frac in a_site.items():
-        # Average r_A for this element over all B partners
-        r_vals = []
-        for b_elem in b_site:
-            key = f"{a_elem}2{b_elem}2O7"
-            if key in PYROCHLORE_DB and PYROCHLORE_DB[key].ionic_radius_A is not None:
-                r_vals.append(PYROCHLORE_DB[key].ionic_radius_A)
+        r_vals = [
+            PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A
+            for b_elem in b_site
+            if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
+            and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A is not None
+        ]
         if r_vals:
             r_i = sum(r_vals) / len(r_vals)
             variance += a_frac * (r_i - r_A_mean) ** 2
-
-    delta = math.sqrt(variance) / r_A_mean if r_A_mean != 0 else None
-    if verbose:
-        print(f"\n  A-site lattice distortion δ_A = {delta:.6f}" if delta else "  δ_A: insufficient data")
+    delta = math.sqrt(variance) / r_A_mean if r_A_mean else None
+    if verbose and delta is not None:
+        print(f"\n  A-site δ_A = {delta:.6f}")
     return delta
 
-
-def calc_lattice_distortion_B(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
+def calc_lattice_distortion_B(a_site, b_site, verbose=False):
     """
-    B-site lattice distortion δ_B:
-        δ_B = sqrt( Σ p_j * (r_j - <r_B>)^2 ) / <r_B>
+    B-site RMS lattice distortion:
+        δ_B = sqrt(Σ p_j (r_j − <r_B>)²) / <r_B>
+    r_j is averaged over available A-site partners for each B element.
     """
-    r_B_mean = calc_ionic_radius_B(a_site, b_site, verbose=False)
+    r_B_mean = calc_ionic_radius_B(a_site, b_site)
     if r_B_mean is None:
         return None
-
     variance = 0.0
     for b_elem, b_frac in b_site.items():
-        r_vals = []
-        for a_elem in a_site:
-            key = f"{a_elem}2{b_elem}2O7"
-            if key in PYROCHLORE_DB and PYROCHLORE_DB[key].ionic_radius_B is not None:
-                r_vals.append(PYROCHLORE_DB[key].ionic_radius_B)
+        r_vals = [
+            PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B
+            for a_elem in a_site
+            if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
+            and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B is not None
+        ]
         if r_vals:
             r_j = sum(r_vals) / len(r_vals)
             variance += b_frac * (r_j - r_B_mean) ** 2
-
-    delta = math.sqrt(variance) / r_B_mean if r_B_mean != 0 else None
-    if verbose:
-        print(f"\n  B-site lattice distortion δ_B = {delta:.6f}" if delta else "  δ_B: insufficient data")
+    delta = math.sqrt(variance) / r_B_mean if r_B_mean else None
+    if verbose and delta is not None:
+        print(f"\n  B-site δ_B = {delta:.6f}")
     return delta
 
 
-def calc_electronegativity_difference(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Mean |χ_A - χ_B| electronegativity difference via ROM."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: (
-            abs(p.electronegativity_A - p.electronegativity_B)
-            if p.electronegativity_A is not None and p.electronegativity_B is not None
-            else None
-        ),
-        prop_name="|Δχ| A-B",
-        verbose=verbose,
-    )
-
-
-def calc_bulk_modulus(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures bulk modulus (GPa), if available in DB."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.bulk_modulus,
-        prop_name="Bulk Modulus (GPa)",
-        verbose=verbose,
-    )
-
-def calc_shear_modulus(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures shear modulus (GPa), if available in DB."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.shear_modulus,
-        prop_name="Shear Modulus (GPa)",
-        verbose=verbose,
-    )
-
-
-def calc_thermal_conductivity(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures thermal conductivity (W/m·K), if available in DB."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.thermal_conductivity,
-        prop_name="Thermal Conductivity (W/m·K)",
-        verbose=verbose,
-    )
-
-
-def calc_thermal_expansion(
-    a_site: Dict[str, float],
-    b_site: Dict[str, float],
-    verbose: bool = False,
-) -> float:
-    """Rule-of-mixtures thermal expansion (°C⁻¹), if available in DB."""
-    return rule_of_mixtures(
-        a_site, b_site,
-        prop_getter=lambda p: p.thermal_conductivity,
-        prop_name="Thermal Expansion (°C⁻¹)",
-        verbose=verbose,
-    )
-
 # =============================================================================
-# FULL SUMMARY REPORT
+# ORDERED CALCULATION REGISTRY
+# (col_name, calculator) — drives both full_report and rom_from_dataframe
 # =============================================================================
 
-def full_report(composition: str, verbose: bool = True) -> Dict[str, float]:
+_CALCS: List[Tuple[str, callable]] = [
+    ("ROM_Lattice_Parameter_A",         calc_lattice_parameter),
+    ("ROM_Ionic_Radius_A",              calc_ionic_radius_A),
+    ("ROM_Ionic_Radius_B",              calc_ionic_radius_B),
+    ("ROM_Radius_Ratio_rA_rB",          calc_radius_ratio),
+    ("ROM_Electronegativity_A",         calc_electronegativity_A),
+    ("ROM_Electronegativity_B",         calc_electronegativity_B),
+    ("ROM_Electronegativity_Diff",      calc_electronegativity_difference),
+    ("ROM_Lattice_Distortion_A",        calc_lattice_distortion_A),
+    ("ROM_Lattice_Distortion_B",        calc_lattice_distortion_B),
+    ("ROM_Bulk_Modulus_GPa",            calc_bulk_modulus),
+    ("ROM_Shear_Modulus_GPa",           calc_shear_modulus),
+    ("ROM_Thermal_Conductivity_W_mK",   calc_thermal_conductivity),
+    ("ROM_Thermal_Expansion",           calc_thermal_expansion),
+]
+
+
+# =============================================================================
+# FULL REPORT  (single composition)
+# =============================================================================
+
+def full_report(
+    a_site: Dict[str, float],
+    b_site: Dict[str, float],
+    verbose: bool = True,
+) -> Dict[str, Optional[float]]:
     """
-    Parse composition and compute all available ROM properties.
+    Compute all ROM properties for a single composition and print a summary.
 
     Parameters
     ----------
-    composition : str   e.g. "(Sn0.3Ho0.7)(Ti0.6Hf0.4)"
-    verbose     : print detailed breakdown per property
+    a_site  : {element: fraction}  e.g. {"Ho": 0.5, "Gd": 0.5}
+    b_site  : {element: fraction}  e.g. {"Zr": 0.5, "Hf": 0.5}
+    verbose : print per-endpoint breakdown for every property
 
     Returns
     -------
-    dict of {property_name: value}
+    dict {col_name: value}  — same keys as the ROM columns added by rom_from_dataframe
     """
-    a_site, b_site = parse_composition(composition)
     label = composition_label(a_site, b_site)
-
-    print("=" * 62)
-    print(f"  High-Entropy Pyrochlore — Rule of Mixtures Report")
+    print("=" * 64)
+    print("  High-Entropy Pyrochlore — Rule of Mixtures Report")
     print(f"  Composition : {label}")
-    print(f"  A-site : { {k: round(v,4) for k,v in a_site.items()} }")
-    print(f"  B-site : { {k: round(v,4) for k,v in b_site.items()} }")
-    print("=" * 62)
+    print(f"  A-site      : { {k: round(v, 4) for k, v in a_site.items()} }")
+    print(f"  B-site      : { {k: round(v, 4) for k, v in b_site.items()} }")
+    print("=" * 64)
 
-    results = {}
+    results: Dict[str, Optional[float]] = {}
+    for col_name, func in _CALCS:
+        results[col_name] = func(a_site, b_site, verbose=verbose)
 
-    calcs = [
-        ("Lattice Parameter (Å)",           calc_lattice_parameter),
-        ("Ionic Radius A-site (Å)",         calc_ionic_radius_A),
-        ("Ionic Radius B-site (Å)",         calc_ionic_radius_B),
-        ("r_A / r_B ratio",                 calc_radius_ratio),
-        ("Electronegativity A-site",        calc_electronegativity_A),
-        ("Electronegativity B-site",        calc_electronegativity_B),
-        ("|Δχ| A-B",                        calc_electronegativity_difference),
-        ("Lattice Distortion δ_A",          calc_lattice_distortion_A),
-        ("Lattice Distortion δ_B",          calc_lattice_distortion_B),
-        ("Bulk Modulus (GPa)",              calc_bulk_modulus),
-        ("Shear Modulus (GPa)",             calc_shear_modulus),
-        ("Thermal Conductivity (W/m·K)",    calc_thermal_conductivity),
-        ("Thermal Expansion Coeff (°C⁻¹)",  calc_thermal_expansion),
-    ]
+    ratio = results.get("ROM_Radius_Ratio_rA_rB")
+    results["ROM_Pyrochlore_Stable"] = (
+        (1.46 <= ratio <= 1.78) if ratio is not None else None
+    )
 
-    for name, func in calcs:
-        val = func(a_site, b_site, verbose=verbose)
-        results[name] = val
-
-    print("\n" + "=" * 62)
+    print("\n" + "=" * 64)
     print("  SUMMARY")
-    print("=" * 62)
+    print("=" * 64)
     for name, val in results.items():
-        if val is not None:
-            print(f"  {name:<38} {val:>10.4f}")
+        if isinstance(val, bool) or val is None:
+            display = f"{'Yes' if val else 'No':>10}" if isinstance(val, bool) else f"{'N/A':>10}"
         else:
-            print(f"  {name:<38} {'N/A':>10}")
+            display = f"{val:>10.4f}"
+        print(f"  {name:<42} {display}")
 
-    # Pyrochlore stability note
-    ratio = results.get("r_A / r_B ratio")
     if ratio is not None:
-        stable = 1.46 <= ratio <= 1.78
-        status = "✓ Pyrochlore-stable" if stable else "✗ Outside pyrochlore stability window"
+        status = "✓ Pyrochlore-stable" if 1.46 <= ratio <= 1.78 else "✗ Outside stability window"
         print(f"\n  Stability (1.46 ≤ r_A/r_B ≤ 1.78): {status}")
+    print("=" * 64 + "\n")
 
-    print("=" * 62 + "\n")
     return results
 
 
 # =============================================================================
-# CONVENIENCE: compute a single named property from a composition string
+# DATAFRAME BATCH CALCULATOR
 # =============================================================================
 
-PROPERTY_MAP = {
-    "lattice_parameter":        calc_lattice_parameter,
-    "ionic_radius_A":           calc_ionic_radius_A,
-    "ionic_radius_B":           calc_ionic_radius_B,
-    "radius_ratio":             calc_radius_ratio,
-    "electronegativity_A":      calc_electronegativity_A,
-    "electronegativity_B":      calc_electronegativity_B,
-    "electronegativity_diff":   calc_electronegativity_difference,
-    "distortion_A":             calc_lattice_distortion_A,
-    "distortion_B":             calc_lattice_distortion_B,
-    "bulk_modulus":             calc_bulk_modulus,
-    "thermal_conductivity":     calc_thermal_conductivity,
-}
-
-
-def get_property(composition: str, property_name: str, verbose: bool = False) -> float:
+def _parse_stoich_json(raw) -> Optional[Dict[str, float]]:
     """
-    Compute a single ROM property for a given composition string.
+    Parse a site-fraction dict from a DataFrame cell.
+
+    Accepts
+    -------
+    • dict already                 {"Ho": 0.5, "Gd": 0.5}
+    • standard JSON string         '{"Ho": 0.5, "Gd": 0.5}'
+    • Python-repr string           "{'Ho': 0.5, 'Gd': 0.5}"
+
+    Returns None on parse failure.
+    """
+    if isinstance(raw, dict):
+        return raw
+    if isinstance(raw, str):
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            try:                                    # handle single-quote repr
+                return json.loads(raw.replace("'", '"'))
+            except json.JSONDecodeError:
+                return None
+    return None
+
+
+def rom_from_dataframe(
+    df: pd.DataFrame,
+    a_col: str = "a_stoich_json",
+    b_col: str = "b_stoich_json",
+    verbose: bool = False,
+) -> pd.DataFrame:
+    """
+    Compute all ROM properties for every row in *df* and return an enriched copy.
+
+    Site fractions are read directly from *a_col* and *b_col* — no composition
+    string parsing is performed.  Values are looked up in PYROCHLORE_DB which
+    is loaded from pristine_pyrochlore.csv at import time (call reload_db() to
+    refresh without restarting the kernel).
 
     Parameters
     ----------
-    composition   : e.g. "(Sn0.3Ho0.7)(Ti0.6Hf0.4)"
-    property_name : one of the keys in PROPERTY_MAP
-    verbose       : print breakdown table
+    df      : DataFrame containing at least *a_col* and *b_col*.
+    a_col   : Column with A-site fractions — dict or JSON/Python-repr string.
+              e.g.  '{"Ho": 0.5, "Gd": 0.5}'
+    b_col   : Column with B-site fractions — same format.
+              e.g.  '{"Zr": 0.5, "Hf": 0.5}'
+    verbose : Forward to each ROM calculator (very chatty on large DataFrames;
+              useful for debugging individual rows).
 
     Returns
     -------
-    float value or None
+    DataFrame — original columns + ROM columns below.
+    Rows whose fractions cannot be parsed get NaN in all ROM columns.
+
+    ROM columns appended
+    --------------------
+    ROM_Lattice_Parameter_A         Å
+    ROM_Ionic_Radius_A              Å  (8-coord)
+    ROM_Ionic_Radius_B              Å  (6-coord)
+    ROM_Radius_Ratio_rA_rB          dimensionless  (stable: 1.46–1.78)
+    ROM_Electronegativity_A         Pauling
+    ROM_Electronegativity_B         Pauling
+    ROM_Electronegativity_Diff      |χ_A − χ_B|
+    ROM_Lattice_Distortion_A        δ_A  (dimensionless)
+    ROM_Lattice_Distortion_B        δ_B  (dimensionless)
+    ROM_Bulk_Modulus_GPa            GPa
+    ROM_Shear_Modulus_GPa           GPa
+    ROM_Thermal_Conductivity_W_mK   W/m·K
+    ROM_Thermal_Expansion_per_C     °C⁻¹
+    ROM_Pyrochlore_Stable           bool  (True if 1.46 ≤ r_A/r_B ≤ 1.78)
     """
-    if property_name not in PROPERTY_MAP:
-        raise ValueError(
-            f"Unknown property '{property_name}'. "
-            f"Choose from: {list(PROPERTY_MAP.keys())}"
-        )
-    a_site, b_site = parse_composition(composition)
-    return PROPERTY_MAP[property_name](a_site, b_site, verbose=verbose)
+    if a_col not in df.columns:
+        raise ValueError(f"A-site column '{a_col}' not found in DataFrame. "
+                         f"Available columns: {list(df.columns)}")
+    if b_col not in df.columns:
+        raise ValueError(f"B-site column '{b_col}' not found in DataFrame. "
+                         f"Available columns: {list(df.columns)}")
+
+    rom_col_names = [name for name, _ in _CALCS] + ["ROM_Pyrochlore_Stable"]
+    records: List[Dict] = []
+
+    for idx, row in df.iterrows():
+        a_site = _parse_stoich_json(row[a_col])
+        b_site = _parse_stoich_json(row[b_col])
+
+        if a_site is None or b_site is None:
+            warnings.warn(
+                f"Row {idx}: could not parse site fractions "
+                f"(a={row[a_col]!r}, b={row[b_col]!r}). "
+                "ROM columns set to NaN.",
+                stacklevel=2,
+            )
+            records.append({c: float("nan") for c in rom_col_names})
+            continue
+
+        row_results: Dict = {}
+        for col_name, func in _CALCS:
+            row_results[col_name] = func(a_site, b_site, verbose=verbose)
+
+        # ratio = row_results.get("ROM_Radius_Ratio_rA_rB")
+        # row_results["ROM_Pyrochlore_Stable"] = (
+        #     (1.46 <= ratio <= 1.78) if ratio is not None else None
+        # )
+        records.append(row_results)
+
+    rom_df = pd.DataFrame(records, index=df.index)
+    return pd.concat([df, rom_df], axis=1)
 
 
 # =============================================================================
-# EXAMPLE USAGE
+# EXAMPLE / SMOKE TEST
 # =============================================================================
 
 if __name__ == "__main__":
 
-    # --- Example 1: Full report for the composition from the problem statement ---
-    full_report("(Sn0.3Ho0.7)(Ti0.6Hf0.4)")
+    print(f"PYROCHLORE_DB: {len(PYROCHLORE_DB)} entries loaded from pristine CSV.\n")
+    if PYROCHLORE_DB:
+        sample_key = next(iter(PYROCHLORE_DB))
+        print(f"  Sample entry → {sample_key}: {PYROCHLORE_DB[sample_key]}\n")
 
-    # --- Example 2: Single property query ---
-    comp = "(Gd0.5Nd0.5)(Zr0.5Hf0.5)"
-    lp = get_property(comp, "lattice_parameter", verbose=True)
-    print(f"Lattice parameter for {comp}: {lp:.4f} Å\n")
+    # ── Single composition ─────────────────────────────────────────────────────
+    full_report(
+        a_site={"Ho": 0.25, "Gd": 0.25, "Nd": 0.25, "Sm": 0.25},
+        b_site={"Zr": 0.5,  "Hf": 0.5},
+    )
 
-    # --- Example 3: Multi-component A and B sites ---
-    full_report("(Ho0.25Gd0.25Nd0.25Sm0.25)(Zr0.5Hf0.5)")
+    # ── DataFrame batch ────────────────────────────────────────────────────────
+    sample_data = {
+        "Composition": [
+            "(Ho0.5Gd0.5)2(Zr1.0)2O7",
+            "(Gd0.5Nd0.5)2(Zr0.5Hf0.5)2O7",
+        ],
+        "Sample A": ["HG-Zr", "GN-ZH"],
+        "Sample B": ["batch-1", "batch-2"],
+        "a_stoich_json": [
+            '{"Ho": 0.5, "Gd": 0.5}',
+            '{"Gd": 0.5, "Nd": 0.5}',
+        ],
+        "b_stoich_json": [
+            '{"Zr": 1.0}',
+            '{"Zr": 0.5, "Hf": 0.5}',
+        ],
+        "Lattice Parameter (Angstrom)": [10.41, 10.51],
+        "Thermal Conductivity (W/m/K)": [1.8,    1.6],
+    }
+    df_in  = pd.DataFrame(sample_data)
+    df_out = rom_from_dataframe(df_in)
 
-    # --- Example 4: Batch comparison ---
-    compositions = [
-        "(Ho0.5Gd0.5)(Zr1.0)",
-        "(Ho0.5Nd0.5)(Zr0.5Hf0.5)",
-        "(Gd0.5Sm0.5)(Ti0.5Zr0.5)",
-    ]
-    print(f"\n{'Composition':<40} {'a (Å)':>8} {'rA/rB':>8} {'δ_A':>8}")
-    print("-" * 68)
-    for c in compositions:
-        a, b = parse_composition(c)
-        lp_  = calc_lattice_parameter(a, b)
-        rr   = calc_radius_ratio(a, b)
-        dA   = calc_lattice_distortion_A(a, b)
-        label = composition_label(a, b)
-        print(f"{label:<40} {lp_ or 0:>8.4f} {rr or 0:>8.4f} {dA or 0:>8.5f}")
+    rom_cols = [c for c in df_out.columns if c.startswith("ROM_")]
+    print("ROM Results:")
+    print(df_out[["Composition"] + rom_cols].to_string(index=False))

@@ -25,7 +25,7 @@ from typing import Dict, List, Optional, Any
 from sklearn.ensemble import (RandomForestRegressor, GradientBoostingRegressor,
                               ExtraTreesRegressor)
 from sklearn.linear_model import Ridge
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, QuantileTransformer, PowerTransformer
 from sklearn.model_selection import KFold, cross_validate, train_test_split
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -152,7 +152,8 @@ def train_and_evaluate(
     save_dir = save_dir or (MODELS_DIR / task_name)
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    scaler = StandardScaler()
+    # scaler = StandardScaler()
+    scaler = QuantileTransformer()
     X_scaled = scaler.fit_transform(X)
 
     X_tr, X_te, y_tr, y_te = train_test_split(

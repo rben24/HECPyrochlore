@@ -37,7 +37,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple, List
-from .. import globals
+from src import globals
 from pymatgen.core import Composition
 
 logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
@@ -636,12 +636,12 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
     for keys, grp in combined.groupby(group_keys, as_index=False):
         # keys is a tuple of group key values in same order as group_keys
         # decide which rows to use for averaging
-        has_dft = grp['Synthesis Method'].eq('DFT').any()
-        if has_dft:
-            use_grp = grp[grp['Synthesis Method'].eq('DFT')]
-        else:
-            use_grp = grp
-
+        # has_dft = grp['Synthesis Method'].eq('DFT').any()
+        # if has_dft:
+        #     use_grp = grp[grp['Synthesis Method'].eq('DFT')]
+        # else:
+        #     use_grp = grp
+        use_grp = grp
         agg_row = dict(zip(group_keys, keys))
 
         # numeric means (pandas will yield NaN if all NaN)
@@ -652,12 +652,12 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
         for col in other_cols:
             if col == 'Band Gap Type' or col == 'data_source':
                 agg_row[col] = concat_strings_col(use_grp[col])
-            elif col == 'Synthesis Method':
-                # prefer 'DFT' if present, else first non-null, else NaN
-                if has_dft:
-                    agg_row[col] = 'DFT'
-                else:
-                    agg_row[col] = first_nonnull(use_grp[col])
+            # elif col == 'Synthesis Method':
+            #     # prefer 'DFT' if present, else first non-null, else NaN
+            #     if has_dft:
+            #         agg_row[col] = 'DFT'
+            #     else:
+            #         agg_row[col] = first_nonnull(use_grp[col])
             else:
                 agg_row[col] = first_nonnull(use_grp[col])
 
@@ -667,6 +667,25 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
 
     # Optional: ensure column order matches original
     combined = result[combined.columns.tolist()]
+
+    # add ionic radius and electronegativity values
+    from src.data.build_pristine import get_electronegativity, \
+        get_ionic_radius_B, get_ionic_radius_A
+    # ionic_a = get_ionic_radius_A(combined['Sample A'])
+    # ionic_b = get_ionic_radius_B(combined['Sample B'])
+    # en_a = get_electronegativity(combined['Sample A'])
+    # en_b = get_electronegativity(combined['Sample B'])
+
+    combined['Ionic Radius A (Angstrom)'] = combined['Sample A'].map(get_ionic_radius_A)
+    combined['Ionic Radius B (Angstrom)'] = combined['Sample B'].map(get_ionic_radius_B)
+    combined['Electronegativity A'] = combined['Sample A'].map(get_electronegativity)
+    combined['Electronegativity B'] = combined['Sample B'].map(get_electronegativity)
+    # combined.append({
+    #     'Ionic Radius A (Angstrom)': ionic_a,
+    #     'Ionic Radius B (Angstrom)': ionic_b,
+    #     'Electronegativity A': en_a,
+    #     'Electronegativity B': en_b,
+    # })
 
     print(f"  Filtered to PRISTINE compounds: {len(combined)} rows")
     print(f"  Output columns: {len(out_cols)}")
@@ -830,8 +849,8 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
 if __name__ == '__main__':
     # df = build_combined_dataset(save=True)
-    # df = build_single_phase_dataset(save=True)
-    df = build_high_entropy_dataset(save=True)
+    df = build_single_phase_dataset(save=True)
+    # df = build_high_entropy_dataset(save=True)
     print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
               'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Angstrom)',
