@@ -346,7 +346,7 @@ def load_icsd_source() -> pd.DataFrame:
         from src.data.load_icsd import load_icsd
 
     icsd_path = RAW_DIR / 'HECPyrochlore_latt_data_ICSD.csv'
-    df = load_icsd(filepath=icsd_path, verbose=True)
+    df = load_icsd(filepath=icsd_path, verbose=True, deduplicate=False)
     log.info(
         f"ICSD: {len(df)} usable rows "
         f"({(df['compound_type']=='pristine').sum()} pristine, "
@@ -849,8 +849,8 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
 if __name__ == '__main__':
     # df = build_combined_dataset(save=True)
-    df = build_single_phase_dataset(save=True)
-    # df = build_high_entropy_dataset(save=True)
+    # df = build_single_phase_dataset(save=True)
+    df = build_high_entropy_dataset(save=True)
     print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
               'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Angstrom)',

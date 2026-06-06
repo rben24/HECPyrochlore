@@ -133,7 +133,8 @@ CANONICAL_COLS = [
 ]
 
 ROM_COLS = [
-    "ROM_Lattice_Parameter_A",
+    "ROM_Lattice_Parameter",
+    "ROM_Lattice_Distortion",
     "ROM_Ionic_Radius_A",
     "ROM_Ionic_Radius_B",
     "ROM_Radius_Ratio_rA_rB",
@@ -144,23 +145,42 @@ ROM_COLS = [
     "ROM_Lattice_Distortion_B",
     "ROM_Bulk_Modulus_GPa",
     "ROM_Shear_Modulus_GPa",
+    "ROM_Youngs_Modulus_GPa",
+    "ROM_Poisson_Ratio",
     "ROM_Thermal_Conductivity_W_mK",
     "ROM_Thermal_Expansion",
 ]
 
 ROM_LATT_FEAT_COLS = [
-    "ROM_Lattice_Parameter_A",
+    "ROM_Lattice_Parameter",
+    "ROM_Lattice_Distortion",
     "ROM_Ionic_Radius_A",
     "ROM_Ionic_Radius_B",
-    "ROM_Electronegativity_A",
+    # "ROM_Radius_Ratio_rA_rB",
+    # "ROM_Electronegativity_A",
     "ROM_Electronegativity_B",
-    "ROM_Lattice_Distortion_A",
-    "ROM_Lattice_Distortion_B",
+    "ROM_Electronegativity_Diff",
+    # "ROM_Lattice_Distortion_A",
+    # "ROM_Lattice_Distortion_B",
     "ROM_Bulk_Modulus_GPa",
     "ROM_Shear_Modulus_GPa",
-    "ROM_Thermal_Conductivity_W_mK",
-    "Temperature",
-]#ROM_COLS + ['Temperature']
+    "ROM_Youngs_Modulus_GPa",
+    "ROM_Poisson_Ratio",
+    # "ROM_Thermal_Conductivity_W_mK",
+    # "Temperature",
+]
+# ROM_LATT_FEAT_COLS = ROM_COLS + ['Temperature']
+
+# ── Outlier Compositions ──────────────────────────────────────────────────
+OUTLIER_COMPS = [
+    'Y2ZrSnO7',
+    'Eu0.02Y1.98Zr1Sn1O7',
+    'La1.65Y0.35Ti2O7',
+    'La1.7Y0.3Ti2O7',
+    'La1.75Y0.25Ti2O7',
+    'Gd2Zr0.3Ti1.7O7',
+    'Y2Ti0.5Sn1.5O7',
+]
 
 # ── Physical property tables ──────────────────────────────────────────────────
 

@@ -239,8 +239,12 @@ def get_lattice_rom_dataset(
     df_sub = df_sub.dropna(subset=[target])
     df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
 
+    # Drop outlier columns given by plot_latt_vs_ROMlatt_wOutliers.py
+    # df_sub = df[~df['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
+
     # Deal with NaN columns
     # df_sub = df_sub.drop(columns=DROP_COLUMNS)
+    df_sub.dropna(subset=['ROM_Lattice_Parameter', 'ROM_Ionic_Radius_A', 'ROM_Ionic_Radius_B'], inplace=True)
     mean_cols = globals.ROM_COLS + ['Temperature']
     threshold = 0.5
     min_non_na = int((1 - threshold) * len(df))
@@ -254,6 +258,7 @@ def get_lattice_rom_dataset(
     log.info(f"Saved combined dataset → {OUTPUT_FILE_L_ROM}")
 
     dropped = list(set(globals.ROM_LATT_FEAT_COLS) - set(df_sub.columns.to_list()))
+    print(dropped)
     cols = [c for c in globals.ROM_LATT_FEAT_COLS if c not in dropped]
     feat_mask = df_sub[cols + [target]].notna().all(axis=1)
     df_sub = df_sub[feat_mask]

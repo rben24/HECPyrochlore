@@ -313,6 +313,7 @@ def _composition_key(
 def load_icsd(
     filepath: str | Path | None = None,
     verbose: bool = True,
+    deduplicate: bool = False,
 ) -> pd.DataFrame:
     """
     Load and parse the ICSD pyrochlore CSV.
@@ -323,6 +324,7 @@ def load_icsd(
                (defaults to ``data/raw/HECPyrochlore_latt_data_ICSD.csv``
                relative to the project root)
     verbose  : print a summary table
+    deduplicate: mean or remove duplicate rows grouped by Composition and Temp
 
     Returns
     -------
@@ -428,30 +430,32 @@ def load_icsd(
     df = df[(df['Temperature'] >= low) & (df['Temperature'] <= high)]
 
     # --- deduplicate: average lattice param for same composition ---
-    # Aggregate by composition key
-    agg_rows = []
-    for key, grp in df.groupby('_comp_key'):
-    # for key, grp in df.groupby(['_comp_key', 'Temperature']):
-        base = grp.iloc[0].copy()
-        base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
-        base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
-        base['n_icsd_duplicates'] = len(grp)
-        # Use the most common ChemicalName as Composition label
-        base['Composition'] = (
-            grp['Composition'].value_counts().index[0]
-            if grp['Composition'].notna().any() else ''
-        )
-        agg_rows.append(base)
+    if deduplicate:
+        # Aggregate by composition key
+        agg_rows = []
+        for key, grp in df.groupby('_comp_key'):
+        # for key, grp in df.groupby(['_comp_key', 'Temperature']):
+            base = grp.iloc[0].copy()
+            base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
+            base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
+            base['n_icsd_duplicates'] = len(grp)
+            # Use the most common ChemicalName as Composition label
+            base['Composition'] = (
+                grp['Composition'].value_counts().index[0]
+                if grp['Composition'].notna().any() else ''
+            )
+            agg_rows.append(base)
 
-    df_dedup = pd.DataFrame(agg_rows).drop(columns=['_comp_key'])
+        df = pd.DataFrame(agg_rows).drop(columns=['_comp_key'])
+
+
 
     if verbose:
-        pristine_n = (df_dedup['compound_type'] == globals.PRISTINE).sum()
-        he_n = (df_dedup['compound_type'] == globals.HIGH_ENTROPY).sum()
-        log.info(
-            f"ICSD: {len(df_dedup)} unique compositions after deduplication "
-            f"({pristine_n} pristine, {he_n} high-entropy)"
-        )
+        pristine_n = (df['compound_type'] == globals.PRISTINE).sum()
+        he_n = (df['compound_type'] == globals.HIGH_ENTROPY).sum()
+        log.info(f"({pristine_n} pristine, {he_n} high-entropy)")
+        if deduplicate:
+            log.info(f"ICSD: {len(df)} unique compositions after deduplication")
         print()
         print(f"  {'Compound type':<20} {'Count':>6}")
         print(f"  {'-'*28}")
@@ -462,7 +466,7 @@ def load_icsd(
         print(f"  {'Total (raw)':<20} {len(df_raw):>6}")
         print()
 
-    return df_dedup
+    return df
 
 
 # ── standalone test ──────────────────────────────────────────────────────────
@@ -471,7 +475,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
     import sys
     fp = sys.argv[1] if len(sys.argv) > 1 else None
-    result = load_icsd(filepath=fp, verbose=True)
+    result = load_icsd(filepath=fp, verbose=True, deduplicate=False)
     print(result[['Composition', 'Sample A', 'Sample B',
                   'Lattice Parameter (Angstrom)', 'compound_type',
                   'n_icsd_duplicates']].head(20).to_string(index=False))

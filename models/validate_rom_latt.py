@@ -31,8 +31,6 @@ import argparse
 import sys
 import warnings
 from pathlib import Path
-from time import sleep
-
 import numpy as np
 
 warnings.filterwarnings('ignore')
@@ -52,16 +50,13 @@ from src.globals import HIGH_ENTROPY
 TASK     = 'lattice_param_rom'
 SAVE_DIR = _PROJECT / 'models' / TASK
 
-
 def main():
     parser = argparse.ArgumentParser(
         description='Validate lattice parameter ML model.')
     parser.add_argument('--splits', type=int, default=6,
-                        help='Number of CV folds (default: 6)')
-    # parser.add_argument('--types', nargs='+',
-    #                     default=['pristine', 'high_entropy'],
-    #                     choices=['pristine', 'high_entropy'],
-    #                     help='Compound types to include (default: both)')
+                        help='Number of CV folds (default: 7)')
+    parser.add_argument('--num_feat', type=int, default=8,
+                        help='Number of Featrures to include (default: 7)')
     args = parser.parse_args()
 
     print()
@@ -118,11 +113,10 @@ def main():
     plt.tight_layout()
     plt.savefig(SAVE_DIR / 'sns.png')#, dpi=150, bbox_inches='tight')
     plt.show()
+'''
 
-    sleep(120)
-    exit(0)
-    '''
-
+    top_n_feat = args.num_feat
+    # top_n_feat = len(feat_names)
     results = train_and_evaluate(
         X, y, feat_names,
         task_name=TASK,
@@ -130,7 +124,7 @@ def main():
         save_dir=SAVE_DIR,
         verbose=True,
         compound_types=[HIGH_ENTROPY],
-        top_n_features=8,
+        top_n_features=top_n_feat,
     )
 
     print("\n[plots] Generating figures …")
@@ -159,7 +153,7 @@ def main():
     # plot_r2_vs_cv_folds(
     #     X, y, feat_names,
     #     task_name='property',
-    #     top_n_features=10,
+    #     top_n_features=top_n_feat,
     #     save_path=SAVE_DIR / 'r2_vs_folds.png'
     # )
 

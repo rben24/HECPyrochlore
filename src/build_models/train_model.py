@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import os
 import pickle
 import json
 import warnings
@@ -23,9 +24,11 @@ from pathlib import Path
 from typing import Dict, List, Optional, Any
 
 from sklearn.ensemble import (RandomForestRegressor, GradientBoostingRegressor,
-                              ExtraTreesRegressor)
+                              ExtraTreesRegressor, HistGradientBoostingRegressor)
 from sklearn.linear_model import Ridge
-from sklearn.preprocessing import StandardScaler, QuantileTransformer, PowerTransformer
+from sklearn.svm import SVR
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import QuantileTransformer, PowerTransformer, RobustScaler
 from sklearn.model_selection import KFold, cross_validate, train_test_split
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
@@ -33,6 +36,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import shap
 
 warnings.filterwarnings('ignore')
 
@@ -46,17 +50,214 @@ MODELS_DIR.mkdir(parents=True, exist_ok=True)
 
 def build_models(random_state: int = 42) -> Dict[str, Any]:
     return {
+        # ── RandomForest ──────────────────────────────────────────────────────
+        # Dataset shrank to 183 → tighten depth and min_samples further
+        # max_depth: 15→12, min_samples_leaf: 4→5, min_samples_split: 8→10
         'RandomForest': RandomForestRegressor(
-            n_estimators=300, max_depth=None, min_samples_leaf=2,
-            max_features='sqrt', random_state=random_state, n_jobs=-1),
+            n_estimators=500,
+            max_depth=12,
+            min_samples_leaf=5,
+            min_samples_split=10,
+            max_features=0.6,
+            random_state=random_state,
+            n_jobs=-1,
+        ),
+
+        # ── GradientBoosting ──────────────────────────────────────────────────
+        # Train/test gap still 0.044 → more aggressive regularization
+        # max_depth: 3→2  (very shallow trees for small dataset)
+        # learning_rate: 0.03→0.02  (slower learning)
+        # n_estimators: 500→700  (compensate for lower LR)
+        # subsample: 0.7→0.6   (more stochasticity)
+        # min_samples_leaf: 5→8
         'GradientBoosting': GradientBoostingRegressor(
-            n_estimators=300, learning_rate=0.05, max_depth=4,
-            subsample=0.8, min_samples_leaf=2, random_state=random_state),
+            n_estimators=700,
+            learning_rate=0.02,
+            max_depth=2,
+            subsample=0.6,
+            min_samples_leaf=8,
+            min_samples_split=12,
+            max_features=0.6,
+            random_state=random_state,
+        ),
+
+        # ── ExtraTrees ────────────────────────────────────────────────────────
+        # Best model — conservative changes only
+        # max_depth: 20→15  (tighter cap for smaller dataset)
+        # min_samples_leaf: 3→4
+        # More estimators for stability
         'ExtraTrees': ExtraTreesRegressor(
-            n_estimators=300, max_depth=None, min_samples_leaf=2,
-            max_features='sqrt', random_state=random_state, n_jobs=-1),
-        'Ridge': Ridge(alpha=10.0),
+            n_estimators=600,
+            max_depth=15,
+            min_samples_leaf=4,
+            min_samples_split=8,
+            max_features=0.65,
+            random_state=random_state,
+            n_jobs=-1,
+        ),
+
+        # ── HistGradientBoosting ──────────────────────────────────────────────
+        # Worst overfit (gap=0.052) → biggest changes here
+        # l2_regularization: 0.1→2.0  (major jump — dominant fix)
+        # min_samples_leaf: 8→20  (sklearn's own default; well-justified for n=183)
+        # max_depth: 4→3
+        # learning_rate: 0.03→0.02
+        # max_features: 0.8→0.65
+        'HistGradientBoosting': HistGradientBoostingRegressor(
+            max_iter=700,
+            learning_rate=0.02,
+            max_depth=3,
+            min_samples_leaf=20,
+            l2_regularization=2.0,
+            max_features=0.65,
+            random_state=random_state,
+        ),
+
+        # ── SVR ───────────────────────────────────────────────────────────────
+        # High variance (±0.053) and gap=0.057 → loosen the fit
+        # C: 10→5   (less aggressive fitting)
+        # epsilon: 0.01→0.05  (wider insensitive tube handles discrete/noisy
+        #                       features seen in the pairplot)
+        # gamma: 'scale' (unchanged — auto-adjusts to n_features=8)
+        'SVR': Pipeline([
+            ('scaler', QuantileTransformer(
+                output_distribution='normal', random_state=random_state)),
+            ('svr', SVR(
+                kernel='rbf',
+                C=5.0,
+                epsilon=0.05,
+                gamma='scale',
+            )),
+        ]),
     }
+
+# ── Using CV to find Outliers ─────────────────────────────────────────────────
+# taken from Tao Liang's repository at
+# https://github.com/TaoLiang120/myml/blob/main/myml/models/models.py#L1084
+def kfold_crossvalidation(self, n_splits, save_dir, n_repeats=1, style="KFold", random_state=None,
+                          find_outliers=False, thres4outliers=3.0,):
+    def get_outliers_index(standardized_resids, threshold=3.0):
+        local_inds = np.arange(len(standardized_resids), dtype="int")
+        out_inds = np.compress(np.abs(standardized_resids) > threshold, local_inds)
+        if len(out_inds) == 0:
+            return np.array([], dtype="int")
+        else:
+            return out_inds
+
+    if not os.path.isdir(save_dir):
+        os.mkdir(save_dir)
+
+    kfold_key_keys = ["imodel", "score",
+                      "imax_abs", "abs_error", "compstr_abs",
+                      "imax_rabs", "relative_error", "compstr_rabs",
+                      "imax_std", "standardized_error", "compstr_std",
+                      "outliers"]
+
+    kfold_keys = ["key", "R2_AVG_ALL", "R2_STDEV"]
+    kfold_df = pd.DataFrame(columns=kfold_keys)
+    keys = []
+    R2s = []
+    R2stds = []
+    print(f"length of original data:{len(self.data.gooddf)}")
+    for key in self.keys:
+        X = self.generate_X()
+        y = self.data.gooddf[key].to_numpy()
+
+        if style[0:3].upper() == "STR":
+            rkf = RepeatedStratifiedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
+            y4split = np.ones(len(y))
+        else:
+            rkf = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
+            y4split = copy.deepcopy(y)
+
+        imodel = 0
+        thisR2s = []
+        df = pd.DataFrame(columns=kfold_key_keys)
+        for train, test in rkf.split(X, y4split):
+            X_train, X_test, y_train, y_test = X[train], X[test], y[train], y[test]
+            model = self.get_regression_model(X_train, y_train, key, savemodel=False)
+            thisscore = model.score(X_test, y_test)
+
+            thisdict = {}
+            for kfoldkey in kfold_key_keys:
+                thisdict[kfoldkey] = "NA"
+            thisdict = {"imodel": imodel, "score": thisscore}
+
+            if imodel % 20 == 0:
+                print_results = True
+            else:
+                print_results = False
+
+            if find_outliers:
+                preds = model.predict(X_test)
+                resids = y_test - preds
+                resid_std = np.std(resids)
+                relative_resids = resids / (y_test + VERY_SMALL_VALUE)
+                standardized_resids = resids / (resid_std + VERY_SMALL_VALUE)
+                errorss = [resids, relative_resids, standardized_resids]
+                for ierror in range(len(errorss)):
+                    errors = copy.deepcopy(errorss[ierror])
+                    imax = np.argmax(np.abs(errors))
+                    maxerror = errors[imax]
+                    yhat = y_test[imax]
+                    pred = preds[imax]
+                    imax_data = test[imax]
+                    compstr = self.data.gooddf.iloc[imax_data]["Composition"]
+                    if ierror == 0:
+                        thisdict["imax_abs"] = imax_data
+                        thisdict["abs_error"] = maxerror
+                        thisdict["compstr_abs"] = compstr
+                        if print_results:
+                            print(f"---- max abs_error ----")
+                    elif ierror == 1:
+                        thisdict["imax_rabs"] = imax_data
+                        thisdict["relative_error"] = maxerror
+                        thisdict["compstr_rabs"] = compstr
+                        if print_results:
+                            print(f"---- max relative_error ----")
+                    elif ierror == 2:
+                        thisdict["imax_std"] = imax_data
+                        thisdict["standardized_error"] = maxerror
+                        thisdict["compstr_std"] = compstr
+                        if print_results:
+                            print(f"---- max standardized_error ----")
+                    if print_results:
+                        print(f"imax: {imax} max error: {maxerror}")
+                        print(f"target:{yhat} prediction: {pred}")
+                        print(f"ind_data:{imax_data} compstr:{compstr}")
+
+                local_outliers = get_outliers_index(standardized_resids, threshold=thres4outliers)
+                if len(local_outliers) > 0:
+                    outliers = test[local_outliers]
+                else:
+                    outliers = np.array([], dtype="int")
+                thisdict["outliers"] = str(tuple(outliers))
+                if print_results:
+                    print(f"outliers:{outliers}")
+
+            df.loc[len(df)] = thisdict
+            thisR2s.append(thisscore)
+            if print_results:
+                print(f"key:{key} xtrain:{X_train.shape} xtest:{X_test.shape} imodel:{imodel} score:{thisscore}")
+            imodel += 1
+
+        fname = "KFOLD_" + self.mname_header + key + ".csv"
+        df.to_csv(os.path.join(self.SAVE_PATH, fname), index=False)
+
+        thisR2s = np.array(thisR2s)
+        thismean = np.mean(thisR2s)
+        thisstd = np.std(thisR2s)
+        keys.append(key)
+        R2s.append(thismean)
+        R2stds.append(thisstd)
+        print(f"key:{key}  R2_AVG_ALL:{thismean} Stdev:{thisstd}")
+        print(f"--- finished Kfold for {key}! ---")
+    kfold_df["key"] = keys
+    kfold_df["R2_AVG_ALL"] = R2s
+    kfold_df["R2_STDEV"] = R2stds
+    fname = "KFOLD_" + self.mname_header + "ALL.csv"
+    kfold_df.to_csv(os.path.join(self.SAVE_PATH, fname), index=False)
+    return kfold_df
 
 
 # ── Metric helpers ───────────────────────────────────────────────────────────
@@ -152,8 +353,7 @@ def train_and_evaluate(
     save_dir = save_dir or (MODELS_DIR / task_name)
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    # scaler = StandardScaler()
-    scaler = QuantileTransformer()
+    scaler  = QuantileTransformer()
     X_scaled = scaler.fit_transform(X)
 
     X_tr, X_te, y_tr, y_te = train_test_split(
@@ -209,6 +409,12 @@ def train_and_evaluate(
     best_model.fit(X_tr, y_tr)
     y_pred = best_model.predict(X_te)
     test_metrics = evaluate_predictions(y_te, y_pred)
+
+    # plot SHAP summary
+    explainer = shap.Explainer(best_model)
+    shap_values = explainer(X_te)
+    shap.summary_plot(shap_values, X_te, feature_names=feature_names)
+    plt.savefig(save_dir / f'{task_name}_shap.png')
 
     if verbose:
         print(f"\n{'=' * 58}")
@@ -392,7 +598,7 @@ def plot_r2_vs_feature_count(
     save_path : Path, optional
         Where to save the figure
     """
-    scaler = StandardScaler()
+    scaler  = QuantileTransformer()
     X_scaled = scaler.fit_transform(X)
 
     X_tr, X_te, y_tr, y_te = train_test_split(
@@ -411,7 +617,9 @@ def plot_r2_vs_feature_count(
         'RandomForest': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'GradientBoosting': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'ExtraTrees': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
-        'Ridge': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        # 'Ridge': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'HistGradientBoosting': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'SVR': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
     }
 
     models = build_models(random_state)
@@ -520,7 +728,7 @@ def plot_r2_vs_cv_folds(
     top_n_features : int
         Number of top features to use (default 10)
     """
-    scaler = StandardScaler()
+    scaler = QuantileTransformer()
     X_scaled = scaler.fit_transform(X)
 
     X_tr, X_te, y_tr, y_te = train_test_split(
@@ -536,12 +744,14 @@ def plot_r2_vs_cv_folds(
     X_te = X_te[:, top_indices]
 
     # Test different fold counts
-    fold_counts = list(range(2, 21))  # 2 to 20 folds
+    fold_counts = list(range(2, 13))  # 2 to 12 folds
     results = {
         'RandomForest': {'mean_r2': [], 'std_r2': []},
         'GradientBoosting': {'mean_r2': [], 'std_r2': []},
         'ExtraTrees': {'mean_r2': [], 'std_r2': []},
-        'Ridge': {'mean_r2': [], 'std_r2': []},
+        # 'Ridge': {'mean_r2': [], 'std_r2': []},
+        'HistGradientBoosting': {'mean_r2': [], 'std_r2': [],},
+        'SVR': {'mean_r2': [], 'std_r2': []},
     }
 
     models = build_models(random_state)

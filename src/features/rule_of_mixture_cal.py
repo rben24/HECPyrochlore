@@ -47,6 +47,7 @@ class PyrochloreProperties:
     bulk_modulus:         float = None   # GPa
     shear_modulus:        float = None   # GPa
     youngs_modulus:       float = None   # GPa
+    poisson_ratio:        float = None
     thermal_conductivity: float = None   # W/m·K
     thermal_expansion:    float = None   # °C⁻¹
 
@@ -68,6 +69,7 @@ _COL_MAP: Dict[str, str] = {
     "bulk_modulus":         "bulk modulus (vrh)",
     "shear_modulus":        "shear modulus (vrh)",
     "youngs_modulus":       "youngs modulus (vrh)",
+    "poisson_ratio":        "poisson ratio",
     "thermal_conductivity": "thermal conductivity (w/m/k)",
     "thermal_expansion":    "thermal_expansion",
 }
@@ -169,6 +171,33 @@ def composition_label(a_site: Dict[str, float], b_site: Dict[str, float]) -> str
     return f"({a_str})2({b_str})2O7"
 
 
+def get_missing_endpoints(
+    a_site: Dict[str, float],
+    b_site: Dict[str, float],
+) -> List[str]:
+    """
+    Return a list of all A_i2B_j2O7 endpoint keys that are absent from
+    PYROCHLORE_DB.  An empty list means full coverage.
+    """
+    return [
+        f"{a_elem}2{b_elem}2O7"
+        for a_elem, b_elem in product(a_site.keys(), b_site.keys())
+        if f"{a_elem}2{b_elem}2O7" not in PYROCHLORE_DB
+    ]
+
+
+def all_endpoints_available(
+    a_site: Dict[str, float],
+    b_site: Dict[str, float],
+) -> bool:
+    """
+    Return True only when every A_i2B_j2O7 endpoint required by the
+    composition is present in PYROCHLORE_DB.
+    """
+    return len(get_missing_endpoints(a_site, b_site)) == 0
+
+
+
 # =============================================================================
 # CORE RULE OF MIXTURES ENGINE
 # =============================================================================
@@ -187,6 +216,10 @@ def rule_of_mixtures(
 
     Endpoints with missing DB entries or None property values are skipped
     and their weight is excluded from the denominator.
+
+    Note: callers in rom_from_dataframe are only reached after
+    all_endpoints_available() returns True, so missing-key skips here
+    serve only as a safety net for direct / full_report usage.
     """
     numerator   = 0.0
     denominator = 0.0
@@ -245,6 +278,89 @@ def calc_lattice_parameter(a_site, b_site, verbose=False):
     return rule_of_mixtures(a_site, b_site,
         lambda p: p.lattice_parameter, "Lattice Parameter (Å)", verbose)
 
+def calculate_lattice_distortion(
+        a_site: Dict[str, float],
+        b_site: Dict[str, float],
+        distortion_metric: str = "weighted_average",
+        verbose: bool = False,
+) -> Optional[float]:
+    """
+    Calculate lattice distortion as deviation from Vegard's law prediction.
+
+    The distortion quantifies how much the actual (or average) lattice
+    parameters deviate from what a linear mixing model would predict.
+
+    Parameters
+    ----------
+    a_site : dict
+        A-site cation fractions.
+    b_site : dict
+        B-site cation fractions.
+    distortion_metric : {'quadratic_elongation', 'max_deviation', 'mean_absolute_deviation'}
+        Type of distortion metric:
+        • 'quadratic_elongation': sqrt(mean((a_i / a_pred)^2)) - 1
+          (analog of octahedral distortion in pyrochlores)
+        • 'max_deviation': max(|a_i - a_pred| / a_pred)
+          (largest single deviation)
+        • 'mean_absolute_deviation': mean(|a_i - a_pred|) / a_pred
+          (average normalized deviation)
+    verbose : bool
+        If True, print detailed breakdown.
+
+    Returns
+    -------
+    float or None
+        Distortion metric (typically 0–0.1 for pyrochlores), or None
+        if insufficient data.
+    """
+    # Get ROM-predicted lattice parameter
+    a_pred = calc_lattice_parameter(a_site, b_site, verbose=verbose)
+    if a_pred is None:
+        return None
+
+    # Collect all single-phase lattice parameters
+    single_phase_params = []
+    for a_elem, b_elem in product(a_site.keys(), b_site.keys()):
+        key = f"{a_elem}2{b_elem}2O7"
+        if key in PYROCHLORE_DB:
+            val = PYROCHLORE_DB[key].lattice_parameter
+            if val is not None:
+                single_phase_params.append(val)
+
+    if not single_phase_params:
+        return None
+
+    if verbose:
+        print(f"\n  Lattice Distortion — {distortion_metric}")
+        print(f"  ROM prediction: {a_pred:.6f} Å")
+        print(f"  Endpoints: {single_phase_params}")
+
+    if distortion_metric == "quadratic_elongation":
+        # Similar to octahedral distortion: sqrt(mean((a_i / a_avg)^2)) - 1
+        mean_sq = sum((a / a_pred) ** 2 for a in single_phase_params) / len(single_phase_params)
+        distortion = (mean_sq ** 0.5) - 1.0
+
+    elif distortion_metric == "max_deviation":
+        # Maximum relative deviation
+        distortion = max(abs(a - a_pred) / a_pred for a in single_phase_params)
+
+    elif distortion_metric == "mean_absolute_deviation":
+        # Mean absolute relative deviation
+        distortion = sum(abs(a - a_pred) for a in single_phase_params) / len(single_phase_params)
+        distortion = distortion / a_pred
+
+    elif distortion_metric == "weighted_average":
+        distortion = sum(abs(a-a_pred) for a in single_phase_params) / a_pred
+
+    else:
+        raise ValueError(f"Unknown distortion_metric: {distortion_metric}")
+
+    if verbose:
+        print(f"  Distortion ({distortion_metric}): {distortion:.8f}")
+
+    return distortion
+
+
 def calc_ionic_radius_A(a_site, b_site, verbose=False):
     """ROM mean A-site ionic radius (Å, 8-coord)."""
     return rule_of_mixtures(a_site, b_site,
@@ -283,6 +399,16 @@ def calc_shear_modulus(a_site, b_site, verbose=False):
     return rule_of_mixtures(a_site, b_site,
         lambda p: p.shear_modulus, "Shear Modulus (GPa)", verbose)
 
+def calc_youngs_modulus(a_site, b_site, verbose=False):
+    """ROM youngs modulus (GPa)."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.youngs_modulus, "Youngs Modulus (GPa)", verbose)
+
+def calc_poisson_ratio(a_site, b_site, verbose=False):
+    """ROM Poisson Ratio."""
+    return rule_of_mixtures(a_site, b_site,
+        lambda p: p.poisson_ratio, "Poisson Ratio", verbose)
+
 def calc_thermal_conductivity(a_site, b_site, verbose=False):
     """ROM thermal conductivity (W/m·K)."""
     return rule_of_mixtures(a_site, b_site,
@@ -299,56 +425,88 @@ def calc_radius_ratio(a_site, b_site, verbose=False):
     r_B = calc_ionic_radius_B(a_site, b_site, verbose)
     return (r_A / r_B) if (r_A and r_B) else None
 
-def calc_lattice_distortion_A(a_site, b_site, verbose=False):
+def calc_lattice_distortion_A(a_site, b_site, verbose=False, t_ideal=1.0):
     """
     A-site RMS lattice distortion:
         δ_A = sqrt(Σ x_i (r_i − <r_A>)²) / <r_A>
     r_i is averaged over available B-site partners for each A element.
-    """
-    r_A_mean = calc_ionic_radius_A(a_site, b_site)
-    if r_A_mean is None:
-        return None
-    variance = 0.0
-    for a_elem, a_frac in a_site.items():
-        r_vals = [
-            PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A
-            for b_elem in b_site
-            if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
-            and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A is not None
-        ]
-        if r_vals:
-            r_i = sum(r_vals) / len(r_vals)
-            variance += a_frac * (r_i - r_A_mean) ** 2
-    delta = math.sqrt(variance) / r_A_mean if r_A_mean else None
-    if verbose and delta is not None:
-        print(f"\n  A-site δ_A = {delta:.6f}")
-    return delta
 
-def calc_lattice_distortion_B(a_site, b_site, verbose=False):
+    Parameters:
+        t_ideal: ideal tolerance for undistorted pyrochlore
+    """
+    # r_A_mean = calc_ionic_radius_A(a_site, b_site)
+    # if r_A_mean is None:
+    #     return None
+    # variance = 0.0
+    # for a_elem, a_frac in a_site.items():
+    #     r_vals = [
+    #         PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A
+    #         for b_elem in b_site
+    #         if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
+    #         and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_A is not None
+    #     ]
+    #     if r_vals:
+    #         r_i = sum(r_vals) / len(r_vals)
+    #         variance += a_frac * (r_i - r_A_mean) ** 2
+    # delta = math.sqrt(variance) / r_A_mean if r_A_mean else None
+    # if verbose and delta is not None:
+    #     print(f"\n  A-site δ_A = {delta:.6f}")
+    # return delta
+    r_A_mean = calc_ionic_radius_A(a_site, b_site)
+    r_B_mean = calc_ionic_radius_B(a_site, b_site)
+    if r_A_mean is None or r_B_mean is None or r_B_mean == 0:
+        return None
+
+    t = r_A_mean / (math.sqrt(2) * r_B_mean)
+    distortion = abs(t - t_ideal)
+
+    if verbose:
+        print(f"\n  r_A_mean = {r_A_mean:.6f} Å")
+        print(f"  r_B_mean = {r_B_mean:.6f} Å")
+        print(f"  t = {t:.6f} (using denominator sqrt(2)*r_B_mean)")
+        print(f"  Distortion (|t - {t_ideal}|) = {distortion:.6f}")
+
+    return distortion
+
+def calc_lattice_distortion_B(a_site, b_site, verbose=False, t_ideal=1.0):
     """
     B-site RMS lattice distortion:
         δ_B = sqrt(Σ p_j (r_j − <r_B>)²) / <r_B>
     r_j is averaged over available A-site partners for each B element.
     """
+    # r_B_mean = calc_ionic_radius_B(a_site, b_site)
+    # if r_B_mean is None:
+    #     return None
+    # variance = 0.0
+    # for b_elem, b_frac in b_site.items():
+    #     r_vals = [
+    #         PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B
+    #         for a_elem in a_site
+    #         if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
+    #         and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B is not None
+    #     ]
+    #     if r_vals:
+    #         r_j = sum(r_vals) / len(r_vals)
+    #         variance += b_frac * (r_j - r_B_mean) ** 2
+    # delta = math.sqrt(variance) / r_B_mean if r_B_mean else None
+    # if verbose and delta is not None:
+    #     print(f"\n  B-site δ_B = {delta:.6f}")
+    # return delta
+    r_A_mean = calc_ionic_radius_A(a_site, b_site)
     r_B_mean = calc_ionic_radius_B(a_site, b_site)
-    if r_B_mean is None:
+    if r_A_mean is None or r_B_mean is None or r_B_mean == 0:
         return None
-    variance = 0.0
-    for b_elem, b_frac in b_site.items():
-        r_vals = [
-            PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B
-            for a_elem in a_site
-            if f"{a_elem}2{b_elem}2O7" in PYROCHLORE_DB
-            and PYROCHLORE_DB[f"{a_elem}2{b_elem}2O7"].ionic_radius_B is not None
-        ]
-        if r_vals:
-            r_j = sum(r_vals) / len(r_vals)
-            variance += b_frac * (r_j - r_B_mean) ** 2
-    delta = math.sqrt(variance) / r_B_mean if r_B_mean else None
-    if verbose and delta is not None:
-        print(f"\n  B-site δ_B = {delta:.6f}")
-    return delta
 
+    t = r_A_mean / (math.sqrt(2) * r_B_mean)
+    distortion_B = abs(t - t_ideal)
+
+    if verbose:
+        print(f"\n  r_A_mean = {r_A_mean:.6f} Å")
+        print(f"  r_B_mean = {r_B_mean:.6f} Å")
+        print(f"  t = {t:.6f} (using denominator sqrt(2)*r_B_mean)")
+        print(f"  B-site Distortion (|t - {t_ideal}|) = {distortion_B:.6f}")
+
+    return distortion_B
 
 # =============================================================================
 # ORDERED CALCULATION REGISTRY
@@ -356,7 +514,8 @@ def calc_lattice_distortion_B(a_site, b_site, verbose=False):
 # =============================================================================
 
 _CALCS: List[Tuple[str, callable]] = [
-    ("ROM_Lattice_Parameter_A",         calc_lattice_parameter),
+    ("ROM_Lattice_Parameter",           calc_lattice_parameter),
+    ("ROM_Lattice_Distortion",          calculate_lattice_distortion),
     ("ROM_Ionic_Radius_A",              calc_ionic_radius_A),
     ("ROM_Ionic_Radius_B",              calc_ionic_radius_B),
     ("ROM_Radius_Ratio_rA_rB",          calc_radius_ratio),
@@ -367,6 +526,8 @@ _CALCS: List[Tuple[str, callable]] = [
     ("ROM_Lattice_Distortion_B",        calc_lattice_distortion_B),
     ("ROM_Bulk_Modulus_GPa",            calc_bulk_modulus),
     ("ROM_Shear_Modulus_GPa",           calc_shear_modulus),
+    ("ROM_Youngs_Modulus_GPa",          calc_youngs_modulus),
+    ("ROM_Poisson_Ratio",               calc_poisson_ratio),
     ("ROM_Thermal_Conductivity_W_mK",   calc_thermal_conductivity),
     ("ROM_Thermal_Expansion",           calc_thermal_expansion),
 ]
@@ -375,6 +536,7 @@ _CALCS: List[Tuple[str, callable]] = [
 # =============================================================================
 # FULL REPORT  (single composition)
 # =============================================================================
+
 
 def full_report(
     a_site: Dict[str, float],
@@ -392,7 +554,8 @@ def full_report(
 
     Returns
     -------
-    dict {col_name: value}  — same keys as the ROM columns added by rom_from_dataframe
+    dict {col_name: value}  — same keys as the ROM columns added by rom_from_dataframe.
+    All values are None when any endpoint is missing from PYROCHLORE_DB.
     """
     label = composition_label(a_site, b_site)
     print("=" * 64)
@@ -401,6 +564,18 @@ def full_report(
     print(f"  A-site      : { {k: round(v, 4) for k, v in a_site.items()} }")
     print(f"  B-site      : { {k: round(v, 4) for k, v in b_site.items()} }")
     print("=" * 64)
+
+    # ── Completeness guard ────────────────────────────────────────────────────
+    missing = get_missing_endpoints(a_site, b_site)
+    if missing:
+        print(f"\n  ✗ Incomplete DB coverage — {len(missing)} endpoint(s) missing:")
+        for key in missing:
+            print(f"      • {key}")
+        print("\n  ROM properties cannot be calculated. Returning all None.\n")
+        print("=" * 64 + "\n")
+        results = {col_name: None for col_name, _ in _CALCS}
+        results["ROM_Pyrochlore_Stable"] = None
+        return results
 
     results: Dict[str, Optional[float]] = {}
     for col_name, func in _CALCS:
@@ -472,6 +647,14 @@ def rom_from_dataframe(
     is loaded from pristine_pyrochlore.csv at import time (call reload_db() to
     refresh without restarting the kernel).
 
+    Completeness requirement
+    ------------------------
+    Every A_i2B_j2O7 endpoint implied by the A-site × B-site Cartesian product
+    must be present in PYROCHLORE_DB.  If **any** endpoint is missing, all ROM
+    columns for that row are set to NaN and a warning is issued listing the
+    absent structures.  Partial interpolation is intentionally not performed so
+    that results are never silently biased by an incomplete endpoint set.
+
     Parameters
     ----------
     df      : DataFrame containing at least *a_col* and *b_col*.
@@ -485,7 +668,8 @@ def rom_from_dataframe(
     Returns
     -------
     DataFrame — original columns + ROM columns below.
-    Rows whose fractions cannot be parsed get NaN in all ROM columns.
+    Rows whose fractions cannot be parsed, or whose endpoint set is not fully
+    covered by PYROCHLORE_DB, receive NaN in all ROM columns.
 
     ROM columns appended
     --------------------
@@ -500,8 +684,10 @@ def rom_from_dataframe(
     ROM_Lattice_Distortion_B        δ_B  (dimensionless)
     ROM_Bulk_Modulus_GPa            GPa
     ROM_Shear_Modulus_GPa           GPa
+    ROM_Youngs_Modulus_GPa          GPa
+    ROM_Poisson_Ratio               float
     ROM_Thermal_Conductivity_W_mK   W/m·K
-    ROM_Thermal_Expansion_per_C     °C⁻¹
+    ROM_Thermal_Expansion           °C⁻¹
     ROM_Pyrochlore_Stable           bool  (True if 1.46 ≤ r_A/r_B ≤ 1.78)
     """
     if a_col not in df.columns:
@@ -512,12 +698,14 @@ def rom_from_dataframe(
                          f"Available columns: {list(df.columns)}")
 
     rom_col_names = [name for name, _ in _CALCS] + ["ROM_Pyrochlore_Stable"]
+    _nan_row = {c: float("nan") for c in rom_col_names}
     records: List[Dict] = []
 
     for idx, row in df.iterrows():
         a_site = _parse_stoich_json(row[a_col])
         b_site = _parse_stoich_json(row[b_col])
 
+        # ── Parse failure ──────────────────────────────────────────────────
         if a_site is None or b_site is None:
             warnings.warn(
                 f"Row {idx}: could not parse site fractions "
@@ -525,21 +713,35 @@ def rom_from_dataframe(
                 "ROM columns set to NaN.",
                 stacklevel=2,
             )
-            records.append({c: float("nan") for c in rom_col_names})
+            records.append(_nan_row.copy())
             continue
 
+        # ── Completeness guard ─────────────────────────────────────────────
+        missing = get_missing_endpoints(a_site, b_site)
+        if missing:
+            warnings.warn(
+                f"Row {idx}: {len(missing)} endpoint(s) missing from "
+                f"PYROCHLORE_DB — ROM columns set to NaN.\n"
+                f"  Missing: {missing}",
+                stacklevel=2,
+            )
+            records.append(_nan_row.copy())
+            continue
+
+        # ── All endpoints present — compute ROM ────────────────────────────
         row_results: Dict = {}
         for col_name, func in _CALCS:
             row_results[col_name] = func(a_site, b_site, verbose=verbose)
 
-        # ratio = row_results.get("ROM_Radius_Ratio_rA_rB")
-        # row_results["ROM_Pyrochlore_Stable"] = (
-        #     (1.46 <= ratio <= 1.78) if ratio is not None else None
-        # )
+        ratio = row_results.get("ROM_Radius_Ratio_rA_rB")
+        row_results["ROM_Pyrochlore_Stable"] = (
+            (1.46 <= ratio <= 1.78) if ratio is not None else None
+        )
         records.append(row_results)
 
     rom_df = pd.DataFrame(records, index=df.index)
     return pd.concat([df, rom_df], axis=1)
+
 
 
 # =============================================================================
@@ -553,11 +755,11 @@ if __name__ == "__main__":
         sample_key = next(iter(PYROCHLORE_DB))
         print(f"  Sample entry → {sample_key}: {PYROCHLORE_DB[sample_key]}\n")
 
-    # ── Single composition ─────────────────────────────────────────────────────
-    full_report(
-        a_site={"Ho": 0.25, "Gd": 0.25, "Nd": 0.25, "Sm": 0.25},
-        b_site={"Zr": 0.5,  "Hf": 0.5},
-    )
+    # # ── Single composition ─────────────────────────────────────────────────────
+    # full_report(
+    #     a_site={"Ho": 0.25, "Gd": 0.25, "Nd": 0.25, "Sm": 0.25},
+    #     b_site={"Zr": 0.5,  "Hf": 0.5},
+    # )
 
     # ── DataFrame batch ────────────────────────────────────────────────────────
     sample_data = {
@@ -578,8 +780,9 @@ if __name__ == "__main__":
         "Lattice Parameter (Angstrom)": [10.41, 10.51],
         "Thermal Conductivity (W/m/K)": [1.8,    1.6],
     }
-    df_in  = pd.DataFrame(sample_data)
-    df_out = rom_from_dataframe(df_in)
+    data = pd.read_csv(HEC_DATA)
+    df_in  = pd.DataFrame(data)
+    df_out = rom_from_dataframe(df_in, verbose=True)
 
     rom_cols = [c for c in df_out.columns if c.startswith("ROM_")]
     print("ROM Results:")
