@@ -47,60 +47,62 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple, Optional
+from pymatgen.core import Composition
+from src import globals
 
 log = logging.getLogger(__name__)
 
 # ── element sets ────────────────────────────────────────────────────────────
 
-# Rare-earth / Y cations that occupy the 8-coordinated A-site
-KNOWN_A: frozenset[str] = frozenset({
-    'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-    'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y', 'Bi', 'Pb', 'Ca',
-})
-
-# Transition-metal cations that occupy the 6-coordinated B-site
-KNOWN_B: frozenset[str] = frozenset({
-    # Group IV
-    'Ti', 'Zr', 'Hf', 'Sn',
-    # Group V
-    'V', 'Nb', 'Ta',
-    # Group VI
-    'Cr', 'Mo', 'W',
-    # Group VII
-    'Mn', 'Re',
-    # Group VIII/IX (transition metals and 5d metals)
-    'Fe', 'Co', 'Ni', 'Ru', 'Os', 'Rh', 'Ir',
-    # Post-transition
-    'Pb', 'Pt',
-})
-
-# Ce can sit on either site depending on oxidation state; handled separately
-_CE_AMBIGUOUS = 'Ce'
-
-# Pyrochlore structure-type identifiers used in the ICSD file
-_PYROCHLORE_STRUCTURE_TYPES: frozenset[str] = frozenset({
-    'Ca2Nb2O7',   # standard Fd-3m pyrochlore prototype
-    'Eu2Zr2O7',   # alternate ICSD label for the same structure
-})
-
-# Physical bounds
-_LATTICE_MIN = 9.5    # Å
-_LATTICE_MAX = 11.5   # Å
-_TEMP_MIN    = 285.0  # K
-_TEMP_MAX    = 305.0  # K
-_A_STOICH_RANGE = (1.5, 2.5)
-_B_STOICH_RANGE = (1.5, 2.5)
-
-
-# ── Compound-type enum strings ───────────────────────────────────────────────
-
-PRISTINE      = 'pristine'
-HIGH_ENTROPY  = 'high_entropy'
-NON_PYROCHLORE = 'non_pyrochlore'
-
+# # Rare-earth / Y cations that occupy the 8-coordinated A-site
+# KNOWN_A: frozenset[str] = frozenset({
+#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
+#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y', 'Bi', 'Pb', 'Ca',
+# })
+#
+# # Transition-metal cations that occupy the 6-coordinated B-site
+# KNOWN_B: frozenset[str] = frozenset({
+#     # Group IV
+#     'Ti', 'Zr', 'Hf', 'Sn',
+#     # Group V
+#     'V', 'Nb', 'Ta',
+#     # Group VI
+#     'Cr', 'Mo', 'W',
+#     # Group VII
+#     'Mn', 'Re',
+#     # Group VIII/IX (transition metals and 5d metals)
+#     'Fe', 'Co', 'Ni', 'Ru', 'Os', 'Rh', 'Ir',
+#     # Post-transition
+#     'Pb', 'Pt',
+# })
+#
+# # Ce can sit on either site depending on oxidation state; handled separately
+# _CE_AMBIGUOUS = 'Ce'
+#
+# # Pyrochlore structure-type identifiers used in the ICSD file
+# _PYROCHLORE_STRUCTURE_TYPES: frozenset[str] = frozenset({
+#     'Ca2Nb2O7',   # standard Fd-3m pyrochlore prototype
+#     'Eu2Zr2O7',   # alternate ICSD label for the same structure
+# })
+#
+# # Physical bounds
+# _LATTICE_MIN = 9.5    # Å
+# _LATTICE_MAX = 11.5   # Å
+# _TEMP_MIN    = 285.0  # K
+# _TEMP_MAX    = 305.0  # K
+# _A_STOICH_RANGE = (1.5, 2.5)
+# _B_STOICH_RANGE = (1.5, 2.5)
+#
+#
+# # ── Compound-type enum strings ───────────────────────────────────────────────
+#
+# PRISTINE      = 'pristine'
+# HIGH_ENTROPY  = 'high_entropy'
+# NON_PYROCHLORE = 'non_pyrochlore'
+#
 
 # ── lattice-parameter parser ─────────────────────────────────────────────────
-
+latt_err = []
 def _parse_lattice(cell_str: str) -> Optional[float]:
     """
     Extract the cubic lattice parameter *a* from a CellParameter string.
@@ -113,8 +115,10 @@ def _parse_lattice(cell_str: str) -> Optional[float]:
         first_token = str(cell_str).strip().split()[0]
         a_str = re.sub(r'\([^)]*\)', '', first_token)   # strip "(3)" etc.
         a = float(a_str)
-        if _LATTICE_MIN <= a <= _LATTICE_MAX:
+        if globals.LATTICE_MIN <= a <= globals.LATTICE_MAX:
+
             return a
+        latt_err.append(cell_str)
         return None
     except Exception:
         return None
@@ -135,58 +139,60 @@ def _parse_icsd_formula(
     normalised to 1).  Normalisation to mole fractions happens later in
     ``build_features.py`` via ``parse_composition``.
 
-    Ce assignment strategy
+    Ambigious Element assignment strategy (for element 'X')
     ~~~~~~~~~~~~~~~~~~~~~~
-    If Ce appears together with other A-site lanthanides → A-site.
-    If Ce appears together with known B-site cations only → B-site.
-    If Ce is the sole cation on both → treated as A-site (Ce³⁺ default).
+    If X appears together with other A-site lanthanides → A-site.
+    If X appears together with known B-site cations only → B-site.
+    If X is the sole cation on both → treated as A-site (X³⁺ default).
     """
     if pd.isna(formula_str):
         return {}, {}, {}
 
-    s = str(formula_str).strip().replace('(', ' ').replace(')', ' ')
+    try:
+        comp = Composition(formula_str)
+    except Exception:
+        return {}, {}, {}
 
-    # Tokenise: pairs of (ElementSymbol, stoichiometry)
-    tokens = re.findall(r'([A-Z][a-z]?)\s*([\d\.]+)?', s)
-    raw: Dict[str, float] = {}
-    for elem, stoich in tokens:
-        if elem == 'O':
-            continue
-        amt = float(stoich) if stoich else 1.0
-        raw[elem] = raw.get(elem, 0.0) + amt
+        # Remove oxygen, get element amounts
+    raw = {str(elem): amt for elem, amt in comp.items() if str(elem) != 'O'}
 
     if not raw:
         return {}, {}, {}
 
-    # Separate into tentative A / B / unknown (Ce is held aside)
     a_comp: Dict[str, float] = {}
     b_comp: Dict[str, float] = {}
     unknown: Dict[str, float] = {}
-    ce_amt: float = 0.0
+    ambiguous: Dict[str, float] = {}
 
-    for elem, amt in raw.items():
-        if elem == _CE_AMBIGUOUS:
-            ce_amt = amt
-        elif elem in KNOWN_A:
-            a_comp[elem] = amt
-        elif elem in KNOWN_B:
-            b_comp[elem] = amt
+    for elem_str, amt in raw.items():
+        if elem_str in globals.KNOWN_AMBIGUOUS:
+            ambiguous[elem_str] = amt
+        elif elem_str in globals.KNOWN_A and elem_str not in globals.KNOWN_B:
+            a_comp[elem_str] = amt
+        elif elem_str in globals.KNOWN_B and elem_str not in globals.KNOWN_A:
+            b_comp[elem_str] = amt
         else:
-            unknown[elem] = amt
+            unknown[elem_str] = amt
 
-    # Resolve Ce
-    if ce_amt > 0:
-        if a_comp:          # other lanthanides present → Ce on A-site
-            a_comp[_CE_AMBIGUOUS] = ce_amt
-        elif b_comp:        # only B-site neighbours → Ce on B-site
-            b_comp[_CE_AMBIGUOUS] = ce_amt
-        else:               # lone Ce → default A-site (Ce³⁺)
-            a_comp[_CE_AMBIGUOUS] = ce_amt
+    # Resolve ambiguous using stoichiometry
+    for elem_str, amt in ambiguous.items():
+        a_total = sum(a_comp.values())
+        b_total = sum(b_comp.values())
+
+        if (2.0 - a_total) > (2.0 - b_total):
+            a_comp[elem_str] = amt
+        elif (2.0 - b_total) > (2.0 - a_total):
+            b_comp[elem_str] = amt
+        else:
+            a_comp[elem_str] = amt  # tie-breaker
 
     return a_comp, b_comp, unknown
 
 
 # ── pyrochlore classifier ────────────────────────────────────────────────────
+struct_err = []
+unknown_err = []
+stoic_err = []
 
 def classify_compound(
     a_comp: Dict[str, float],
@@ -210,40 +216,46 @@ def classify_compound(
       • pristine     → exactly 1 element on A-site AND 1 on B-site
       • high_entropy → ≥2 elements on A-site OR B-site (or both)
     """
+
+
     # --- structure type check ---
-    if str(structure_type).strip() not in _PYROCHLORE_STRUCTURE_TYPES:
-        return NON_PYROCHLORE
+    if str(structure_type).strip() not in globals.PYROCHLORE_STRUCTURE_TYPES:
+        struct_err.append(str(structure_type).strip())
+        return globals.NON_PYROCHLORE
 
     # --- temperature check ---
     try:
         t = float(temp)
     except (TypeError, ValueError):
-        return NON_PYROCHLORE
-    if not (_TEMP_MIN <= t <= _TEMP_MAX):
-        return NON_PYROCHLORE
-
-    # --- lattice check ---
-    if lattice_a is None or not (_LATTICE_MIN <= lattice_a <= _LATTICE_MAX):
-        return NON_PYROCHLORE
+        return globals.NON_PYROCHLORE
+    # if not (globals.TEMP_MIN <= t <= globals.TEMP_MAX):
+    #     return globals.NON_PYROCHLORE
+    #
+    # # --- lattice check ---
+    # if lattice_a is None or not (globals.LATTICE_MIN <= lattice_a <= globals.LATTICE_MAX):
+    #     return globals.NON_PYROCHLORE
 
     # --- unknown cations check ---
     if unknown:
-        return NON_PYROCHLORE
+        unknown_err.append([unknown, a_comp, b_comp])
+        return globals.NON_PYROCHLORE
 
     # --- stoichiometry checks ---
-    a_tot = sum(a_comp.values()) if a_comp else 0.0
-    b_tot = sum(b_comp.values()) if b_comp else 0.0
-    if not (_A_STOICH_RANGE[0] <= a_tot <= _A_STOICH_RANGE[1]):
-        return NON_PYROCHLORE
-    if not (_B_STOICH_RANGE[0] <= b_tot <= _B_STOICH_RANGE[1]):
-        return NON_PYROCHLORE
+    # a_tot = sum(a_comp.values()) if a_comp else 0.0
+    # b_tot = sum(b_comp.values()) if b_comp else 0.0
+    # if not (globals.A_STOICH_RANGE[0] <= a_tot <= globals.A_STOICH_RANGE[1]):
+    #     stoic_err.append([a_comp, b_comp])
+    #     return globals.NON_PYROCHLORE
+    # if not (globals.B_STOICH_RANGE[0] <= b_tot <= globals.B_STOICH_RANGE[1]):
+    #     stoic_err.append([a_comp, b_comp])
+    #     return globals.NON_PYROCHLORE
 
     # --- compound type ---
     n_a = len(a_comp)
     n_b = len(b_comp)
     if n_a == 1 and n_b == 1:
-        return PRISTINE
-    return HIGH_ENTROPY
+        return globals.PRISTINE
+    return globals.HIGH_ENTROPY
 
 
 # ── canonical composition strings ────────────────────────────────────────────
@@ -301,6 +313,7 @@ def _composition_key(
 def load_icsd(
     filepath: str | Path | None = None,
     verbose: bool = True,
+    deduplicate: bool = False,
 ) -> pd.DataFrame:
     """
     Load and parse the ICSD pyrochlore CSV.
@@ -311,6 +324,7 @@ def load_icsd(
                (defaults to ``data/raw/HECPyrochlore_latt_data_ICSD.csv``
                relative to the project root)
     verbose  : print a summary table
+    deduplicate: mean or remove duplicate rows grouped by Composition and Temp
 
     Returns
     -------
@@ -341,8 +355,9 @@ def load_icsd(
             f"or pass the path explicitly."
         )
 
-    df_raw = pd.read_csv(filepath, encoding='latin-1')
-    df_raw['temp_val'] = pd.to_numeric(df_raw['Temperature'], errors='coerce')
+    df_raw = pd.read_csv(filepath)#, encoding='latin-1')
+    # df_raw['temp_val'] = pd.to_numeric(df_raw['Temperature'], errors='coerce')
+    df_raw['density_calc'] = pd.to_numeric(df_raw['CalculatedDensity'], errors='coerce')
     df_raw['lattice_a'] = df_raw['CellParameter'].apply(_parse_lattice)
 
     if verbose:
@@ -359,21 +374,27 @@ def load_icsd(
             a_comp, b_comp, unknown,
             row['lattice_a'],
             row.get('StructureType', ''),
-            row['temp_val'],
+            row['Temperature'],
         )
 
-        if ctype == NON_PYROCHLORE:
+        if ctype == globals.NON_PYROCHLORE:
             n_non_pyro += 1
             continue
 
         a_frac = _comp_to_fractions(a_comp)
         b_frac = _comp_to_fractions(b_comp)
 
+        # Pretty formula from pymatgen for consistency
+        try:
+            pretty = Composition(str(row['StructuredFormula'])).reduced_formula
+        except Exception:
+            pretty = str(row.get('StructuredFormula', ''))
+
         records.append({
-            'Composition':                  str(row.get('ChemicalName', '')).strip(),
+            'Composition':                  pretty,#str(row.get('ChemicalName', '')).strip(),
             'Sample A':                     _comp_to_str(a_comp),
             'Sample B':                     _comp_to_str(b_comp),
-            'TPS Cond W/m/K':               np.nan,
+            'Thermal Conductivity W/m/K':   np.nan,
             'Lattice Parameter (Angstrom)': row['lattice_a'],
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
@@ -388,6 +409,8 @@ def load_icsd(
             'a_stoich_json':                json.dumps(a_frac),
             'b_stoich_json':                json.dumps(b_frac),
             '_comp_key':                    _composition_key(a_comp, b_comp),
+            'Temperature':                  row['Temperature'],
+            'density_calc':                 row['density_calc'],
         })
 
     if verbose:
@@ -401,30 +424,38 @@ def load_icsd(
 
     df = pd.DataFrame(records)
 
-    # --- deduplicate: average lattice param for same composition ---
-    # Aggregate by composition key
-    agg_rows = []
-    for key, grp in df.groupby('_comp_key'):
-        base = grp.iloc[0].copy()
-        base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
-        base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
-        base['n_icsd_duplicates'] = len(grp)
-        # Use the most common ChemicalName as Composition label
-        base['Composition'] = (
-            grp['Composition'].value_counts().index[0]
-            if grp['Composition'].notna().any() else ''
-        )
-        agg_rows.append(base)
+    # Remove temperature values beyond range of ROOM_TEMP (300K) ± 15K
+    low = globals.ROOM_TEMP - 15
+    high = globals.ROOM_TEMP + 15
+    df = df[(df['Temperature'] >= low) & (df['Temperature'] <= high)]
 
-    df_dedup = pd.DataFrame(agg_rows).drop(columns=['_comp_key'])
+    # --- deduplicate: average lattice param for same composition ---
+    if deduplicate:
+        # Aggregate by composition key
+        agg_rows = []
+        for key, grp in df.groupby('_comp_key'):
+        # for key, grp in df.groupby(['_comp_key', 'Temperature']):
+            base = grp.iloc[0].copy()
+            base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
+            base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
+            base['n_icsd_duplicates'] = len(grp)
+            # Use the most common ChemicalName as Composition label
+            base['Composition'] = (
+                grp['Composition'].value_counts().index[0]
+                if grp['Composition'].notna().any() else ''
+            )
+            agg_rows.append(base)
+
+        df = pd.DataFrame(agg_rows).drop(columns=['_comp_key'])
+
+
 
     if verbose:
-        pristine_n = (df_dedup['compound_type'] == PRISTINE).sum()
-        he_n = (df_dedup['compound_type'] == HIGH_ENTROPY).sum()
-        log.info(
-            f"ICSD: {len(df_dedup)} unique compositions after deduplication "
-            f"({pristine_n} pristine, {he_n} high-entropy)"
-        )
+        pristine_n = (df['compound_type'] == globals.PRISTINE).sum()
+        he_n = (df['compound_type'] == globals.HIGH_ENTROPY).sum()
+        log.info(f"({pristine_n} pristine, {he_n} high-entropy)")
+        if deduplicate:
+            log.info(f"ICSD: {len(df)} unique compositions after deduplication")
         print()
         print(f"  {'Compound type':<20} {'Count':>6}")
         print(f"  {'-'*28}")
@@ -435,7 +466,7 @@ def load_icsd(
         print(f"  {'Total (raw)':<20} {len(df_raw):>6}")
         print()
 
-    return df_dedup
+    return df
 
 
 # ── standalone test ──────────────────────────────────────────────────────────
@@ -444,8 +475,12 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
     import sys
     fp = sys.argv[1] if len(sys.argv) > 1 else None
-    result = load_icsd(filepath=fp, verbose=True)
+    result = load_icsd(filepath=fp, verbose=True, deduplicate=False)
     print(result[['Composition', 'Sample A', 'Sample B',
                   'Lattice Parameter (Angstrom)', 'compound_type',
                   'n_icsd_duplicates']].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")
+    print(f"Unkown error({len(unknown_err)}): {unknown_err}")
+    print(f"Structure error({len(struct_err)}): {struct_err}")
+    print(f"Stoich error({len(stoic_err)}): {stoic_err}")
+    print(f"Lattice error({len(latt_err)}): {latt_err}")

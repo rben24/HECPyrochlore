@@ -1,271 +1,397 @@
-Composition,Sample A,Sample B,TPS Cond W/m/K,Lattice Parameter (Angstrom),Relative Density %,Is Single Phase,Synthesis Method,data_source,b_o_distance,b_o_b_angle,oxygen_param_x,compound_type,a_stoich_json,b_stoich_json,icsd_collection,n_icsd_duplicates
-YbHo Ti HP,"Yb,Ho",Ti,1.5253,10.07653,0.9627,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",,
-YbHoTb Ti HP,"Yb,Ho,Tb",Ti,1.7887,10.09559,0.9006,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.3333333333333333, ""Ho"": 0.3333333333333333, ""Tb"": 0.3333333333333333}","{""Ti"": 1.0}",,
-YbHoTbNd Ti HP,"Yb,Ho,Tb,Nd",Ti,1.6582,10.11292,0.9377,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.25, ""Ho"": 0.25, ""Tb"": 0.25, ""Nd"": 0.25}","{""Ti"": 1.0}",,
-YbHoTbNdPr Ti HP,"Yb,Ho,Tb,Nd,Pr",Ti,1.5326,10.18264,,No,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.2, ""Ho"": 0.2, ""Tb"": 0.2, ""Nd"": 0.2, ""Pr"": 0.2}","{""Ti"": 1.0}",,
-PrSmGdHoLu TI SDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.5663,10.17812,0.9152,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-SmEuGdTbDy Ti SDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.0263,10.184691,0.9277,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,
-PrNdGdYbLu Ti SDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.4074,10.175423,0.9353,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-PrSmGdHoLu Ti HPSDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.6402,10.17788,0.9519,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-PrNdGdYbLu Ti HPSDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.5372,10.17459,0.9334,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-SmEuGdTbDy Ti HPSDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.1861,10.18337,0.9596,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,
-PrSmGdHoLu Ti CDTF,"Pr,Sm,Gd,Ho,Lu",Ti,1.5632,10.17813232,0.923,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-PrNdGdYbLu CDTF,"Pr,Nd,Gd,Yb,Lu",Ti,1.3101,10.17715823,0.9043,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-SmEuGdTbDy Ti CDTF,"Sm,Eu,Gd,Tb,Dy",Ti,1.9556,10.18087481,0.8998,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,
-SmEuGdTbDy SPS,"Sm,Eu,Gd,Tb,Dy",Ti,2.0866,10.186104,0.9632,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,
-PrNdGdYbLu SPS,"Pr,Nd,Gd,Yb,Lu",Ti,1.4789,10.173943,0.9543,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-PrSmGdHoLu SPS,"Pr,Sm,Gd,Ho,Lu",Ti,1.5631,10.182036,0.9879,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,
-LaLuTiZr TF,"La,Lu","Ti,Zr",1.0087,10.36904,,No,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.5, ""Lu"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-LaGdLuTiZr TF,"La,Gd,Lu","Ti,Zr",0.86389,10.37753523,0.9415,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-LaGdLuTiZr HP,"La,Gd,Lu","Ti,Zr",1.0483,,0.8467,Yes,,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-LaEuLuTiZr TF,"La,Eu,Lu","Ti,Zr",1.020142857,10.38009,0.9617,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Eu"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-PrYbTiZr TF,"Pr,Yb","Ti,Zr",0.99236,10.36939,0.9571,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-PrYbTiHf TF,"Pr,Yb","Ti,Hf",0.8213,10.34771,0.9183,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",,
-LaGdLuTiHf TF,"La,Gd,Lu","Ti,Hf",0.643571429,10.36585,0.9446,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",,
-LaGdLu TiZr SM 2500 1500 20,"La,Gd,Lu","Ti,Zr",0.7585,10.35687,0.9394,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-PrYb SM 2500 1500 20,"Pr,Yb","Ti,Zr",1.015142857,10.37021,0.9412,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-LaGdLuTiHf SM 2500 1500 20,"La,Gd,Lu","Ti,Hf",0.878971429,10.36733,0.9248,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",,
-PrYb TiHf SM 2500 1500 20,"Pr,Yb","Ti,Hf",0.899971429,10.37763,0.9495,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",,
-LaYTiZr TF,"La,Y","Ti,Zr",1.052428571,10.36109,,No,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-LaSmYTiZr TF,"La,Sm,Y","Ti,Zr",1.024692308,10.3711,0.929,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,
-Lu2Ti2O7,Lu,Ti,,9.99,,,,notebookLM_literature,,,0.33,pristine,"{""Lu"": 1.0}","{""Ti"": 1.0}",,
-Nd2Ir2O7,Nd,Ir,,10.198,,,,notebookLM_literature,1.999,128.8,0.3347,pristine,"{""Nd"": 1.0}","{""Ir"": 1.0}",,
-Pr2Ir2O7,Pr,Ir,,10.4159,,,,notebookLM_literature,2.025,130.77,0.331,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",,
-Gd2Zr2O7,Gd,Zr,,10.53931,,,,notebookLM_literature,,,0.34093,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",,
-Lanthanide Zirconates,"La,Nd,Sm,Eu,Gd,Y",Zr,0.9,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Zr"": 1.0}",,
-Lanthanide Hafnates,"La,Nd,Sm,Eu,Gd,Y",Hf,1.0,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Hf"": 1.0}",,
-Lanthanide Stannates,"La,Nd,Sm,Eu,Gd,Y",Sn,1.3,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Sn"": 1.0}",,
-Lanthanide Titanates,"Ho,Y,Dy,Gd,Eu",Ti,0.75,,,Yes,,parent_components_literature,,,,high_entropy,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,
-Mixed B-site Zirconates,"La,Nd,Sm,Eu,Gd,Y","Zr,Hf,Sn",0.9,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Zr"": 0.3333333333333333, ""Hf"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,
-Seven-Element Zirconate,"La,Nd,Sm,Eu,Gd,Dy,Ho",Zr,0.85,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.14285714285714285, ""Nd"": 0.14285714285714285, ""Sm"": 0.14285714285714285, ""Eu"": 0.14285714285714285, ""Gd"": 0.14285714285714285, ""Dy"": 0.14285714285714285, ""Ho"": 0.14285714285714285}","{""Zr"": 1.0}",,
-Rare-Earth Titanate Composites,"Ho,Y,Dy,Gd,Eu",Ti,0.65,,,Yes,,parent_components_literature,,,,high_entropy,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,
-Stannate with Lanthanides,"Gd,Nd,La,Pr,Sm",Sn,1.15,,,Yes,,parent_components_literature,,,,high_entropy,"{""Gd"": 0.2, ""Nd"": 0.2, ""La"": 0.2, ""Pr"": 0.2, ""Sm"": 0.2}","{""Sn"": 1.0}",,
-Lanthanum calcium heptaoxodistannate (1.96/0.04/1),"Ca,La",Sn,,10.7192,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",168360,1.0
-Samarium calcium heptaoxodistannate (0.96/0.04/1),"Ca,Sm",Sn,,10.5225,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",168361,1.0
-Ytterbium calcium heptaoxodistannate (0.96/0.04/1),"Ca,Yb",Sn,,10.3182,,Yes,,icsd_literature,,,,high_entropy,"{""Yb"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",168362,1.0
-Gadolinium calcium zirconium dititanate,"Ca,Gd","Ti,Zr",,10.1762,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9473684210526315, ""Ca"": 0.05263157894736842}","{""Zr"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",33467,1.0
-Calcium zirconium samarium heptaoxodititanate (0.1/0.1/1.8/1),"Ca,Sm","Ti,Zr",,10.2183,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.05263157894736842, ""Sm"": 0.9473684210526315}","{""Zr"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",213149,1.0
-Gadolinium calcium zirconium dititanate,"Ca,Gd","Ti,Zr",,10.1629,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.888888888888889, ""Ca"": 0.11111111111111112}","{""Zr"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",33468,1.0
-Calcium zirconium samarium heptaoxodititanate (0.2/0.2/1.6/1),"Ca,Sm","Ti,Zr",,10.2016,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.11111111111111112, ""Sm"": 0.888888888888889}","{""Zr"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",213148,1.0
-Gadolinium calcium zirconium dititanate,"Ca,Gd","Ti,Zr",,10.1533,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8235294117647058, ""Ca"": 0.17647058823529413}","{""Zr"": 0.13043478260869565, ""Ti"": 0.8695652173913044}",33469,1.0
-Calcium zirconium samarium heptaoxodititanate (0.3/0.3/1.4/1),"Ca,Sm","Ti,Zr",,10.1891,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.17647058823529413, ""Sm"": 0.8235294117647058}","{""Zr"": 0.13043478260869565, ""Ti"": 0.8695652173913044}",213147,1.0
-Gadolinium calcium zirconium dititanate,"Ca,Gd","Ti,Zr",,10.1356,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.7499999999999999, ""Ca"": 0.25}","{""Zr"": 0.16666666666666669, ""Ti"": 0.8333333333333334}",33470,1.0
-Calcium zirconium samarium heptaoxodititanate (0.4/0.4/1.2/1),"Ca,Sm","Ti,Zr",,10.1696,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.25, ""Sm"": 0.7499999999999999}","{""Zr"": 0.16666666666666669, ""Ti"": 0.8333333333333334}",213146,1.0
-Praseodymium calcium dimolybdate(VI) (1.37/0.63/1),"Ca,Pr",Mo,,10.4329,,Yes,,icsd_literature,,,,high_entropy,"{""Pr"": 0.685, ""Ca"": 0.315}","{""Mo"": 1.0}",241237,1.0
-Calcium cerium distannate (.8/1.2/1),"Ca,Ce",Sn,,10.488,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Ce"": 0.6}","{""Sn"": 1.0}",40588,1.0
-Calcium yttrium diniobate-(Eu:0.05),"Ca,Eu,Y",Nb,,10.4618,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.58, ""Eu"": 0.02}","{""Nb"": 1.0}",253760,1.0
-Calcium yttrium diniobate-(Eu:0.15),"Ca,Eu,Y",Nb,,10.4689,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.54, ""Eu"": 0.06}","{""Nb"": 1.0}",253761,1.0
-Calcium yttrium diniobate-(Eu:0.25),"Ca,Eu,Y",Nb,,10.4747,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.5, ""Eu"": 0.1}","{""Nb"": 1.0}",253762,1.0
-Calcium yttrium diniobate-(Eu:0.375),"Ca,Eu,Y",Nb,,10.4832,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.45, ""Eu"": 0.15}","{""Nb"": 1.0}",253763,1.0
-Calcium yttrium diniobate-(Eu:0.5),"Ca,Eu,Y",Nb,,10.489,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.4, ""Eu"": 0.2}","{""Nb"": 1.0}",253764,1.0
-Calcium yttrium diniobate-(Eu:0.625),"Ca,Eu,Y",Nb,,10.4991,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.35, ""Eu"": 0.25}","{""Nb"": 1.0}",253765,1.0
-Calcium yttrium diniobate,"Ca,Y",Nb,,10.459,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.4, ""Y"": 0.6}","{""Nb"": 1.0}",253759,1.0
-Calcium samarium titanium niobium tantalum oxide (0.75/1/1.75/0.125/0.375/7),"Ca,Sm","Nb,Ta,Ti",,10.2049,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Nb"": 0.05555555555555555, ""Ta"": 0.16666666666666666}",186480,1.0
-Caclium samarium titanium niobium tantalum oxide (0.75/1/1.75/0.25/0.25/7),"Ca,Sm","Nb,Ta,Ti",,10.2206,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Nb"": 0.1111111111111111, ""Ta"": 0.1111111111111111}",186481,1.0
-Calcium samarium titanium niobium tantalum oxide (0.75/1/1.75/0.375/0.125/7),"Ca,Sm","Nb,Ta,Ti",,10.22,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Nb"": 0.16666666666666666, ""Ta"": 0.05555555555555555}",186482,1.0
-Calcium samarium titanium niobium oxide (0.75/1/1.75/0.5/7),"Ca,Sm","Nb,Ti",,10.2257,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Nb"": 0.2222222222222222}",186483,1.0
-Calcium samarium titanium tantalum oxide (0.75/1/1.75/0.5/7),"Ca,Sm","Ta,Ti",,10.2042,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Ta"": 0.2222222222222222}",186479,1.0
-Calcium neodymium iron niobium oxide (1/1/0.5/1.5/7),"Ca,Nd","Fe,Nb",,10.4138,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5, ""Nd"": 0.5}","{""Fe"": 0.25, ""Nb"": 0.75}",91261,1.0
-Calcium neodymium diniobate,"Ca,Nd",Nb,,10.42615,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5, ""Nd"": 0.5}","{""Nb"": 1.0}",50033|50034,2.0
-Calcium yttrium titanium(IV) niobium(V) pentaoxide,"Ca,Y","Nb,Ti",,10.246,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Nb"": 0.5}",230784,1.0
-Calcium yttrium diniobate,"Ca,Y",Nb,,10.3155,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5, ""Y"": 0.5}","{""Nb"": 1.0}",50035,1.0
-Calcium cerium manganese tin niobium oxide (1/0.8/0.2/1/1/7),"Ca,Ce","Mn,Nb,Sn",,10.41883,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5555555555555556, ""Ce"": 0.4444444444444445}","{""Mn"": 0.09090909090909091, ""Sn"": 0.45454545454545453, ""Nb"": 0.45454545454545453}",186597,1.0
-Calcium samarium titanium niobium oxide (1/0.75/1.5/0.75/7),"Ca,Sm","Nb,Ti",,10.2454,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5714285714285714, ""Sm"": 0.42857142857142855}","{""Ti"": 0.6666666666666666, ""Nb"": 0.3333333333333333}",186484,1.0
-Calcium samarium titanium tantalum oxide (1/0.75/1.5/0.75/7),"Ca,Sm","Ta,Ti",,10.243,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.5714285714285714, ""Sm"": 0.42857142857142855}","{""Ti"": 0.6666666666666666, ""Ta"": 0.3333333333333333}",186478,1.0
-Calcium cerium manganese tin niobium oxide (1/0.6/0.4/1/1/7),"Ca,Ce","Mn,Nb,Sn",,10.39855,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.625, ""Ce"": 0.37499999999999994}","{""Mn"": 0.16666666666666669, ""Sn"": 0.4166666666666667, ""Nb"": 0.4166666666666667}",186598,1.0
-Calcium samarium titanium niobium oxide (1.25/0.5/1.25/1/7),"Ca,Sm","Nb,Ti",,10.2737,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.7142857142857143, ""Sm"": 0.2857142857142857}","{""Ti"": 0.5555555555555556, ""Nb"": 0.4444444444444444}",186485,1.0
-Calcium samarium titanium tantalum oxide (1.25/0.5/1.25/1/7),"Ca,Sm","Ta,Ti",,10.2715,,Yes,,icsd_literature,,,,high_entropy,"{""Ca"": 0.7142857142857143, ""Sm"": 0.2857142857142857}","{""Ti"": 0.5555555555555556, ""Ta"": 0.4444444444444444}",186477,1.0
-Dicalcium diniobium oxide,Ca,Nb,,10.39625,,Yes,,icsd_literature,,,,pristine,"{""Ca"": 1.0}","{""Nb"": 1.0}",72206|22411,2.0
-Dicalcium diruthenate(V),Ca,Ru,,10.197,,Yes,,icsd_literature,,,,pristine,"{""Ca"": 1.0}","{""Ru"": 1.0}",156409,1.0
-Calcium tantalum oxide (2/2/7),Ca,Ta,,10.37,,Yes,,icsd_literature,,,,pristine,"{""Ca"": 1.0}","{""Ta"": 1.0}",27121,1.0
-Digadolinium heptaoxo-dititanate : 2% Ce4+ doped,"Ce,Gd",Ti,,10.1295,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9803921568627451, ""Ce"": 0.0196078431372549}","{""Ti"": 1.0}",145343|145348,2.0
-Gadolinium-1.95 cerium-0.05 dititanate,"Ce,Gd",Ti,,10.1708,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Ce"": 0.025}","{""Ti"": 1.0}",4658,1.0
-Digadolinium heptaoxo-dititanate : 4% Ce4+ doped,"Ce,Gd",Ti,,10.13205,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9615384615384615, ""Ce"": 0.038461538461538464}","{""Ti"": 1.0}",145344|145347,2.0
-Gadolinium-1.9 cerium-0.1 dititanate,"Ce,Gd",Ti,,10.1755,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Ce"": 0.05}","{""Ti"": 1.0}",4659,1.0
-Digadolinium heptaoxo-dititanate : 6% Ce4+ doped,"Ce,Gd",Ti,,10.1362,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9433962264150942, ""Ce"": 0.056603773584905655}","{""Ti"": 1.0}",145345|145349,2.0
-Digadolinium heptaoxo-dititanate : 8% Ce4+ doped,"Ce,Gd",Ti,,10.142949999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9259259259259258, ""Ce"": 0.07407407407407407}","{""Ti"": 1.0}",145346|145350,2.0
-Gadolinium-1.8 cerium-0.2 dititanate,"Ce,Gd",Ti,,10.1846,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Ce"": 0.1}","{""Ti"": 1.0}",4660,1.0
-Gadolinium-1.75 cerium-0.25 dititanate,"Ce,Gd",Ti,,10.194,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.875, ""Ce"": 0.125}","{""Ti"": 1.0}",4661,1.0
-"Gadolinium cerium(III,IV) dititanate, oxygen-excess","Ce,Gd",Ti,,10.189675000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",19688|19689|19690|19691,4.0
-Gadolinium-1.5 cerium-0.5 dititanate,"Ce,Gd",Ti,,10.2066,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.75, ""Ce"": 0.25}","{""Ti"": 1.0}",4662,1.0
-Gadolinium-1.2 cerium-0.8 dititanate,"Ce,Gd",Ti,,10.2297,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.6, ""Ce"": 0.4}","{""Ti"": 1.0}",4663,1.0
-Digadolinium heptaoxodititanate - 1.5%Dy(3+)-doped,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.985, ""Dy"": 0.015}","{""Ti"": 1.0}",126423,1.0
-Digadolinium heptaoxodititanate - 0.5%Dy(3+)-doped,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.995, ""Dy"": 0.005}","{""Ti"": 1.0}",126421|126422,2.0
-Digadolinium heptaoxodititanate - 2.0%Dy(3+)-doped,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.98, ""Dy"": 0.02}","{""Ti"": 1.0}",126424,1.0
-Digadolinium heptaoxodititanate - 2.5%Dy(3+)-doped,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Dy"": 0.025}","{""Ti"": 1.0}",126425,1.0
-Yttrium dititanate,"Dy,Y","Ta,Ti",,10.1109,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.879, ""Dy"": 0.121}","{""Ti"": 0.993, ""Ta"": 0.007}",215320,1.0
-Dysprosium europium dititanate,"Dy,Eu",Ti,,10.165,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",188550,1.0
-Samarium dysprosium titanium oxide (1/1/2/7),"Dy,Sm",Ti,,10.175,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Dy"": 0.5}","{""Ti"": 1.0}",144744,1.0
-Didysprosium heptaoxodititanate- 0.05 Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1208,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.02439024390243903, ""Ti"": 0.9756097560975611}",223419,1.0
-Didysprosium heptaoxodititanate- 0.1 Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1143,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",223929,1.0
-Didysprosium heptaoxodititanate - 0.15  Fe(3+) at.p.f.u. doped,Dy,"Fe,Ti",,10.1077,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 1.0}","{""Fe"": 0.06976744186046512, ""Ti"": 0.9302325581395349}",223930,1.0
-Didysprosium heptaoxodihafnate,Dy,Hf,,10.43055,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Hf"": 1.0}",218113|245138,2.0
-Didysprosium dimolybdate(IV),Dy,Mo,,10.2728,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Mo"": 1.0}",291026,1.0
-Didysprosium diruthenium(IV) heptaoxide,Dy,Ru,,10.1658,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ru"": 1.0}",176953|78151,2.0
-Didysprosium distanate,Dy,Sn,,10.4021,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Sn"": 1.0}",82960|204111,2.0
-Didysprosium dititanium oxide,Dy,Ti,,10.136535454545454,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",112534|134709|154156|154157|154158|154159|188553|191617|222913|249063|249064,11.0
-Didysprosium divanadate(IV),Dy,V,,10.0381,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""V"": 1.0}",160863|160864,2.0
-Dysprosium zirconium oxide (2/2/7),Dy,Zr,,10.4588,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Zr"": 1.0}",217895,1.0
-Samarium erbium dititanate,"Er,Sm",Ti,,10.156,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Er"": 0.5}","{""Ti"": 1.0}",148750,1.0
-Dierbium dimanganate(IV),Er,Mn,,9.875,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Mn"": 1.0}",202517,1.0
-Dierbium diruthenate(IV),Er,Ru,,10.1063,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ru"": 1.0}",97533,1.0
-Dierbium distannate,Er,Sn,,10.354133333333333,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",82962|84749|204113,3.0
-Dierbium dititanate,Er,Ti,,10.088888857142857,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",24152|24209|134712|148753|150211|188878|188879|191615|249070|249071|252238|156425|181209|181210,14.0
-Dierbium divanadate(IV),Er,V,,9.9924,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""V"": 1.0}",160866,1.0
-Erbium zirconium oxide (2/2/7),Er,Zr,,10.4108,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Zr"": 1.0}",217897,1.0
-Yttrium europium zirconium tin oxide (1.98/0.02/1/1/7),"Eu,Y","Sn,Zr",,10.35,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.99, ""Eu"": 0.01}","{""Zr"": 0.5, ""Sn"": 0.5}",154368,1.0
-Gadolinium europium titanium oxide (1.9/0.1/2/7),"Eu,Gd",Ti,,10.187,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",264720,1.0
-Lanthanum-1.9 europium-0.1 heptaoxo-dihafnate,"Eu,La",Hf,,10.765,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.95, ""Eu"": 0.05}","{""Hf"": 1.0}",4817,1.0
-Yttrium europium titanium oxide,"Eu,Y",Ti,,10.1,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",128614,1.0
-Gadolinium europium titanium oxide (1.8/0.2/2/7),"Eu,Gd",Ti,,10.188,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",264721,1.0
-Lanthanum europium zirconium oxide (1.8/0.2/2/7),"Eu,La",Zr,,10.7999,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.9, ""Eu"": 0.1}","{""Zr"": 1.0}",230049,1.0
-Yttrium europium titanium oxide,"Eu,Y",Ti,,10.105,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",128615,1.0
-Gadolinium europium titanium oxide (1.8/0.2/2/7),"Eu,Gd",Ti,,10.191,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",264722,1.0
-Yttrium europium titanium oxide,"Eu,Y",Ti,,10.119,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",128616,1.0
-Gadolinium europium dititanate,"Eu,Gd",Ti,,10.197,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",188549|196408|264723,3.0
-Yttrium europium titanium oxide,"Eu,Y",Ti,,10.157,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",128617|196409,2.0
-Europium iron(III) dititanate,Eu,"Fe,Ti",,10.1722,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 1.0}","{""Fe"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",8819,1.0
-Europium iron(III) dititanate,Eu,"Fe,Ti",,10.157,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 1.0}","{""Fe"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",8820,1.0
-Europium hafnium oxide (2.1/1.9/6.95),Eu,Hf,,10.503525,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Hf"": 1.0}",173953|119417|156142|158839,4.0
-Europium diiridate(IV),Eu,Ir,,10.2408375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ir"": 1.0}",124896|124897|124898|124899|135031|156437|173948|239645,8.0
-Dieuropium dimolybdate(IV),Eu,Mo,,10.375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Mo"": 1.0}",173946,1.0
-Dieuropium diplatinate,Eu,Pt,,10.293,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Pt"": 1.0}",173952,1.0
-Dieuropium diruthenate(IV),Eu,Ru,,10.256633333333333,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ru"": 1.0}",173947|176947|109306,3.0
-Dieuropium distannate,Eu,Sn,,10.48054,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Sn"": 1.0}",84754|165931|173949|204109,4.0
-Dieuropium dititanate,Eu,Ti,,10.202905454545453,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ti"": 1.0}",8818|48170|83596|92767|128618|173945|188551|191620|196405|200797|264724,11.0
-Dieuropium dizirconate,Eu,Zr,,10.55204,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Zr"": 1.0}",34479|108765|130791|130792|130793|173950|189342|119384|156139|180493,10.0
-Gadolinium neodymium dizirconate (0.4/1.6/1),"Gd,Nd",Zr,,10.6092,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",160163,1.0
-Neodymium gadolinium dizirconate,"Gd,Nd",Zr,,10.61575,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.5, ""Gd"": 0.5}","{""Zr"": 1.0}",186179,1.0
-Gadolinium-1.4 terbium-0.6 dizirconate,"Gd,Tb",Zr,,10.5036,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.7, ""Tb"": 0.3}","{""Zr"": 1.0}",250763,1.0
-Lanthanum gadolinium zirconium oxide (0.4/1.6/2/7),"Gd,La",Zr,,10.5934,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Gd"": 0.8}","{""Zr"": 1.0}",230560,1.0
-Gadolinium neodymium dizirconate (1.6/0.4/1),"Gd,Nd",Zr,,10.5688,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Nd"": 0.2}","{""Zr"": 1.0}",160162,1.0
-Gadolinium neodymium dizirconate (1.8/0.2/1),"Gd,Nd",Zr,,10.5571,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Nd"": 0.1}","{""Zr"": 1.0}",160161,1.0
-Gadolinium neodymium dizirconate (1.85/0.15/1),"Gd,Nd",Zr,,10.5433,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.925, ""Nd"": 0.075}","{""Zr"": 1.0}",160160,1.0
-Gadolinium neodymium dizirconate (1.95/0.05/1),"Gd,Nd",Zr,,10.5429,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Nd"": 0.025}","{""Zr"": 1.0}",160159,1.0
-Gadolinium cobalt ruthenium oxide,Gd,"Co,Ru",,10.225,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Co"": 0.047619047619047616, ""Ru"": 0.9523809523809523}",127153,1.0
-Gadolinium cobalt ruthenium oxide,Gd,"Co,Ru",,10.2042,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Co"": 0.16666666666666669, ""Ru"": 0.8333333333333334}",127154,1.0
-Gadolinium chromium(III) tantalum(V) oxide (2/0.966/1.034/7),Gd,"Cr,Ta",,10.29015,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Cr"": 0.483, ""Ta"": 0.517}",142246,1.0
-Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.27171,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.2, ""Ti"": 0.8}",258280,1.0
-Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.31934,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",258279|258285,2.0
-Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.36858,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.6, ""Ti"": 0.4}",258284,1.0
-Gadolinium hafnate titanate,Gd,"Hf,Ti",,10.42276,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",258277|258283,2.0
-Digadolinium dihafnium heptaoxide,Gd,Hf,,10.519988,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Hf"": 1.0}",213372|258282|119418|156143|158840,5.0
-Digadolinium dimolybdate(IV),Gd,Mo,,10.30677,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Mo"": 1.0}",34166|159774|159775|159776|159777|291027,6.0
-Digadolinium diplatinum heptaoxide,Gd,Pt,,10.261389999999999,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pt"": 1.0}",48347|264487,2.0
-Digadolinium diruthenate(IV),Gd,Ru,,10.235566666666667,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",79332|127152|176950,3.0
-Digadolinium distannate,Gd,Sn,,10.45609,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Sn"": 1.0}",84753|204115,2.0
-Digadolinium dititanate,Gd,Ti,,10.188074599999998,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",4657|19687|24207|33466|126420|134710|145342|145864|148752|150210|154160|154161|154162|154163|167918|188552|191619|196406|213838|213839|214706|235987|258281|258286|264719,25.0
-Digadolinium dizirconate,Gd,Zr,,10.532914117647058,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",35077|35083|35114|35131|160158|165813|165814|165815|165816|185395|207492|212861|213855|217894|261759|119385|156140,17.0
-Holmium neodymium zirconate (0.2/1.8/2),"Ho,Nd",Zr,,10.6049,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.1, ""Nd"": 0.9}","{""Zr"": 1.0}",261855,1.0
-Holmium neodymium zirconate (0.4/1.6/2),"Ho,Nd",Zr,,10.5871,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",261856,1.0
-Holmium neodymium zirconate (0.6/1.4/2),"Ho,Nd",Zr,,10.5652,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.3, ""Nd"": 0.7}","{""Zr"": 1.0}",261857,1.0
-Holmium neodymium zirconate (0.8/1.2/2),"Ho,Nd",Zr,,10.5607,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.4, ""Nd"": 0.6}","{""Zr"": 1.0}",261858,1.0
-Holmium neodymium zirconate (0.9/1.1/2),"Ho,Nd",Zr,,10.5563,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",261859,1.0
-Holmium neodymium zirconate (1/1/2),"Ho,Nd",Zr,,10.5093,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",261860,1.0
-Samarium holmium titanium oxide (1/1/2/7),"Ho,Sm",Ti,,10.162,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",144745,1.0
-Holmium titanium iron oxide (2/1.85/0.15/7),Ho,"Fe,Ti",,10.1013,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Ti"": 0.925, ""Fe"": 0.075}",112535,1.0
-Holmium iron heptaoxodititanate (1.8/0.2/7),Ho,"Fe,Ti",,10.0804,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Fe"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",112536,1.0
-Diholmium manganese ruthenium heptaoxide,Ho,"Mn,Ru",,10.0491,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",169610,1.0
-Diholmium dimolybdate,Ho,Mo,,10.26902,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Mo"": 1.0}",34170,1.0
-Diholmium diruthenate(IV),Ho,Ru,,10.147400000000001,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ru"": 1.0}",96730|176954,2.0
-Diholmium distannate,Ho,Sn,,10.3743,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",82961|84748|204117,3.0
-Holmium titanium oxide (2.1/1.9/6.95),Ho,Ti,,10.115577363636364,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ti"": 1.0}",112533|188880|188881|191616|205098|249077|249078|252236|146122|180591|180592,11.0
-Holmium zirconium oxide (2/2/7),Ho,Zr,,10.4167,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Zr"": 1.0}",217896,1.0
-Yttrium lanthanum titanium oxide (1.95/0.05/2/7),"La,Y",Ti,,10.10199,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""La"": 0.025}","{""Ti"": 1.0}",173057,1.0
-Yttrium lanthanum titanium oxide (1.9/0.1/2/7),"La,Y",Ti,,10.109195,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",173049|173058,2.0
-Yttrium lanthanum titanium oxide (1.8/0.2/2/7),"La,Y",Ti,,10.10901,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""La"": 0.1}","{""Ti"": 1.0}",173059,1.0
-Yttrium lanthanum titanium oxide (1.75/0.22/2/7),"La,Y",Ti,,10.132525000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",173050|173052,2.0
-Yttrium lanthanum titanium oxide (1.73/0.23/2/7),"La,Y",Ti,,10.12388,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",173054|173060,2.0
-Yttrium lanthanum titanium oxide (1.7/0.3/2/7),"La,Y",Ti,,10.11981,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.85, ""La"": 0.15}","{""Ti"": 1.0}",173061,1.0
-Yttrium lanthanum titanium oxide (1.65/0.35/2/7),"La,Y",Ti,,10.12344,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.825, ""La"": 0.175}","{""Ti"": 1.0}",173062,1.0
-Lanthanum yttrium dihafnate (0.4/1.6/1),"La,Y",Hf,,10.5148,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Y"": 0.8}","{""Hf"": 1.0}",173794,1.0
-Lanthanum yttrium dihafnate (0.8/1.2/1),"La,Y",Hf,,10.5718,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.4, ""Y"": 0.6}","{""Hf"": 1.0}",173793,1.0
-Lanthanum yttrium dizirconate (0.8/1.2/1),"La,Y",Zr,,10.6572,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",173798,1.0
-Lanthanum yttrium dihafnate (1.2/0.8/1),"La,Y",Hf,,10.646,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.6, ""Y"": 0.4}","{""Hf"": 1.0}",173792,1.0
-Lanthanum yttrium dizirconate (1.2/0.8/1),"La,Y",Zr,,10.6714,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.6, ""Y"": 0.4}","{""Zr"": 1.0}",173797,1.0
-Lanthanum yttrium dihafnate (1.6/0.4/1),"La,Y",Hf,,10.7212,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.8, ""Y"": 0.2}","{""Hf"": 1.0}",173791,1.0
-Lanthanum yttrium dizirconate (1.6/0.4/1),"La,Y",Zr,,10.7484,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",173796,1.0
-Yttrium lanthanum titanium oxide (0.35/1.65/2/7),"La,Y",Ti,,10.1315,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.175, ""La"": 0.825}","{""Ti"": 1.0}",173064,1.0
-Yttrium lanthanum titanium oxide (0.3/1.7/2/7),"La,Y",Ti,,10.1316,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.15, ""La"": 0.85}","{""Ti"": 1.0}",173066,1.0
-Yttrium lanthanum titanium oxide (0.25/1.75/2/7),"La,Y",Ti,,10.1145,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.125, ""La"": 0.875}","{""Ti"": 1.0}",173068,1.0
-Lanthanum dihafnate,La,Hf,,10.770800000000001,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Hf"": 1.0}",173790|218109,2.0
-Dilanthanum diruthenium(IV) heptaoxide,La,Ru,,10.3967,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Ru"": 1.0}",176946,1.0
-Dilanthanum distannate,La,Sn,,10.699575,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",24195|82956|167144|204105,4.0
-Dilanthanum dizirconate,La,Zr,,10.8023496,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",26762|26768|26779|26851|26853|51573|130794|130795|130796|140547|147738|150206|153222|173795|184089|189341|189344|207489|248878|253061|253063|15165|47621|49600|180491,25.0
-Dilutetium diiridate(IV),Lu,Ir,,10.099,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ir"": 1.0}",35849|144826,2.0
-Dilutetium dimanganate(IV),Lu,Mn,,9.82684,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mn"": 1.0}",56518,1.0
-Dilutetium heptaoxodimolybdate,Lu,Mo,,10.1478,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mo"": 1.0}",117790,1.0
-Dilutetium diruthenate(IV),Lu,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ru"": 1.0}",109308,1.0
-Dilutetium distannate,Lu,Sn,,10.2961,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Sn"": 1.0}",82965|204106,2.0
-Dilutetium dititanate,Lu,Ti,,10.018242631578948,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ti"": 1.0}",24205|188869|188870|188871|191612|249084|119363|119364|119365|154079|154080|154081|155572|155573|155574|223078|223079|223080|250252,19.0
-Dilutetium divanadate(IV),Lu,V,,9.934475,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""V"": 1.0}",32688|159286|159290|160599,4.0
-Neodymium yttrium dizirconate (0.4/1.6/1),"Nd,Y",Zr,,10.531,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.2, ""Y"": 0.8}","{""Zr"": 1.0}",174191,1.0
-Neodymium yttrium dizirconate (0.8/1.2/1),"Nd,Y",Zr,,10.532,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",174190,1.0
-Neodymium yttrium zirconate (1.6/0.4/1),"Nd,Y",Zr,,10.609,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",174188,1.0
-Dineodymium heptaoxodihafnate,Nd,Hf,,10.6469,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Hf"": 1.0}",218111,1.0
-Neodymium iridium oxide (2/2/7),Nd,Ir,,10.37255,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ir"": 1.0}",239644|259364,2.0
-Dineodymium dimolybdate(IV),Nd,Mo,,10.4836,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Mo"": 1.0}",291030,1.0
-Dineodymium diplatinum(IV) oxide,Nd,Pt,,10.4041,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Pt"": 1.0}",402456,1.0
-Dineodymium diruthenate(IV),Nd,Ru,,10.342575,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",4816|79327|82304|91085|161572|176951|195795|78133,8.0
-Dineodymium distannate,Nd,Sn,,10.571,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Sn"": 1.0}",82958|204108,2.0
-Dineodymium dizirconate,Nd,Zr,,10.664559565217392,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",26799|26802|26805|26854|62793|62794|153227|160164|174187|189340|189343|207491|212858|213450|213451|213452|213453|249974|259150|261854|119329|180492|191573,23.0
-Dipraseodymium heptaoxodihafnate,Pr,Hf,,10.6965,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Hf"": 1.0}",218110,1.0
-Dipraseodymium diiridium heptaoxide,Pr,Ir,,10.407933333333332,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",135032|156436|239646,3.0
-Dipraseodymium diruthenate(IV),Pr,Ru,,10.37385,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ru"": 1.0}",82303|163397|221580|78123,4.0
-Dipraseodymium distannate,Pr,Sn,,10.6068,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",82957|84744|204114,3.0
-Dipraseodymium dizirconate,Pr,Zr,,10.703985124999999,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Zr"": 1.0}",150207|193859|249972|429190|429191|429192|219179|219180,8.0
-Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.098,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""Sm"": 0.025}","{""Ti"": 1.0}",128619,1.0
-Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.105,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Sm"": 0.05}","{""Ti"": 1.0}",128620,1.0
-Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.113,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""Sm"": 0.1}","{""Ti"": 1.0}",128621,1.0
-Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.125,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.75, ""Sm"": 0.25}","{""Ti"": 1.0}",128622,1.0
-Yttrium samarium titanium oxide,"Sm,Y",Ti,,10.16,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.5, ""Sm"": 0.5}","{""Ti"": 1.0}",128623,1.0
-Samarium ytterbium titanium oxide (1/1/2/7),"Sm,Yb",Ti,,10.133,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Yb"": 0.5}","{""Ti"": 1.0}",144746,1.0
-Samarium cobalt titanium oxide (1.89/0.11/2/6.95),Sm,"Co,Ti",,10.215,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Co"": 0.05213270142180095, ""Ti"": 0.9478672985781991}",99982,1.0
-Samarium chromium(III) tantalum(V) oxide (2/0.846/1.154/7),Sm,"Cr,Ta",,10.34059,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Cr"": 0.423, ""Ta"": 0.577}",142248,1.0
-Samarium hafnium oxide (2.1/1.9/6.95),Sm,Hf,,10.5703,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Hf"": 1.0}",119416|119419|156141|156144|158838|158841,6.0
-Disamarium dimolybdate(IV),Sm,Mo,,10.406533333333334,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Mo"": 1.0}",108766|108769|291028,3.0
-Samarium nickel titanium oxide (1.89/0.11/2/6.95),Sm,"Ni,Ti",,10.219,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 1.0}","{""Ni"": 0.05213270142180095, ""Ti"": 0.9478672985781991}",99986,1.0
-Disamarium diruthenium(IV) heptaoxide,Sm,Ru,,10.278849999999998,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ru"": 1.0}",176949|78142,2.0
-Disamarium ditin(IV) oxide,Sm,Sn,,10.513316666666666,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Sn"": 1.0}",24194|84755|204118,3.0
-Disamarium dititanate,Sm,Ti,,10.227225,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",24208|128624|134726|148751|150209|191621|213145|214705,8.0
-Disamarium dizirconate,Sm,Zr,,10.59001111111111,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Zr"": 1.0}",150208|249976|258907|261415|119322|119381|119382|156137|156138,9.0
-Diterbium heptaoxodihafnate,Tb,Hf,,10.4716,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Hf"": 1.0}",218112,1.0
-Diterbium dimolybdate(IV),Tb,Mo,,10.152892,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Mo"": 1.0}",159770|159771|159772|159773|182567,5.0
-Diterbium diruthenate(IV),Tb,Ru,,10.225200000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ru"": 1.0}",82305|176952,2.0
-Terbium tin zirconium oxide,Tb,"Sn,Zr",,10.423759,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 1.0}","{""Sn"": 0.9, ""Zr"": 0.1}",133286,1.0
-Terbium distannate,Tb,Sn,,10.292275,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",82959|159786|159787|159788|159789|159790|159791|204116,8.0
-Terbium dititanate,Tb,Ti,,10.052223000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ti"": 1.0}",139376|159781|159782|159783|159784|159785|191618|249087|249088|69461,10.0
-Thulium iridium oxide (2/2/7),Tm,Ir,,10.135,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ir"": 1.0}",144825,1.0
-Dithulium diruthenate(IV),Tm,Ru,,10.096,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ru"": 1.0}",109307,1.0
-Dithulium ditin heptaoxide,Tm,Sn,,10.228980000000002,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",82963|84750|147480|147481|204112,5.0
-Dithulium dititanate,Tm,Ti,,10.0675,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ti"": 1.0}",191614|249092|249093,3.0
-Thulium heptaoxodivanadate(IV),Tm,V,,9.973,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""V"": 1.0}",32690,1.0
-Yttrium chromium(III) tantalum(V) oxide (2/1.016/0.984/7),Y,"Cr,Ta",,10.20068,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Cr"": 0.508, ""Ta"": 0.492}",142247,1.0
-Yttrium titanium hafnium oxide (2/1.5/0.5/7),Y,"Hf,Ti",,10.179,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.75, ""Hf"": 0.25}",239725,1.0
-Yttrium titanium hafnium oxide (2/1/1/7),Y,"Hf,Ti",,10.2524,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.5, ""Hf"": 0.5}",239726,1.0
-Yttrium titanium hafnium oxide (2/0.5/1.5/7),Y,"Hf,Ti",,10.3246,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.75}",239727,1.0
-Diyttrium titanium iridate,Y,"Ir,Ti",,10.212,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.85, ""Ti"": 0.15}",759800,1.0
-Diyttrium titanium iridate,Y,"Ir,Ti",,10.218,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.9, ""Ti"": 0.1}",759799,1.0
-Diyttrium titanium iridate,Y,"Ir,Ti",,10.228,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.95, ""Ti"": 0.05}",759798,1.0
-Diyttrium titanium iridate,Y,"Ir,Ti",,10.242,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ir"": 0.975, ""Ti"": 0.025}",759797,1.0
-Diyttrium diiridate(IV),Y,Ir,,10.174033333333334,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ir"": 1.0}",135030|187534|759796,3.0
-Diyttrium zirconium manganese(IV) heptaoxide,Y,"Mn,Zr",,10.4507,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.95, ""Mn"": 0.05}",46127,1.0
-Diyttrium zirconium manganese(IV) heptaoxide,Y,"Mn,Zr",,10.4468,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.9, ""Mn"": 0.1}",46128,1.0
-Diyttrium dimanganate(IV),Y,Mn,,9.908193333333335,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mn"": 1.0}",56516|139773|202516,3.0
-Diyttrium dimolybdenum(IV) oxide,Y,Mo,,10.23,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mo"": 1.0}",202522,1.0
-Diyttrium dirhodium(IV) heptaoxide,Y,Rh,,10.11833,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Rh"": 1.0}",220880,1.0
-Diyttrium diruthenate(IV),Y,Ru,,10.138549999999999,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ru"": 1.0}",79733|73799,2.0
-Yttrium titanium tin oxide (2/1.5/0.5/7),Y,"Sn,Ti",,10.3162,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.75, ""Sn"": 0.25}",160112,1.0
-Diyttrium heptaoxotitanostannate,Y,"Sn,Ti",,10.2532,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.5, ""Sn"": 0.5}",160113,1.0
-Diyttrium zirconium tin heptaoxide,Y,"Sn,Zr",,10.3,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.5, ""Sn"": 0.5}",154222,1.0
-Yttrium titanium tin oxide (2/0.5/1.5/7),Y,"Sn,Ti",,10.197,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.25, ""Sn"": 0.75}",160114,1.0
-Yttrium tin zirconium oxide (2/1.8/0.2/7),Y,"Sn,Zr",,10.38564,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Sn"": 0.9, ""Zr"": 0.1}",237258,1.0
-Diyttrium distannate,Y,Sn,,10.335252857142857,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Sn"": 1.0}",24193|74706|84803|84805|157673|208186|160115,7.0
-Diyttrium dititanate,Y,Ti,,10.118511454545455,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",14242|24206|34883|34885|42702|48174|66874|83593|93770|128613|134732|154152|154153|154154|154155|157666|157667|173048|191622|196407|239724|160111,22.0
-Diyttrium divanadate(IV),Y,V,,10.01434,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""V"": 1.0}",160600|160865,2.0
-Diyttrium dizirconium heptaoxide,Y,Zr,,10.4531,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Zr"": 1.0}",46126,1.0
-Diytterbium diiridate(IV),Yb,Ir,,10.104,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ir"": 1.0}",35850,1.0
-Diytterbium diruthenate(IV),Yb,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",82306,1.0
-Diytterbium distannate,Yb,Sn,,10.3096,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Sn"": 1.0}",82964|204107,2.0
-Diytterbium dititanate,Yb,Ti,,10.054812621621622,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",24722|121049|122289|122290|122291|122292|122293|122295|122297|122298|122299|122300|122301|122303|122304|122305|122306|122307|134731|138128|138129|161405|173750|186195|186196|188872|188873|188874|188876|188877|191613|214707|249099|249100|252237|119368|154077,37.0
-Ytterbium heptaoxodivanadate(IV),Yb,V,,9.945,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""V"": 1.0}",32689,1.0
+Composition,Sample A,Sample B,Thermal Conductivity (W/m/K),Lattice Parameter (Angstrom),Relative Density %,Is Single Phase,Synthesis Method,data_source,b_o_distance,b_o_b_angle,oxygen_param_x,compound_type,a_stoich_json,b_stoich_json,Temperature,Thermal Expansion,density_calc,icsd_collection,n_icsd_duplicates
+YbHo Ti HP,"Yb,Ho",Ti,1.5253,10.07653,0.9627,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",,,,,
+YbHoTb Ti HP,"Yb,Ho,Tb",Ti,1.7887,10.09559,0.9006,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.3333333333333333, ""Ho"": 0.3333333333333333, ""Tb"": 0.3333333333333333}","{""Ti"": 1.0}",,,,,
+YbHoTbNd Ti HP,"Yb,Ho,Tb,Nd",Ti,1.6582,10.11292,0.9377,Yes,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.25, ""Ho"": 0.25, ""Tb"": 0.25, ""Nd"": 0.25}","{""Ti"": 1.0}",,,,,
+YbHoTbNdPr Ti HP,"Yb,Ho,Tb,Nd,Pr",Ti,1.5326,10.18264,,No,Hot Press from Pyrochlore 1400 C 35 Mpa 15 min,safin_experimental,,,,high_entropy,"{""Yb"": 0.2, ""Ho"": 0.2, ""Tb"": 0.2, ""Nd"": 0.2, ""Pr"": 0.2}","{""Ti"": 1.0}",,,,,
+PrSmGdHoLu TI SDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.5663,10.17812,0.9152,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+SmEuGdTbDy Ti SDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.0263,10.184691,0.9277,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,,,,
+PrNdGdYbLu Ti SDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.4074,10.175423,0.9353,Yes,SSS 1400C 20 Hr powder then 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+PrSmGdHoLu Ti HPSDJ,"Pr,Sm,Gd,Ho,Lu",Ti,1.6402,10.17788,0.9519,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+PrNdGdYbLu Ti HPSDJ,"Pr,Nd,Gd,Yb,Lu",Ti,1.5372,10.17459,0.9334,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+SmEuGdTbDy Ti HPSDJ,"Sm,Eu,Gd,Tb,Dy",Ti,2.1861,10.18337,0.9596,Yes,Hot Press from Pyrochlore 1400 C 35 MPa 15 min,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,,,,
+PrSmGdHoLu Ti CDTF,"Pr,Sm,Gd,Ho,Lu",Ti,1.5632,10.17813232,0.923,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+PrNdGdYbLu CDTF,"Pr,Nd,Gd,Yb,Lu",Ti,1.3101,10.17715823,0.9043,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+SmEuGdTbDy Ti CDTF,"Sm,Eu,Gd,Tb,Dy",Ti,1.9556,10.18087481,0.8998,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,,,,
+SmEuGdTbDy SPS,"Sm,Eu,Gd,Tb,Dy",Ti,2.0866,10.186104,0.9632,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,,,,
+PrNdGdYbLu SPS,"Pr,Nd,Gd,Yb,Lu",Ti,1.4789,10.173943,0.9543,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+PrSmGdHoLu SPS,"Pr,Sm,Gd,Ho,Lu",Ti,1.5631,10.182036,0.9879,Yes,Spark Plasma Sinter from Pyrochlore 1350C 37 MPa 10mintue,safin_experimental,,,,high_entropy,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",,,,,
+LaLuTiZr TF,"La,Lu","Ti,Zr",1.0087,10.36904,,No,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.5, ""Lu"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+LaGdLuTiZr TF,"La,Gd,Lu","Ti,Zr",0.86389,10.37753523,0.9415,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+LaGdLuTiZr HP,"La,Gd,Lu","Ti,Zr",1.0483,,0.8467,Yes,,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+LaEuLuTiZr TF,"La,Eu,Lu","Ti,Zr",1.020142857,10.38009,0.9617,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Eu"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+PrYbTiZr TF,"Pr,Yb","Ti,Zr",0.99236,10.36939,0.9571,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+PrYbTiHf TF,"Pr,Yb","Ti,Hf",0.8213,10.34771,0.9183,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",,,,,
+LaGdLuTiHf TF,"La,Gd,Lu","Ti,Hf",0.643571429,10.36585,0.9446,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",,,,,
+LaGdLu TiZr SM 2500 1500 20,"La,Gd,Lu","Ti,Zr",0.7585,10.35687,0.9394,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+PrYb SM 2500 1500 20,"Pr,Yb","Ti,Zr",1.015142857,10.37021,0.9412,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+LaGdLuTiHf SM 2500 1500 20,"La,Gd,Lu","Ti,Hf",0.878971429,10.36733,0.9248,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",,,,,
+PrYb TiHf SM 2500 1500 20,"Pr,Yb","Ti,Hf",0.899971429,10.37763,0.9495,Yes,SpeedMix 2500 RPM 30 min then SSS 1500C 20 Hr,safin_experimental,,,,high_entropy,"{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",,,,,
+LaYTiZr TF,"La,Y","Ti,Zr",1.052428571,10.36109,,No,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+LaSmYTiZr TF,"La,Sm,Y","Ti,Zr",1.024692308,10.3711,0.929,Yes,SSS 1600C 40 Hr,safin_experimental,,,,high_entropy,"{""La"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,,,,
+Lu2Ti2O7,Lu,Ti,,9.99,,,,notebookLM_literature,,,0.33,pristine,"{""Lu"": 1.0}","{""Ti"": 1.0}",,,,,
+Bi2Sn2O7,Bi,Sn,,10.7428,,,,notebookLM_literature,2.065,,,pristine,"{""Bi"": 1.0}","{""Sn"": 1.0}",,,,,
+Nd2Ir2O7,Nd,Ir,,10.198,,,,notebookLM_literature,1.999,128.8,0.3347,pristine,"{""Nd"": 1.0}","{""Ir"": 1.0}",,,,,
+Pr2Ir2O7,Pr,Ir,,10.4159,,,,notebookLM_literature,2.025,130.77,0.331,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",,,,,
+Bi2Ir2O7,Bi,Ir,,10.3256,,,,notebookLM_literature,2.003,131.38,0.32985,pristine,"{""Bi"": 1.0}","{""Ir"": 1.0}",,,,,
+Gd2Zr2O7,Gd,Zr,,10.53931,,,,notebookLM_literature,,,0.34093,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",,,,,
+Lanthanide Zirconates,"La,Nd,Sm,Eu,Gd,Y",Zr,0.9,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Zr"": 1.0}",,,,,
+Lanthanide Hafnates,"La,Nd,Sm,Eu,Gd,Y",Hf,1.0,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Hf"": 1.0}",,,,,
+Lanthanide Stannates,"La,Nd,Sm,Eu,Gd,Y",Sn,1.3,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Sn"": 1.0}",,,,,
+Lanthanide Titanates,"Ho,Y,Dy,Gd,Eu",Ti,0.75,,,Yes,,parent_components_literature,,,,high_entropy,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,,,,
+Mixed B-site Zirconates,"La,Nd,Sm,Eu,Gd,Y","Zr,Hf,Sn",0.9,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Eu"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Y"": 0.16666666666666666}","{""Zr"": 0.3333333333333333, ""Hf"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,,,,
+Seven-Element Zirconate,"La,Nd,Sm,Eu,Gd,Dy,Ho",Zr,0.85,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.14285714285714285, ""Nd"": 0.14285714285714285, ""Sm"": 0.14285714285714285, ""Eu"": 0.14285714285714285, ""Gd"": 0.14285714285714285, ""Dy"": 0.14285714285714285, ""Ho"": 0.14285714285714285}","{""Zr"": 1.0}",,,,,
+Rare-Earth Titanate Composites,"Ho,Y,Dy,Gd,Eu",Ti,0.65,,,Yes,,parent_components_literature,,,,high_entropy,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,,,,
+Zirconate with Ce Doping,"La,Nd,Sm,Gd,Yb","Zr,Ce",0.9,,,Yes,,parent_components_literature,,,,high_entropy,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 0.5, ""Ce"": 0.5}",,,,,
+Stannate with Lanthanides,"Gd,Nd,La,Pr,Sm",Sn,1.15,,,Yes,,parent_components_literature,,,,high_entropy,"{""Gd"": 0.2, ""Nd"": 0.2, ""La"": 0.2, ""Pr"": 0.2, ""Sm"": 0.2}","{""Sn"": 1.0}",,,,,
+Gd1.925Th0.075Zr1.925Al0.075O7,"Al,Gd","Th,Zr",,10.527,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9625, ""Al"": 0.0375}","{""Th"": 0.0375, ""Zr"": 0.9625}",298.0,,6.94,185397,1.0
+Gd1.9Th0.1Zr1.9Al0.1O7,"Al,Gd","Th,Zr",,10.531,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Al"": 0.05}","{""Th"": 0.05, ""Zr"": 0.95}",298.0,,6.94,185399,1.0
+Gd1.85Th0.15Zr1.85Al0.15O7,"Al,Gd","Th,Zr",,10.537,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.925, ""Al"": 0.075}","{""Th"": 0.075, ""Zr"": 0.925}",298.0,,6.93,185401,1.0
+Gd1.8Th0.2Zr1.8Al0.2O7,"Al,Gd","Th,Zr",,10.543,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Al"": 0.1}","{""Th"": 0.1, ""Zr"": 0.9}",298.0,,6.93,185403,1.0
+Am2Zr2O7,Am,Zr,,10.660798333333332,,Yes,,icsd_literature,,,,pristine,"{""Am"": 1.0}","{""Zr"": 1.0}",293.0,,8.54,118470|118471|118472|118473|118474|159148,6.0
+Dy1.8Bi0.2Ru2O7,"Bi,Dy",Ru,,10.1798,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Dy"": 0.9}","{""Ru"": 1.0}",293.0,,8.17,78150,1.0
+Nd1.8Bi0.2Ru2O7,"Bi,Nd",Ru,,10.3311,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Nd"": 0.9}","{""Ru"": 1.0}",293.0,,7.42,78132,1.0
+Pr1.8Bi0.2Ru2O7,"Bi,Pr",Ru,,10.368,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Pr"": 0.9}","{""Ru"": 1.0}",293.0,,7.27,163396,1.0
+Sm1.8Bi0.2Ru2O7,"Bi,Sm",Ru,,10.2779,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Sm"": 0.9}","{""Ru"": 1.0}",293.0,,7.67,78141,1.0
+Y1.8Bi0.2Ru2O7,"Bi,Y",Ru,,10.1525,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Y"": 0.9}","{""Ru"": 1.0}",293.0,,6.55,73798,1.0
+Y1.8Sn2Bi0.2O7,"Bi,Y",Sn,,10.3563,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.1, ""Y"": 0.9}","{""Sn"": 1.0}",293.0,,6.59,84804,1.0
+Nd1.75Bi0.25Ru2O6.988,"Bi,Nd",Ru,,10.341,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.125, ""Nd"": 0.875}","{""Ru"": 1.0}",293.0,,7.43,91084,1.0
+Y1.73Ti2Bi0.27O7,"Bi,Y",Ti,,10.134,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.865, ""Bi"": 0.135}","{""Ti"": 1.0}",293.0,,5.34,157836,1.0
+Dy1.6Bi0.4Ru2O7,"Bi,Dy",Ru,,10.1931,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Dy"": 0.8}","{""Ru"": 1.0}",293.0,,8.25,78149,1.0
+Bi0.5Ir2Pb1.5O7,"Bi,Ir",Pb,,10.1838,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Ir"": 0.8}","{""Pb"": 1.0}",300.0,,11.49,252128,1.0
+Nd1.6Bi0.4Ru2O7,"Bi,Nd",Ru,,10.3341,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Nd"": 0.8}","{""Ru"": 1.0}",293.0,,7.57,78131,1.0
+Pr1.6Bi0.4Ru2O7,"Bi,Pr",Ru,,10.36195,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Pr"": 0.8}","{""Ru"": 1.0}",293.0,,7.44,163395|78122,2.0
+Sm1.6Bi0.4Ru2O7,"Bi,Sm",Ru,,10.2831,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Sm"": 0.8}","{""Ru"": 1.0}",293.0,,7.8,78140,1.0
+Y1.6Bi0.4Ru2O7,"Bi,Y",Ru,,10.1774,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Y"": 0.8}","{""Ru"": 1.0}",293.0,,6.8,73797,1.0
+Y1.6Sn2Bi0.4O7,"Bi,Y",Sn,,10.3697,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.2, ""Y"": 0.8}","{""Sn"": 1.0}",293.0,,6.85,84802,1.0
+Dy1.5Bi0.5Ru2O7,"Bi,Dy",Ru,,10.2016,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Dy"": 0.75}","{""Ru"": 1.0}",293.0,,8.29,78148,1.0
+Gd1.5Bi0.5Ru2O7,"Bi,Gd",Ru,,10.2468,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Gd"": 0.75}","{""Ru"": 1.0}",293.0,,8.08,78153,1.0
+Lu1.5Bi0.5Ru2O7,"Bi,Lu",Ru,,10.1187,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Lu"": 0.75}","{""Ru"": 1.0}",293.0,,8.73,78152,1.0
+Nd1.5Bi0.5Ru2O7,"Bi,Nd",Ru,,10.3306,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Nd"": 0.75}","{""Ru"": 1.0}",293.0,,7.65,78130,1.0
+Pr1.5Bi0.5Ru2O7,"Bi,Pr",Ru,,10.3565,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Pr"": 0.75}","{""Ru"": 1.0}",293.0,,7.53,78121,1.0
+Sm1.5Bi0.5Ru2O7,"Bi,Sm",Ru,,10.2802,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Sm"": 0.75}","{""Ru"": 1.0}",293.0,,7.88,78139,1.0
+Y1.5Bi0.5Ru2O7,"Bi,Y",Ru,,10.1834,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.25, ""Y"": 0.75}","{""Ru"": 1.0}",293.0,,6.94,73796,1.0
+Dy1.4Bi0.6Ru2O7,"Bi,Dy",Ru,,10.2016,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Dy"": 0.7}","{""Ru"": 1.0}",293.0,,8.35,78147,1.0
+Nd1.4Bi0.6Ru2O7,"Bi,Nd",Ru,,10.3311,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Nd"": 0.7}","{""Ru"": 1.0}",293.0,,7.73,78129,1.0
+Pr1.4Bi0.6Ru2O7,"Bi,Pr",Ru,,10.3547,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Pr"": 0.7}","{""Ru"": 1.0}",293.0,,7.62,163394|78120,2.0
+Sm1.4Bi0.6Ru2O7,"Bi,Sm",Ru,,10.2862,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Sm"": 0.7}","{""Ru"": 1.0}",293.0,,7.93,78138,1.0
+Y1.4Bi0.6Ru2O7,"Bi,Y",Ru,,10.1924,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Y"": 0.7}","{""Ru"": 1.0}",293.0,,7.08,73795,1.0
+Y1.4Sn2Bi0.6O7,"Bi,Y",Sn,,10.396650000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3, ""Y"": 0.7}","{""Sn"": 1.0}",293.0,,7.05,84800|84801,2.0
+Yb1.375Bi0.625Ru2O7,"Bi,Yb",Ru,,10.1405,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3125, ""Yb"": 0.6875}","{""Ru"": 1.0}",293.0,,8.7,126215|126227,2.0
+Eu1.33Ti2Bi0.66O7,"Bi,Eu",Ti,,10.25373,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3316582914572864, ""Eu"": 0.6683417085427136}","{""Ti"": 1.0}",293.0,,6.75,246400,1.0
+Ho1.33Ti2Bi0.66O7,"Bi,Ho",Ti,,10.18701,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3316582914572864, ""Ho"": 0.6683417085427136}","{""Ti"": 1.0}",293.0,,7.1,246401,1.0
+BiIr2PbO7,"Bi,Ir",Pb,,10.19191,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3333333333333333, ""Ir"": 0.6666666666666666}","{""Pb"": 1.0}",300.0,,11.48,252130,1.0
+Yb1.33Ti2Bi0.66O7,"Bi,Yb",Ti,,10.145389999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.3316582914572864, ""Yb"": 0.6683417085427136}","{""Ti"": 1.0}",293.0,,7.33,246402|246403,2.0
+Y1.3Ti2Bi0.7O7,"Bi,Y",Ti,,10.206,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.65, ""Bi"": 0.35}","{""Ti"": 1.0}",293.0,,5.87,157835,1.0
+Gd1.27Ti2Bi0.73O7,"Bi,Gd",Ti,,10.2408,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.635, ""Bi"": 0.365}","{""Ti"": 1.0}",293.0,,6.91,162575|162576,2.0
+Y1.26Ti2Bi0.74O7,"Bi,Y",Ti,,10.221,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.63, ""Bi"": 0.37}","{""Ti"": 1.0}",293.0,,5.9,157834,1.0
+Nd1.25Bi0.75Ru2O6.978,"Bi,Nd",Ru,,10.3374,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.375, ""Nd"": 0.625}","{""Ru"": 1.0}",293.0,,7.83,91082,1.0
+Yb1.25Bi0.75Ru2O7,"Bi,Yb",Ru,,10.1576,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.375, ""Yb"": 0.625}","{""Ru"": 1.0}",293.0,,8.71,126214|126226,2.0
+Nd1.2Bi0.8Ru2O7,"Bi,Nd",Ru,,10.326,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4, ""Nd"": 0.6}","{""Ru"": 1.0}",293.0,,7.9,78128,1.0
+Pr1.2Bi0.8Ru2O7,"Bi,Pr",Ru,,10.346150000000002,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4, ""Pr"": 0.6}","{""Ru"": 1.0}",293.0,,7.81,163393|78119,2.0
+Sm1.2Bi0.8Ru2O7,"Bi,Sm",Ru,,10.2888,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4, ""Sm"": 0.6}","{""Ru"": 1.0}",293.0,,8.07,78137,1.0
+Y1.2Bi0.8Ru2O7,"Bi,Y",Ru,,10.208,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4, ""Y"": 0.6}","{""Ru"": 1.0}",293.0,,7.34,73794,1.0
+Y1.2Sn2Bi0.8O7,"Bi,Y",Sn,,10.39675,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4, ""Y"": 0.6}","{""Sn"": 1.0}",293.0,,7.32,84798|84799,2.0
+Yb1.125Bi0.875Ru2O7,"Bi,Yb",Ru,,10.1808,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.4375, ""Yb"": 0.5625}","{""Ru"": 1.0}",293.0,,8.71,126213|126225,2.0
+DyBiRu2O7,"Bi,Dy",Ru,,10.2398,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Dy"": 0.5}","{""Ru"": 1.0}",293.0,,8.48,78146,1.0
+Nd1Bi1Ru2O6.963,"Bi,Nd",Ru,,10.324549999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Nd"": 0.5}","{""Ru"": 1.0}",293.0,,8.03,91081|78127,2.0
+PrBiRu2O7,"Bi,Pr",Ru,,10.338899999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Pr"": 0.5}","{""Ru"": 1.0}",293.0,,7.98,163392|78118,2.0
+SmBiRu2O7,"Bi,Sm",Ru,,10.2902,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Sm"": 0.5}","{""Ru"": 1.0}",293.0,,8.21,78136,1.0
+YBiRu2O7,"Bi,Y",Ru,,10.2273,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Y"": 0.5}","{""Ru"": 1.0}",293.0,,7.6,73793,1.0
+YSn2BiO7,"Bi,Y",Sn,,10.50235,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Y"": 0.5}","{""Sn"": 1.0}",293.0,,7.42,84797|84812,2.0
+YTi2BiO7,"Bi,Y",Ti,,10.1984,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.5, ""Bi"": 0.5}","{""Ti"": 1.0}",293.0,,6.33,164765,1.0
+YbBiRu2O7,"Bi,Yb",Ru,,10.1958,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Ru"": 1.0}",293.0,,8.73,126212|126224,2.0
+YbSn2BiO7,"Bi,Yb",Sn,,10.4661,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Sn"": 1.0}",295.0,,8.47,84817,1.0
+Nd0.925Bi1.075Ru2O6.977,"Bi,Nd",Ru,,10.3345,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5375, ""Nd"": 0.4625}","{""Ru"": 1.0}",293.0,,8.09,91080,1.0
+Yb0.875Bi1.125Ru2O6.996,"Bi,Yb",Ru,,10.212,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5625, ""Yb"": 0.4375}","{""Ru"": 1.0}",293.0,,8.74,126211,1.0
+Nd0.825Bi1.175Ru2O6.996,"Bi,Nd",Ru,,10.3296,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.5875, ""Nd"": 0.4125}","{""Ru"": 1.0}",293.0,,8.18,91079,1.0
+Nd0.8Bi1.2Ru2O7,"Bi,Nd",Ru,,10.3142,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.6, ""Nd"": 0.4}","{""Ru"": 1.0}",293.0,,8.24,78126,1.0
+Pr0.8Bi1.2Ru2O7,"Bi,Pr",Ru,,10.3295,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.6, ""Pr"": 0.4}","{""Ru"": 1.0}",293.0,,8.17,163391,1.0
+Y0.8Bi1.2Ru2O7,"Bi,Y",Ru,,10.2404,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.6, ""Y"": 0.4}","{""Ru"": 1.0}",293.0,,7.87,73792,1.0
+Y0.8Sn2Bi1.2O7,"Bi,Y",Sn,,10.4071,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.6, ""Y"": 0.4}","{""Sn"": 1.0}",293.0,,7.9,84795|84796,2.0
+Nd0.75Bi1.25Ru2O6.955,"Bi,Nd",Ru,,10.3175,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.625, ""Nd"": 0.375}","{""Ru"": 1.0}",293.0,,8.26,91078,1.0
+Yb0.75Bi1.25Ru2O6.967,"Bi,Yb",Ru,,10.2258,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.625, ""Yb"": 0.375}","{""Ru"": 1.0}",293.0,,8.75,126210|126222,2.0
+Yb0.625Bi1.375Ru2O6.958,"Bi,Yb",Ru,,10.2366,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.6875, ""Yb"": 0.3125}","{""Ru"": 1.0}",293.0,,8.78,126209|126221,2.0
+Dy0.6Bi1.4Ru2O7,"Bi,Dy",Ru,,10.2649,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.7, ""Dy"": 0.3}","{""Ru"": 1.0}",293.0,,8.65,78145,1.0
+Pr0.6Bi1.4Ru2O7,"Bi,Pr",Ru,,10.32255,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.7, ""Pr"": 0.3}","{""Ru"": 1.0}",293.0,,8.35,163390|78117,2.0
+Y0.6Bi1.4Ru2O7,"Bi,Y",Ru,,10.2565,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.7, ""Y"": 0.3}","{""Ru"": 1.0}",293.0,,8.13,73791,1.0
+Y0.6Sn2Bi1.4O7,"Bi,Y",Sn,,10.4816,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.7, ""Y"": 0.3}","{""Sn"": 1.0}",293.0,,8.02,84794,1.0
+Ti2Cr0.5Bi1.5O7,"Bi,Cr",Ti,,10.34214,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Cr"": 0.25}","{""Ti"": 1.0}",293.0,,6.57,11801,1.0
+Dy0.5Bi1.5Ru2O7,"Bi,Dy",Ru,,10.2659,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Dy"": 0.25}","{""Ru"": 1.0}",293.0,,8.7,78144,1.0
+Ti2Fe0.5Bi1.5O7,"Bi,Fe",Ti,,10.3152,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Fe"": 0.25}","{""Ti"": 1.0}",293.0,,6.65,48876|48877,2.0
+Ti2In0.5Bi1.5O7,"Bi,In",Ti,,10.3271,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""In"": 0.25}","{""Ti"": 1.0}",298.0,,6.98,213830,1.0
+Nd0.5Bi1.5Ru2O6.938,"Bi,Nd",Ru,,10.30965,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Nd"": 0.25}","{""Ru"": 1.0}",293.0,,8.46,91077|78125,2.0
+Pr0.5Bi1.5Ru2O7,"Bi,Pr",Ru,,10.319,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Pr"": 0.25}","{""Ru"": 1.0}",293.0,,8.44,78116,1.0
+Sc0.5Ti2Bi1.5O7,"Bi,Sc",Ti,,10.3105,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Sc"": 0.25}","{""Ti"": 1.0}",298.0,,6.59,213829,1.0
+Sm0.5Bi1.5Ru2O7,"Bi,Sm",Ru,,10.2921,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Sm"": 0.25}","{""Ru"": 1.0}",293.0,,8.56,78135,1.0
+Y0.5Bi1.5Ru2O7,"Bi,Y",Ru,,10.2592,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Y"": 0.25}","{""Ru"": 1.0}",293.0,,8.27,73790,1.0
+Yb0.5Bi1.5Ru2O6.97,"Bi,Yb",Ru,,10.2478,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.75, ""Yb"": 0.25}","{""Ru"": 1.0}",293.0,,8.81,126208|126220,2.0
+Ti2Fe0.4Bi1.6O7,"Bi,Fe",Ti,,10.3328,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.8, ""Fe"": 0.2}","{""Ti"": 1.0}",293.0,,6.8,188735,1.0
+Pr0.4Bi1.6Ru2O7,"Bi,Pr",Ru,,10.3143,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.8, ""Pr"": 0.2}","{""Ru"": 1.0}",293.0,,8.53,163389,1.0
+Sc0.4Ti2Bi1.6O7,"Bi,Sc",Ti,,10.3275,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.8, ""Sc"": 0.2}","{""Ti"": 1.0}",293.0,,6.76,239781|239783,2.0
+Y0.4Bi1.6Ru2O7,"Bi,Y",Ru,,10.2654,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.8, ""Y"": 0.2}","{""Ru"": 1.0}",293.0,,8.4,73789,1.0
+Yb0.375Bi1.625Ru2O6.954,"Bi,Yb",Ru,,10.2599,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.8125, ""Yb"": 0.1875}","{""Ru"": 1.0}",293.0,,8.83,126207|126219,2.0
+Yb0.25Bi1.75Ru2O6.955,"Bi,Yb",Ru,,10.2711,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.875, ""Yb"": 0.125}","{""Ru"": 1.0}",293.0,,8.86,126206|126218,2.0
+Dy0.2Bi1.8Ru2O7,"Bi,Dy",Ru,,10.2839,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.9, ""Dy"": 0.1}","{""Ru"": 1.0}",293.0,,8.83,78143,1.0
+Nd0.2Bi1.8Ru2O7,"Bi,Nd",Ru,,10.2988,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.9, ""Nd"": 0.1}","{""Ru"": 1.0}",293.0,,8.75,78124,1.0
+Pr0.2Bi1.8Ru2O7,"Bi,Pr",Ru,,10.30425,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.9, ""Pr"": 0.1}","{""Ru"": 1.0}",293.0,,8.72,163388|78115,2.0
+Sm0.2Bi1.8Ru2O7,"Bi,Sm",Ru,,10.2948,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.9, ""Sm"": 0.1}","{""Ru"": 1.0}",293.0,,8.77,78134,1.0
+Y0.2Bi1.8Ru2O7,"Bi,Y",Ru,,10.2775,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 0.9, ""Y"": 0.1}","{""Ru"": 1.0}",293.0,,8.66,73788,1.0
+Bi1.5Ir2Pb0.5O7,Bi,"Ir,Pb",,10.21714,,Yes,,icsd_literature,,,,high_entropy,"{""Bi"": 1.0}","{""Pb"": 0.2, ""Ir"": 0.8}",300.0,,11.4,252132,1.0
+Bi2Ir2O7,Bi,Ir,,10.25242,,Yes,,icsd_literature,,,,pristine,"{""Bi"": 1.0}","{""Ir"": 1.0}",293.0,,11.07,237820|252134,2.0
+Bi2Pt2O7,Bi,Pt,,10.3655,,Yes,,icsd_literature,,,,pristine,"{""Bi"": 1.0}","{""Pt"": 1.0}",293.0,,10.96,202346|108965,2.0
+Bi2Ru2O7,Bi,Ru,,10.2932875,,Yes,,icsd_literature,,,,pristine,"{""Bi"": 1.0}","{""Ru"": 1.0}",293.0,,8.91,126204|126216|163387|166566|166567|177440|73787|78114,8.0
+Ti2Bi2O7,Bi,Ti,,10.382148333333333,,Yes,,icsd_literature,,,,pristine,"{""Bi"": 1.0}","{""Ti"": 1.0}",298.0,,7.43,19637|19639|19641|19643|19645|99437,6.0
+Ce0.05Gd1.95Ti2O7,"Ce,Gd",Ti,,10.1708,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Ce"": 0.025}","{""Ti"": 1.0}",293.0,,6.58,4658,1.0
+Ce0.1Gd1.9Ti2O7,"Ce,Gd",Ti,,10.1755,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Ce"": 0.05}","{""Ti"": 1.0}",293.0,,6.56,4659,1.0
+Ce0.2Gd1.8Ti2O7,"Ce,Gd",Ti,,10.1846,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Ce"": 0.1}","{""Ti"": 1.0}",293.0,,6.52,4660,1.0
+Ce0.25Gd1.75Ti2O7,"Ce,Gd",Ti,,10.194,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.875, ""Ce"": 0.125}","{""Ti"": 1.0}",293.0,,6.5,4661,1.0
+Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,,10.189675000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",293.0,,6.46,19688|19689|19690|19691,4.0
+Ce0.5Gd1.5Ti2O7,"Ce,Gd",Ti,,10.2066,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.75, ""Ce"": 0.25}","{""Ti"": 1.0}",293.0,,6.42,4662,1.0
+Ce0.8Gd1.2Ti2O7,"Ce,Gd",Ti,,10.2297,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.6, ""Ce"": 0.4}","{""Ti"": 1.0}",293.0,,6.31,4663,1.0
+Ce2Sn2O7,Ce,Sn,,10.576550000000001,,Yes,,icsd_literature,,,,pristine,"{""Ce"": 1.0}","{""Sn"": 1.0}",293.0,,7.2,14785|204110,2.0
+Ce2Zr2O7,Ce,Zr,,10.734396,,Yes,,icsd_literature,,,,pristine,"{""Ce"": 1.0}","{""Zr"": 1.0}",298.0,,6.15,168595|207490|212857|420822|151444,5.0
+Gd1.9Co0.1Ru2O7,"Co,Gd",Ru,,10.225,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Co"": 0.05}","{""Ru"": 1.0}",295.0,,7.69,127153,1.0
+Sm1.89Ti2Co0.11O6.945,"Co,Sm",Ti,,10.215,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.945, ""Co"": 0.055}","{""Ti"": 1.0}",293.0,,6.2,99982,1.0
+Gd1.6Co0.4Ru2O7,"Co,Gd",Ru,,10.2042,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Co"": 0.2}","{""Ru"": 1.0}",295.0,,7.37,127154,1.0
+CoRuPb2O7,"Co,Ru",Pb,,10.1623,,Yes,,icsd_literature,,,,high_entropy,"{""Co"": 0.5, ""Ru"": 0.5}","{""Pb"": 1.0}",293.0,,8.69,215895,1.0
+Co2Pb2O7,Co,Pb,,9.95776,,Yes,,icsd_literature,,,,pristine,"{""Co"": 1.0}","{""Pb"": 1.0}",293.0,,8.67,259018,1.0
+Y2Ti1.986Cr0.014O7,"Cr,Y",Ti,,10.09633,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.99304865938431, ""Cr"": 0.006951340615690169}","{""Ti"": 1.0}",293.0,,4.98,157668,1.0
+Y2Ti1.916Cr0.084O7,"Cr,Y",Ti,,10.09904,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9596928982725528, ""Cr"": 0.04030710172744722}","{""Ti"": 1.0}",293.0,,4.98,157669,1.0
+Y2Ti1.894Cr0.106O7,"Cr,Y",Ti,,10.096083333333334,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9496676163342831, ""Cr"": 0.050332383665717004}","{""Ti"": 1.0}",293.0,,4.98,157670|157671|157672,3.0
+Gd1.97Dy0.03Ti2O7,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.985, ""Dy"": 0.015}","{""Ti"": 1.0}",293.0,,6.58,126423,1.0
+Gd1.99Dy0.01Ti2O7,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.995, ""Dy"": 0.005}","{""Ti"": 1.0}",293.0,,6.58,126421|126422,2.0
+Gd1.96Dy0.04Ti2O7,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.98, ""Dy"": 0.02}","{""Ti"": 1.0}",293.0,,6.58,126424,1.0
+Gd1.95Dy0.05Ti2O7,"Dy,Gd",Ti,,10.18,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Dy"": 0.025}","{""Ti"": 1.0}",293.0,,6.58,126425,1.0
+EuDyTi2O7,"Dy,Eu",Ti,,10.165,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",293.0,,6.61,188550,1.0
+SmDyTi2O7,"Dy,Sm",Ti,,10.175,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Dy"": 0.5}","{""Ti"": 1.0}",293.0,,6.57,144744,1.0
+Dy1.85Ti2Fe0.15O7,"Dy,Fe",Ti,,10.1077,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 0.925, ""Fe"": 0.075}","{""Ti"": 1.0}",293.0,,6.65,223930,1.0
+Dy1.9Ti2Fe0.1O7,"Dy,Fe",Ti,,10.1143,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",293.0,,6.7,223929,1.0
+Dy1.95Ti2Fe0.05O7,"Dy,Fe",Ti,,10.1208,,Yes,,icsd_literature,,,,high_entropy,"{""Dy"": 0.975, ""Fe"": 0.025}","{""Ti"": 1.0}",293.0,,6.76,223419,1.0
+Dy2Hf2O7,Dy,Hf,,10.43055,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Hf"": 1.0}",295.0,,9.19,218113|245138,2.0
+Dy2Mo2O7,Dy,Mo,,10.2728,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Mo"": 1.0}",300.0,,7.71,291026,1.0
+Dy2Ru2O7,Dy,Ru,,10.1658,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ru"": 1.0}",299.0,,8.07,176953|78151,2.0
+Dy2Sn2O7,Dy,Sn,,10.4021,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Sn"": 1.0}",295.0,,7.97,82960|204111,2.0
+Dy2Tc2O7,Dy,Tc,,10.246,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Tc"": 1.0}",293.0,,7.84,109080,1.0
+Dy2Ti2O7,Dy,Ti,,10.136535454545454,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Ti"": 1.0}",293.0,,6.81,112534|134709|154156|154157|154158|154159|188553|191617|222913|249063|249064,11.0
+Dy2Zr2O7,Dy,Zr,,10.4588,,Yes,,icsd_literature,,,,pristine,"{""Dy"": 1.0}","{""Zr"": 1.0}",293.0,,7.19,217895,1.0
+SmErTi2O7,"Er,Sm",Ti,,10.156,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Er"": 0.5}","{""Ti"": 1.0}",293.0,,6.66,148750,1.0
+Er2Mn2O7,Er,Mn,,9.875,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Mn"": 1.0}",293.0,,7.68,202517,1.0
+Er2Ru2O7,Er,Ru,,10.1063,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ru"": 1.0}",293.0,,8.35,97533,1.0
+Er2Sn2O7,Er,Sn,,10.354133333333333,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Sn"": 1.0}",295.0,,8.19,82962|84749|204113,3.0
+Er2Tc2O7,Er,Tc,,10.194,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Tc"": 1.0}",293.0,,8.08,109081,1.0
+Er2Ti2O7,Er,Ti,,10.088888857142857,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Ti"": 1.0}",293.0,,7.04,24152|24209|134712|148753|150211|188878|188879|191615|249070|249071|252238|156425|181209|181210,14.0
+Er2Zr2O7,Er,Zr,,10.4108,,Yes,,icsd_literature,,,,pristine,"{""Er"": 1.0}","{""Zr"": 1.0}",293.0,,7.4,217897,1.0
+Eu0.02Y1.98Zr1Sn1O7,"Eu,Y","Sn,Zr",,10.35,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.99, ""Eu"": 0.01}","{""Zr"": 0.5, ""Sn"": 0.5}",293.0,,6.0,154368,1.0
+Gd1.9Eu0.1Ti2O7,"Eu,Gd",Ti,,10.187,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",293.0,,6.55,264720,1.0
+La1.9Eu0.1Hf2O7,"Eu,La",Hf,,10.765,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.95, ""Eu"": 0.05}","{""Hf"": 1.0}",293.0,,7.97,4817,1.0
+Eu0.1Y1.9Ti2O7,"Eu,Y",Ti,,10.1,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",293.0,,5.05,128614,1.0
+Gd1.8Eu0.2Ti2O7,"Eu,Gd",Ti,,10.188,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",293.0,,6.55,264721,1.0
+La1.8Eu0.2Zr2O7,"Eu,La",Zr,,10.7999,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.9, ""Eu"": 0.1}","{""Zr"": 1.0}",293.0,,6.06,230049,1.0
+Eu0.2Y1.8Ti2O7,"Eu,Y",Ti,,10.105,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",293.0,,5.13,128615,1.0
+La0.4Yb0.4Nd0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Nd,Yb",Zr,,10.5858,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Nd"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",293.0,,6.73,49598,1.0
+La0.4Yb0.4Sm0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Sm,Yb",Zr,,10.5763,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",293.0,,6.77,49597,1.0
+Gd1.5Eu0.5Ti2O7,"Eu,Gd",Ti,,10.191,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",293.0,,6.52,264722,1.0
+Eu0.5Y1.5Ti2O7,"Eu,Y",Ti,,10.119,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",293.0,,5.35,128616,1.0
+EuGdTi2O7,"Eu,Gd",Ti,,10.197,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",293.0,,6.48,188549|196408|264723,3.0
+EuYTi2O7,"Eu,Y",Ti,,10.15585,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 0.5, ""Y"": 0.5}","{""Ti"": 1.0}",293.0,,5.69,48173|128617|196409,3.0
+Eu1.8Ti2Fe0.2O7,"Eu,Fe",Ti,,10.157,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",300.0,,6.24,8820,1.0
+Eu1.9Ti2Fe0.1O7,"Eu,Fe",Ti,,10.1722,,Yes,,icsd_literature,,,,high_entropy,"{""Eu"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",300.0,,6.34,8819,1.0
+Eu2.096Hf1.904O6.952,Eu,Hf,,10.503525,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Hf"": 1.0}",293.0,,8.72,173953|119417|156142|158839,4.0
+Eu2Ir2O7,Eu,Ir,,10.2408375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ir"": 1.0}",293.0,,9.79,124896|124897|124898|124899|135031|156437|173948|239645,8.0
+Eu2Mo2O7,Eu,Mo,,10.375,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Mo"": 1.0}",293.0,,7.23,173946,1.0
+Eu2Pb2O7,Eu,Pb,,10.742,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Pb"": 1.0}",293.0,,8.9,173951,1.0
+Eu2Pt2O7,Eu,Pt,,10.293,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Pt"": 1.0}",293.0,,9.82,173952,1.0
+Eu2Ru2O7,Eu,Ru,,10.256633333333333,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ru"": 1.0}",293.0,,7.62,173947|176947|109306,3.0
+Eu2Sn2O7,Eu,Sn,,10.48054,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Sn"": 1.0}",293.0,,7.55,84754|165931|173949|204109,4.0
+Eu2Ti2O7,Eu,Ti,,10.202905454545453,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Ti"": 1.0}",300.0,,6.43,8818|48170|83596|92767|128618|173945|188551|191620|196405|200797|264724,11.0
+Eu2Zr2O7,Eu,Zr,,10.55204,,Yes,,icsd_literature,,,,pristine,"{""Eu"": 1.0}","{""Zr"": 1.0}",293.0,,6.77,34479|108765|130791|130792|130793|173950|189342|119384|156139|180493,10.0
+Ho2Ti1.85Fe0.15O7,"Fe,Ho",Ti,,10.1013,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.9302325581395349, ""Fe"": 0.06976744186046512}","{""Ti"": 1.0}",293.0,,6.95,112535,1.0
+Ho1.8Ti2Fe0.2O7,"Fe,Ho",Ti,,10.0804,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",293.0,,6.69,112536,1.0
+La0.4Yb0.4Nd0.4Sm0.4Gd0.4Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,,10.5937,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",293.0,,6.7,49599,1.0
+Nd1.6Gd0.4Zr2O7,"Gd,Nd",Zr,,10.6092,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",293.0,,6.54,160163,1.0
+Gd0.8Ho1.2Ti2O7,"Gd,Ho",Ti,,10.1428,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.4, ""Ho"": 0.6}","{""Ti"": 1.0}",293.0,,6.77,145867,1.0
+Nd1Gd1Zr1.85Sc0.15O7,"Gd,Nd,Sc",Zr,,10.60965,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.46511627906976744, ""Gd"": 0.46511627906976744, ""Sc"": 0.06976744186046512}","{""Zr"": 1.0}",293.0,,6.55,186182,1.0
+Nd1Gd1Zr1.9Sc0.1O7,"Gd,Nd,Sc",Zr,,10.61193,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.47619047619047616, ""Gd"": 0.47619047619047616, ""Sc"": 0.047619047619047616}","{""Zr"": 1.0}",293.0,,6.57,186181,1.0
+Nd1Gd1Zr1.95Sc0.05O7,"Gd,Nd,Sc",Zr,,10.61221,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.48780487804878053, ""Gd"": 0.48780487804878053, ""Sc"": 0.02439024390243903}","{""Zr"": 1.0}",293.0,,6.6,186180,1.0
+NdGdZr2O7,"Gd,Nd",Zr,,10.61575,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.5, ""Gd"": 0.5}","{""Zr"": 1.0}",293.0,,6.62,186179,1.0
+SmGdTi2O7,"Gd,Sm",Ti,,,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Gd"": 0.5}","{""Ti"": 1.0}",293.0,,6.41,148749,1.0
+Gd1.2Ho0.8Ti2O7,"Gd,Ho",Ti,,10.16,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.6, ""Ho"": 0.4}","{""Ti"": 1.0}",293.0,,6.69,145866,1.0
+Tb0.6Gd1.4Zr2O7,"Gd,Tb",Zr,,10.5036,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.7, ""Tb"": 0.3}","{""Zr"": 1.0}",293.0,,6.99,250763,1.0
+Gd1.6Ho0.4Ti2O7,"Gd,Ho",Ti,,10.1746,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Ho"": 0.2}","{""Ti"": 1.0}",293.0,,6.63,145865,1.0
+La0.4Gd1.6Zr2O7,"Gd,La",Zr,,10.5934,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Gd"": 0.8}","{""Zr"": 1.0}",293.0,,6.72,230560,1.0
+Nd0.4Gd1.6Zr2O7,"Gd,Nd",Zr,,10.5688,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.8, ""Nd"": 0.2}","{""Zr"": 1.0}",293.0,,6.79,160162,1.0
+Nd0.2Gd1.8Zr2O7,"Gd,Nd",Zr,,10.5571,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.9, ""Nd"": 0.1}","{""Zr"": 1.0}",293.0,,6.85,160161,1.0
+Nd0.15Gd1.85Zr2O7,"Gd,Nd",Zr,,10.5433,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.925, ""Nd"": 0.075}","{""Zr"": 1.0}",293.0,,6.88,160160,1.0
+Yb0.1Gd1.9Sn2O7,"Gd,Yb",Sn,,10.45421,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",293.0,,7.74,187429,1.0
+Nd0.05Gd1.95Zr2O7,"Gd,Nd",Zr,,10.5429,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 0.975, ""Nd"": 0.025}","{""Zr"": 1.0}",293.0,,6.9,160159,1.0
+Ce0.04Gd2Ti1.96O7,Gd,"Ce,Ti",,10.1295,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.98, ""Ce"": 0.02}",293.0,,6.75,145343|145348,2.0
+Ce0.08Gd2Ti1.92O7,Gd,"Ce,Ti",,10.13205,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.96, ""Ce"": 0.04}",293.0,,6.79,145344|145347,2.0
+Ce0.12Gd2Ti1.88O7,Gd,"Ce,Ti",,10.1362,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.94, ""Ce"": 0.06}",293.0,,6.83,145345|145349,2.0
+Ce0.16Gd2Ti1.84O7,Gd,"Ce,Ti",,10.142949999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.92, ""Ce"": 0.08}",293.0,,6.86,145346|145350,2.0
+Gd2Hf0.4Ti1.6O7,Gd,"Hf,Ti",,10.27171,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.2, ""Ti"": 0.8}",293.0,,7.04,258280,1.0
+Gd2Hf0.8Ti1.2O7,Gd,"Hf,Ti",,10.31934,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",293.0,,7.57,258279|258285,2.0
+Gd2Hf1.2Ti0.8O7,Gd,"Hf,Ti",,10.36858,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.6, ""Ti"": 0.4}",293.0,,8.09,258284,1.0
+Gd2Hf1.6Ti0.4O7,Gd,"Hf,Ti",,10.42276,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",293.0,,8.57,258277|258283,2.0
+Gd2Hf2O7,Gd,Hf,,10.519988,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Hf"": 1.0}",293.0,,8.86,213372|258282|119418|156143|158840,5.0
+Gd2Mn0.2Mo1.8O7,Gd,"Mn,Mo",,10.31757,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",293.0,,7.38,34167,1.0
+Gd2Mo2O7,Gd,Mo,,10.30677,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Mo"": 1.0}",293.0,,7.39,34166|159774|159775|159776|159777|291027,6.0
+Gd1.8Ru2Pb0.2O6.962,Gd,"Pb,Ru",,10.2302,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Pb"": 0.09090909090909091, ""Ru"": 0.9090909090909091}",293.0,,7.92,79331,1.0
+Gd2Pb2O7,Gd,Pb,,10.7292,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pb"": 1.0}",293.0,,9.04,117426,1.0
+Gd2Pt2O7,Gd,Pt,,10.261389999999999,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Pt"": 1.0}",298.0,,10.04,48347|264487,2.0
+Gd2Ru2O7,Gd,Ru,,10.235566666666667,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ru"": 1.0}",293.0,,7.8,79332|127152|176950,3.0
+Gd2Sn2O7,Gd,Sn,,10.45609,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Sn"": 1.0}",293.0,,7.72,84753|204115,2.0
+Gd2Zr1.7Ti0.3O7,Gd,"Ti,Zr",,10.48699,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.15, ""Zr"": 0.85}",293.0,,6.86,213850,1.0
+Gd2Zr1.5Ti0.5O7,Gd,"Ti,Zr",,10.461865,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.75}",293.0,,6.82,213846|213849,2.0
+Gd2Zr1.3Ti0.7O7,Gd,"Ti,Zr",,10.4154,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.35, ""Zr"": 0.65}",293.0,,6.8,245012,1.0
+Gd2ZrTiO7,Gd,"Ti,Zr",,10.35871,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",293.0,,6.77,213844|213845,2.0
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr",,10.3184875,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",293.0,,6.68,120102|120103|120104|159867|159868|159869|245014|245015,8.0
+Gd2Zr0.5Ti1.5O7,Gd,"Ti,Zr",,10.303239999999999,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.75, ""Zr"": 0.25}",293.0,,6.67,213842|213843,2.0
+Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr",,10.300593333333333,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",293.0,,6.6,182253|213840|213841,3.0
+Gd2Zr0.04Ti1.96O7,Gd,"Ti,Zr",,10.20079,,Yes,,icsd_literature,,,,high_entropy,"{""Gd"": 1.0}","{""Ti"": 0.98, ""Zr"": 0.02}",293.0,,6.56,182252,1.0
+Gd2Ti2O7,Gd,Ti,,10.188074599999998,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Ti"": 1.0}",293.0,,6.6,4657|19687|24207|33466|126420|134710|145342|145864|148752|150210|154160|154161|154162|154163|167918|188552|191619|196406|213838|213839|214706|235987|258281|258286|264719,25.0
+Gd2Zr2O7,Gd,Zr,,10.532914117647058,,Yes,,icsd_literature,,,,pristine,"{""Gd"": 1.0}","{""Zr"": 1.0}",293.0,,6.9,35077|35083|35114|35131|160158|165813|165814|165815|165816|185395|207492|212861|213855|217894|261759|119385|156140,17.0
+Nd1.8Ho0.2Zr2O7,"Ho,Nd",Zr,,10.6049,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.1, ""Nd"": 0.9}","{""Zr"": 1.0}",293.0,,6.54,261855,1.0
+Nd1.6Ho0.4Zr2O7,"Ho,Nd",Zr,,10.5871,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",293.0,,6.62,261856,1.0
+Nd1.4Ho0.6Zr2O7,"Ho,Nd",Zr,,10.5652,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.3, ""Nd"": 0.7}","{""Zr"": 1.0}",293.0,,6.71,261857,1.0
+Nd1.2Ho0.8Zr2O7,"Ho,Nd",Zr,,10.5607,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.4, ""Nd"": 0.6}","{""Zr"": 1.0}",293.0,,6.76,261858,1.0
+Nd1.1Ho0.9Zr2O7,"Ho,Nd",Zr,,10.5563,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",293.0,,6.79,261859,1.0
+NdHoZr2O7,"Ho,Nd",Zr,,10.5093,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",293.0,,6.91,261860,1.0
+SmHoTi2O7,"Ho,Sm",Ti,,10.162,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",293.0,,6.62,144745,1.0
+Ho2Mn0.2Mo1.8O7,Ho,"Mn,Mo",,10.204,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",293.0,,7.82,34175,1.0
+Ho2MnRuO7,Ho,"Mn,Ru",,10.0491,,Yes,,icsd_literature,,,,high_entropy,"{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",295.0,,7.83,169610,1.0
+Ho2Mo2O7,Ho,Mo,,10.26902,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Mo"": 1.0}",293.0,,7.77,34170,1.0
+Ho2Ru2O7,Ho,Ru,,10.147400000000001,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ru"": 1.0}",293.0,,8.2,96730|176954,2.0
+Ho2Sn2O7,Ho,Sn,,10.3743,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Sn"": 1.0}",295.0,,8.09,82961|84748|204117,3.0
+Ho2Ti2O7,Ho,Ti,,10.115577363636364,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Ti"": 1.0}",293.0,,6.93,112533|188880|188881|191616|205098|249077|249078|252236|146122|180591|180592,11.0
+Ho2Zr2O7,Ho,Zr,,10.4167,,Yes,,icsd_literature,,,,pristine,"{""Ho"": 1.0}","{""Zr"": 1.0}",293.0,,7.34,217896,1.0
+Mn2In2O7,In,Mn,,9.70786,,Yes,,icsd_literature,,,,pristine,"{""In"": 1.0}","{""Mn"": 1.0}",298.0,,6.56,56517,1.0
+Ir2Pb2O7,Ir,Pb,,10.1754,,Yes,,icsd_literature,,,,pristine,"{""Ir"": 1.0}","{""Pb"": 1.0}",300.0,,11.5,252126,1.0
+La0.05Y1.95Ti2O7,"La,Y",Ti,,10.10199,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""La"": 0.025}","{""Ti"": 1.0}",293.0,,5.0,173057,1.0
+La0.1Y1.9Ti2O7,"La,Y",Ti,,10.109195,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",293.0,,5.02,173049|173058,2.0
+La0.2Y1.8Ti2O7,"La,Y",Ti,,10.10901,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""La"": 0.1}","{""Ti"": 1.0}",293.0,,5.09,173059,1.0
+La0.22Y1.75Ti2O7,"La,Y",Ti,,10.132525000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",298.0,,5.03,173050|173052,2.0
+La0.23Y1.73Ti2O7,"La,Y",Ti,,10.12388,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",298.0,,5.02,173054|173060,2.0
+La0.3Y1.7Ti2O7,"La,Y",Ti,,10.11981,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.85, ""La"": 0.15}","{""Ti"": 1.0}",293.0,,5.14,173061,1.0
+La0.35Y1.65Ti2O7,"La,Y",Ti,,10.12344,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.825, ""La"": 0.175}","{""Ti"": 1.0}",293.0,,5.16,173062,1.0
+Tb1.6La0.4Mo2O7,"La,Tb",Mo,,10.286,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",293.0,,7.29,159778|159779|159780,3.0
+La0.4Y1.6Hf2O7,"La,Y",Hf,,10.5148,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.2, ""Y"": 0.8}","{""Hf"": 1.0}",298.0,,7.62,173794,1.0
+La0.8Y1.2Hf2O7,"La,Y",Hf,,10.5718,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.4, ""Y"": 0.6}","{""Hf"": 1.0}",298.0,,7.72,173793,1.0
+La0.8Y1.2Zr2O7,"La,Y",Zr,,10.6572,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",298.0,,5.62,173798,1.0
+La0.9Nd1.1Zr2O7,"La,Nd",Zr,,10.70252,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",293.0,,6.26,153226,1.0
+LaNdZr2O7,"La,Nd",Zr,,10.72892,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",293.0,,6.21,153225,1.0
+La1.2Ce0.8Y0.8Zr1.2O7,"La,Y","Ce,Zr",,10.792,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.4, ""La"": 0.6}","{""Zr"": 0.6, ""Ce"": 0.4}",293.0,,6.04,156500,1.0
+La1.2Y0.8Hf2O7,"La,Y",Hf,,10.646,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.6, ""Y"": 0.4}","{""Hf"": 1.0}",298.0,,7.78,173792,1.0
+La1.2Y0.8Zr2O7,"La,Y",Zr,,10.6714,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.6, ""Y"": 0.4}","{""Zr"": 1.0}",298.0,,5.82,173797,1.0
+La1.26Nd0.74Zr2O7,"La,Nd",Zr,,10.75648,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.63, ""Nd"": 0.37}","{""Zr"": 1.0}",293.0,,6.15,153224,1.0
+La1.48Nd0.52Zr2O7,"La,Nd",Zr,,10.78457,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.74, ""Nd"": 0.26}","{""Zr"": 1.0}",293.0,,6.09,153223,1.0
+La1.6Y0.4Hf2O7,"La,Y",Hf,,10.7212,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.8, ""Y"": 0.2}","{""Hf"": 1.0}",298.0,,7.83,173791,1.0
+La1.6Y0.4Zr2O7,"La,Y",Zr,,10.7484,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",298.0,,5.91,173796,1.0
+La1.65Y0.35Ti2O7,"La,Y",Ti,,10.1315,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.175, ""La"": 0.825}","{""Ti"": 1.0}",298.0,,5.98,173064,1.0
+La1.7Y0.3Ti2O7,"La,Y",Ti,,10.1316,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.15, ""La"": 0.85}","{""Ti"": 1.0}",298.0,,6.01,173066,1.0
+La1.75Y0.25Ti2O7,"La,Y",Ti,,10.1145,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.125, ""La"": 0.875}","{""Ti"": 1.0}",298.0,,6.07,173068,1.0
+La1.94Pr0.06Zr2O7,"La,Pr",Zr,,10.7807,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 0.97, ""Pr"": 0.03}","{""Zr"": 1.0}",293.0,,6.07,47622,1.0
+La2Ce0.1Zr1.9O7,La,"Ce,Zr",,10.787,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",298.0,,6.11,184103,1.0
+La2Ce0.2Zr1.8O7,La,"Ce,Zr",,10.776,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",298.0,,6.18,184117,1.0
+La2Ce0.3Zr1.7O7,La,"Ce,Zr",,10.815,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 1.0}","{""Zr"": 0.85, ""Ce"": 0.15}",298.0,,6.16,184131,1.0
+La2Ce0.4Zr1.6O7,La,"Ce,Zr",,10.837,,Yes,,icsd_literature,,,,high_entropy,"{""La"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",298.0,,6.18,184145,1.0
+La2Hf2O7,La,Hf,,10.770800000000001,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Hf"": 1.0}",298.0,,7.94,173790|218109,2.0
+La2Pb2O7,La,Pb,,10.9682,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Pb"": 1.0}",293.0,,8.09,117424,1.0
+La2Ru2O7,La,Ru,,10.3967,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Ru"": 1.0}",298.0,,7.0,176946,1.0
+La2Sn2O7,La,Sn,,10.699575,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Sn"": 1.0}",293.0,,6.8,24195|82956|167144|204105,4.0
+La2Zr2O7,La,Zr,,10.8023496,,Yes,,icsd_literature,,,,pristine,"{""La"": 1.0}","{""Zr"": 1.0}",293.0,,6.12,26762|26768|26779|26851|26853|51573|130794|130795|130796|140547|147738|150206|153222|173795|184089|189341|189344|207489|248878|253061|253063|15165|47621|49600|180491,25.0
+Lu2Ir2O6.97,Lu,Ir,,10.099,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ir"": 1.0}",293.0,,10.95,35849|144826,2.0
+Lu2Mn2O7,Lu,Mn,,9.82684,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mn"": 1.0}",298.0,,8.0,56518,1.0
+Lu2Mo2O7,Lu,Mo,,10.1478,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Mo"": 1.0}",293.0,,8.31,117790,1.0
+Lu2Ru2O7,Lu,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ru"": 1.0}",293.0,,8.63,109308,1.0
+Lu2Sn2O7,Lu,Sn,,10.2961,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Sn"": 1.0}",295.0,,8.52,82965|204106,2.0
+Lu2Ti2O7,Lu,Ti,,10.018242631578948,,Yes,,icsd_literature,,,,pristine,"{""Lu"": 1.0}","{""Ti"": 1.0}",293.0,,7.37,24205|188869|188870|188871|191612|249084|119363|119364|119365|154079|154080|154081|155572|155573|155574|223078|223079|223080|250252,19.0
+Nd0.4Y1.6Zr2O7,"Nd,Y",Zr,,10.531,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.2, ""Y"": 0.8}","{""Zr"": 1.0}",293.0,,5.62,174191,1.0
+Nd0.8Y1.2Zr2O7,"Nd,Y",Zr,,10.532,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",293.0,,5.87,174190,1.0
+Nd1.6Y0.4Zr2O7,"Nd,Y",Zr,,10.609,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",293.0,,6.24,174188,1.0
+Ce0.1Nd2Zr1.9O7,Nd,"Ce,Zr",,10.687,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",293.0,,6.4,62796|62795,2.0
+Ce0.2Nd2Zr1.8O7,Nd,"Ce,Zr",,10.7,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",293.0,,6.43,62797|62798,2.0
+Ce0.4Nd2Zr1.6O7,Nd,"Ce,Zr",,10.728,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",293.0,,6.48,62799|62800,2.0
+Nd2Hf2O7,Nd,Hf,,10.6469,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Hf"": 1.0}",295.0,,8.34,218111,1.0
+Nd2Ir2O7,Nd,Ir,,10.37255,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ir"": 1.0}",293.0,,9.35,239644|259364,2.0
+Nd2Mo2O7,Nd,Mo,,10.4836,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Mo"": 1.0}",300.0,,6.83,291030,1.0
+Nd1.8Ru2Pb0.2O6.962,Nd,"Pb,Ru",,10.33705,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Pb"": 0.09090909090909091, ""Ru"": 0.9090909090909091}",293.0,,7.39,79326,1.0
+Nd2Pb2O7,Nd,Pb,,10.8336,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Pb"": 1.0}",293.0,,8.51,117425,1.0
+Nd2Pt2O7,Nd,Pt,,10.4041,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Pt"": 1.0}",297.0,,9.33,402456,1.0
+Nd2Ru2O7,Nd,Ru,,10.342575,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Ru"": 1.0}",295.0,,7.21,4816|79327|82304|91085|161572|176951|195795|78133,8.0
+Nd2Sn2O7,Nd,Sn,,10.571,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Sn"": 1.0}",295.0,,7.18,82958|204108,2.0
+Nd2Tc2O7,Nd,Tc,,10.40629,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Tc"": 1.0}",293.0,,7.06,236758,1.0
+Nd2Zr1.556Ti0.444O7,Nd,"Ti,Zr",,10.5908,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.778, ""Ti"": 0.222}",293.0,,6.3,153228,1.0
+Nd2Zr1.188Ti0.812O7,Nd,"Ti,Zr",,10.5254,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.594, ""Ti"": 0.406}",293.0,,6.24,153229,1.0
+Nd2Zr0.89Ti1.11O7,Nd,"Ti,Zr",,10.461120000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Nd"": 1.0}","{""Zr"": 0.445, ""Ti"": 0.555}",293.0,,6.2,153230|153231,2.0
+Nd2Zr2O7,Nd,Zr,,10.647112758620688,,Yes,,icsd_literature,,,,pristine,"{""Nd"": 1.0}","{""Zr"": 1.0}",293.0,,6.47,26799|26802|26805|26854|62793|62794|149744|149753|149754|149756|149758|153227|160164|174187|189340|189343|201277|207491|212858|213450|213451|213452|213453|249974|259150|261854|119329|180492|191573,29.0
+Pr2Sc0.27Mo1.73O6.97,"Pr,Sc",Mo,,10.5271,,Yes,,icsd_literature,,,,high_entropy,"{""Pr"": 0.8810572687224669, ""Sc"": 0.11894273127753305}","{""Mo"": 1.0}",293.0,,6.51,290327,1.0
+Pr2Hf2O7,Pr,Hf,,10.6965,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Hf"": 1.0}",295.0,,8.15,218110,1.0
+Pr2Ir2O7,Pr,Ir,,10.407933333333332,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ir"": 1.0}",293.0,,9.17,135032|156436|239646,3.0
+Pr2Ru2O7,Pr,Ru,,10.37385,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Ru"": 1.0}",293.0,,7.08,82303|163397|221580|78123,4.0
+Pr2Sn2O7,Pr,Sn,,10.6068,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Sn"": 1.0}",295.0,,7.04,82957|84744|204114,3.0
+Pr2Zr2O7,Pr,Zr,,10.703985124999999,,Yes,,icsd_literature,,,,pristine,"{""Pr"": 1.0}","{""Zr"": 1.0}",293.0,,6.26,150207|193859|249972|429190|429191|429192|219179|219180,8.0
+Y2Rh2O7,"Rh,Y",,,10.11833,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.5, ""Rh"": 0.5}",{},300.0,,6.36,220880,1.0
+Rh2Pb2O7,Rh,Pb,,10.105662,,Yes,,icsd_literature,,,,pristine,"{""Rh"": 1.0}","{""Pb"": 1.0}",300.0,,9.43,220881,1.0
+Ce0.1Sm1.9Zr1.9Sc0.1O7,"Sc,Sm","Ce,Zr",,10.5758,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.95, ""Sc"": 0.05}","{""Zr"": 0.95, ""Ce"": 0.05}",293.0,,6.62,258908,1.0
+Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,,10.0082,,Yes,,icsd_literature,,,,high_entropy,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",293.0,,7.03,188875|119369|154078,3.0
+Ce0.2Sm1.8Zr1.8Sc0.2O7,"Sc,Sm","Ce,Zr",,10.5718,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.9, ""Sc"": 0.09999999999999999}","{""Zr"": 0.9, ""Ce"": 0.09999999999999999}",293.0,,6.56,258909,1.0
+Sc0.2Mn2Tl1.8O7,"Sc,Tl",Mn,,9.869,,Yes,,icsd_literature,,,,high_entropy,"{""Tl"": 0.9, ""Sc"": 0.1}","{""Mn"": 1.0}",296.0,,8.27,50299,1.0
+Ce0.3Sm1.7Zr1.7Sc0.3O7,"Sc,Sm","Ce,Zr",,10.568,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.85, ""Sc"": 0.15}","{""Zr"": 0.85, ""Ce"": 0.15}",293.0,,6.51,258910,1.0
+Ce0.4Sm1.6Zr1.6Sc0.4O7,"Sc,Sm","Ce,Zr",,10.56,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.8, ""Sc"": 0.2}","{""Zr"": 0.8, ""Ce"": 0.2}",293.0,,6.46,258911,1.0
+Sc2Mn2O7,Sc,Mn,,9.5965,,Yes,,icsd_literature,,,,pristine,"{""Sc"": 1.0}","{""Mn"": 1.0}",293.0,,4.69,83277,1.0
+Sm0.05Y1.95Ti2O7,"Sm,Y",Ti,,10.098,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.975, ""Sm"": 0.025}","{""Ti"": 1.0}",293.0,,5.01,128619,1.0
+Sm0.1Y1.9Ti2O7,"Sm,Y",Ti,,10.105,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Sm"": 0.05}","{""Ti"": 1.0}",293.0,,5.04,128620,1.0
+Sm0.2Y1.8Ti2O7,"Sm,Y",Ti,,10.113,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.9, ""Sm"": 0.1}","{""Ti"": 1.0}",293.0,,5.11,128621,1.0
+Sm0.5Y1.5Ti2O7,"Sm,Y",Ti,,10.125,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.75, ""Sm"": 0.25}","{""Ti"": 1.0}",293.0,,5.33,128622,1.0
+SmYTi2O7,"Sm,Y",Ti,,10.16,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.5, ""Sm"": 0.5}","{""Ti"": 1.0}",293.0,,5.66,128623,1.0
+YbSmTi2O7,"Sm,Yb",Ti,,10.133,,Yes,,icsd_literature,,,,high_entropy,"{""Sm"": 0.5, ""Yb"": 0.5}","{""Ti"": 1.0}",293.0,,6.78,144746,1.0
+Sm2.096Hf1.904O6.952,Sm,Hf,,10.5703,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Hf"": 1.0}",293.0,,8.61,119416|119419|156141|156144|158838|158841,6.0
+Sm2Mo2O7,Sm,Mo,,10.406533333333334,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Mo"": 1.0}",293.0,,7.14,108766|108769|291028,3.0
+Sm2Ru2O7,Sm,Ru,,10.278849999999998,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ru"": 1.0}",299.0,,7.51,176949|78142,2.0
+Sm2Sn2O7,Sm,Sn,,10.513316666666666,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Sn"": 1.0}",293.0,,7.44,24194|84755|204118,3.0
+Sm2Tc2O7,Sm,Tc,,10.352,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Tc"": 1.0}",293.0,,7.31,109079,1.0
+Sm2Ti2O7,Sm,Ti,,10.227225,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Ti"": 1.0}",293.0,,6.3,24208|128624|134726|148751|150209|191621|213145|214705,8.0
+Sm2Zr2O7,Sm,Zr,,10.59001111111111,,Yes,,icsd_literature,,,,pristine,"{""Sm"": 1.0}","{""Zr"": 1.0}",293.0,,6.66,150208|249976|258907|261415|119322|119381|119382|156137|156138,9.0
+Tb2Hf2O7,Tb,Hf,,10.4716,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Hf"": 1.0}",295.0,,9.1,218112,1.0
+Tb2Mo2O7,Tb,Mo,,10.152892,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Mo"": 1.0}",293.0,,7.53,159770|159771|159772|159773|182567,5.0
+Tb2Ru2O7,Tb,Ru,,10.225200000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ru"": 1.0}",293.0,,7.9,82305|176952,2.0
+Tb2Zr0.2Sn1.8O7,Tb,"Sn,Zr",,10.423759,,Yes,,icsd_literature,,,,high_entropy,"{""Tb"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",293.0,,7.76,133286,1.0
+Tb2Sn2O7,Tb,Sn,,10.292275,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Sn"": 1.0}",295.0,,7.83,82959|159786|159787|159788|159789|159790|159791|204116,8.0
+Tb2Ti2O7,Tb,Ti,,10.052223000000001,,Yes,,icsd_literature,,,,pristine,"{""Tb"": 1.0}","{""Ti"": 1.0}",293.0,,6.68,139376|159781|159782|159783|159784|159785|191618|249087|249088|69461,10.0
+Tl2Ir2O7,Tl,Ir,,10.18258,,Yes,,icsd_literature,,,,pristine,"{""Tl"": 1.0}","{""Ir"": 1.0}",293.0,,11.41,112139,1.0
+Mn2Tl2O7,Tl,Mn,,9.891876666666667,,Yes,,icsd_literature,,,,pristine,"{""Tl"": 1.0}","{""Mn"": 1.0}",298.0,,8.66,56515|83269|83270,3.0
+Tl2Pt2O7,Tl,Pt,,10.132,,Yes,,icsd_literature,,,,pristine,"{""Tl"": 1.0}","{""Pt"": 1.0}",293.0,,11.63,22215,1.0
+Tl2Ru2O7,Tl,Ru,,10.1947,,Yes,,icsd_literature,,,,pristine,"{""Tl"": 1.0}","{""Ru"": 1.0}",295.0,,9.09,51157|51158|172017,3.0
+Tm2Ir2O7,Tm,Ir,,10.135,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ir"": 1.0}",293.0,,10.67,144825,1.0
+Tm2Ru2O7,Tm,Ru,,10.096,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ru"": 1.0}",293.0,,8.42,109307,1.0
+Tm2Sn2O7,Tm,Sn,,10.228980000000002,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Sn"": 1.0}",295.0,,8.29,82963|84750|147480|147481|204112,5.0
+Tm2Ti2O7,Tm,Ti,,10.0675,,Yes,,icsd_literature,,,,pristine,"{""Tm"": 1.0}","{""Ti"": 1.0}",293.0,,7.11,191614|249092|249093,3.0
+Yb0.1Y1.9Sn2O7,"Y,Yb",Sn,,10.37036,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",293.0,,6.38,187428,1.0
+Y2Hf0.5Ti1.5O7,Y,"Hf,Ti",,10.179,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.75, ""Hf"": 0.25}",293.0,,5.68,239725,1.0
+Y2HfTiO7,Y,"Hf,Ti",,10.2524,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.5, ""Hf"": 0.5}",293.0,,6.36,239726,1.0
+Y2Hf1.5Ti0.5O7,Y,"Hf,Ti",,10.3246,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.75}",293.0,,7.02,239727,1.0
+Y2Ti0.3Ir1.7O7,Y,"Ir,Ti",,10.212,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.15, ""Ir"": 0.85}",293.0,,7.89,759800,1.0
+Y2Ti0.2Ir1.8O7,Y,"Ir,Ti",,10.218,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.1, ""Ir"": 0.9}",293.0,,8.06,759799,1.0
+Y2Ti0.1Ir1.9O7,Y,"Ir,Ti",,10.228,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.05, ""Ir"": 0.95}",293.0,,8.22,759798,1.0
+Y2Ti0.05Ir1.95O7,Y,"Ir,Ti",,10.242,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.025, ""Ir"": 0.975}",293.0,,8.27,759797,1.0
+Y2Ir2O7,Y,Ir,,10.174033333333334,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ir"": 1.0}",293.0,,8.54,135030|187534|759796,3.0
+Y2Zr1.9Mn0.1O7,Y,"Mn,Zr",,10.4507,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.95, ""Mn"": 0.05}",293.0,,5.45,46127,1.0
+Y2Zr1.8Mn0.2O7,Y,"Mn,Zr",,10.4468,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.9, ""Mn"": 0.1}",293.0,,5.42,46128,1.0
+Y2Mn2O7,Y,Mn,,9.908193333333335,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mn"": 1.0}",298.0,,5.45,56516|139773|202516,3.0
+Y2Mo2O7,Y,Mo,,10.23,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Mo"": 1.0}",293.0,,5.98,202522,1.0
+Y2Ru2O7,Y,Ru,,10.138549999999999,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ru"": 1.0}",295.0,,6.26,79733|73799,2.0
+Y2Ti1.5Sn0.5O7,Y,"Sn,Ti",,10.3162,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.75, ""Sn"": 0.25}",293.0,,5.09,160112,1.0
+Y2TiSnO7,Y,"Sn,Ti",,10.2532,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.5, ""Sn"": 0.5}",293.0,,5.62,160113,1.0
+Y2ZrSnO7,Y,"Sn,Zr",,10.3,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.5, ""Sn"": 0.5}",293.0,,6.08,154222,1.0
+Y2Ti0.5Sn1.5O7,Y,"Sn,Ti",,10.197,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Ti"": 0.25, ""Sn"": 0.75}",293.0,,6.16,160114,1.0
+Y2Zr0.2Sn1.8O7,Y,"Sn,Zr",,10.38564,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",293.0,,6.19,237258,1.0
+Y2Sn2O7,Y,Sn,,10.335252857142857,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Sn"": 1.0}",293.0,,6.28,24193|74706|84803|84805|157673|208186|160115,7.0
+Y2Zr1.2Ti0.8O7,Y,"Ti,Zr",,10.286000000000001,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.6, ""Ti"": 0.4}",293.0,,5.33,66875|79523,2.0
+Y2Zr0.9Ti1.1O7,Y,"Ti,Zr",,10.2437,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.45, ""Ti"": 0.55}",293.0,,5.25,79522,1.0
+Y2Zr0.6Ti1.4O7,Y,"Ti,Zr",,10.1901,,Yes,,icsd_literature,,,,high_entropy,"{""Y"": 1.0}","{""Zr"": 0.3, ""Ti"": 0.7}",293.0,,5.17,79521,1.0
+Y2Ti2O7,Y,Ti,,10.11725443478261,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Ti"": 1.0}",293.0,,4.99,14242|15633|24206|34883|34885|42702|48174|66874|83593|93770|128613|134732|154152|154153|154154|154155|157666|157667|173048|191622|196407|239724|160111,23.0
+Y2Zr2O7,Y,Zr,,10.4531,,Yes,,icsd_literature,,,,pristine,"{""Y"": 1.0}","{""Zr"": 1.0}",293.0,,5.49,46126,1.0
+Yb2Ir2O6.97,Yb,Ir,,10.104,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ir"": 1.0}",293.0,,10.87,35850,1.0
+Yb2Ru2O7,Yb,Ru,,10.0752,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ru"": 1.0}",293.0,,8.58,82306,1.0
+Yb2Sn2O7,Yb,Sn,,10.3096,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Sn"": 1.0}",295.0,,8.44,82964|204107,2.0
+Yb2Ti2O7,Yb,Ti,,10.054812621621622,,Yes,,icsd_literature,,,,pristine,"{""Yb"": 1.0}","{""Ti"": 1.0}",293.0,,7.28,24722|121049|122289|122290|122291|122292|122293|122295|122297|122298|122299|122300|122301|122303|122304|122305|122306|122307|134731|138128|138129|161405|173750|186195|186196|188872|188873|188874|188876|188877|191613|214707|249099|249100|252237|119368|154077,37.0

@@ -1,0 +1,2 @@
+material_id,formula_pretty,composition,a_lattice,b_lattice,c_lattice,alpha_angle,beta_angle,gamma_angle,volume,density,crystal_system,space_group_symbol,space_group_number,point_group,band_gap,cbm,vbm,is_gap_direct,total_magnetization,energy_above_hull,formation_energy_per_atom,energy_per_atom
+mp-1101257,Tm2Pt2O7,Tm4 Pt4 O14,7.135136,7.135136,7.135136,60.0,60.0,60.0,256.8572,10.8613,Cubic,Fd-3m,227,m-3m,1.4709,5.1862,3.7153,False,0.0,0.0,-2.489978588181823,-7.557523736818186

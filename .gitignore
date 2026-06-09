@@ -3,3 +3,4 @@
 *.pkl
 *.json
 !notes.txt
+__pycache__/

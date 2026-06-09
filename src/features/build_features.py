@@ -27,50 +27,32 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Optional
 import warnings
+from src.globals import IONIC_RADII_6, IONIC_RADII_8, ELECTRONEGATIVITY, \
+    MOLAR_MASSES, ATOMIC_NUMBER, R_GAS
 
 warnings.filterwarnings('ignore')
 
 # ── Physical property tables ──────────────────────────────────────────────────
 
 # Shannon ionic radii (Å) — 8-coord for A-site, 6-coord for B-site
-IONIC_RADII_8: Dict[str, float] = {
-    'La': 1.160, 'Ce': 1.143, 'Pr': 1.126, 'Nd': 1.109, 'Sm': 1.079,
-    'Eu': 1.066, 'Gd': 1.053, 'Tb': 1.040, 'Dy': 1.027, 'Ho': 1.015,
-    'Er': 1.004, 'Tm': 0.994, 'Yb': 0.985, 'Lu': 0.977, 'Y':  1.019,
-}
+# taken from Shannon, R. D. “Revised Effective Ionic Radii and Systematic Studies of Interatomic Distances in Halides
+# and Chalcogenides.” Acta Crystallographica Section A, vol. 32, no. 5, 1 Sept. 1976, pp. 751–767,
+# https://doi.org/10.1107/s0567739476001551.
+IONIC_RADII_8: Dict[str, float] = IONIC_RADII_8
 
-IONIC_RADII_6: Dict[str, float] = {
-    'Ti': 0.605, 'Zr': 0.720, 'Hf': 0.710, 'Sn': 0.690, 'Ir': 0.625,
-    'Ce': 0.870, 'Nb': 0.640,
-}
+IONIC_RADII_6: Dict[str, float] = IONIC_RADII_6
 
 # Molar masses (g/mol)
-MOLAR_MASSES: Dict[str, float] = {
-    'La': 138.91, 'Ce': 140.12, 'Pr': 140.91, 'Nd': 144.24, 'Pm': 145.00,
-    'Sm': 150.36, 'Eu': 151.96, 'Gd': 157.25, 'Tb': 158.93, 'Dy': 162.50,
-    'Ho': 164.93, 'Er': 167.26, 'Tm': 168.93, 'Yb': 173.04, 'Lu': 174.97,
-    'Y':   88.91, 'Ti':  47.87, 'Zr':  91.22, 'Hf': 178.49, 'Sn': 118.71,
-    'Ir': 192.22, 'Nb':  92.91, 'O':   16.00,
-}
+# from https://iupac.qmul.ac.uk/AtWt/
+MOLAR_MASSES: Dict[str, float] = MOLAR_MASSES
 
 # Pauling electronegativity
-ELECTRONEGATIVITY: Dict[str, float] = {
-    'La': 1.10, 'Ce': 1.12, 'Pr': 1.13, 'Nd': 1.14, 'Sm': 1.17,
-    'Eu': 1.20, 'Gd': 1.20, 'Tb': 1.22, 'Dy': 1.23, 'Ho': 1.24,
-    'Er': 1.24, 'Tm': 1.25, 'Yb': 1.10, 'Lu': 1.27, 'Y':  1.22,
-    'Ti': 1.54, 'Zr': 1.33, 'Hf': 1.30, 'Sn': 1.96, 'Ir': 2.20,
-    'Nb': 1.60,
-}
+# from Wikipedia
+ELECTRONEGATIVITY: Dict[str, float] = ELECTRONEGATIVITY
 
 # Atomic numbers
-ATOMIC_NUMBER: Dict[str, int] = {
-    'La': 57, 'Ce': 58, 'Pr': 59, 'Nd': 60, 'Sm': 62, 'Eu': 63,
-    'Gd': 64, 'Tb': 65, 'Dy': 66, 'Ho': 67, 'Er': 68, 'Tm': 69,
-    'Yb': 70, 'Lu': 71, 'Y': 39, 'Ti': 22, 'Zr': 40, 'Hf': 72,
-    'Sn': 50, 'Ir': 77, 'Nb': 41,
-}
+ATOMIC_NUMBER: Dict[str, int] = ATOMIC_NUMBER
 
-R_GAS = 8.314  # J/(mol·K)
 
 
 # ── Composition parser ────────────────────────────────────────────────────────
@@ -157,6 +139,7 @@ def radius_std(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
 
 def delta_parameter(comp: Dict[str, float], radii_table: Dict[str, float]) -> float:
     """δ = √(Σ xᵢ(1 − rᵢ/r̄)²)  — lattice distortion index."""
+    """https://www.tandfonline.com/doi/full/10.1080/21663831.2024.2326014#d1e452"""
     r_mean = mean_radius(comp, radii_table)
     if np.isnan(r_mean) or r_mean == 0:
         return np.nan
@@ -298,7 +281,9 @@ def build_features_for_row(row: pd.Series) -> Dict[str, float]:
 
     # ── Lattice-derived features ──────────────────────────────────────────────
     lattice_vol = lattice_a ** 3 if not np.isnan(lattice_a) else np.nan
-    rho_th      = theoretical_density(a_comp, b_comp, lattice_a)
+    rho_th = (theoretical_density(a_comp, b_comp, lattice_a) + float(row.get('density_calc'))) / 2 \
+        if pd.notna(row.get('density_calc')) \
+        else theoretical_density(a_comp, b_comp, lattice_a)
 
     return {
         # A-site

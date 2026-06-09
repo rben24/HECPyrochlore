@@ -18,11 +18,11 @@ Outputs
 
 Usage
 -----
-  python models/validate_lattice.py
-  python models/validate_lattice.py --splits 10
-  python models/validate_lattice.py --types pristine          # pristine only
-  python models/validate_lattice.py --types high_entropy      # HEC only
-  python models/validate_lattice.py --types pristine high_entropy  # both (default)
+  python models/validate_rom_latt.py
+  python models/validate_rom_latt.py --splits 10
+  python models/validate_rom_latt.py --types pristine          # pristine only
+  python models/validate_rom_latt.py --types high_entropy      # HEC only
+  python models/validate_rom_latt.py --types pristine high_entropy  # both (default)
 """
 
 from __future__ import annotations
@@ -39,26 +39,24 @@ _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent
 sys.path.insert(0, str(_PROJECT))
 
-from src.data.load_data import get_lattice_dataset
+from src.data.load_data import get_lattice_rom_dataset, HIGH_ENTROPY
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
     plot_parity, plot_cv_comparison, plot_r2_vs_cv_folds,
     plot_r2_vs_feature_count,
 )
+from src.globals import HIGH_ENTROPY
 
-TASK     = 'lattice_param'
+TASK     = 'lattice_param_rom'
 SAVE_DIR = _PROJECT / 'models' / TASK
-
 
 def main():
     parser = argparse.ArgumentParser(
         description='Validate lattice parameter ML model.')
-    parser.add_argument('--splits', type=int, default=5,
-                        help='Number of CV folds (default: 5)')
-    parser.add_argument('--types', nargs='+',
-                        default=['pristine', 'high_entropy'],
-                        choices=['pristine', 'high_entropy'],
-                        help='Compound types to include (default: both)')
+    parser.add_argument('--splits', type=int, default=6,
+                        help='Number of CV folds (default: 7)')
+    parser.add_argument('--num_feat', type=int, default=8,
+                        help='Number of Featrures to include (default: 7)')
     args = parser.parse_args()
 
     print()
@@ -66,22 +64,67 @@ def main():
     print("║   Lattice Parameter — Validation & Feature Report    ║")
     print("╚══════════════════════════════════════════════════════╝")
 
-    X, y, feat_names = get_lattice_dataset(
-        verbose=True, compound_types=args.types)
+    X, y, feat_names = get_lattice_rom_dataset(verbose=True)
 
     print(f"\n  Samples  : {len(y)}")
     print(f"  Features : {len(feat_names)}")
     print(f"  Target   : Lattice Parameter (Å)  "
           f"range [{y.min():.4f}, {y.max():.4f}]")
 
+    '''
+    import seaborn as sns
+    import pandas as pd
+    import matplotlib.pyplot as plt
+
+    # Convert to DataFrame for easier labeling
+    X_df = pd.DataFrame(X, columns=feat_names)
+    X_df['latt param'] = y
+
+    # Set style
+    sns.set_theme(style='whitegrid')
+    sns.pairplot(X_df, diag_kind='kde', plot_kws={'alpha': 0.6})
+    plt.tight_layout()
+    plt.savefig(SAVE_DIR / 'sns2.png')
+    plt.show()
+
+    # 1. Check distributions and outliers
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    sns.histplot(X_df, kde=True, ax=axes[0, 0])
+    axes[0, 0].set_title('Distributions')
+    plt.show()
+
+    sns.boxplot(data=X_df, ax=axes[0, 1])
+    axes[0, 1].set_title('Outliers & Quartiles')
+    axes[0, 1].tick_params(axis='x', rotation=45)
+    plt.show()
+
+    # 2. Check correlations
+    corr = X_df.corr()
+    sns.heatmap(corr, annot=True, cmap='coolwarm', ax=axes[1, 0], fmt='.2f')
+    axes[1, 0].set_title('Feature Correlations')
+    plt.show()
+
+    # 3. Target relationship
+    y_series = pd.Series(y, name='target')
+    sns.scatterplot(data=pd.concat([X_df.iloc[:, 0], y_series], axis=1),
+                    x=X_df.columns[0], y='target', ax=axes[1, 1], alpha=0.6)
+    axes[1, 1].set_title(f'{feat_names[0]} vs Target')
+
+    plt.tight_layout()
+    plt.savefig(SAVE_DIR / 'sns.png')#, dpi=150, bbox_inches='tight')
+    plt.show()
+'''
+
+    top_n_feat = args.num_feat
+    # top_n_feat = len(feat_names)
     results = train_and_evaluate(
         X, y, feat_names,
         task_name=TASK,
         n_splits=args.splits,
         save_dir=SAVE_DIR,
         verbose=True,
-        compound_types=args.types,
-        top_n_features=8,
+        compound_types=[HIGH_ENTROPY],
+        top_n_features=top_n_feat,
     )
 
     print("\n[plots] Generating figures …")
@@ -110,15 +153,15 @@ def main():
     # plot_r2_vs_cv_folds(
     #     X, y, feat_names,
     #     task_name='property',
-    #     top_n_features=10,
+    #     top_n_features=top_n_feat,
     #     save_path=SAVE_DIR / 'r2_vs_folds.png'
     # )
 
-    _write_report(results, feat_names, args.splits, args.types)
+    _write_report(results, feat_names, args.splits)
     print("\n[done] All outputs written to:", SAVE_DIR)
 
 
-def _write_report(results, feat_names, n_splits, compound_types):
+def _write_report(results, feat_names, n_splits):
     report_path = SAVE_DIR / 'lattice_validation_report.txt'
     fi = results['fi_df']
     cv = results['cv_results']
@@ -131,7 +174,7 @@ def _write_report(results, feat_names, n_splits, compound_types):
         f"  Best model      : {results['best_name']}",
         f"  CV folds        : {n_splits}",
         f"  Features        : {len(feat_names)}",
-        f"  Compound types  : {', '.join(compound_types)}",
+        f"  Compound types  : {HIGH_ENTROPY}",
         f"  Train samples   : {results.get('n_train', '?')}",
         f"  Test samples    : {results.get('n_test', '?')}",
         "",
@@ -155,14 +198,15 @@ def _write_report(results, feat_names, n_splits, compound_types):
             f"    MAE  : {mae.mean():.5f} ± {mae.std():.5f}",
         ]
 
+    num_rows = min(20, len(fi))
     lines += [
         "",
-        "── Top-20 Features by Permutation Importance ─────────────────",
+        f"── Top-{num_rows} Features by Permutation Importance ─────────────────",
         f"  {'Rank':<5} {'Feature':<35} {'Perm Imp':>10}  {'±':>2}  "
         f"{'Std':>8}  {'Tree MDI':>10}",
         "  " + "-" * 72,
     ]
-    for rank, row in fi.head(20).iterrows():
+    for rank, row in fi.head(num_rows).iterrows():
         tree_str = (f"{row['tree_importance']:.6f}"
                     if not np.isnan(row['tree_importance']) else "   N/A   ")
         lines.append(
