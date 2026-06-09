@@ -614,6 +614,15 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
     out_cols = [c for c in PRISTINE_COLS if c in combined.columns]
     combined = combined[out_cols]
 
+    # Checking the (LaY)(SnTi) type compositions
+    # LaSn_df = combined[combined['Composition'] == 'La2Sn2O7']
+    # LaTi_df = combined[combined['Composition'] == 'La2Ti2O7']
+    # YSn_df = combined[combined['Composition'] == 'Y2Sn2O7']
+    # YTi_df = combined[combined['Composition'] == 'Y2Ti2O7']
+    # check_df = pd.concat([LaTi_df, LaSn_df, YTi_df, YSn_df])
+    # print(check_df)
+    # check_df.to_csv(RAW_DIR / 'check_df.csv')
+
 
     # ------- Deduplication ------------------------------------
     group_keys = ['Sample A', 'Sample B']
@@ -784,7 +793,7 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
     '''
     # ------- Deduplication ------------------------------------
-    group_keys = ['Sample A', 'Sample B']
+    group_keys = ['a_stoich_json', 'b_stoich_json']
 
     # helper aggregators
     def concat_strings_col(series):
@@ -799,35 +808,21 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
     numeric_cols = combined.select_dtypes(include='number').columns.tolist()
     other_cols = [c for c in combined.columns if c not in numeric_cols + group_keys]
 
-    # we'll build aggregated rows per group manually to apply the 'DFT' logic
+    # build aggregated rows per group
     out_rows = []
     for keys, grp in combined.groupby(group_keys, as_index=False):
-        # keys is a tuple of group key values in same order as group_keys
-        # decide which rows to use for averaging
-        has_dft = grp['Synthesis Method'].eq('DFT').any()
-        if has_dft:
-            use_grp = grp[grp['Synthesis Method'].eq('DFT')]
-        else:
-            use_grp = grp
-
         agg_row = dict(zip(group_keys, keys))
 
-        # numeric means (pandas will yield NaN if all NaN)
+        # numeric means
         for col in numeric_cols:
-            agg_row[col] = use_grp[col].mean()
+            agg_row[col] = grp[col].mean()
 
         # non-numeric processing
         for col in other_cols:
-            if col == 'Band Gap Type' or col == 'data_source':
-                agg_row[col] = concat_strings_col(use_grp[col])
-            elif col == 'Synthesis Method':
-                # prefer 'DFT' if present, else first non-null, else NaN
-                if has_dft:
-                    agg_row[col] = 'DFT'
-                else:
-                    agg_row[col] = first_nonnull(use_grp[col])
+            if col == 'data_source':
+                agg_row[col] = concat_strings_col(grp[col])
             else:
-                agg_row[col] = first_nonnull(use_grp[col])
+                agg_row[col] = first_nonnull(grp[col])
 
         out_rows.append(agg_row)
 
@@ -835,7 +830,7 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
     # Optional: ensure column order matches original
     combined = result[combined.columns.tolist()]
-    '''
+'''
     print(f"  Filtered to High Entropy compounds: {len(combined)} rows")
     print(f"  Output columns: {len(out_cols)}")
     print()

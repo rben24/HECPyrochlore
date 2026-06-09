@@ -8,8 +8,10 @@ import numpy as np
 data = pd.read_csv("../../data/processed/rom_hec_latt.csv")
 df = pd.DataFrame(data)
 
-X = df[['Lattice Parameter (Angstrom)']]
-y = df['ROM_Lattice_Parameter']
+# X = df[['Lattice Parameter (Angstrom)']]
+# y = df['ROM_Lattice_Parameter']
+X = df[['ROM_Lattice_Parameter']]
+y = df['Lattice Parameter (Angstrom)']
 
 model_l = LinearRegression()
 model_l.fit(X, y)

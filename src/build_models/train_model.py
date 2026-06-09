@@ -131,6 +131,7 @@ def build_models(random_state: int = 42) -> Dict[str, Any]:
         ]),
     }
 
+'''
 # ── Using CV to find Outliers ─────────────────────────────────────────────────
 # taken from Tao Liang's repository at
 # https://github.com/TaoLiang120/myml/blob/main/myml/models/models.py#L1084
@@ -258,7 +259,7 @@ def kfold_crossvalidation(self, n_splits, save_dir, n_repeats=1, style="KFold", 
     fname = "KFOLD_" + self.mname_header + "ALL.csv"
     kfold_df.to_csv(os.path.join(self.SAVE_PATH, fname), index=False)
     return kfold_df
-
+'''
 
 # ── Metric helpers ───────────────────────────────────────────────────────────
 
@@ -506,7 +507,8 @@ def plot_feature_importance(fi_df: pd.DataFrame, title: str,
 
 def plot_parity(y_true: np.ndarray, y_pred: np.ndarray,
                 title: str, ylabel: str,
-                save_path: Optional[Path] = None):
+                save_path: Optional[Path] = None,
+                xlabel: Optional[str] = None):
     metrics = evaluate_predictions(y_true, y_pred)
     fig, ax = plt.subplots(figsize=(6, 6))
     ax.scatter(y_true, y_pred, alpha=0.75, edgecolors='k', linewidth=0.5,
@@ -515,8 +517,12 @@ def plot_parity(y_true: np.ndarray, y_pred: np.ndarray,
     hi = max(y_true.max(), y_pred.max())
     pad = (hi - lo) * 0.05
     ax.plot([lo - pad, hi + pad], [lo - pad, hi + pad], 'r--', linewidth=1.2)
-    ax.set_xlabel(f'Actual {ylabel}')
-    ax.set_ylabel(f'Predicted {ylabel}')
+    if xlabel:
+        ax.set_xlabel(xlabel)
+        ax.set_ylabel(ylabel)
+    else:
+        ax.set_xlabel(f'Actual {ylabel}')
+        ax.set_ylabel(f'Predicted {ylabel}')
     ax.set_title(
         f'{title}\n'
         f'R²={metrics["R2"]:.3f}  RMSE={metrics["RMSE"]:.4f}  MAE={metrics["MAE"]:.4f}'

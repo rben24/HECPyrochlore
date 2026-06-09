@@ -180,6 +180,12 @@ OUTLIER_COMPS = [
     'La1.75Y0.25Ti2O7',
     'Gd2Zr0.3Ti1.7O7',
     'Y2Ti0.5Sn1.5O7',
+    'LaYTiZr TF',
+    'La0.35Y1.65Ti2O7',
+    'La0.3Y1.7Ti2O7',
+    'La0.25Y1.75Ti2O7',
+    'La0.2Y1.8Ti2O7',
+    'Yb0.1Y1.9Sn2O7',
 ]
 
 # ── Physical property tables ──────────────────────────────────────────────────

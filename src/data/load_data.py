@@ -240,19 +240,20 @@ def get_lattice_rom_dataset(
     df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
 
     # Drop outlier columns given by plot_latt_vs_ROMlatt_wOutliers.py
-    # df_sub = df[~df['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
+    df_sub = df_sub[~df_sub['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
 
     # Deal with NaN columns
     # df_sub = df_sub.drop(columns=DROP_COLUMNS)
     df_sub.dropna(subset=['ROM_Lattice_Parameter', 'ROM_Ionic_Radius_A', 'ROM_Ionic_Radius_B'], inplace=True)
     mean_cols = globals.ROM_COLS + ['Temperature']
-    threshold = 0.5
+    threshold = 0.8
     min_non_na = int((1 - threshold) * len(df))
     for col in mean_cols:
         if col in df_sub.columns:
             col_mean = df_sub[col].mean()
             df_sub.fillna(value={col: col_mean},inplace=True)
     df_sub.dropna(axis=1, thresh=min_non_na, inplace=True)
+    print(df_sub.shape)
 
     df_sub.to_csv(OUTPUT_FILE_L_ROM, index=False)
     log.info(f"Saved combined dataset → {OUTPUT_FILE_L_ROM}")
