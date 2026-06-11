@@ -1,9 +1,9 @@
 """
-Globals will be declared here
-
+Globals are declared here
+Includes elements for pyrochlore sites, elementary constants
 """
 import numpy as np
-from typing import List, Tuple
+# from typing import List, Tuple
 
 # ── element sets ────────────────────────────────────────────────────────────
 
@@ -21,12 +21,12 @@ KNOWN_A: frozenset[str] = frozenset({
 # pulled from pymatgen using is_metal() and common_oxidation_state of 4
 KNOWN_B: frozenset[str] = frozenset({
     'Ce', 'Hf', 'Ir', 'Mn', 'Mo', 'Os', 'Pb', 'Pd', 'Pt', 'Pu',
-    'Re', 'Ru', 'Sn', 'Tc', 'Th', 'Ti', 'W', 'Zr'
+    'Re', 'Rh', 'Ru', 'Sn', 'Ta', 'Tc', 'Th', 'Ti', 'W', 'Zr'
 })
 
 # Some elements can sit on either site depending on oxidation state; handled separately
 KNOWN_AMBIGUOUS = [
-    'Ce', 'Ir', 'Sn', 'Ru',
+    'Ce', 'Ir', 'Sn', 'Ru', 'Rh' #'Ta'
 ]
 CE_AMBIGUOUS = 'Ce'
 
@@ -199,48 +199,50 @@ IONIC_RADII_8 = {
     'Eu': 1.066, 'Gd': 1.053, 'Tb': 1.040, 'Dy': 1.027, 'Ho': 1.015,
     'Er': 1.004, 'Tm': 0.994, 'Yb': 0.985, 'Lu': 0.977, 'Y':  1.019,
     # Additional A-site cations
-    'Ac': 1.120,
-    'Al': 0.675,
+    # 'Ac': 1.120,
+    # 'Al': 0.675,
     'Am': 1.090,
-    'Au': 1.020,
+    # 'Au': 1.020,
     'Bi': 1.170,
-    'Bk': 1.010,
-    'Cf': 1.010,
-    'Cm': 1.025,
-    'Co': 0.900,
-    'Cr': 0.840,
-    'Es': 1.000,
-    'Fe': 0.920,
-    'Fm': 0.990,
-    'Ga': 0.762,
-    'In': 1.100,
-    'Ir': 1.000,
-    'Lr': 0.970,
-    'Md': 0.980,
-    'No': 0.975,
+    # 'Bk': 1.010,
+    # 'Cf': 1.010,
+    # 'Cm': 1.025,
+    # 'Co': 0.900,
+    # 'Cr': 0.840,
+    # 'Es': 1.000,
+    'Fe': 0.780,
+    # 'Fm': 0.990,
+    # 'Ga': 0.762,
+    'In': 0.920,
+    # 'Ir': 1.000,
+    # 'Lr': 0.970,
+    # 'Md': 0.980,
+    # 'No': 0.975,
     'Pm': 1.093,
-    'Rh': 0.880,
-    'Ru': 0.900,
-    'Sc': 0.885,
-    'Tl': 1.155,
+    # 'Rh': 0.665,
+    # 'Ru': 0.680,
+    'Sc': 0.870,
+    'Tl': 0.980,
 }
 
 IONIC_RADII_6 = {
     'Ti': 0.605, 'Zr': 0.720, 'Hf': 0.710, 'Sn': 0.690, 'Ir': 0.625,
-    'Ce': 0.870, 'Nb': 0.640,
+    'Ce': 0.870, 'Nb': 0.680,
     # Additional B-site cations
-    'Mn': 0.670,
-    'Mo': 0.790,
+    'Mn': 0.530,
+    'Mo': 0.650,
     'Os': 0.630,
-    'Pb': 0.785,
-    'Pd': 0.755,
-    'Pt': 0.740,
-    'Pu': 0.900,
-    'Re': 0.720,
-    'Ru': 0.760,
-    'Tc': 0.740,
-    'Th': 1.050,
-    'W': 0.740,
+    'Pb': 0.775,
+    'Pd': 0.615,
+    'Pt': 0.625,
+    'Pu': 0.860,
+    'Re': 0.630,
+    'Rh': 0.600,
+    'Ru': 0.620,
+    'Ta': 0.680,
+    'Tc': 0.645,
+    'Th': 0.940,
+    'W': 0.660,
 }
 
 # Molar masses (g/mol)
@@ -281,6 +283,7 @@ MOLAR_MASSES = {
     'Rh': 102.91,
     'Ru': 101.07,
     'Sc': 44.956,
+    'Ta': 180.947,
     'Tc': 98.00,
     'Th': 232.04,
     'Tl': 204.38,
@@ -325,6 +328,7 @@ ELECTRONEGATIVITY = {
     'Rh': 2.28,
     'Ru': 2.20,
     'Sc': 1.36,
+    'Ta': 1.50,
     'Tc': 1.90,
     'Th': 1.30,
     'Tl': 1.62,
@@ -335,7 +339,7 @@ ELECTRONEGATIVITY = {
 ATOMIC_NUMBER = {
     'La': 57, 'Ce': 58, 'Pr': 59, 'Nd': 60, 'Sm': 62, 'Eu': 63,
     'Gd': 64, 'Tb': 65, 'Dy': 66, 'Ho': 67, 'Er': 68, 'Tm': 69,
-    'Yb': 70, 'Lu': 71, 'Y': 39, 'Ti': 22, 'Zr': 40, 'Hf': 72,
+    'Yb': 70, 'Lu': 71, 'Y': 39, 'Ti': 22, 'Zr': 40, 'Hf': 72, 'Ta': 73,
     'Sn': 50, 'Ir': 77, 'Nb': 41,
     # Additional elements
     'Ac': 89, 'Al': 13, 'Am': 95, 'Au': 79, 'Bi': 83, 'Bk': 97,
