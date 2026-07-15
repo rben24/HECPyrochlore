@@ -3,32 +3,117 @@ Globals are declared here
 Includes elements for pyrochlore sites, elementary constants
 """
 import numpy as np
-# from typing import List, Tuple
+from typing import Dict, List, Tuple, Optional
+from pymatgen.core import Element, Composition
+from pathlib import Path
+
+_HERE = Path(__file__).resolve().parent
+PROJECT = _HERE.parent
 
 # ── element sets ────────────────────────────────────────────────────────────
 
 # Rare-earth / Y cations that occupy the 8-coordinated A-site
-# pulled from pymatgen using is_metal() and common_oxidation_state of 3
+# pulled from pymatgen using is_metal() and common_oxidation_state of 3 or 2
 # **Also, there can possibly be metals with oxidation state 2+ in A site
-KNOWN_A: frozenset[str] = frozenset({
-    'Ac', 'Al', 'Am', 'Au', 'Bi', 'Bk', 'Ce', 'Cf', 'Cm', 'Co',
-    'Cr', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Ga', 'Gd', 'Ho',
-    'In', 'Ir', 'La', 'Lr', 'Lu', 'Md', 'Nd', 'No', 'Pm', 'Pr',
-    'Rh', 'Ru', 'Sc', 'Sm', 'Tb', 'Tl', 'Tm', 'Y', 'Yb'
-})
-
-# Transition-metal cations that occupy the 6-coordinated B-site
-# pulled from pymatgen using is_metal() and common_oxidation_state of 4
-KNOWN_B: frozenset[str] = frozenset({
-    'Ce', 'Hf', 'Ir', 'Mn', 'Mo', 'Os', 'Pb', 'Pd', 'Pt', 'Pu',
-    'Re', 'Rh', 'Ru', 'Sn', 'Ta', 'Tc', 'Th', 'Ti', 'W', 'Zr'
-})
+# KNOWN_A_3 = [ #: frozenset[str] = frozenset({
+#     'Ac', 'Al', 'Am', 'Au', 'Bi', 'Bk', 'Ce', 'Cf', 'Cm', 'Co',
+#     'Cr', 'Dy', 'Er', 'Es', 'Eu', 'Fe', 'Fm', 'Ga', 'Gd', 'Ho',
+#     'In', 'Ir', 'La', 'Lr', 'Lu', 'Md', 'Nd', 'No', 'Pm', 'Pr',
+#     'Sc', 'Sm', 'Tb', 'Tl', 'Tm', 'Y', 'Yb'
+# ] # })
+#
+# KNOWN_A_2 = [
+#     'Ba', 'Be', 'Ca', 'Cd', 'Co', 'Cu', 'Eu', 'Fe', 'Hg', 'Mg',
+#     'Mn', 'Ni', 'Pb', 'Pd', 'Pt', 'Ra', 'Sn', 'Sr', 'Zn',
+# ]
+#
+# # Transition-metal cations that occupy the 6-coordinated B-site
+# # pulled from pymatgen using is_metal() and common_oxidation_state of 4 or 5
+# KNOWN_B_4 = [ #: frozenset[str] = frozenset({
+#     'Ce', 'Hf', 'Ir', 'Mn', 'Mo', 'Os', 'Pb', 'Pd', 'Pt', 'Pu',
+#     'Re', 'Rh', 'Ru', 'Sn', 'Ta', 'Tc', 'Th', 'Ti', 'W', 'Zr'
+# ] #})
+#
+# KNOWN_B_5 = [
+#     'Nb', 'Np', 'Pa', 'Ta', 'V',
+# ]
 
 # Some elements can sit on either site depending on oxidation state; handled separately
-KNOWN_AMBIGUOUS = [
-    'Ce', 'Ir', 'Sn', 'Ru', 'Rh' #'Ta'
+# KNOWN_AMBIGUOUS = [
+#     'Ce', 'Ir', 'Sn', 'Ru', 'Rh', 'Pb', 'Mn', #'Ta'
+# ]
+
+# Pure A-site only (do NOT appear in any B list)
+KNOWN_A_3_ONLY = [
+    'Ac', 'Al', 'Am', 'Au', 'Bi', 'Bk', 'Cf', 'Cm',
+    'Cr', 'Dy', 'Er', 'Es', 'Fm', 'Ga', 'Gd', 'Ho',
+    'In', 'La', 'Lr', 'Lu', 'Md', 'Nd', 'No', 'Pm', 'Pr',
+    'Sc', 'Sm', 'Tb', 'Tl', 'Tm', 'Y', 'Yb',
 ]
+
+KNOWN_A_2_ONLY = [
+    'Ba', 'Be', 'Ca', 'Cd', 'Cu', 'Hg', 'Mg',
+    'Ni', 'Ra', 'Sr', 'Zn',
+]
+
+# Pure B-site only (do NOT appear in any A list)
+KNOWN_B_4_ONLY = [
+    'Hf', 'Mo', 'Re', 'Ta', 'Tc', 'Th', 'Ti', 'W', 'Zr',
+    'Rh', 'Ru', 'Os', 'Te',
+]
+
+KNOWN_B_5_ONLY = [
+    'Nb', 'Np', 'Pa', 'Ta', 'V',
+]
+
+# Structure: element → list of (oxidation_state, site_type) pairs
+# site_type: 'A2' = A-site +2, 'A3' = A-site +3, 'B4' = B-site +4, 'B5' = B-site +5
+KNOWN_AMBIGUOUS_SMALL = {
+    'Ce': [3, 4],      # ±3 or ±4
+    'Co': [3, 2],
+    'Eu': [3, 2],
+    'Fe': [3, 2],
+    'Ge': [2, 4],
+    'Ir': [3, 4],
+    'Mn': [4, 2],
+    'Pb': [4, 2],
+    'Pd': [4, 2],
+    'Pt': [4, 2],
+    # 'Rh': [3, 4],
+    # 'Ru': [3, 4],
+    'Sn': [4, 2],
+    'Ta': [5, 4],  # Prefers +5 as B-site
+    'V':  [2, 3, 4, 5],  # Ultra-ambiguous
+    # 'Mo': [('B', 4), ('B', 5), ('A', 3)],  # Mostly B-site
+    # 'W':  [('B', 4), ('B', 5), ('A', 3)],  # Mostly B-site
+}
+
+KNOWN_AMBIGUOUS = {
+    'Ce': [('A', 3), ('B', 4)],      # ±3 or ±4
+    'Co': [('A', 3), ('A', 2)],
+    'Eu': [('A', 3), ('A', 2)],
+    'Fe': [('A', 3), ('A', 2)],
+    'Ge': [('A', 2), ('B', 4)],
+    'Ir': [('A', 3), ('B', 4)],
+    'Mn': [('B', 4), ('A', 2)],
+    'Pb': [('B', 4), ('A', 2)],
+    'Pd': [('B', 4), ('A', 2)],
+    'Pt': [('B', 4), ('A', 2)],
+    # 'Rh': [('A', 3), ('B', 4)],
+    # 'Ru': [('A', 3), ('B', 4)],
+    'Sn': [('B', 4), ('A', 2)],
+    'Ta': [('B', 5), ('B', 4)],  # Prefers +5 as B-site
+    'V':  [('A', 2), ('A', 3), ('B', 4), ('B', 5)],  # Ultra-ambiguous
+    # 'Mo': [('B', 4), ('B', 5), ('A', 3)],  # Mostly B-site
+    # 'W':  [('B', 4), ('B', 5), ('A', 3)],  # Mostly B-site
+}
+
+# Fallback hardcoded sets (for elements not matching standard oxidation patterns)
+KNOWN_A = set(KNOWN_A_3_ONLY) | set(KNOWN_A_2_ONLY) | set(KNOWN_AMBIGUOUS_SMALL.keys())
+KNOWN_B = set(KNOWN_B_4_ONLY) | set(KNOWN_B_5_ONLY) | set(KNOWN_AMBIGUOUS_SMALL.keys())
+
 CE_AMBIGUOUS = 'Ce'
+
 
 # Pyrochlore structure-type identifiers used in the ICSD file
 PYROCHLORE_STRUCTURE_TYPES: frozenset[str] = frozenset({
@@ -61,6 +146,8 @@ NON_PYROCHLORE = 'non_pyrochlore'
 K_B = 1.380649 * np.float_power(10, -23) # Boltzmann constant J/K
 R_GAS = 8.314  # J/(mol·K)
 ROOM_TEMP = 300 # K (technically 298.15K by IUPAC)
+NA = 6.02214076e23 # Avogadro's number
+
 
 # ── Column Names ─────────────────────────────────────────────────────────────
 
@@ -69,28 +156,43 @@ PRISTINE_COLS = [
     'Composition',
     'Sample A',
     'Sample B',
+    'Oxidation State A',
+    'Oxidation State B',
     'Thermal Conductivity (W/m/K)',
-    'Lattice Parameter (Angstrom)',
-    'Density',
+    'Lattice Parameter (Å)',
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)',
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
     'Energy per Atom',
     'Formation Energy per Atom',
     'Enthalpy',
+    'Activation Energy (eV)',
     'Magnetic Moment',
     'Band Gap',
     'Band Gap Type',
     'Valence',
-    'Bulk Modulus (VRH)',
-    'Shear Modulus (VRH)',
-    'Youngs Modulus (VRH)',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
     'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)',
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
     'AEL Debye Temperature',
-    'Temperature',
-    'Thermal Expansion',
+    'Temperature (K)',
     'Energy Above Hull',
-    'Ionic Radius A (Angstrom)',
-    'Ionic Radius B (Angstrom)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
     'Electronegativity A',
     'Electronegativity B',
+    'oxygen_param_x',
     'Synthesis Method',
     'compound_type',
     'data_source',
@@ -103,10 +205,30 @@ HEC_COLS = [
     'Sample B',
     'a_stoich_json',
     'b_stoich_json',
-    'Lattice Parameter (Angstrom)',
+    'Lattice Parameter (Å)',
     'Thermal Conductivity (W/m/K)',
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)', # °K⁻¹
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
+    'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)', # Jg⁻¹K⁻¹
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
+    'Temperature (K)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'oxygen_param_x',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
     'compound_type',
-    'Temperature',
     'data_source',
 ]
 
@@ -116,7 +238,7 @@ CANONICAL_COLS = [
     'Sample A',
     'Sample B',
     'Thermal Conductivity (W/m/K)',
-    'Lattice Parameter (Angstrom)',
+    'Lattice Parameter (Å)',
     'Relative Density %',
     'Is Single Phase',
     'Synthesis Method',
@@ -149,6 +271,10 @@ ROM_COLS = [
     "ROM_Poisson_Ratio",
     "ROM_Thermal_Conductivity_W_mK",
     "ROM_Thermal_Expansion",
+    "ROM_Vickers_Hardness",
+    "ROM_Fracture_Toughness",
+    "ROM_Specific_Heat",
+    "ROM_Thermal_Diffusivity",
 ]
 
 ROM_LATT_FEAT_COLS = [
@@ -157,29 +283,166 @@ ROM_LATT_FEAT_COLS = [
     "ROM_Ionic_Radius_A",
     "ROM_Ionic_Radius_B",
     # "ROM_Radius_Ratio_rA_rB",
-    # "ROM_Electronegativity_A",
+    "ROM_Electronegativity_A",
     "ROM_Electronegativity_B",
-    "ROM_Electronegativity_Diff",
-    # "ROM_Lattice_Distortion_A",
-    # "ROM_Lattice_Distortion_B",
+    # "ROM_Electronegativity_Diff",
+    "ROM_Lattice_Distortion_A",
+    "ROM_Lattice_Distortion_B",
     "ROM_Bulk_Modulus_GPa",
     "ROM_Shear_Modulus_GPa",
     "ROM_Youngs_Modulus_GPa",
     "ROM_Poisson_Ratio",
     # "ROM_Thermal_Conductivity_W_mK",
-    # "Temperature",
+    'ROM_Vickers_Hardness',
+    'ROM_Fracture_Toughness',
+    'ROM_Specific_Heat',
+    'ROM_Thermal_Diffusivity',
 ]
-# ROM_LATT_FEAT_COLS = ROM_COLS + ['Temperature']
+# ROM_LATT_FEAT_COLS = ROM_COLS + HEC_COLS
+
+ROM_THERM_COND_FEAT_COLS = [
+    'Lattice Parameter (Å)',
+    'Thermal Conductivity (W/m/K)',
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)',  # °K⁻¹
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
+    'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)',  # Jg⁻¹K⁻¹
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
+    'Temperature (K)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'oxygen_param_x',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
+    "ROM_Lattice_Parameter",
+    "ROM_Lattice_Distortion",
+    # "ROM_Ionic_Radius_A",
+    # "ROM_Ionic_Radius_B",
+    # "ROM_Radius_Ratio_rA_rB",
+    "ROM_Electronegativity_A",
+    "ROM_Electronegativity_B",
+    "ROM_Electronegativity_Diff",
+    "ROM_Lattice_Distortion_A",
+    "ROM_Lattice_Distortion_B",
+    "ROM_Bulk_Modulus_GPa",
+    "ROM_Shear_Modulus_GPa",
+    "ROM_Youngs_Modulus_GPa",
+    "ROM_Poisson_Ratio",
+    "ROM_Thermal_Conductivity_W_mK",
+    "ROM_Thermal_Expansion",
+    'ROM_Vickers_Hardness',
+    'ROM_Fracture_Toughness',
+    'ROM_Specific_Heat',
+    'ROM_Thermal_Diffusivity',
+]
+# ROM_THERM_COND_FEAT_COLS = ROM_COLS + HEC_COLS
+
+ROM_HARDNESS_FEAT_COLS = [
+    'Lattice Parameter (Å)',
+    'Thermal Conductivity (W/m/K)',
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)',  # °K⁻¹
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
+    'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)',  # Jg⁻¹K⁻¹
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
+    'Temperature (K)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'oxygen_param_x',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
+    "ROM_Lattice_Parameter",
+    "ROM_Lattice_Distortion",
+    # "ROM_Ionic_Radius_A",
+    # "ROM_Ionic_Radius_B",
+    # "ROM_Radius_Ratio_rA_rB",
+    "ROM_Electronegativity_A",
+    "ROM_Electronegativity_B",
+    "ROM_Electronegativity_Diff",
+    "ROM_Lattice_Distortion_A",
+    "ROM_Lattice_Distortion_B",
+    "ROM_Bulk_Modulus_GPa",
+    "ROM_Shear_Modulus_GPa",
+    "ROM_Youngs_Modulus_GPa",
+    "ROM_Poisson_Ratio",
+    "ROM_Thermal_Conductivity_W_mK",
+    "ROM_Thermal_Expansion",
+    'ROM_Vickers_Hardness',
+    'ROM_Fracture_Toughness',
+    'ROM_Specific_Heat',
+    'ROM_Thermal_Diffusivity',
+]
+# ROM_HARDNESS_FEAT_COLS = ROM_COLS + HEC_COLS
+
+ROM_CTE_FEAT_COLS = [
+    "ROM_Lattice_Parameter",
+    "ROM_Lattice_Distortion",
+    "ROM_Ionic_Radius_A",
+    "ROM_Ionic_Radius_B",
+    "ROM_Radius_Ratio_rA_rB",
+    "ROM_Electronegativity_A",
+    "ROM_Electronegativity_B",
+    "ROM_Electronegativity_Diff",
+    "ROM_Lattice_Distortion_A",
+    "ROM_Lattice_Distortion_B",
+    "ROM_Bulk_Modulus_GPa",
+    "ROM_Shear_Modulus_GPa",
+    "ROM_Youngs_Modulus_GPa",
+    "ROM_Poisson_Ratio",
+    "ROM_Thermal_Conductivity_W_mK",
+    "ROM_Thermal_Expansion",
+    'ROM_Vickers_Hardness',
+    'ROM_Fracture_Toughness',
+    'ROM_Specific_Heat',
+    'ROM_Thermal_Diffusivity',
+]
+# ROM_CTE_FEAT_COLS = ROM_COLS + HEC_COLS
+
+ELEMENT_COLS = [
+    'Element',
+    'Atomic Mass',
+    'Electronegativity',
+    'Atomic Radius',
+    'Metallic Radius',
+    'Melting Point',
+    'Thermal Expansion Coeff',
+    'Thermal Conductivity',
+    'Vickers Hardness',
+    'Bulk Modulus',
+    'Youngs Modulus',
+    'Shear Modulus',
+    'Poissons Ratio',
+]
 
 # ── Outlier Compositions ──────────────────────────────────────────────────
 OUTLIER_COMPS = [
-    'Y2ZrSnO7',
+    'Y2ZrSnO7',                     # over 2 * stddev
     'Eu0.02Y1.98Zr1Sn1O7',
-    'La1.65Y0.35Ti2O7',
-    'La1.7Y0.3Ti2O7',
-    'La1.75Y0.25Ti2O7',
-    'Gd2Zr0.3Ti1.7O7',
-    'Y2Ti0.5Sn1.5O7',
+    'La1.65Y0.35Ti2O7',             # over 3 * stddev
+    'La1.7Y0.3Ti2O7',               # over 3 * stddev
+    'La1.75Y0.25Ti2O7',             # over 3 * stddev
+    'Gd2Zr0.3Ti1.7O7',              # over 3 * stddev
+    'Y2Ti0.5Sn1.5O7',               # over 2 * stddev
     'LaYTiZr TF',
     'La0.35Y1.65Ti2O7',
     'La0.3Y1.7Ti2O7',
@@ -194,41 +457,31 @@ OUTLIER_COMPS = [
 # taken from Shannon, R. D. “Revised Effective Ionic Radii and Systematic Studies of Interatomic Distances in Halides
 # and Chalcogenides.” Acta Crystallographica Section A, vol. 32, no. 5, 1 Sept. 1976, pp. 751–767,
 # https://doi.org/10.1107/s0567739476001551.
-IONIC_RADII_8 = {
+IONIC_RADII_8_3 = {
     'La': 1.160, 'Ce': 1.143, 'Pr': 1.126, 'Nd': 1.109, 'Sm': 1.079,
     'Eu': 1.066, 'Gd': 1.053, 'Tb': 1.040, 'Dy': 1.027, 'Ho': 1.015,
     'Er': 1.004, 'Tm': 0.994, 'Yb': 0.985, 'Lu': 0.977, 'Y':  1.019,
     # Additional A-site cations
-    # 'Ac': 1.120,
-    # 'Al': 0.675,
     'Am': 1.090,
-    # 'Au': 1.020,
     'Bi': 1.170,
-    # 'Bk': 1.010,
-    # 'Cf': 1.010,
-    # 'Cm': 1.025,
-    # 'Co': 0.900,
-    # 'Cr': 0.840,
-    # 'Es': 1.000,
     'Fe': 0.780,
-    # 'Fm': 0.990,
-    # 'Ga': 0.762,
     'In': 0.920,
-    # 'Ir': 1.000,
-    # 'Lr': 0.970,
-    # 'Md': 0.980,
-    # 'No': 0.975,
     'Pm': 1.093,
-    # 'Rh': 0.665,
-    # 'Ru': 0.680,
     'Sc': 0.870,
     'Tl': 0.980,
 }
 
-IONIC_RADII_6 = {
+IONIC_RADII_8_2 = {
+    'Ba': 1.420, 'Ca': 1.120, 'Cd': 1.100, 'Co': 0.900, 'Eu': 1.250,
+    'Fe': 0.920, 'Hg': 1.140, 'Mg': 0.890, 'Mn': 0.960, 'Pb': 1.290,
+    'Ra': 1.480, 'Sr': 1.260, 'Zn': 0.900,
+}
+
+IONIC_RADII_6_4 = {
     'Ti': 0.605, 'Zr': 0.720, 'Hf': 0.710, 'Sn': 0.690, 'Ir': 0.625,
     'Ce': 0.870, 'Nb': 0.680,
     # Additional B-site cations
+    'Ge': 0.530,
     'Mn': 0.530,
     'Mo': 0.650,
     'Os': 0.630,
@@ -239,10 +492,18 @@ IONIC_RADII_6 = {
     'Re': 0.630,
     'Rh': 0.600,
     'Ru': 0.620,
+    'Si': 0.400,
     'Ta': 0.680,
     'Tc': 0.645,
+    'Te': 0.970,
     'Th': 0.940,
     'W': 0.660,
+}
+
+IONIC_RADII_6_5 = {
+    'Ir': 0.570, 'Nb': 0.640, 'Np': 0.750, 'Os': 0.575, 'Pa': 0.780, 'Re': 0.580, 'Ru': 0.565,
+    'Ta': 0.640, 'Tc': 0.600,
+    'V': 0.540,
 }
 
 # Molar masses (g/mol)
@@ -268,6 +529,7 @@ MOLAR_MASSES = {
     'Fe': 55.845,
     'Fm': 257.00,
     'Ga': 69.723,
+    'Ge': 72.630,
     'In': 114.818,
     'Lr': 262.00,
     'Md': 258.00,
@@ -305,6 +567,8 @@ ELECTRONEGATIVITY = {
     'Au': 2.54,
     'Bi': 2.02,
     'Bk': 1.30,
+    'Ca': 1.00,
+    'Cd': 1.69,
     'Cf': 1.30,
     'Cm': 1.30,
     'Co': 1.88,
@@ -313,6 +577,8 @@ ELECTRONEGATIVITY = {
     'Fe': 1.83,
     'Fm': 1.30,
     'Ga': 1.81,
+    'Ge': 2.01,
+    'Hg': 2.00,
     'In': 1.78,
     'Lr': 1.30,
     'Md': 1.30,
@@ -330,6 +596,7 @@ ELECTRONEGATIVITY = {
     'Sc': 1.36,
     'Ta': 1.50,
     'Tc': 1.90,
+    'Te': 2.10,
     'Th': 1.30,
     'Tl': 1.62,
     'W': 2.36,
@@ -344,8 +611,347 @@ ATOMIC_NUMBER = {
     # Additional elements
     'Ac': 89, 'Al': 13, 'Am': 95, 'Au': 79, 'Bi': 83, 'Bk': 97,
     'Cf': 98, 'Cm': 96, 'Co': 27, 'Cr': 24, 'Es': 99, 'Fe': 26,
-    'Fm': 100, 'Ga': 31, 'In': 49, 'Lr': 103, 'Md': 101, 'Mn': 25,
+    'Fm': 100, 'Ga': 31, 'Ge': 32, 'In': 49, 'Lr': 103, 'Md': 101, 'Mn': 25,
     'Mo': 42, 'No': 102, 'Os': 76, 'Pb': 82, 'Pd': 46, 'Pt': 78,
     'Pu': 94, 'Re': 75, 'Rh': 45, 'Ru': 44, 'Sc': 21, 'Tc': 43,
     'Th': 90, 'Tl': 81, 'W': 74,
 }
+
+# =============================================================================
+# ELEMENTAL MECHANICAL & THERMAL PROPERTIES
+# Sources: user-provided CSV (images) + standard reference (Haynes, CRC 2023)
+# K  = bulk modulus  (GPa)
+# E  = Young's modulus (GPa)
+# nu = Poisson ratio (dimensionless)
+# G  = shear modulus (GPa); computed as E/(2*(1+nu)) if absent
+# k  = thermal conductivity (W/m·K)
+# cte= thermal expansion coefficient (K⁻¹)
+# =============================================================================
+ELEM_PROPS: Dict[str, Dict] = {
+    # ── A-site lanthanides + Y ────────────────────────────────────────────────
+    'La': {'K':  27.9, 'E':  36.6, 'nu': 0.280, 'k': 13.0, 'cte': 1.21e-5},
+    'Ce': {'K':  21.5, 'E':  33.6, 'nu': 0.248, 'k': 11.0, 'cte': 6.30e-6},
+    'Pr': {'K':  28.8, 'E':  37.3, 'nu': 0.280, 'k': 13.0, 'cte': 6.70e-6},
+    'Nd': {'K':  32.0, 'E':  41.0, 'nu': 0.280, 'k': 17.0, 'cte': 9.60e-6},
+    'Pm': {'K':  33.0, 'E':  46.0, 'nu': 0.280, 'k': 15.0, 'cte': 1.10e-5},
+    'Sm': {'K':  38.0, 'E':  50.0, 'nu': 0.270, 'k': 13.0, 'cte': 1.27e-5},
+    'Eu': {'K':   8.3, 'E':  18.2, 'nu': 0.152, 'k': 14.0, 'cte': 3.50e-5},
+    'Gd': {'K':  37.9, 'E':  54.8, 'nu': 0.259, 'k': 11.0, 'cte': 9.40e-6},
+    'Tb': {'K':  38.7, 'E':  55.7, 'nu': 0.261, 'k': 11.0, 'cte': 1.03e-5},
+    'Dy': {'K':  40.5, 'E':  61.4, 'nu': 0.247, 'k': 11.0, 'cte': 9.90e-6},
+    'Ho': {'K':  40.2, 'E':  64.8, 'nu': 0.231, 'k': 16.0, 'cte': 1.12e-5},
+    'Er': {'K':  44.4, 'E':  69.9, 'nu': 0.237, 'k': 15.0, 'cte': 1.22e-5},
+    'Tm': {'K':  45.0, 'E':  74.0, 'nu': 0.213, 'k': 17.0, 'cte': 1.33e-5},
+    'Yb': {'K':  30.5, 'E':  23.9, 'nu': 0.207, 'k': 39.0, 'cte': 2.63e-5},
+    'Lu': {'K':  47.6, 'E':  68.6, 'nu': 0.261, 'k': 16.0, 'cte': 9.90e-6},
+    'Y':  {'K':  41.2, 'E':  63.5, 'nu': 0.243, 'k': 17.0, 'cte': 1.06e-5},
+    'Sc': {'K':  56.6, 'E':  74.4, 'nu': 0.279, 'k': 16.0, 'cte': 1.02e-5},
+    'Bi': {'K':  31.0, 'E':  32.0, 'nu': 0.330, 'k':  8.0, 'cte': 1.34e-5},
+    'Tl': {'K':  43.0, 'E':   8.0, 'nu': 0.450, 'k': 46.0, 'cte': 2.99e-5},
+    'In': {'K':  39.0, 'E':  11.0, 'nu': 0.450, 'k': 82.0, 'cte': 3.21e-5},
+    'Am': {'K':  None, 'E':  None, 'nu':  None, 'k': 10.0, 'cte':  None},
+    'Pu': {'K':  None, 'E':  96.0, 'nu': 0.210, 'k':  6.0, 'cte':  None},
+    'Th': {'K':  54.0, 'E':  79.0, 'nu': 0.270, 'k': 54.0, 'cte': 1.10e-5},
+    'Cm': {'K':  None, 'E':  None, 'nu':  None, 'k':  8.8, 'cte':  None},
+    # ── B-site transition metals ───────────────────────────────────────────────
+    'Ti': {'K': 110.0, 'E': 116.0, 'nu': 0.320, 'k': 22.0, 'cte': 8.60e-6},
+    'Zr': {'K':  94.0, 'E':  68.0, 'nu': 0.340, 'k': 23.0, 'cte': 5.70e-6},
+    'Hf': {'K': 110.0, 'E':  78.0, 'nu': 0.370, 'k': 23.0, 'cte': 5.90e-6},
+    'Sn': {'K':  58.0, 'E':  50.0, 'nu': 0.360, 'k': 67.0, 'cte': 2.20e-5},
+    'Ir': {'K': 320.0, 'E': 528.0, 'nu': 0.260, 'k':150.0, 'cte': 6.40e-6},
+    'Nb': {'K': 170.0, 'E': 105.0, 'nu': 0.400, 'k': 54.0, 'cte': 7.30e-6},
+    'Ta': {'K': 200.0, 'E': 186.0, 'nu': 0.340, 'k': 57.0, 'cte': 6.30e-6},
+    'Mo': {'K': 230.0, 'E': 329.0, 'nu': 0.310, 'k':139.0, 'cte': 4.80e-6},
+    'W':  {'K': 310.0, 'E': 411.0, 'nu': 0.280, 'k':170.0, 'cte': 4.50e-6},
+    'Re': {'K': 370.0, 'E': 463.0, 'nu': 0.300, 'k': 48.0, 'cte': 6.20e-6},
+    'Ru': {'K': 220.0, 'E': 447.0, 'nu': 0.300, 'k':120.0, 'cte': 6.40e-6},
+    'Rh': {'K': 380.0, 'E': 275.0, 'nu': 0.260, 'k':150.0, 'cte': 8.20e-6},
+    'Os': {'K': 462.0, 'E': 586.0, 'nu': 0.250, 'k': 88.0, 'cte': 5.10e-6},
+    'Pd': {'K': 180.0, 'E': 121.0, 'nu': 0.390, 'k': 72.0, 'cte': 1.18e-5},
+    'Pt': {'K': 230.0, 'E': 168.0, 'nu': 0.380, 'k': 72.0, 'cte': 8.80e-6},
+    'Mn': {'K': 120.0, 'E': 198.0, 'nu': 0.240, 'k':  7.8, 'cte': 2.17e-5},
+    'Pb': {'K':  46.0, 'E':  16.0, 'nu': 0.440, 'k': 35.0, 'cte': 2.89e-5},
+    'Tc': {'K':  None, 'E':  None, 'nu':  None, 'k': 51.0, 'cte':  None},
+}
+
+# ── Helper functions ────────────────────────────────────────────────────────────
+
+def get_pymatgen_oxi_preference(element_str: str) -> List[int]:
+    """Return pymatgen's common oxidation states in order of prevalence."""
+    try:
+        return list(Element(element_str).common_oxidation_states)
+    except Exception:
+        return []
+
+
+def _infer_b_oxi_from_b_comp(b_comp: Dict[str, float]) -> Optional[int]:
+    """
+    Infer the B-site oxidation state from already-assigned B-site elements.
+
+    Rules
+    -----
+    - If all present elements are in KNOWN_B_4_ONLY → +4
+    - If all present elements are in KNOWN_B_5_ONLY → +5
+    - If mixed, return None (caller must handle)
+    """
+    b4 = sum(1 for e in b_comp if e in KNOWN_B_4_ONLY)
+    b5 = sum(1 for e in b_comp if e in KNOWN_B_5_ONLY)
+    if b4 > 0 and b5 == 0:
+        return 4
+    if b5 > 0 and b4 == 0:
+        return 5
+    return None  # mixed or unknown
+
+
+def resolve_ambiguous_element(
+        elem: str,
+        a_oxidation_state: Optional[int],
+        required_b_oxi: Optional[int],
+        a_comp: Dict[str, float],
+        b_comp: Dict[str, float],
+) -> Tuple[str, Optional[int]]:
+    """
+    Resolve which site an ambiguous element belongs to.
+
+    Returns
+    -------
+    site      : 'A' or 'B'
+    oxi_state : oxidation state for that site
+    """
+    possible_sites = KNOWN_AMBIGUOUS[elem]
+
+    # ── PRIORITY 1: Match already-known A or B oxidation state ──────────────
+    if a_oxidation_state is not None:
+        matching_a = [oxi for site, oxi in possible_sites
+                      if site == 'A' and oxi == a_oxidation_state]
+        if matching_a:
+            return 'A', a_oxidation_state
+
+        if required_b_oxi is not None:
+            matching_b = [oxi for site, oxi in possible_sites
+                          if site == 'B' and oxi == required_b_oxi]
+            if matching_b:
+                return 'B', required_b_oxi
+
+    if required_b_oxi is not None:
+        matching_b = [oxi for site, oxi in possible_sites
+                      if site == 'B' and oxi == required_b_oxi]
+        if matching_b:
+            return 'B', required_b_oxi
+
+    # ── PRIORITY 2: Placement guided by which sites are already occupied ─────
+    if a_comp:
+        # A-site already has members → prefer B-site to avoid double-counting
+        b_options = [oxi for site, oxi in possible_sites if site == 'B']
+        if b_options:
+            return 'B', b_options[0]
+        a_options = [oxi for site, oxi in possible_sites if site == 'A']
+        if a_options:
+            return 'A', a_options[0]
+
+    if b_comp:
+        # B-site already has members
+        b_options = [oxi for site, oxi in possible_sites if site == 'B']
+        if b_options:
+            return 'B', b_options[0]
+        # FIX: element cannot go to B-site; fall back to A-site rather than
+        #      letting pymatgen prevalence pick a conflicting oxidation state.
+        a_options = [oxi for site, oxi in possible_sites if site == 'A']
+        if a_options:
+            # Honour charge balance if possible
+            if a_oxidation_state is not None and a_oxidation_state in a_options:
+                return 'A', a_oxidation_state
+            return 'A', a_options[0]
+
+    # ── PRIORITY 3: Use pymatgen's oxidation-state prevalence ────────────────
+    for oxi in get_pymatgen_oxi_preference(elem):
+        for site, s_oxi in possible_sites:
+            if s_oxi == oxi:
+                return site, oxi
+
+    # ── PRIORITY 4: First option in list ─────────────────────────────────────
+    if possible_sites:
+        site, oxi = possible_sites[0]
+        return site, oxi
+
+    return 'unknown', None
+
+
+def resolve_all_flexible_a(
+        flexible_a_elements: Dict[str, float],
+) -> Tuple[int, int]:
+    """
+    Resolve A-site oxidation when every cation is a flexible A-site element.
+
+    Strategy
+    --------
+    1. If any element also supports B-site +4 → assume A(+3) / B(+4)
+    2. If any element also supports B-site +5 → assume A(+2) / B(+5)
+    3. Default to A(+3) / B(+4)
+    """
+    can_be_b4 = []
+    can_be_b5 = []
+
+    for elem in flexible_a_elements:
+        try:
+            common = set(Element(elem).common_oxidation_states)
+        except Exception:
+            common = set()
+        if 4 in common:
+            can_be_b4.append(elem)
+        if 5 in common:
+            can_be_b5.append(elem)
+
+    if can_be_b4:
+        return 3, 4
+    if can_be_b5:
+        return 2, 5
+
+    print(f"WARNING: All flexible elements {list(flexible_a_elements)} "
+          f"lack B-site capability. Defaulting to A(+3), B(+4).")
+    return 3, 4
+
+
+# ── Main assignment function ──────────────────────────────────────────────────
+
+def assign_sites(
+        comp: Composition,
+) -> Tuple[Dict[str, float], Dict[str, float],
+           Dict[str, float], Optional[Tuple[float, float]]]:
+    """
+    Split cation elements into A-site (3+/2+), B-site (4+/5+), and unknown dicts.
+    Stoichiometries are mole fractions (sum to 1 per site).
+
+    Pyrochlore charge balance constraint
+    -------------------------------------
+    A₂B₂O₇  →  2·A_oxi + 2·B_oxi = 14
+        A(+3) / B(+4)   or   A(+2) / B(+5)
+
+    Assignment priority (per element)
+    -----------------------------------
+    1. Oxygen is always skipped.
+    2. Ambiguous elements are held aside and resolved last.
+    3. For every other cation the KNOWN_* look-up tables are consulted.
+    4. Anything not in a known list goes to *unknown*.
+    5. After the first pass, ``required_b_oxi`` is inferred from already-
+       assigned B-site elements (fixing the Eu₂Ru₂O₇-class of errors), then
+       ``a_oxidation_state`` is back-derived if still unknown.
+    6. Ambiguous elements are resolved with full A/B context available.
+
+    Parameters
+    ----------
+    comp : pymatgen Composition (need not be reduced; reduced internally)
+
+    Returns
+    -------
+    a_comp     : {element: mole_fraction}  A-site (sums to 1)
+    b_comp     : {element: mole_fraction}  B-site (sums to 1)
+    unknown    : {element: mole_fraction}  unassigned cations
+    oxi_states : (a_site_oxi_state, b_site_oxi_state) or (None, None)
+    """
+    reduced = Composition(comp).reduced_composition
+    raw: Dict[str, float] = {
+        str(el): amt
+        for el, amt in reduced.items()
+        if str(el) != 'O'
+    }
+
+    a_comp:        Dict[str, float] = {}
+    b_comp:        Dict[str, float] = {}
+    unknown:       Dict[str, float] = {}
+    ambig_elements: Dict[str, float] = {}
+    a_oxidation_state: Optional[int] = None
+
+    # ── FIRST PASS: assign non-ambiguous elements ────────────────────────────
+    for elem, amt in raw.items():
+        if elem in KNOWN_AMBIGUOUS:
+            ambig_elements[elem] = amt
+        elif elem in KNOWN_A_3_ONLY:
+            a_comp[elem] = amt
+            if a_oxidation_state is None:
+                a_oxidation_state = 3
+        elif elem in KNOWN_A_2_ONLY:
+            a_comp[elem] = amt
+            if a_oxidation_state is None:
+                a_oxidation_state = 2
+        elif elem in KNOWN_B_4_ONLY:
+            b_comp[elem] = amt
+        elif elem in KNOWN_B_5_ONLY:
+            b_comp[elem] = amt
+        else:
+            unknown[elem] = amt
+
+    # ── INFER OXIDATION STATES from both A and B evidence ───────────────────
+    # FIX: derive required_b_oxi from B-site elements *before* resolving
+    #      ambiguous elements — this is what caused Eu₂Ru₂O₇ → Eu(+2)/Ru(NaN).
+    required_b_oxi: Optional[int] = None
+
+    if a_oxidation_state == 3:
+        required_b_oxi = 4
+    elif a_oxidation_state == 2:
+        required_b_oxi = 5
+
+    if required_b_oxi is None and b_comp:
+        required_b_oxi = _infer_b_oxi_from_b_comp(b_comp)
+
+    # Back-derive a_oxidation_state from B-site if still unknown
+    if a_oxidation_state is None:
+        if required_b_oxi == 4:
+            a_oxidation_state = 3
+        elif required_b_oxi == 5:
+            a_oxidation_state = 2
+
+    # Forward-derive required_b_oxi from A-site if still unknown
+    if required_b_oxi is None:
+        if a_oxidation_state == 3:
+            required_b_oxi = 4
+        elif a_oxidation_state == 2:
+            required_b_oxi = 5
+
+    # ── RESOLVE AMBIGUOUS ELEMENTS (full context now available) ──────────────
+    for elem, amt in ambig_elements.items():
+        site, oxi = resolve_ambiguous_element(
+            elem,
+            a_oxidation_state,
+            required_b_oxi,
+            a_comp,
+            b_comp,
+        )
+
+        if site == 'A':
+            a_comp[elem] = amt
+            if a_oxidation_state is None:
+                a_oxidation_state = oxi
+                required_b_oxi = 4 if oxi == 3 else (5 if oxi == 2 else required_b_oxi)
+        elif site == 'B':
+            b_comp[elem] = amt
+            if required_b_oxi is None:
+                required_b_oxi = oxi
+                a_oxidation_state = 3 if oxi == 4 else (2 if oxi == 5 else a_oxidation_state)
+        else:
+            unknown[elem] = amt
+
+    oxi_states: Optional[Tuple[float, float]] = (a_oxidation_state, required_b_oxi)
+
+    def _to_fracs(d: Dict[str, float]) -> Dict[str, float]:
+        total = sum(d.values())
+        return {k: v / total for k, v in d.items()} if total else {}
+
+    return _to_fracs(a_comp), _to_fracs(b_comp), unknown, oxi_states
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
