@@ -24,6 +24,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\processed\pristine_pyrochlore.bak.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\processed\pristine_pyrochlore.csv">
           <value>
             <Attribute>
@@ -31,7 +38,28 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\processed\pristine_pyrochlore1.bak.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\processed\pristine_pyrochlore_extra.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\processed\rom_hec_latt.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\processed\rom_hec_therm_cond.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -46,6 +74,20 @@
           </value>
         </entry>
         <entry key="\data\raw\Jordan_pyrochlore_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\Jordan_smaller.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\Pyrochlore_literature_extraction.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -73,6 +115,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\data\raw\aflow_pyrochlore_data_coord.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\data\raw\aflow_pyrochlore_data_extra.csv">
           <value>
             <Attribute>
@@ -81,6 +130,20 @@
           </value>
         </entry>
         <entry key="\data\raw\aflow_pyrochlore_data_thermal.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\check_df.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\data\raw\element_database.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
@@ -102,6 +165,34 @@
           </value>
         </entry>
         <entry key="\data\raw\parent_components.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\models\pristine_fill\cv_summary.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\models\pristine_fill\feature_importances.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\models\pristine_fill\pristine_pyrochlore_filled.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\src\utils\materials_properties.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

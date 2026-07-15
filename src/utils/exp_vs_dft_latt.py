@@ -18,7 +18,7 @@ SAVE_DIR  = _PROJECT / 'src' / 'utils'
 
 def process_and_match(df1, df2,
                       composition_col='Composition',
-                      lattice_col='Lattice Parameter (Angstrom)'):
+                      lattice_col='Lattice Parameter (Å)'):
     """
     Return two DataFrames (df1_out, df2_out) that:
       - contain only rows for compositions present in both input DataFrames
@@ -75,12 +75,12 @@ if __name__ == '__main__':
     # If your composition column has a different name, pass composition_col='YourColumnName'
     df1_proc, df2_proc = process_and_match(df1, df2,
                                            composition_col='Composition',
-                                           lattice_col='Lattice Parameter (Angstrom)')
+                                           lattice_col='Lattice Parameter (Å)')
     # Save processed outputs (optional)
     # df1_proc.to_csv('dataset1_processed.csv')
     # df2_proc.to_csv('dataset2_processed.csv')
 
-    latt_col = 'Lattice Parameter (Angstrom)'
+    latt_col = 'Lattice Parameter (Å)'
     # Quick scatter plot of matched lattice parameters
     # plot_parity(df1_proc[latt_col], df2_proc[latt_col], 'ICSD vs AFLOW Lattice Parameters', 'AFLOW lattice param',
     #             SAVE_DIR / 'icsd_vs_aflow_latt.png', 'ICSD Lattice Parameter')
@@ -108,10 +108,10 @@ if __name__ == '__main__':
     #     df1_proc_aligned = df1_proc.sort_index()
     #     df2_proc_aligned = df2_proc.reindex(df1_proc_aligned.index)
     #
-    #     plt.scatter(df1_proc_aligned['Lattice Parameter (Angstrom)'],
-    #                 df2_proc_aligned['Lattice Parameter (Angstrom)'])
-    #     plt.xlabel('Dataset1 Lattice Parameter (Angstrom)')
-    #     plt.ylabel('Dataset2 Lattice Parameter (Angstrom)')
+    #     plt.scatter(df1_proc_aligned['Lattice Parameter (Å)'],
+    #                 df2_proc_aligned['Lattice Parameter (Å)'])
+    #     plt.xlabel('Dataset1 Lattice Parameter (Å)')
+    #     plt.ylabel('Dataset2 Lattice Parameter (Å)')
     #     plt.title('Matched compositions: lattice parameter comparison')
     #     plt.grid(True)
     #     plt.show()

@@ -32,7 +32,8 @@ _PROJECT = _HERE.parent.parent
 DATA  = _PROJECT / 'data' / 'processed'
 OUTPUT_FILE_L = DATA / 'engineered_pyrochlore_latt.csv'
 OUTPUT_FILE_L_ROM = DATA / 'rom_hec_latt.csv'
-OUTPUT_FILE_T = DATA / 'engineered_pyrochlore_therm.csv'
+OUTPUT_FILE_T_ROM = DATA / 'rom_hec_therm_cond.csv'
+OUTPUT_FILE_V_ROM = DATA / 'rom_hec_vick.csv'
 COMBINED_FILE = DATA / 'combined_pyrochlore.csv'
 HEC_FILE = DATA / 'hec_pyrochlore.csv'
 
@@ -90,7 +91,7 @@ def load_combined(verbose: bool = True) -> pd.DataFrame:
     df = pd.read_csv(COMBINED_FILE, na_values=['NA', '', 'N/A', 'nan'])
 
     num_cols = ['Thermal Conductivity (W/m/K)', 'Relative Density %',
-                'Lattice Parameter (Angstrom)', 'b_o_distance',
+                'Lattice Parameter (Å)', 'b_o_distance',
                 'b_o_b_angle', 'oxygen_param_x']
     for c in num_cols:
         if c in df.columns:
@@ -110,7 +111,7 @@ def load_combined(verbose: bool = True) -> pd.DataFrame:
             lambda r: classify_sample(r['Sample A'], r['Sample B']), axis=1)
 
     if verbose:
-        n_lat = df['Lattice Parameter (Angstrom)'].notna().sum()
+        n_lat = df['Lattice Parameter (Å)'].notna().sum()
         n_tc  = df['Thermal Conductivity (W/m/K)'].notna().sum()
         n_pri = (df['compound_type'] == PRISTINE).sum()
         n_he  = (df['compound_type'] == HIGH_ENTROPY).sum()
@@ -123,7 +124,7 @@ def load_hec(verbose: bool = True) -> pd.DataFrame:
     _ensure_hec(verbose)
     df = pd.read_csv(HEC_FILE, na_values=['NA', '', 'N/A', 'nan'])
 
-    num_cols = ['Thermal Conductivity (W/m/K)', 'Lattice Parameter (Angstrom)', 'Temperature',]
+    num_cols = ['Thermal Conductivity (W/m/K)', 'Lattice Parameter (Å)', 'Temperature',]
     for c in num_cols:
         if c in df.columns:
             df[c] = pd.to_numeric(df[c], errors='coerce')
@@ -137,7 +138,7 @@ def load_hec(verbose: bool = True) -> pd.DataFrame:
             lambda r: classify_sample(r['Sample A'], r['Sample B']), axis=1)
 
     if verbose:
-        n_lat = df['Lattice Parameter (Angstrom)'].notna().sum()
+        n_lat = df['Lattice Parameter (Å)'].notna().sum()
         n_tc = df['Thermal Conductivity (W/m/K)'].notna().sum()
         print(f"[data] {len(df)} rows | {n_lat} lattice | {n_tc} thermal ")
     return df
@@ -149,7 +150,7 @@ def clean_and_engineer(df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
     return df
 
 def clean_and_rom(df: pd.DataFrame, verbose: bool = True) -> pd.DataFrame:
-    df = rom_from_dataframe(df, )
+    df = rom_from_dataframe(df, auto_add_missing=False, auto_save=False)
     if verbose:
         print(f"[features] {df.shape[1]} total columns after feature engineering")
     return df
@@ -185,7 +186,7 @@ def get_lattice_dataset(
         compound_types = [PRISTINE, HIGH_ENTROPY]
 
     df = clean_and_engineer(load_combined(verbose=verbose), verbose=verbose)
-    target = 'Lattice Parameter (Angstrom)'
+    target = 'Lattice Parameter (Å)'
 
     # Restrict to valid compound types (always exclude non-pyrochlore)
     df_sub = df[df['compound_type'].isin(compound_types)].copy()
@@ -232,7 +233,7 @@ def get_lattice_rom_dataset(
     compound_types = [HIGH_ENTROPY]
 
     df = clean_and_rom(load_hec(verbose=verbose), verbose=verbose)
-    target = 'Lattice Parameter (Angstrom)'
+    target = 'Lattice Parameter (Å)'
 
     # Restrict to valid compound types (always exclude non-pyrochlore)
     df_sub = df[df['compound_type'].isin(compound_types)].copy()
@@ -240,19 +241,43 @@ def get_lattice_rom_dataset(
     df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
 
     # Drop outlier columns given by plot_latt_vs_ROMlatt_wOutliers.py
-    df_sub = df_sub[~df_sub['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
+    # df_sub = df_sub[~df_sub['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
+
+    # Combine Ionic Radius columns
+    df_sub['Ionic Radius A (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius A (Å)'] + row['ROM_Ionic_Radius_A']) / 2 \
+            if pd.notna(row['Ionic Radius A (Å)']) and pd.notna(row['ROM_Ionic_Radius_A'])
+        else row['Ionic Radius A (Å)'] if pd.notna(row['Ionic Radius A (Å)'])
+        else row['ROM_Ionic_Radius_A'],
+        axis=1
+    )
+    df_sub['Ionic Radius B (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius B (Å)'] + row['ROM_Ionic_Radius_B']) / 2 \
+            if pd.notna(row['Ionic Radius B (Å)']) and pd.notna(row['ROM_Ionic_Radius_B'])
+        else row['Ionic Radius B (Å)'] if pd.notna(row['Ionic Radius B (Å)'])
+        else row['ROM_Ionic_Radius_B'],
+        axis=1
+    )
+    df_sub['rA/rB (Å)'] = df_sub.apply(
+        lambda row: (row['rA/rB (Å)'] + row['ROM_Radius_Ratio_rA_rB']) / 2 \
+            if pd.notna(row['rA/rB (Å)']) and pd.notna(row['ROM_Radius_Ratio_rA_rB'])
+        else row['rA/rB (Å)'] if pd.notna(row['rA/rB (Å)'])
+        else row['ROM_Radius_Ratio_rA_rB'],
+        axis=1
+    )
 
     # Deal with NaN columns
     # df_sub = df_sub.drop(columns=DROP_COLUMNS)
-    df_sub.dropna(subset=['ROM_Lattice_Parameter', 'ROM_Ionic_Radius_A', 'ROM_Ionic_Radius_B'], inplace=True)
-    mean_cols = globals.ROM_COLS + ['Temperature']
-    threshold = 0.8
-    min_non_na = int((1 - threshold) * len(df))
+    df_sub.dropna(subset=['Ionic Radius A (Å)', 'Ionic Radius B (Å)'], inplace=True)
+    threshold = 0.75
+    min_non_na = int(threshold * len(df_sub))
+    df_sub.dropna(axis=1, thresh=min_non_na, inplace=True)
+    mean_cols = globals.ROM_THERM_COND_FEAT_COLS
     for col in mean_cols:
         if col in df_sub.columns:
             col_mean = df_sub[col].mean()
-            df_sub.fillna(value={col: col_mean},inplace=True)
-    df_sub.dropna(axis=1, thresh=min_non_na, inplace=True)
+            # print(f'Mean of {col}: {col_mean}')
+            df_sub[col] = df_sub[col].fillna(col_mean)
     print(df_sub.shape)
 
     df_sub.to_csv(OUTPUT_FILE_L_ROM, index=False)
@@ -275,52 +300,171 @@ def get_lattice_rom_dataset(
 
     return X, y, cols
 
-
-def get_thermal_dataset(
+def get_therm_cond_rom_dataset(
     verbose: bool = True,
-    compound_types: List[str] | None = None,
+    # compound_types: List[str] | None = None,
 ) -> Tuple[np.ndarray, np.ndarray, List[str]]:
     """
     Return (X, y, feature_names) for the thermal conductivity model.
 
     Parameters
     ----------
-    compound_types : which compound types to include.
-                     Default: ['pristine', 'high_entropy']
+    # compound_types : which compound types to include.
+    #                  Default: ['high_entropy']
     """
-    if compound_types is None:
-        compound_types = [PRISTINE, HIGH_ENTROPY]
+    # if compound_types is None:
+    compound_types = [HIGH_ENTROPY]
 
-    from src.features.build_features import THERMAL_EXTRA_FEATURES
-    df = clean_and_engineer(load_combined(verbose=verbose), verbose=verbose)
-    target   = 'TPS Cond W/m/K'
-    feat_cols = [c for c in THERMAL_EXTRA_FEATURES if c in df.columns]
+    df = clean_and_rom(load_hec(verbose=verbose), verbose=verbose)
+    target = 'Thermal Conductivity (W/m/K)'
 
+    # Restrict to valid compound types (always exclude non-pyrochlore)
     df_sub = df[df['compound_type'].isin(compound_types)].copy()
     df_sub = df_sub.dropna(subset=[target])
     df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
 
-    base_feats = [c for c in feat_cols if c != 'lattice_parameter']
-    feat_mask  = df_sub[base_feats].notna().all(axis=1)
-    df_sub     = df_sub[feat_mask]
+    # Drop outlier columns given by plot_latt_vs_ROMlatt_wOutliers.py
+    # df_sub = df_sub[~df_sub['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
 
-    # Impute missing lattice parameter with dataset mean (fallback)
-    if 'lattice_parameter' in df_sub.columns:
-        mean_lat = df_sub['lattice_parameter'].mean()
-        df_sub = df_sub.copy()
-        df_sub['lattice_parameter'] = df_sub['lattice_parameter'].fillna(mean_lat)
+    # Combine Ionic Radius columns
+    df_sub['Ionic Radius A (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius A (Å)'] + row['ROM_Ionic_Radius_A']) / 2 \
+            if pd.notna(row['Ionic Radius A (Å)']) and pd.notna(row['ROM_Ionic_Radius_A'])
+        else row['Ionic Radius A (Å)'] if pd.notna(row['Ionic Radius A (Å)'])
+        else row['ROM_Ionic_Radius_A'],
+        axis=1
+    )
+    df_sub['Ionic Radius B (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius B (Å)'] + row['ROM_Ionic_Radius_B']) / 2 \
+            if pd.notna(row['Ionic Radius B (Å)']) and pd.notna(row['ROM_Ionic_Radius_B'])
+        else row['Ionic Radius B (Å)'] if pd.notna(row['Ionic Radius B (Å)'])
+        else row['ROM_Ionic_Radius_B'],
+        axis=1
+    )
+    df_sub['rA/rB (Å)'] = df_sub.apply(
+        lambda row: (row['rA/rB (Å)'] + row['ROM_Radius_Ratio_rA_rB']) / 2 \
+            if pd.notna(row['rA/rB (Å)']) and pd.notna(row['ROM_Radius_Ratio_rA_rB'])
+        else row['rA/rB (Å)'] if pd.notna(row['rA/rB (Å)'])
+        else row['ROM_Radius_Ratio_rA_rB'],
+        axis=1
+    )
 
-    X = df_sub[feat_cols].values.astype(float)
+    # Deal with NaN columns
+    # df_sub = df_sub.drop(columns=DROP_COLUMNS)
+    df_sub.dropna(subset=['Ionic Radius A (Å)', 'Ionic Radius B (Å)'], inplace=True)
+    threshold = 0.75
+    min_non_na = int(threshold * len(df_sub))
+    df_sub.dropna(axis=1, thresh=min_non_na, inplace=True)
+    mean_cols = globals.ROM_THERM_COND_FEAT_COLS
+    for col in mean_cols:
+        if col in df_sub.columns:
+            col_mean = df_sub[col].mean()
+            # print(f'Mean of {col}: {col_mean}')
+            df_sub[col] = df_sub[col].fillna(col_mean)
+    print(df_sub.shape)
+
+    df_sub.to_csv(OUTPUT_FILE_T_ROM, index=False)
+    log.info(f"Saved combined dataset → {OUTPUT_FILE_T_ROM}")
+
+    dropped = list(set(globals.ROM_THERM_COND_FEAT_COLS) - set(df_sub.columns.to_list()))
+    print(dropped)
+    cols = [c for c in globals.ROM_THERM_COND_FEAT_COLS if c not in dropped]
+    feat_mask = df_sub[cols + [target]].notna().all(axis=1)
+    df_sub = df_sub[feat_mask]
+
+    X = df_sub[cols].values.astype(float)
     y = df_sub[target].values.astype(float)
 
     if verbose:
-        print(f"[thermal] {X.shape[0]} samples × {X.shape[1]} features")
+        print(f"[therm_cond] {X.shape[0]} samples × {X.shape[1]} features")
         print(f"  compound types : {compound_types}")
-        print(f"  target range   : [{y.min():.4f}, {y.max():.4f}] W/m·K")
-        _source_breakdown(df_sub, 'thermal')
+        print(f"  target range   : [{y.min():.4f}, {y.max():.4f}] W/m/K")
+        _source_breakdown(df_sub, 'Thermal Conductivity')
 
-    return X, y, feat_cols
+    return X, y, cols
 
+def get_vickers_rom_dataset(
+    verbose: bool = True,
+    # compound_types: List[str] | None = None,
+) -> Tuple[np.ndarray, np.ndarray, List[str]]:
+    """
+    Return (X, y, feature_names) for the Vickers Hardness model.
+
+    Parameters
+    ----------
+    # compound_types : which compound types to include.
+    #                  Default: ['high_entropy']
+    """
+    # if compound_types is None:
+    compound_types = [HIGH_ENTROPY]
+
+    df = clean_and_rom(load_hec(verbose=verbose), verbose=verbose)
+    target = 'Vickers Hardness (GPa)'
+
+    # Restrict to valid compound types (always exclude non-pyrochlore)
+    df_sub = df[df['compound_type'].isin(compound_types)].copy()
+    df_sub = df_sub.dropna(subset=[target])
+    df_sub = df_sub[df_sub['Sample A'].notna() & df_sub['Sample B'].notna()]
+
+    # Drop outlier columns given by plot_latt_vs_ROMlatt_wOutliers.py
+    # df_sub = df_sub[~df_sub['Composition'].isin(globals.OUTLIER_COMPS)].reset_index(drop=True)
+
+    # Combine Ionic Radius columns
+    df_sub['Ionic Radius A (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius A (Å)'] + row['ROM_Ionic_Radius_A']) / 2 \
+            if pd.notna(row['Ionic Radius A (Å)']) and pd.notna(row['ROM_Ionic_Radius_A'])
+        else row['Ionic Radius A (Å)'] if pd.notna(row['Ionic Radius A (Å)'])
+        else row['ROM_Ionic_Radius_A'],
+        axis=1
+    )
+    df_sub['Ionic Radius B (Å)'] = df_sub.apply(
+        lambda row: (row['Ionic Radius B (Å)'] + row['ROM_Ionic_Radius_B']) / 2 \
+            if pd.notna(row['Ionic Radius B (Å)']) and pd.notna(row['ROM_Ionic_Radius_B'])
+        else row['Ionic Radius B (Å)'] if pd.notna(row['Ionic Radius B (Å)'])
+        else row['ROM_Ionic_Radius_B'],
+        axis=1
+    )
+    df_sub['rA/rB (Å)'] = df_sub.apply(
+        lambda row: (row['rA/rB (Å)'] + row['ROM_Radius_Ratio_rA_rB']) / 2 \
+            if pd.notna(row['rA/rB (Å)']) and pd.notna(row['ROM_Radius_Ratio_rA_rB'])
+        else row['rA/rB (Å)'] if pd.notna(row['rA/rB (Å)'])
+        else row['ROM_Radius_Ratio_rA_rB'],
+        axis=1
+    )
+
+    # Deal with NaN columns
+    # df_sub = df_sub.drop(columns=DROP_COLUMNS)
+    df_sub.dropna(subset=['Ionic Radius A (Å)', 'Ionic Radius B (Å)'], inplace=True)
+    threshold = 0.75
+    min_non_na = int(threshold * len(df_sub))
+    df_sub.dropna(axis=1, thresh=min_non_na, inplace=True)
+    mean_cols = globals.ROM_HARDNESS_FEAT_COLS
+    for col in mean_cols:
+        if col in df_sub.columns:
+            col_mean = df_sub[col].mean()
+            # print(f'Mean of {col}: {col_mean}')
+            df_sub[col] = df_sub[col].fillna(col_mean)
+    print(df_sub.shape)
+
+    df_sub.to_csv(OUTPUT_FILE_V_ROM, index=False)
+    log.info(f"Saved combined dataset → {OUTPUT_FILE_V_ROM}")
+
+    dropped = list(set(globals.ROM_HARDNESS_FEAT_COLS) - set(df_sub.columns.to_list()))
+    print(dropped)
+    cols = [c for c in globals.ROM_HARDNESS_FEAT_COLS if c not in dropped]
+    feat_mask = df_sub[cols + [target]].notna().all(axis=1)
+    df_sub = df_sub[feat_mask]
+
+    X = df_sub[cols].values.astype(float)
+    y = df_sub[target].values.astype(float)
+
+    if verbose:
+        print(f"[vickers_hardness] {X.shape[0]} samples × {X.shape[1]} features")
+        print(f"  compound types : {compound_types}")
+        print(f"  target range   : [{y.min():.4f}, {y.max():.4f}] GPa")
+        _source_breakdown(df_sub, 'Vickers Hardness')
+
+    return X, y, cols
 
 # ── Standalone test ───────────────────────────────────────────────────────────
 
@@ -329,11 +473,19 @@ if __name__ == '__main__':
     # X, y, names = get_lattice_dataset()
     # print(f"Shape: {X.shape}")
 
-    print("\n=== Lattice ROM dataset ===")
-    Xr, yr, names_r = get_lattice_rom_dataset()
-    print(f"Shape: {Xr.shape}")
+    # print("\n=== Lattice ROM dataset ===")
+    # Xr, yr, names_r = get_lattice_rom_dataset()
+    # print(f"Shape: {Xr.shape}")
 
     # print("\n=== Thermal dataset ===")
     # X2, y2, names2 = get_thermal_dataset()
     # print(f"Shape: {X2.shape}")
+
+    print("\n=== Thermal Conductivity ROM dataset ===")
+    Xt, yt, names_t = get_therm_cond_rom_dataset()
+    print(f"Shape: {Xt.shape}")
+
+    print("\n=== Vickers Hardness ROM dataset ===")
+    Xv, yv, names_v = get_vickers_rom_dataset()
+    print(f"Shape: {Xv.shape}")
 

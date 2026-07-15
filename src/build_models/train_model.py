@@ -129,6 +129,25 @@ def build_models(random_state: int = 42) -> Dict[str, Any]:
                 gamma='scale',
             )),
         ]),
+
+        # ── Ridge (Baseline) ──────────────────────────────────────────────────
+        # Linear model included purely as a performance baseline.
+        # Expected R² ~0.81 — gap vs tree models shows the value of
+        # capturing non-linearity in your features.
+        #
+        # QuantileTransformer: mandatory for Ridge — it's sensitive to feature
+        # scale and your features are skewed/bimodal (seen in pairplot).
+        # Using the same scaler as SVR keeps the comparison fair.
+        #
+        # alpha=10.0: previously validated on this dataset; provides enough
+        # regularization for n=183 without over-shrinking coefficients.
+        # (Interpretable range: 1.0 = less regularized ceiling,
+        #                       100.0 = conservative floor)
+        'Ridge': Pipeline([
+            ('scaler', QuantileTransformer(
+                output_distribution='normal', random_state=random_state)),
+            ('ridge', Ridge(alpha=10.0)),
+        ]),
     }
 
 '''
@@ -623,7 +642,7 @@ def plot_r2_vs_feature_count(
         'RandomForest': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'GradientBoosting': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'ExtraTrees': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
-        # 'Ridge': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
+        'Ridge': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'HistGradientBoosting': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
         'SVR': {'test_r2': [], 'train_r2': [], 'cv_r2': []},
     }
@@ -755,7 +774,7 @@ def plot_r2_vs_cv_folds(
         'RandomForest': {'mean_r2': [], 'std_r2': []},
         'GradientBoosting': {'mean_r2': [], 'std_r2': []},
         'ExtraTrees': {'mean_r2': [], 'std_r2': []},
-        # 'Ridge': {'mean_r2': [], 'std_r2': []},
+        'Ridge': {'mean_r2': [], 'std_r2': []},
         'HistGradientBoosting': {'mean_r2': [], 'std_r2': [],},
         'SVR': {'mean_r2': [], 'std_r2': []},
     }

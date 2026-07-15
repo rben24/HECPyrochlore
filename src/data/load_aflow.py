@@ -31,6 +31,7 @@ Both must pass for an entry to be classified as pristine.
 from __future__ import annotations
 
 import re
+import ast
 import logging
 import json
 import numpy as np
@@ -40,7 +41,7 @@ from typing import Dict, List, Optional, Tuple
 
 from pymatgen.core import Composition, Element
 
-from .. import globals
+from src import globals
 
 log = logging.getLogger(__name__)
 
@@ -156,12 +157,15 @@ def _assign_sites(
     unknown: Dict[str, float] = {}
     ce_amt: float = 0.0
 
+    # keep track of oxidation states to ensure balance
+    a_site_ox = -1
     for elem, amt in raw.items():
         if elem == globals.CE_AMBIGUOUS:
             ce_amt = amt
-        if elem in globals.KNOWN_A:
+        if elem in globals.KNOWN_A_3_ONLY:
             a_comp[elem] = amt
-        elif elem in globals.KNOWN_B:
+            a_site_ox = 3
+        elif elem in globals.KNOWN_B_4_ONLY and a_site_ox == 3:
             b_comp[elem] = amt
         else:
             unknown[elem] = amt
@@ -186,7 +190,7 @@ def _assign_sites(
 def _classify_aflow(
     compound: str,
     composition_str: str,
-) -> Tuple[str, Dict, Dict, Dict, Optional[str]]:
+) -> Tuple[str, Dict, Dict, Dict, Tuple, Optional[str]]:
     """
     Classify a single AFLOW row.
 
@@ -196,43 +200,43 @@ def _classify_aflow(
     """
     # --- pymatgen formula parse ---
     try:
-        comp = Composition(str(compound))
+        comp = Composition(str(composition_str))
     except Exception as e:
-        return globals.NON_PYROCHLORE, {}, {}, {}, f"Composition parse failed: {e}"
+        return globals.NON_PYROCHLORE, {}, {}, {}, (), f"Composition parse failed: {e}"
 
     # --- Check A: composition column stoichiometry ---
-    stoich_ok, stoich_reason = _parse_aflow_composition(composition_str, compound)
+    stoich_ok, stoich_reason = _parse_aflow_composition(compound, composition_str)
     if not stoich_ok:
-        return globals.NON_PYROCHLORE, {}, {}, {}, stoich_reason
+        return globals.NON_PYROCHLORE, {}, {}, {}, (), stoich_reason
 
     # --- Check B: pymatgen reduced formula ---
     if not _is_pyrochlore_formula(comp):
         return (
-            globals.NON_PYROCHLORE, {}, {}, {},
+            globals.NON_PYROCHLORE, {}, {}, {}, (),
             f"pymatgen reduced formula not A2B2O7: "
             f"{comp.reduced_formula}"
         )
 
     # --- site assignment ---
-    a_comp, b_comp, unknown = _assign_sites(comp)
+    a_comp, b_comp, unknown, oxi_states = globals.assign_sites(comp)
 
     if unknown:
         return (
-            globals.NON_PYROCHLORE, a_comp, b_comp, unknown,
+            globals.NON_PYROCHLORE, a_comp, b_comp, unknown, oxi_states,
             f"unknown cations: {list(unknown.keys())}"
         )
 
     if not a_comp or not b_comp:
         return (
-            globals.NON_PYROCHLORE, a_comp, b_comp, unknown,
+            globals.NON_PYROCHLORE, a_comp, b_comp, unknown, oxi_states,
             "empty A-site or B-site after assignment"
         )
 
     # --- pristine vs high_entropy ---
     if len(a_comp) == 1 and len(b_comp) == 1:
-        return globals.PRISTINE, a_comp, b_comp, unknown, None
+        return globals.PRISTINE, a_comp, b_comp, unknown, oxi_states, None
 
-    return globals.HIGH_ENTROPY, a_comp, b_comp, unknown, None
+    return globals.HIGH_ENTROPY, a_comp, b_comp, unknown, oxi_states, None
 
 
 # ── main loader ───────────────────────────────────────────────────────────────
@@ -293,27 +297,62 @@ def load_aflow(
     rejection_log: List[Tuple[str, str]] = []
 
     for _, row in df_raw.iterrows():
-        compound = str(row.get('compound', ''))
-        composition_str = str(row.get('composition', ''))
+        composition_str = str(row.get('compound', ''))
+        compound = str(row.get('composition', ''))
 
-        ctype, a_comp, b_comp, unknown, reason = _classify_aflow(
+        # get relaxed parameters and coordinates for site assignment
+        rel_latt_params = row.get('geometry', np.nan)
+        # rel_latt_a = rel_latt_params[0]
+        # rel_latt_angle = rel_latt_params[3]
+        coordstr = row.get('positions_fractional', np.nan)
+        if coordstr is not np.nan:
+            coords = ast.literal_eval(f"[{coordstr}]")
+            # print(coords)
+            # exit(0)
+
+            eles = re.findall(r'[A-Z][a-z]?', composition_str)
+            first_ele = eles[0]
+            second_ele = eles[1]
+            third_ele = eles[2]
+
+            first_coord = []
+            second_coord = []
+            third_coord = []
+
+            if first_ele == 'O':
+                first_coord.append(coords[0:13])
+                second_coord.append(coords[14:17])
+                third_coord.append(coords[18:21])
+            elif second_ele == '0':
+                first_coord.append(coords[0:3])
+                second_coord.append(coords[4:17])
+                third_coord.append(coords[18:21])
+            else:
+                first_coord.append(coords[0:3])
+                second_coord.append(coords[4:7])
+                third_coord.append(coords[8:21])
+
+        ctype, a_comp, b_comp, unknown, oxi_state, reason = _classify_aflow(
             compound=compound,
             composition_str=composition_str,
         )
 
         if ctype == globals.NON_PYROCHLORE:
             n_non_pyro += 1
-            rejection_log.append((compound, reason or 'unknown'))
+            rejection_log.append((composition_str, reason or 'unknown'))
             continue
 
         # Pymatgen pretty formula for canonical Composition label
         try:
-            pretty = Composition(compound).reduced_formula
+            pretty = Composition(composition_str).reduced_formula
         except Exception:
-            pretty = compound
+            pretty = composition_str
 
         sample_a = ','.join(sorted(a_comp.keys()))
         sample_b = ','.join(sorted(b_comp.keys()))
+
+        oxi_a = oxi_state[0] if oxi_state is not None else np.nan
+        oxi_b = oxi_state[1] if oxi_state is not None else np.nan
 
         # Lattice parameter: AFLOW stores 'a' in prototype params
         # aflow_prototype_params_values_relax first value is 'a' (Å)
@@ -338,8 +377,10 @@ def load_aflow(
             'Composition':                          pretty,
             'Sample A':                             sample_a,
             'Sample B':                             sample_b,
+            'Oxidation State A':                    oxi_a,
+            'Oxidation State B':                    oxi_b,
             'Thermal Conductivity (W/m/K)':         row.get('agl_thermal_conductivity_300K', np.nan),
-            'Lattice Parameter (Angstrom)':         lattice_a,
+            'Lattice Parameter (Å)':         lattice_a,
             'Relative Density %':                   np.nan,
             'Is Single Phase':                      'Yes',
             'Synthesis Method':                     'DFT',
@@ -355,15 +396,15 @@ def load_aflow(
             'Enthalpy':                             row.get('enthalpy_atom', np.nan),
             'Band Gap':                             row.get('Egap', np.nan),
             'Band Gap Type':                        str(row.get('Egap_type', '')),
-            'Bulk Modulus (VRH)':                   row.get('ael_bulk_modulus_vrh', np.nan),
-            'Shear Modulus (VRH)':                  row.get('ael_shear_modulus_vrh', np.nan),
-            'Youngs Modulus (VRH)':                 row.get('ael_youngs_modulus_vrh', np.nan),
+            'Bulk Modulus (GPa)':                   row.get('ael_bulk_modulus_vrh', np.nan),
+            'Shear Modulus (GPa)':                  row.get('ael_shear_modulus_vrh', np.nan),
+            'Youngs Modulus (GPa)':                 row.get('ael_youngs_modulus_vrh', np.nan),
             'Poisson Ratio':                        row.get('ael_poisson_ratio', np.nan),
             'AEL Debye Temperature':                row.get('ael_debye_temperature', np.nan),
             'Temperature':                          np.nan,
             'Thermal Expansion':                    row.get('agl_thermal_expansion_300K', np.nan),
             'Energy Above Hull':                    np.nan,
-            'Density':                              row.get('density', np.nan),
+            'Density Calculated':                   row.get('density', np.nan),
             'Magnetic Moment':                      row.get('spin_atom', np.nan),
             'Valence':                              row.get('valence_cell_iupac', np.nan),
             'a_stoich_json':                        json.dumps(a_comp),
@@ -417,7 +458,8 @@ if __name__ == '__main__':
     result = load_aflow(filepath=aflow_fp, verbose=True)
     print(result[[
         'Composition', 'Sample A', 'Sample B',
-        'Lattice Parameter (Angstrom)', 'compound_type', 'auid'
-    ]].head(20).to_string(index=False))
+        'Lattice Parameter (Å)', 'compound_type', #'auid'
+    ]].to_string(index=False))
+    # ]].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")
 

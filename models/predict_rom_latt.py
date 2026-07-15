@@ -92,7 +92,7 @@ def predict_from_composition(a_str: str, b_str: str,
     row = pd.Series({
         'Sample A': a_str,
         'Sample B': b_str,
-        'Lattice Parameter (Angstrom)': np.nan,
+        'Lattice Parameter (Å)': np.nan,
         'TPS Cond W/m/K': np.nan,
         'Relative Density %': np.nan,
         'Is Single Phase': np.nan,
@@ -128,7 +128,7 @@ def _reverse_lookup_dataset(target: float, tol: float, model, scaler):
             'Sample A':  row['Sample A'],
             'Sample B':  row['Sample B'],
             'Predicted': pred,
-            'Measured':  row.get('Lattice Parameter (Angstrom)', np.nan),
+            'Measured':  row.get('Lattice Parameter (Å)', np.nan),
             'Diff':      diff,
             'Source':    row.get('data_source', ''),
         })

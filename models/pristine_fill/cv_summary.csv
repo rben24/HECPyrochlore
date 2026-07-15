@@ -1,0 +1,8 @@
+Target,CV R² (mean),CV R² (std),CV MAE (mean),CV MAE (std),RF weight,GBT weight
+Thermal Conductivity (W/m/K),0.3923,0.2495,0.769706,0.366259,0.49,0.51
+Bulk Modulus (VRH),0.6707,0.2458,5.172335,1.929648,0.51,0.49
+Shear Modulus (VRH),0.4734,0.3008,4.490252,1.533717,0.35,0.65
+Youngs Modulus (VRH),0.4889,0.3149,10.077583,3.019526,0.39,0.61
+Poisson Ratio,0.1264,0.5949,0.011271,0.005629,0.94,0.06
+AEL Debye Temperature,0.7342,0.1892,22.217014,11.279904,0.49,0.51
+Thermal Expansion,0.6698,0.314,2e-06,2e-06,0.45,0.55

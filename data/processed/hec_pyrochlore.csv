@@ -1,344 +1,719 @@
-Composition,Sample A,Sample B,a_stoich_json,b_stoich_json,Lattice Parameter (Angstrom),Thermal Conductivity (W/m/K),compound_type,Temperature,data_source
-YbHo Ti HP,"Yb,Ho",Ti,"{""Yb"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",10.07653,1.5253,high_entropy,,safin_experimental
-YbHoTb Ti HP,"Yb,Ho,Tb",Ti,"{""Yb"": 0.3333333333333333, ""Ho"": 0.3333333333333333, ""Tb"": 0.3333333333333333}","{""Ti"": 1.0}",10.09559,1.7887,high_entropy,,safin_experimental
-YbHoTbNd Ti HP,"Yb,Ho,Tb,Nd",Ti,"{""Yb"": 0.25, ""Ho"": 0.25, ""Tb"": 0.25, ""Nd"": 0.25}","{""Ti"": 1.0}",10.11292,1.6582,high_entropy,,safin_experimental
-YbHoTbNdPr Ti HP,"Yb,Ho,Tb,Nd,Pr",Ti,"{""Yb"": 0.2, ""Ho"": 0.2, ""Tb"": 0.2, ""Nd"": 0.2, ""Pr"": 0.2}","{""Ti"": 1.0}",10.18264,1.5326,high_entropy,,safin_experimental
-PrSmGdHoLu TI SDJ,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17812,1.5663,high_entropy,,safin_experimental
-SmEuGdTbDy Ti SDJ,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.184691,2.0263,high_entropy,,safin_experimental
-PrNdGdYbLu Ti SDJ,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.175423,1.4074,high_entropy,,safin_experimental
-PrSmGdHoLu Ti HPSDJ,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17788,1.6402,high_entropy,,safin_experimental
-PrNdGdYbLu Ti HPSDJ,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17459,1.5372,high_entropy,,safin_experimental
-SmEuGdTbDy Ti HPSDJ,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.18337,2.1861,high_entropy,,safin_experimental
-PrSmGdHoLu Ti CDTF,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17813232,1.5632,high_entropy,,safin_experimental
-PrNdGdYbLu CDTF,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17715823,1.3101,high_entropy,,safin_experimental
-SmEuGdTbDy Ti CDTF,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.18087481,1.9556,high_entropy,,safin_experimental
-SmEuGdTbDy SPS,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.186104,2.0866,high_entropy,,safin_experimental
-PrNdGdYbLu SPS,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.173943,1.4789,high_entropy,,safin_experimental
-PrSmGdHoLu SPS,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.182036,1.5631,high_entropy,,safin_experimental
-LaLuTiZr TF,"La,Lu","Ti,Zr","{""La"": 0.5, ""Lu"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36904,1.0087,high_entropy,,safin_experimental
-LaGdLuTiZr TF,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.37753523,0.86389,high_entropy,,safin_experimental
-LaGdLuTiZr HP,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,1.0483,high_entropy,,safin_experimental
-LaEuLuTiZr TF,"La,Eu,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Eu"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.38009,1.020142857,high_entropy,,safin_experimental
-PrYbTiZr TF,"Pr,Yb","Ti,Zr","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36939,0.99236,high_entropy,,safin_experimental
-PrYbTiHf TF,"Pr,Yb","Ti,Hf","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",10.34771,0.8213,high_entropy,,safin_experimental
-LaGdLuTiHf TF,"La,Gd,Lu","Ti,Hf","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",10.36585,0.643571429,high_entropy,,safin_experimental
-LaGdLu TiZr SM 2500 1500 20,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.35687,0.7585,high_entropy,,safin_experimental
-PrYb SM 2500 1500 20,"Pr,Yb","Ti,Zr","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.37021,1.015142857,high_entropy,,safin_experimental
-LaGdLuTiHf SM 2500 1500 20,"La,Gd,Lu","Ti,Hf","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",10.36733,0.878971429,high_entropy,,safin_experimental
-PrYb TiHf SM 2500 1500 20,"Pr,Yb","Ti,Hf","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",10.37763,0.899971429,high_entropy,,safin_experimental
-LaYTiZr TF,"La,Y","Ti,Zr","{""La"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36109,1.052428571,high_entropy,,safin_experimental
-LaSmYTiZr TF,"La,Sm,Y","Ti,Zr","{""La"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3711,1.024692308,high_entropy,,safin_experimental
-Ce0.05Gd1.95Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.975, ""Ce"": 0.025}","{""Ti"": 1.0}",10.1708,,high_entropy,293.0,icsd_literature
-Ce0.1Gd1.9Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.95, ""Ce"": 0.05}","{""Ti"": 1.0}",10.1755,,high_entropy,293.0,icsd_literature
-Ce0.2Gd1.8Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.9, ""Ce"": 0.1}","{""Ti"": 1.0}",10.1846,,high_entropy,293.0,icsd_literature
-Ce0.25Gd1.75Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.875, ""Ce"": 0.125}","{""Ti"": 1.0}",10.194,,high_entropy,293.0,icsd_literature
-Ce0.5Gd1.5Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.75, ""Ce"": 0.25}","{""Ti"": 1.0}",10.2066,,high_entropy,293.0,icsd_literature
-Ce0.8Gd1.2Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.6, ""Ce"": 0.4}","{""Ti"": 1.0}",10.2297,,high_entropy,293.0,icsd_literature
-La1.9Eu0.1Hf2O7,"Eu,La",Hf,"{""La"": 0.95, ""Eu"": 0.05}","{""Hf"": 1.0}",10.765,,high_entropy,293.0,icsd_literature
-Eu1.9Ti2Fe0.1O7,"Eu,Fe",Ti,"{""Eu"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",10.1722,,high_entropy,300.0,icsd_literature
-Eu1.8Ti2Fe0.2O7,"Eu,Fe",Ti,"{""Eu"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",10.157,,high_entropy,300.0,icsd_literature
-Ti2Cr0.5Bi1.5O7,"Bi,Cr",Ti,"{""Bi"": 0.75, ""Cr"": 0.25}","{""Ti"": 1.0}",10.34214,,high_entropy,293.0,icsd_literature
-Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.197,,high_entropy,293.0,icsd_literature
-Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.1956,,high_entropy,293.0,icsd_literature
-Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.175,,high_entropy,293.0,icsd_literature
-Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.1911,,high_entropy,293.0,icsd_literature
-Gd2Mn0.2Mo1.8O7,Gd,"Mn,Mo","{""Gd"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",10.31757,,high_entropy,293.0,icsd_literature
-Ho2Mn0.2Mo1.8O7,Ho,"Mn,Mo","{""Ho"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",10.204,,high_entropy,293.0,icsd_literature
-Y2Zr1.9Mn0.1O7,Y,"Mn,Zr","{""Y"": 1.0}","{""Zr"": 0.95, ""Mn"": 0.05}",10.4507,,high_entropy,293.0,icsd_literature
-Y2Zr1.8Mn0.2O7,Y,"Mn,Zr","{""Y"": 1.0}","{""Zr"": 0.9, ""Mn"": 0.1}",10.4468,,high_entropy,293.0,icsd_literature
-EuYTi2O7,"Eu,Y",Ti,"{""Eu"": 0.5, ""Y"": 0.5}","{""Ti"": 1.0}",10.15355,,high_entropy,293.0,icsd_literature
-Ti2Fe0.5Bi1.5O7,"Bi,Fe",Ti,"{""Bi"": 0.75, ""Fe"": 0.25}","{""Ti"": 1.0}",10.3152,,high_entropy,293.0,icsd_literature
-Ti2Fe0.5Bi1.5O7,"Bi,Fe",Ti,"{""Bi"": 0.75, ""Fe"": 0.25}","{""Ti"": 1.0}",10.3152,,high_entropy,293.0,icsd_literature
-Sc0.2Mn2Tl1.8O7,"Sc,Tl",Mn,"{""Tl"": 0.9, ""Sc"": 0.1}","{""Mn"": 1.0}",9.869,,high_entropy,296.0,icsd_literature
-Ce0.1Nd2Zr1.9O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.687,,high_entropy,293.0,icsd_literature
-Ce0.2Nd2Zr1.8O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.7,,high_entropy,293.0,icsd_literature
-Ce0.2Nd2Zr1.8O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.7,,high_entropy,293.0,icsd_literature
-Ce0.4Nd2Zr1.6O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.728,,high_entropy,293.0,icsd_literature
-Ce0.4Nd2Zr1.6O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.728,,high_entropy,293.0,icsd_literature
-Y2Zr1.2Ti0.8O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.6, ""Ti"": 0.4}",10.291,,high_entropy,293.0,icsd_literature
-Nd1.8Ru2Pb0.2O6.962,Nd,"Pb,Ru","{""Nd"": 1.0}","{""Pb"": 0.09090909090909091, ""Ru"": 0.9090909090909091}",10.33705,,high_entropy,293.0,icsd_literature
-Gd1.8Ru2Pb0.2O6.962,Gd,"Pb,Ru","{""Gd"": 1.0}","{""Pb"": 0.09090909090909091, ""Ru"": 0.9090909090909091}",10.2302,,high_entropy,293.0,icsd_literature
-Y2Zr0.6Ti1.4O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.3, ""Ti"": 0.7}",10.1901,,high_entropy,293.0,icsd_literature
-Y2Zr0.9Ti1.1O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.45, ""Ti"": 0.55}",10.2437,,high_entropy,293.0,icsd_literature
-Y2Zr1.2Ti0.8O6.99,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.6, ""Ti"": 0.4}",10.281,,high_entropy,293.0,icsd_literature
-Y0.6Sn2Bi1.4O7,"Bi,Y",Sn,"{""Bi"": 0.7, ""Y"": 0.3}","{""Sn"": 1.0}",10.4816,,high_entropy,293.0,icsd_literature
-Y0.8Sn2Bi1.2O7,"Bi,Y",Sn,"{""Bi"": 0.6, ""Y"": 0.4}","{""Sn"": 1.0}",10.4142,,high_entropy,293.0,icsd_literature
-Y0.8Sn2Bi1.2O7,"Bi,Y",Sn,"{""Bi"": 0.6, ""Y"": 0.4}","{""Sn"": 1.0}",10.4,,high_entropy,293.0,icsd_literature
-YSn2BiO7,"Bi,Y",Sn,"{""Bi"": 0.5, ""Y"": 0.5}","{""Sn"": 1.0}",10.5025,,high_entropy,293.0,icsd_literature
-Y1.2Sn2Bi0.8O7,"Bi,Y",Sn,"{""Bi"": 0.4, ""Y"": 0.6}","{""Sn"": 1.0}",10.4189,,high_entropy,293.0,icsd_literature
-Y1.2Sn2Bi0.8O7,"Bi,Y",Sn,"{""Bi"": 0.4, ""Y"": 0.6}","{""Sn"": 1.0}",10.3746,,high_entropy,293.0,icsd_literature
-Y1.4Sn2Bi0.6O7,"Bi,Y",Sn,"{""Bi"": 0.3, ""Y"": 0.7}","{""Sn"": 1.0}",10.4147,,high_entropy,293.0,icsd_literature
-Y1.4Sn2Bi0.6O7,"Bi,Y",Sn,"{""Bi"": 0.3, ""Y"": 0.7}","{""Sn"": 1.0}",10.3786,,high_entropy,293.0,icsd_literature
-Y1.6Sn2Bi0.4O7,"Bi,Y",Sn,"{""Bi"": 0.2, ""Y"": 0.8}","{""Sn"": 1.0}",10.3697,,high_entropy,293.0,icsd_literature
-Y1.8Sn2Bi0.2O7,"Bi,Y",Sn,"{""Bi"": 0.1, ""Y"": 0.9}","{""Sn"": 1.0}",10.3563,,high_entropy,293.0,icsd_literature
-YSn2BiO7,"Bi,Y",Sn,"{""Bi"": 0.5, ""Y"": 0.5}","{""Sn"": 1.0}",10.5022,,high_entropy,295.0,icsd_literature
-YbSn2BiO7,"Bi,Yb",Sn,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Sn"": 1.0}",10.4661,,high_entropy,295.0,icsd_literature
-Nd0.5Bi1.5Ru2O6.938,"Bi,Nd",Ru,"{""Bi"": 0.75, ""Nd"": 0.25}","{""Ru"": 1.0}",10.3135,,high_entropy,293.0,icsd_literature
-Nd0.75Bi1.25Ru2O6.955,"Bi,Nd",Ru,"{""Bi"": 0.625, ""Nd"": 0.375}","{""Ru"": 1.0}",10.3175,,high_entropy,293.0,icsd_literature
-Nd0.825Bi1.175Ru2O6.996,"Bi,Nd",Ru,"{""Bi"": 0.5875, ""Nd"": 0.4125}","{""Ru"": 1.0}",10.3296,,high_entropy,293.0,icsd_literature
-Nd0.925Bi1.075Ru2O6.977,"Bi,Nd",Ru,"{""Bi"": 0.5375, ""Nd"": 0.4625}","{""Ru"": 1.0}",10.3345,,high_entropy,293.0,icsd_literature
-Nd1Bi1Ru2O6.963,"Bi,Nd",Ru,"{""Bi"": 0.5, ""Nd"": 0.5}","{""Ru"": 1.0}",10.3303,,high_entropy,293.0,icsd_literature
-Nd1.25Bi0.75Ru2O6.978,"Bi,Nd",Ru,"{""Bi"": 0.375, ""Nd"": 0.625}","{""Ru"": 1.0}",10.3374,,high_entropy,293.0,icsd_literature
-Nd1.75Bi0.25Ru2O6.988,"Bi,Nd",Ru,"{""Bi"": 0.125, ""Nd"": 0.875}","{""Ru"": 1.0}",10.341,,high_entropy,293.0,icsd_literature
-Sm1.89Ti2Co0.11O6.945,"Co,Sm",Ti,"{""Sm"": 0.945, ""Co"": 0.055}","{""Ti"": 1.0}",10.215,,high_entropy,293.0,icsd_literature
-Ho2Ti1.85Fe0.15O7,"Fe,Ho",Ti,"{""Ho"": 0.9302325581395349, ""Fe"": 0.06976744186046512}","{""Ti"": 1.0}",10.1013,,high_entropy,293.0,icsd_literature
-Ho1.8Ti2Fe0.2O7,"Fe,Ho",Ti,"{""Ho"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",10.0804,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,high_entropy,293.0,icsd_literature
-Yb0.25Bi1.75Ru2O6.955,"Bi,Yb",Ru,"{""Bi"": 0.875, ""Yb"": 0.125}","{""Ru"": 1.0}",10.2711,,high_entropy,293.0,icsd_literature
-Yb0.375Bi1.625Ru2O6.954,"Bi,Yb",Ru,"{""Bi"": 0.8125, ""Yb"": 0.1875}","{""Ru"": 1.0}",10.2599,,high_entropy,293.0,icsd_literature
-Yb0.5Bi1.5Ru2O6.97,"Bi,Yb",Ru,"{""Bi"": 0.75, ""Yb"": 0.25}","{""Ru"": 1.0}",10.2478,,high_entropy,293.0,icsd_literature
-Yb0.625Bi1.375Ru2O6.958,"Bi,Yb",Ru,"{""Bi"": 0.6875, ""Yb"": 0.3125}","{""Ru"": 1.0}",10.2366,,high_entropy,293.0,icsd_literature
-Yb0.75Bi1.25Ru2O6.967,"Bi,Yb",Ru,"{""Bi"": 0.625, ""Yb"": 0.375}","{""Ru"": 1.0}",10.2258,,high_entropy,293.0,icsd_literature
-Yb0.875Bi1.125Ru2O6.996,"Bi,Yb",Ru,"{""Bi"": 0.5625, ""Yb"": 0.4375}","{""Ru"": 1.0}",10.212,,high_entropy,293.0,icsd_literature
-YbBiRu2O7,"Bi,Yb",Ru,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Ru"": 1.0}",10.1958,,high_entropy,293.0,icsd_literature
-Yb1.125Bi0.875Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.4375, ""Yb"": 0.5625}","{""Ru"": 1.0}",10.1808,,high_entropy,293.0,icsd_literature
-Yb1.25Bi0.75Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.375, ""Yb"": 0.625}","{""Ru"": 1.0}",10.1576,,high_entropy,293.0,icsd_literature
-Yb1.375Bi0.625Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.3125, ""Yb"": 0.6875}","{""Ru"": 1.0}",10.1405,,high_entropy,293.0,icsd_literature
-Yb0.25Bi1.75Ru2O6.955,"Bi,Yb",Ru,"{""Bi"": 0.875, ""Yb"": 0.125}","{""Ru"": 1.0}",10.2711,,high_entropy,293.0,icsd_literature
-Yb0.375Bi1.625Ru2O6.954,"Bi,Yb",Ru,"{""Bi"": 0.8125, ""Yb"": 0.1875}","{""Ru"": 1.0}",10.2599,,high_entropy,293.0,icsd_literature
-Yb0.5Bi1.5Ru2O6.97,"Bi,Yb",Ru,"{""Bi"": 0.75, ""Yb"": 0.25}","{""Ru"": 1.0}",10.2478,,high_entropy,293.0,icsd_literature
-Yb0.625Bi1.375Ru2O6.957,"Bi,Yb",Ru,"{""Bi"": 0.6875, ""Yb"": 0.3125}","{""Ru"": 1.0}",10.2366,,high_entropy,293.0,icsd_literature
-Yb0.75Bi1.25Ru2O6.966,"Bi,Yb",Ru,"{""Bi"": 0.625, ""Yb"": 0.375}","{""Ru"": 1.0}",10.2258,,high_entropy,293.0,icsd_literature
-YbBiRu2O7,"Bi,Yb",Ru,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Ru"": 1.0}",10.1958,,high_entropy,293.0,icsd_literature
-Yb1.125Bi0.875Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.4375, ""Yb"": 0.5625}","{""Ru"": 1.0}",10.1808,,high_entropy,293.0,icsd_literature
-Yb1.25Bi0.75Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.375, ""Yb"": 0.625}","{""Ru"": 1.0}",10.1576,,high_entropy,293.0,icsd_literature
-Yb1.375Bi0.625Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.3125, ""Yb"": 0.6875}","{""Ru"": 1.0}",10.1405,,high_entropy,293.0,icsd_literature
-Gd1.99Dy0.01Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.995, ""Dy"": 0.005}","{""Ti"": 1.0}",10.18,,high_entropy,293.0,icsd_literature
-Gd1.98Dy0.02Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.99, ""Dy"": 0.01}","{""Ti"": 1.0}",10.18,,high_entropy,293.0,icsd_literature
-Gd1.97Dy0.03Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.985, ""Dy"": 0.015}","{""Ti"": 1.0}",10.18,,high_entropy,293.0,icsd_literature
-Gd1.96Dy0.04Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.98, ""Dy"": 0.02}","{""Ti"": 1.0}",10.18,,high_entropy,293.0,icsd_literature
-Gd1.95Dy0.05Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.975, ""Dy"": 0.025}","{""Ti"": 1.0}",10.18,,high_entropy,293.0,icsd_literature
-Gd1.9Co0.1Ru2O7,"Co,Gd",Ru,"{""Gd"": 0.95, ""Co"": 0.05}","{""Ru"": 1.0}",10.225,,high_entropy,295.0,icsd_literature
-Gd1.6Co0.4Ru2O7,"Co,Gd",Ru,"{""Gd"": 0.8, ""Co"": 0.2}","{""Ru"": 1.0}",10.2042,,high_entropy,295.0,icsd_literature
-Eu0.1Y1.9Ti2O7,"Eu,Y",Ti,"{""Y"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",10.1,,high_entropy,293.0,icsd_literature
-Eu0.2Y1.8Ti2O7,"Eu,Y",Ti,"{""Y"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",10.105,,high_entropy,293.0,icsd_literature
-Eu0.5Y1.5Ti2O7,"Eu,Y",Ti,"{""Y"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",10.119,,high_entropy,293.0,icsd_literature
-EuYTi2O7,"Eu,Y",Ti,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.157,,high_entropy,293.0,icsd_literature
-Sm0.05Y1.95Ti2O7,"Sm,Y",Ti,"{""Y"": 0.975, ""Sm"": 0.025}","{""Ti"": 1.0}",10.098,,high_entropy,293.0,icsd_literature
-Sm0.1Y1.9Ti2O7,"Sm,Y",Ti,"{""Y"": 0.95, ""Sm"": 0.05}","{""Ti"": 1.0}",10.105,,high_entropy,293.0,icsd_literature
-Sm0.2Y1.8Ti2O7,"Sm,Y",Ti,"{""Y"": 0.9, ""Sm"": 0.1}","{""Ti"": 1.0}",10.113,,high_entropy,293.0,icsd_literature
-Sm0.5Y1.5Ti2O7,"Sm,Y",Ti,"{""Y"": 0.75, ""Sm"": 0.25}","{""Ti"": 1.0}",10.125,,high_entropy,293.0,icsd_literature
-SmYTi2O7,"Sm,Y",Ti,"{""Y"": 0.5, ""Sm"": 0.5}","{""Ti"": 1.0}",10.16,,high_entropy,293.0,icsd_literature
-SmDyTi2O7,"Dy,Sm",Ti,"{""Sm"": 0.5, ""Dy"": 0.5}","{""Ti"": 1.0}",10.175,,high_entropy,293.0,icsd_literature
-SmHoTi2O7,"Ho,Sm",Ti,"{""Sm"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",10.162,,high_entropy,293.0,icsd_literature
-YbSmTi2O7,"Sm,Yb",Ti,"{""Sm"": 0.5, ""Yb"": 0.5}","{""Ti"": 1.0}",10.133,,high_entropy,293.0,icsd_literature
-Ce0.04Gd2Ti1.96O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.98, ""Ce"": 0.02}",10.1177,,high_entropy,293.0,icsd_literature
-Ce0.08Gd2Ti1.92O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.96, ""Ce"": 0.04}",10.1208,,high_entropy,293.0,icsd_literature
-Ce0.12Gd2Ti1.88O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.94, ""Ce"": 0.06}",10.1247,,high_entropy,293.0,icsd_literature
-Ce0.16Gd2Ti1.84O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.92, ""Ce"": 0.08}",10.1332,,high_entropy,293.0,icsd_literature
-Ce0.08Gd2Ti1.94O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.9603960396039604, ""Ce"": 0.039603960396039604}",10.1433,,high_entropy,293.0,icsd_literature
-Ce0.04Gd2Ti1.96O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.98, ""Ce"": 0.02}",10.1413,,high_entropy,293.0,icsd_literature
-Ce0.12Gd2Ti1.88O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.94, ""Ce"": 0.06}",10.1477,,high_entropy,293.0,icsd_literature
-Ce0.16Gd2Ti1.84O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.92, ""Ce"": 0.08}",10.1527,,high_entropy,293.0,icsd_literature
-Gd1.6Ho0.4Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.8, ""Ho"": 0.2}","{""Ti"": 1.0}",10.1746,,high_entropy,293.0,icsd_literature
-Gd1.2Ho0.8Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.6, ""Ho"": 0.4}","{""Ti"": 1.0}",10.16,,high_entropy,293.0,icsd_literature
-Gd0.8Ho1.2Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.4, ""Ho"": 0.6}","{""Ti"": 1.0}",10.1428,,high_entropy,293.0,icsd_literature
-SmGdTi2O7,"Gd,Sm",Ti,"{""Sm"": 0.5, ""Gd"": 0.5}","{""Ti"": 1.0}",,,high_entropy,293.0,icsd_literature
-SmErTi2O7,"Er,Sm",Ti,"{""Sm"": 0.5, ""Er"": 0.5}","{""Ti"": 1.0}",10.156,,high_entropy,293.0,icsd_literature
-La1.48Nd0.52Zr2O7,"La,Nd",Zr,"{""La"": 0.74, ""Nd"": 0.26}","{""Zr"": 1.0}",10.78457,,high_entropy,293.0,icsd_literature
-La1.26Nd0.74Zr2O7,"La,Nd",Zr,"{""La"": 0.63, ""Nd"": 0.37}","{""Zr"": 1.0}",10.75648,,high_entropy,293.0,icsd_literature
-LaNdZr2O7,"La,Nd",Zr,"{""La"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",10.72892,,high_entropy,293.0,icsd_literature
-La0.9Nd1.1Zr2O7,"La,Nd",Zr,"{""La"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",10.70252,,high_entropy,293.0,icsd_literature
-Nd2Zr1.556Ti0.444O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.778, ""Ti"": 0.222}",10.5908,,high_entropy,293.0,icsd_literature
-Nd2Zr1.188Ti0.812O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.594, ""Ti"": 0.406}",10.5254,,high_entropy,293.0,icsd_literature
-Nd2Zr0.89Ti1.11O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.445, ""Ti"": 0.555}",10.46209,,high_entropy,293.0,icsd_literature
-Nd2Zr0.89Ti1.11O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.445, ""Ti"": 0.555}",10.46015,,high_entropy,293.0,icsd_literature
-Y2ZrSnO7,Y,"Sn,Zr","{""Y"": 1.0}","{""Zr"": 0.5, ""Sn"": 0.5}",10.3,,high_entropy,293.0,icsd_literature
-Eu0.02Y1.98Zr1Sn1O7,"Eu,Y","Sn,Zr","{""Y"": 0.99, ""Eu"": 0.01}","{""Zr"": 0.5, ""Sn"": 0.5}",10.35,,high_entropy,293.0,icsd_literature
-La1.2Ce0.8Y0.8Zr1.2O7,"La,Y","Ce,Zr","{""Y"": 0.4, ""La"": 0.6}","{""Zr"": 0.6, ""Ce"": 0.4}",10.792,,high_entropy,293.0,icsd_literature
-Y2Ti1.986Cr0.014O7,"Cr,Y",Ti,"{""Y"": 0.99304865938431, ""Cr"": 0.006951340615690169}","{""Ti"": 1.0}",10.09633,,high_entropy,293.0,icsd_literature
-Y2Ti1.916Cr0.084O7,"Cr,Y",Ti,"{""Y"": 0.9596928982725528, ""Cr"": 0.04030710172744722}","{""Ti"": 1.0}",10.09904,,high_entropy,293.0,icsd_literature
-Y2Ti1.894Cr0.106O7,"Cr,Y",Ti,"{""Y"": 0.9496676163342831, ""Cr"": 0.050332383665717004}","{""Ti"": 1.0}",10.09639,,high_entropy,293.0,icsd_literature
-Y2Ti1.884Cr0.116O7,"Cr,Y",Ti,"{""Y"": 0.9451795841209829, ""Cr"": 0.054820415879017016}","{""Ti"": 1.0}",10.09577,,high_entropy,293.0,icsd_literature
-Y2Ti1.904Cr0.096O7,"Cr,Y",Ti,"{""Y"": 0.9541984732824427, ""Cr"": 0.04580152671755725}","{""Ti"": 1.0}",10.09609,,high_entropy,293.0,icsd_literature
-Y1.26Ti2Bi0.74O7,"Bi,Y",Ti,"{""Y"": 0.63, ""Bi"": 0.37}","{""Ti"": 1.0}",10.221,,high_entropy,293.0,icsd_literature
-Y1.3Ti2Bi0.7O7,"Bi,Y",Ti,"{""Y"": 0.65, ""Bi"": 0.35}","{""Ti"": 1.0}",10.206,,high_entropy,293.0,icsd_literature
-Y1.73Ti2Bi0.27O7,"Bi,Y",Ti,"{""Y"": 0.865, ""Bi"": 0.135}","{""Ti"": 1.0}",10.134,,high_entropy,293.0,icsd_literature
-Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.378,,high_entropy,293.0,icsd_literature
-Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.21,,high_entropy,293.0,icsd_literature
-Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.27,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,high_entropy,293.0,icsd_literature
-Nd0.05Gd1.95Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.975, ""Nd"": 0.025}","{""Zr"": 1.0}",10.5429,,high_entropy,293.0,icsd_literature
-Nd0.15Gd1.85Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.925, ""Nd"": 0.075}","{""Zr"": 1.0}",10.5433,,high_entropy,293.0,icsd_literature
-Nd0.2Gd1.8Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.9, ""Nd"": 0.1}","{""Zr"": 1.0}",10.5571,,high_entropy,293.0,icsd_literature
-Nd0.4Gd1.6Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.8, ""Nd"": 0.2}","{""Zr"": 1.0}",10.5688,,high_entropy,293.0,icsd_literature
-Nd1.6Gd0.4Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",10.6092,,high_entropy,293.0,icsd_literature
-Gd1.27Ti2Bi0.73O7,"Bi,Gd",Ti,"{""Gd"": 0.635, ""Bi"": 0.365}","{""Ti"": 1.0}",10.2471,,high_entropy,293.0,icsd_literature
-Gd1.28Ti2Bi0.72O7,"Bi,Gd",Ti,"{""Gd"": 0.64, ""Bi"": 0.36}","{""Ti"": 1.0}",10.2345,,high_entropy,293.0,icsd_literature
-Pr0.2Bi1.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.9, ""Pr"": 0.1}","{""Ru"": 1.0}",10.3048,,high_entropy,293.0,icsd_literature
-Pr0.4Bi1.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.8, ""Pr"": 0.2}","{""Ru"": 1.0}",10.3143,,high_entropy,293.0,icsd_literature
-Pr0.6Bi1.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.7, ""Pr"": 0.3}","{""Ru"": 1.0}",10.3234,,high_entropy,293.0,icsd_literature
-Pr0.8Bi1.2Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.6, ""Pr"": 0.4}","{""Ru"": 1.0}",10.3295,,high_entropy,293.0,icsd_literature
-PrBiRu2O7,"Bi,Pr",Ru,"{""Bi"": 0.5, ""Pr"": 0.5}","{""Ru"": 1.0}",10.3416,,high_entropy,293.0,icsd_literature
-Pr1.2Bi0.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.4, ""Pr"": 0.6}","{""Ru"": 1.0}",10.3434,,high_entropy,293.0,icsd_literature
-Pr1.4Bi0.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.3, ""Pr"": 0.7}","{""Ru"": 1.0}",10.354,,high_entropy,293.0,icsd_literature
-Pr1.6Bi0.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.2, ""Pr"": 0.8}","{""Ru"": 1.0}",10.362,,high_entropy,293.0,icsd_literature
-Pr1.8Bi0.2Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.1, ""Pr"": 0.9}","{""Ru"": 1.0}",10.368,,high_entropy,293.0,icsd_literature
-YTi2BiO7,"Bi,Y",Ti,"{""Y"": 0.5, ""Bi"": 0.5}","{""Ti"": 1.0}",10.1984,,high_entropy,293.0,icsd_literature
-Ho2MnRuO7,Ho,"Mn,Ru","{""Ho"": 1.0}","{""Mn"": 0.5, ""Ru"": 0.5}",10.0491,,high_entropy,295.0,icsd_literature
-La0.1Y1.9Ti2O7,"La,Y",Ti,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",10.11355,,high_entropy,293.0,icsd_literature
-La0.22Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",10.13428,,high_entropy,298.0,icsd_literature
-La0.22Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",10.13077,,high_entropy,298.0,icsd_literature
-La0.23Y1.73Ti2O7,"La,Y",Ti,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",10.1347,,high_entropy,298.0,icsd_literature
-La0.05Y1.95Ti2O7,"La,Y",Ti,"{""Y"": 0.975, ""La"": 0.025}","{""Ti"": 1.0}",10.10199,,high_entropy,293.0,icsd_literature
-La0.1Y1.9Ti2O7,"La,Y",Ti,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",10.10484,,high_entropy,293.0,icsd_literature
-La0.2Y1.8Ti2O7,"La,Y",Ti,"{""Y"": 0.9, ""La"": 0.1}","{""Ti"": 1.0}",10.10901,,high_entropy,293.0,icsd_literature
-La0.25Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.875, ""La"": 0.125}","{""Ti"": 1.0}",10.11306,,high_entropy,293.0,icsd_literature
-La0.3Y1.7Ti2O7,"La,Y",Ti,"{""Y"": 0.85, ""La"": 0.15}","{""Ti"": 1.0}",10.11981,,high_entropy,293.0,icsd_literature
-La0.35Y1.65Ti2O7,"La,Y",Ti,"{""Y"": 0.825, ""La"": 0.175}","{""Ti"": 1.0}",10.12344,,high_entropy,293.0,icsd_literature
-La1.65Y0.35Ti2O7,"La,Y",Ti,"{""Y"": 0.175, ""La"": 0.825}","{""Ti"": 1.0}",10.1315,,high_entropy,298.0,icsd_literature
-La1.7Y0.3Ti2O7,"La,Y",Ti,"{""Y"": 0.15, ""La"": 0.85}","{""Ti"": 1.0}",10.1316,,high_entropy,298.0,icsd_literature
-La1.75Y0.25Ti2O7,"La,Y",Ti,"{""Y"": 0.125, ""La"": 0.875}","{""Ti"": 1.0}",10.1145,,high_entropy,298.0,icsd_literature
-La1.6Y0.4Hf2O7,"La,Y",Hf,"{""La"": 0.8, ""Y"": 0.2}","{""Hf"": 1.0}",10.7212,,high_entropy,298.0,icsd_literature
-La1.2Y0.8Hf2O7,"La,Y",Hf,"{""La"": 0.6, ""Y"": 0.4}","{""Hf"": 1.0}",10.646,,high_entropy,298.0,icsd_literature
-La0.8Y1.2Hf2O7,"La,Y",Hf,"{""La"": 0.4, ""Y"": 0.6}","{""Hf"": 1.0}",10.5718,,high_entropy,298.0,icsd_literature
-La0.4Y1.6Hf2O7,"La,Y",Hf,"{""La"": 0.2, ""Y"": 0.8}","{""Hf"": 1.0}",10.5148,,high_entropy,298.0,icsd_literature
-La1.6Y0.4Zr2O7,"La,Y",Zr,"{""La"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",10.7484,,high_entropy,298.0,icsd_literature
-La1.2Y0.8Zr2O7,"La,Y",Zr,"{""La"": 0.6, ""Y"": 0.4}","{""Zr"": 1.0}",10.6714,,high_entropy,298.0,icsd_literature
-La0.8Y1.2Zr2O7,"La,Y",Zr,"{""La"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",10.6572,,high_entropy,298.0,icsd_literature
-Nd1.6Y0.4Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",10.609,,high_entropy,293.0,icsd_literature
-Nd0.8Y1.2Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",10.532,,high_entropy,293.0,icsd_literature
-Nd0.4Y1.6Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.2, ""Y"": 0.8}","{""Zr"": 1.0}",10.531,,high_entropy,293.0,icsd_literature
-Gd2Zr0.04Ti1.96O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.98, ""Zr"": 0.02}",10.20079,,high_entropy,293.0,icsd_literature
-Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.25074,,high_entropy,293.0,icsd_literature
-La2Ce0.1Zr1.9O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.787,,high_entropy,298.0,icsd_literature
-La2Ce0.2Zr1.8O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.776,,high_entropy,298.0,icsd_literature
-La2Ce0.3Zr1.7O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.85, ""Ce"": 0.15}",10.815,,high_entropy,298.0,icsd_literature
-La2Ce0.4Zr1.6O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.837,,high_entropy,298.0,icsd_literature
-Gd1.925Th0.075Zr1.925Al0.075O7,"Al,Gd","Th,Zr","{""Gd"": 0.9625, ""Al"": 0.0375}","{""Th"": 0.0375, ""Zr"": 0.9625}",10.527,,high_entropy,298.0,icsd_literature
-Gd1.9Th0.1Zr1.9Al0.1O7,"Al,Gd","Th,Zr","{""Gd"": 0.95, ""Al"": 0.05}","{""Th"": 0.05, ""Zr"": 0.95}",10.531,,high_entropy,298.0,icsd_literature
-Gd1.85Th0.15Zr1.85Al0.15O7,"Al,Gd","Th,Zr","{""Gd"": 0.925, ""Al"": 0.075}","{""Th"": 0.075, ""Zr"": 0.925}",10.537,,high_entropy,298.0,icsd_literature
-Gd1.8Th0.2Zr1.8Al0.2O7,"Al,Gd","Th,Zr","{""Gd"": 0.9, ""Al"": 0.1}","{""Th"": 0.1, ""Zr"": 0.9}",10.543,,high_entropy,298.0,icsd_literature
-NdGdZr2O7,"Gd,Nd",Zr,"{""Nd"": 0.5, ""Gd"": 0.5}","{""Zr"": 1.0}",10.61575,,high_entropy,293.0,icsd_literature
-Nd1Gd1Zr1.95Sc0.05O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.48780487804878053, ""Gd"": 0.48780487804878053, ""Sc"": 0.02439024390243903}","{""Zr"": 1.0}",10.61221,,high_entropy,293.0,icsd_literature
-Nd1Gd1Zr1.9Sc0.1O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.47619047619047616, ""Gd"": 0.47619047619047616, ""Sc"": 0.047619047619047616}","{""Zr"": 1.0}",10.61193,,high_entropy,293.0,icsd_literature
-Nd1Gd1Zr1.85Sc0.15O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.46511627906976744, ""Gd"": 0.46511627906976744, ""Sc"": 0.06976744186046512}","{""Zr"": 1.0}",10.60965,,high_entropy,293.0,icsd_literature
-Yb0.1Y1.9Sn2O7,"Y,Yb",Sn,"{""Y"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",10.37036,,high_entropy,293.0,icsd_literature
-Yb0.1Gd1.9Sn2O7,"Gd,Yb",Sn,"{""Gd"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",10.45421,,high_entropy,293.0,icsd_literature
-EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,high_entropy,293.0,icsd_literature
-EuDyTi2O7,"Dy,Eu",Ti,"{""Dy"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.165,,high_entropy,293.0,icsd_literature
-Ti2Fe0.4Bi1.6O7,"Bi,Fe",Ti,"{""Bi"": 0.8, ""Fe"": 0.2}","{""Ti"": 1.0}",10.3328,,high_entropy,293.0,icsd_literature
-Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,high_entropy,293.0,icsd_literature
-EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,high_entropy,293.0,icsd_literature
-EuYTi2O7,"Eu,Y",Ti,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.157,,high_entropy,293.0,icsd_literature
-Sc0.5Ti2Bi1.5O7,"Bi,Sc",Ti,"{""Bi"": 0.75, ""Sc"": 0.25}","{""Ti"": 1.0}",10.3105,,high_entropy,298.0,icsd_literature
-Ti2In0.5Bi1.5O7,"Bi,In",Ti,"{""Bi"": 0.75, ""In"": 0.25}","{""Ti"": 1.0}",10.3271,,high_entropy,298.0,icsd_literature
-Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.23104,,high_entropy,293.0,icsd_literature
-Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.42,,high_entropy,293.0,icsd_literature
-Gd2Zr0.5Ti1.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.75, ""Zr"": 0.25}",10.26928,,high_entropy,293.0,icsd_literature
-Gd2Zr0.5Ti1.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.75, ""Zr"": 0.25}",10.3372,,high_entropy,293.0,icsd_literature
-Gd2ZrTiO7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",10.35152,,high_entropy,293.0,icsd_literature
-Gd2ZrTiO7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3659,,high_entropy,293.0,icsd_literature
-Gd2Zr1.5Ti0.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.75}",10.45829,,high_entropy,293.0,icsd_literature
-Gd2Zr1.5Ti0.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.75}",10.46544,,high_entropy,293.0,icsd_literature
-Gd2Zr1.7Ti0.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.15, ""Zr"": 0.85}",10.48699,,high_entropy,293.0,icsd_literature
-CoRuPb2O7,"Co,Ru",Pb,"{""Co"": 0.5, ""Ru"": 0.5}","{""Pb"": 1.0}",10.1623,,high_entropy,293.0,icsd_literature
-Y2Rh2O7,"Rh,Y",,"{""Y"": 0.5, ""Rh"": 0.5}",{},10.11833,,high_entropy,300.0,icsd_literature
-Dy1.95Ti2Fe0.05O7,"Dy,Fe",Ti,"{""Dy"": 0.975, ""Fe"": 0.025}","{""Ti"": 1.0}",10.1208,,high_entropy,293.0,icsd_literature
-Dy1.9Ti2Fe0.1O7,"Dy,Fe",Ti,"{""Dy"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",10.1143,,high_entropy,293.0,icsd_literature
-Dy1.85Ti2Fe0.15O7,"Dy,Fe",Ti,"{""Dy"": 0.925, ""Fe"": 0.075}","{""Ti"": 1.0}",10.1077,,high_entropy,293.0,icsd_literature
-La0.4Gd1.6Zr2O7,"Gd,La",Zr,"{""La"": 0.2, ""Gd"": 0.8}","{""Zr"": 1.0}",10.5934,,high_entropy,293.0,icsd_literature
-Y2Zr0.2Sn1.8O7,Y,"Sn,Zr","{""Y"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",10.38564,,high_entropy,293.0,icsd_literature
-Y2Hf0.5Ti1.5O7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.75, ""Hf"": 0.25}",10.179,,high_entropy,293.0,icsd_literature
-Y2HfTiO7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.5, ""Hf"": 0.5}",10.2524,,high_entropy,293.0,icsd_literature
-Y2Hf1.5Ti0.5O7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.75}",10.3246,,high_entropy,293.0,icsd_literature
-Sc0.4Ti2Bi1.6O7,"Bi,Sc",Ti,"{""Bi"": 0.8, ""Sc"": 0.2}","{""Ti"": 1.0}",10.3274,,high_entropy,293.0,icsd_literature
-Sc0.4Ti2Bi1.6O7,"Bi,Sc",Ti,"{""Bi"": 0.8, ""Sc"": 0.2}","{""Ti"": 1.0}",10.3276,,high_entropy,293.0,icsd_literature
-Gd2Zr1.3Ti0.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.35, ""Zr"": 0.65}",10.4154,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,high_entropy,293.0,icsd_literature
-Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,high_entropy,293.0,icsd_literature
-Eu1.33Ti2Bi0.66O7,"Bi,Eu",Ti,"{""Bi"": 0.3316582914572864, ""Eu"": 0.6683417085427136}","{""Ti"": 1.0}",10.25373,,high_entropy,293.0,icsd_literature
-Ho1.33Ti2Bi0.66O7,"Bi,Ho",Ti,"{""Bi"": 0.3316582914572864, ""Ho"": 0.6683417085427136}","{""Ti"": 1.0}",10.18701,,high_entropy,293.0,icsd_literature
-Yb1.33Ti2Bi0.66O7,"Bi,Yb",Ti,"{""Bi"": 0.3316582914572864, ""Yb"": 0.6683417085427136}","{""Ti"": 1.0}",10.1453,,high_entropy,293.0,icsd_literature
-Yb1.33Ti2Bi0.66O7,"Bi,Yb",Ti,"{""Bi"": 0.3316582914572864, ""Yb"": 0.6683417085427136}","{""Ti"": 1.0}",10.14548,,high_entropy,293.0,icsd_literature
-Tb0.6Gd1.4Zr2O7,"Gd,Tb",Zr,"{""Gd"": 0.7, ""Tb"": 0.3}","{""Zr"": 1.0}",10.5036,,high_entropy,293.0,icsd_literature
-Bi0.5Ir2Pb1.5O7,"Bi,Ir",Pb,"{""Bi"": 0.2, ""Ir"": 0.8}","{""Pb"": 1.0}",10.1838,,high_entropy,300.0,icsd_literature
-BiIr2PbO7,"Bi,Ir",Pb,"{""Bi"": 0.3333333333333333, ""Ir"": 0.6666666666666666}","{""Pb"": 1.0}",10.19191,,high_entropy,300.0,icsd_literature
-Bi1.5Ir2Pb0.5O7,Bi,"Ir,Pb","{""Bi"": 1.0}","{""Pb"": 0.2, ""Ir"": 0.8}",10.21714,,high_entropy,300.0,icsd_literature
-Gd2Hf1.6Ti0.4O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",10.42488,,high_entropy,293.0,icsd_literature
-Gd2Hf0.8Ti1.2O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",10.32151,,high_entropy,293.0,icsd_literature
-Gd2Hf0.4Ti1.6O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.2, ""Ti"": 0.8}",10.27171,,high_entropy,293.0,icsd_literature
-Gd2Hf1.6Ti0.4O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",10.42064,,high_entropy,293.0,icsd_literature
-Gd2Hf1.2Ti0.8O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.6, ""Ti"": 0.4}",10.36858,,high_entropy,293.0,icsd_literature
-Gd2Hf0.8Ti1.2O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",10.31717,,high_entropy,293.0,icsd_literature
-Ce0.1Sm1.9Zr1.9Sc0.1O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.95, ""Sc"": 0.05}","{""Zr"": 0.95, ""Ce"": 0.05}",10.5758,,high_entropy,293.0,icsd_literature
-Ce0.2Sm1.8Zr1.8Sc0.2O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.9, ""Sc"": 0.09999999999999999}","{""Zr"": 0.9, ""Ce"": 0.09999999999999999}",10.5718,,high_entropy,293.0,icsd_literature
-Ce0.3Sm1.7Zr1.7Sc0.3O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.85, ""Sc"": 0.15}","{""Zr"": 0.85, ""Ce"": 0.15}",10.568,,high_entropy,293.0,icsd_literature
-Ce0.4Sm1.6Zr1.6Sc0.4O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.8, ""Sc"": 0.2}","{""Zr"": 0.8, ""Ce"": 0.2}",10.56,,high_entropy,293.0,icsd_literature
-Nd1.8Ho0.2Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.1, ""Nd"": 0.9}","{""Zr"": 1.0}",10.6049,,high_entropy,293.0,icsd_literature
-Nd1.6Ho0.4Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",10.5871,,high_entropy,293.0,icsd_literature
-Nd1.4Ho0.6Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.3, ""Nd"": 0.7}","{""Zr"": 1.0}",10.5652,,high_entropy,293.0,icsd_literature
-Nd1.2Ho0.8Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.4, ""Nd"": 0.6}","{""Zr"": 1.0}",10.5607,,high_entropy,293.0,icsd_literature
-Nd1.1Ho0.9Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",10.5563,,high_entropy,293.0,icsd_literature
-NdHoZr2O7,"Ho,Nd",Zr,"{""Ho"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",10.5093,,high_entropy,293.0,icsd_literature
-Gd1.9Eu0.1Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",10.187,,high_entropy,293.0,icsd_literature
-Gd1.8Eu0.2Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",10.188,,high_entropy,293.0,icsd_literature
-Gd1.5Eu0.5Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",10.191,,high_entropy,293.0,icsd_literature
-EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,high_entropy,293.0,icsd_literature
-Pr2Sc0.27Mo1.73O6.97,"Pr,Sc",Mo,"{""Pr"": 0.8810572687224669, ""Sc"": 0.11894273127753305}","{""Mo"": 1.0}",10.5271,,high_entropy,293.0,icsd_literature
-Y2Ti0.05Ir1.95O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.025, ""Ir"": 0.975}",10.242,,high_entropy,293.0,icsd_literature
-Y2Ti0.1Ir1.9O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.05, ""Ir"": 0.95}",10.228,,high_entropy,293.0,icsd_literature
-Y2Ti0.2Ir1.8O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.1, ""Ir"": 0.9}",10.218,,high_entropy,293.0,icsd_literature
-Y2Ti0.3Ir1.7O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.15, ""Ir"": 0.85}",10.212,,high_entropy,293.0,icsd_literature
-La1.94Pr0.06Zr2O7,"La,Pr",Zr,"{""La"": 0.97, ""Pr"": 0.03}","{""Zr"": 1.0}",10.7807,,high_entropy,293.0,icsd_literature
-La0.4Yb0.4Sm0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Sm,Yb",Zr,"{""La"": 0.2, ""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.5763,,high_entropy,293.0,icsd_literature
-La0.4Yb0.4Nd0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Nd,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.5858,,high_entropy,293.0,icsd_literature
-La0.4Yb0.4Nd0.4Sm0.4Gd0.4Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.5937,,high_entropy,293.0,icsd_literature
-Ce0.1Nd2Zr1.9O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.687,,high_entropy,293.0,icsd_literature
-Y0.2Bi1.8Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.9, ""Y"": 0.1}","{""Ru"": 1.0}",10.2775,,high_entropy,293.0,icsd_literature
-Y0.4Bi1.6Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.8, ""Y"": 0.2}","{""Ru"": 1.0}",10.2654,,high_entropy,293.0,icsd_literature
-Y0.5Bi1.5Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.75, ""Y"": 0.25}","{""Ru"": 1.0}",10.2592,,high_entropy,293.0,icsd_literature
-Y0.6Bi1.4Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.7, ""Y"": 0.3}","{""Ru"": 1.0}",10.2565,,high_entropy,293.0,icsd_literature
-Y0.8Bi1.2Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.6, ""Y"": 0.4}","{""Ru"": 1.0}",10.2404,,high_entropy,293.0,icsd_literature
-YBiRu2O7,"Bi,Y",Ru,"{""Bi"": 0.5, ""Y"": 0.5}","{""Ru"": 1.0}",10.2273,,high_entropy,293.0,icsd_literature
-Y1.2Bi0.8Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.4, ""Y"": 0.6}","{""Ru"": 1.0}",10.208,,high_entropy,293.0,icsd_literature
-Y1.4Bi0.6Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.3, ""Y"": 0.7}","{""Ru"": 1.0}",10.1924,,high_entropy,293.0,icsd_literature
-Y1.5Bi0.5Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.25, ""Y"": 0.75}","{""Ru"": 1.0}",10.1834,,high_entropy,293.0,icsd_literature
-Y1.6Bi0.4Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.2, ""Y"": 0.8}","{""Ru"": 1.0}",10.1774,,high_entropy,293.0,icsd_literature
-Y1.8Bi0.2Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.1, ""Y"": 0.9}","{""Ru"": 1.0}",10.1525,,high_entropy,293.0,icsd_literature
-Pr0.2Bi1.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.9, ""Pr"": 0.1}","{""Ru"": 1.0}",10.3037,,high_entropy,293.0,icsd_literature
-Pr0.5Bi1.5Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.75, ""Pr"": 0.25}","{""Ru"": 1.0}",10.319,,high_entropy,293.0,icsd_literature
-Pr0.6Bi1.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.7, ""Pr"": 0.3}","{""Ru"": 1.0}",10.3217,,high_entropy,293.0,icsd_literature
-PrBiRu2O7,"Bi,Pr",Ru,"{""Bi"": 0.5, ""Pr"": 0.5}","{""Ru"": 1.0}",10.3362,,high_entropy,293.0,icsd_literature
-Pr1.2Bi0.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.4, ""Pr"": 0.6}","{""Ru"": 1.0}",10.3489,,high_entropy,293.0,icsd_literature
-Pr1.4Bi0.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.3, ""Pr"": 0.7}","{""Ru"": 1.0}",10.3554,,high_entropy,293.0,icsd_literature
-Pr1.5Bi0.5Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.25, ""Pr"": 0.75}","{""Ru"": 1.0}",10.3565,,high_entropy,293.0,icsd_literature
-Pr1.6Bi0.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.2, ""Pr"": 0.8}","{""Ru"": 1.0}",10.3619,,high_entropy,293.0,icsd_literature
-Nd0.2Bi1.8Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.9, ""Nd"": 0.1}","{""Ru"": 1.0}",10.2988,,high_entropy,293.0,icsd_literature
-Nd0.5Bi1.5Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.75, ""Nd"": 0.25}","{""Ru"": 1.0}",10.3058,,high_entropy,293.0,icsd_literature
-Nd0.8Bi1.2Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.6, ""Nd"": 0.4}","{""Ru"": 1.0}",10.3142,,high_entropy,293.0,icsd_literature
-NdBiRu2O7,"Bi,Nd",Ru,"{""Bi"": 0.5, ""Nd"": 0.5}","{""Ru"": 1.0}",10.3188,,high_entropy,293.0,icsd_literature
-Nd1.2Bi0.8Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.4, ""Nd"": 0.6}","{""Ru"": 1.0}",10.326,,high_entropy,293.0,icsd_literature
-Nd1.4Bi0.6Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.3, ""Nd"": 0.7}","{""Ru"": 1.0}",10.3311,,high_entropy,293.0,icsd_literature
-Nd1.5Bi0.5Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.25, ""Nd"": 0.75}","{""Ru"": 1.0}",10.3306,,high_entropy,293.0,icsd_literature
-Nd1.6Bi0.4Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.2, ""Nd"": 0.8}","{""Ru"": 1.0}",10.3341,,high_entropy,293.0,icsd_literature
-Nd1.8Bi0.2Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.1, ""Nd"": 0.9}","{""Ru"": 1.0}",10.3311,,high_entropy,293.0,icsd_literature
-Sm0.2Bi1.8Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.9, ""Sm"": 0.1}","{""Ru"": 1.0}",10.2948,,high_entropy,293.0,icsd_literature
-Sm0.5Bi1.5Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.75, ""Sm"": 0.25}","{""Ru"": 1.0}",10.2921,,high_entropy,293.0,icsd_literature
-SmBiRu2O7,"Bi,Sm",Ru,"{""Bi"": 0.5, ""Sm"": 0.5}","{""Ru"": 1.0}",10.2902,,high_entropy,293.0,icsd_literature
-Sm1.2Bi0.8Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.4, ""Sm"": 0.6}","{""Ru"": 1.0}",10.2888,,high_entropy,293.0,icsd_literature
-Sm1.4Bi0.6Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.3, ""Sm"": 0.7}","{""Ru"": 1.0}",10.2862,,high_entropy,293.0,icsd_literature
-Sm1.5Bi0.5Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.25, ""Sm"": 0.75}","{""Ru"": 1.0}",10.2802,,high_entropy,293.0,icsd_literature
-Sm1.6Bi0.4Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.2, ""Sm"": 0.8}","{""Ru"": 1.0}",10.2831,,high_entropy,293.0,icsd_literature
-Sm1.8Bi0.2Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.1, ""Sm"": 0.9}","{""Ru"": 1.0}",10.2779,,high_entropy,293.0,icsd_literature
-Dy0.2Bi1.8Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.9, ""Dy"": 0.1}","{""Ru"": 1.0}",10.2839,,high_entropy,293.0,icsd_literature
-Dy0.5Bi1.5Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.75, ""Dy"": 0.25}","{""Ru"": 1.0}",10.2659,,high_entropy,293.0,icsd_literature
-Dy0.6Bi1.4Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.7, ""Dy"": 0.3}","{""Ru"": 1.0}",10.2649,,high_entropy,293.0,icsd_literature
-DyBiRu2O7,"Bi,Dy",Ru,"{""Bi"": 0.5, ""Dy"": 0.5}","{""Ru"": 1.0}",10.2398,,high_entropy,293.0,icsd_literature
-Dy1.4Bi0.6Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.3, ""Dy"": 0.7}","{""Ru"": 1.0}",10.2016,,high_entropy,293.0,icsd_literature
-Dy1.5Bi0.5Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.25, ""Dy"": 0.75}","{""Ru"": 1.0}",10.2016,,high_entropy,293.0,icsd_literature
-Dy1.6Bi0.4Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.2, ""Dy"": 0.8}","{""Ru"": 1.0}",10.1931,,high_entropy,293.0,icsd_literature
-Dy1.8Bi0.2Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.1, ""Dy"": 0.9}","{""Ru"": 1.0}",10.1798,,high_entropy,293.0,icsd_literature
-Lu1.5Bi0.5Ru2O7,"Bi,Lu",Ru,"{""Bi"": 0.25, ""Lu"": 0.75}","{""Ru"": 1.0}",10.1187,,high_entropy,293.0,icsd_literature
-Gd1.5Bi0.5Ru2O7,"Bi,Gd",Ru,"{""Bi"": 0.25, ""Gd"": 0.75}","{""Ru"": 1.0}",10.2468,,high_entropy,293.0,icsd_literature
-Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,high_entropy,293.0,icsd_literature
-Tb2Zr0.2Sn1.8O7,Tb,"Sn,Zr","{""Tb"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",10.423759,,high_entropy,293.0,icsd_literature
-Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,high_entropy,293.0,icsd_literature
-Y2Ti1.5Sn0.5O7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.75, ""Sn"": 0.25}",10.3162,,high_entropy,293.0,icsd_literature
-Y2TiSnO7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.5, ""Sn"": 0.5}",10.2532,,high_entropy,293.0,icsd_literature
-Y2Ti0.5Sn1.5O7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.25, ""Sn"": 0.75}",10.197,,high_entropy,293.0,icsd_literature
-La1.8Eu0.2Zr2O7,"Eu,La",Zr,"{""La"": 0.9, ""Eu"": 0.1}","{""Zr"": 1.0}",10.7999,,high_entropy,293.0,icsd_literature
+Composition,Sample A,Sample B,a_stoich_json,b_stoich_json,Lattice Parameter (Å),Thermal Conductivity (W/m/K),Vickers Hardness (GPa),CTE (K^-1),Relative Density %,Density Measured,Density Calculated,Bulk Modulus (GPa),Shear Modulus (GPa),Youngs Modulus (GPa),Poisson Ratio,Fracture Toughness (Mpa*m^.5),Specific Heat (Jg^−1K^−1),Thermal Diffusivity  (mm² s⁻¹),High Temp CTE,Temperature (K),Ionic Radius A (Å),Ionic Radius B (Å),oxygen_param_x,rA/rB (Å),Size disorder (δ %),Porosity (%),Grain Size (μm),compound_type,data_source
+YbHo Ti HP,"Yb,Ho",Ti,"{""Yb"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",10.07653,1.5253,,,0.9627,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+YbHoTb Ti HP,"Yb,Ho,Tb",Ti,"{""Yb"": 0.3333333333333333, ""Ho"": 0.3333333333333333, ""Tb"": 0.3333333333333333}","{""Ti"": 1.0}",10.09559,1.7887,,,0.9006,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+YbHoTbNd Ti HP,"Yb,Ho,Tb,Nd",Ti,"{""Yb"": 0.25, ""Ho"": 0.25, ""Tb"": 0.25, ""Nd"": 0.25}","{""Ti"": 1.0}",10.11292,1.6582,,,0.9377,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+YbHoTbNdPr Ti HP,"Yb,Ho,Tb,Nd,Pr",Ti,"{""Yb"": 0.2, ""Ho"": 0.2, ""Tb"": 0.2, ""Nd"": 0.2, ""Pr"": 0.2}","{""Ti"": 1.0}",10.18264,1.5326,,,,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrSmGdHoLu TI SDJ,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17812,1.5663,,,0.9152,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+SmEuGdTbDy Ti SDJ,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.184691,2.0263,,,0.9277,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrNdGdYbLu Ti SDJ,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.175423,1.4074,,,0.9353,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrSmGdHoLu Ti HPSDJ,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17788,1.6402,,,0.9519,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrNdGdYbLu Ti HPSDJ,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17459,1.5372,,,0.9334,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+SmEuGdTbDy Ti HPSDJ,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.18337,2.1861,,,0.9596,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrSmGdHoLu Ti CDTF,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17813232,1.5632,,,0.923,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrNdGdYbLu CDTF,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.17715823,1.3101,,,0.9043,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+SmEuGdTbDy Ti CDTF,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.18087481,1.9556,,,0.8998,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+SmEuGdTbDy SPS,"Sm,Eu,Gd,Tb,Dy",Ti,"{""Sm"": 0.2, ""Eu"": 0.2, ""Gd"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",10.186104,2.0866,,,0.9632,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrNdGdYbLu SPS,"Pr,Nd,Gd,Yb,Lu",Ti,"{""Pr"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.173943,1.4789,,,0.9543,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrSmGdHoLu SPS,"Pr,Sm,Gd,Ho,Lu",Ti,"{""Pr"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Lu"": 0.2}","{""Ti"": 1.0}",10.182036,1.5631,,,0.9879,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaLuTiZr TF,"La,Lu","Ti,Zr","{""La"": 0.5, ""Lu"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36904,1.0087,,,,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaGdLuTiZr TF,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.37753523,0.86389,,,0.9415,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaGdLuTiZr HP,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",,1.0483,,,0.8467,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaEuLuTiZr TF,"La,Eu,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Eu"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.38009,1.020142857,,,0.9617,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrYbTiZr TF,"Pr,Yb","Ti,Zr","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36939,0.99236,,,0.9571,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrYbTiHf TF,"Pr,Yb","Ti,Hf","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",10.34771,0.8213,,,0.9183,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaGdLuTiHf TF,"La,Gd,Lu","Ti,Hf","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",10.36585,0.643571429,,,0.9446,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaGdLu TiZr SM 2500 1500 20,"La,Gd,Lu","Ti,Zr","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.35687,0.7585,,,0.9394,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrYb SM 2500 1500 20,"Pr,Yb","Ti,Zr","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.37021,1.015142857,,,0.9412,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaGdLuTiHf SM 2500 1500 20,"La,Gd,Lu","Ti,Hf","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Lu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.5}",10.36733,0.878971429,,,0.9248,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+PrYb TiHf SM 2500 1500 20,"Pr,Yb","Ti,Hf","{""Pr"": 0.5, ""Yb"": 0.5}","{""Ti"": 0.5, ""Hf"": 0.5}",10.37763,0.899971429,,,0.9495,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaYTiZr TF,"La,Y","Ti,Zr","{""La"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.36109,1.052428571,,,,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+LaSmYTiZr TF,"La,Sm,Y","Ti,Zr","{""La"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3711,1.024692308,,,0.929,,,,,,,,,,,,,,,,,,,high_entropy,safin_experimental
+Ce0.05Gd1.95Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.975, ""Ce"": 0.025}","{""Ti"": 1.0}",10.1708,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.1Gd1.9Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.95, ""Ce"": 0.05}","{""Ti"": 1.0}",10.1755,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.2Gd1.8Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.9, ""Ce"": 0.1}","{""Ti"": 1.0}",10.1846,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.25Gd1.75Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.875, ""Ce"": 0.125}","{""Ti"": 1.0}",10.194,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.5Gd1.5Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.75, ""Ce"": 0.25}","{""Ti"": 1.0}",10.2066,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.8Gd1.2Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.6, ""Ce"": 0.4}","{""Ti"": 1.0}",10.2297,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.9Eu0.1Hf2O7,"Eu,La",Hf,"{""La"": 0.95, ""Eu"": 0.05}","{""Hf"": 1.0}",10.765,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu1.9Ti2Fe0.1O7,"Eu,Fe",Ti,"{""Eu"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",10.1722,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu1.8Ti2Fe0.2O7,"Eu,Fe",Ti,"{""Eu"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",10.157,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ti2Cr0.5Bi1.5O7,"Bi,Cr",Ti,"{""Bi"": 0.75, ""Cr"": 0.25}","{""Ti"": 1.0}",10.34214,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca2Bi2O7,"Bi,Ca",,"{""Ca"": 0.5, ""Bi"": 0.5}",{},10.75021,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sr2Bi2O7,"Bi,Sr",,"{""Sr"": 0.5, ""Bi"": 0.5}",{},10.94132,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.197,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.1956,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.175,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Gd1.6Ti2O7,"Ce,Gd",Ti,"{""Gd"": 0.8, ""Ce"": 0.2}","{""Ti"": 1.0}",10.1911,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.54Mg0.89Ta1.57O7,"Mg,Nd",Ta,"{""Mg"": 0.3662551440329218, ""Nd"": 0.6337448559670782}","{""Ta"": 1.0}",10.3967,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Mg1Nb1.5Bi1.5O7,"Bi,Mg",Nb,"{""Bi"": 0.6, ""Mg"": 0.4}","{""Nb"": 1.0}",10.5461,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.1Gd1.8Zr0.1Ti2O7,"Ca,Gd","Ti,Zr","{""Gd"": 0.9473684210526315, ""Ca"": 0.05263157894736842}","{""Zr"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",10.1762,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.2Gd1.6Zr0.2Ti2O7,"Ca,Gd","Ti,Zr","{""Gd"": 0.888888888888889, ""Ca"": 0.11111111111111112}","{""Zr"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",10.1629,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.3Gd1.4Zr0.3Ti2O7,"Ca,Gd","Ti,Zr","{""Gd"": 0.8235294117647058, ""Ca"": 0.17647058823529413}","{""Zr"": 0.13043478260869565, ""Ti"": 0.8695652173913044}",10.1533,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.4Gd1.2Zr0.4Ti2O7,"Ca,Gd","Ti,Zr","{""Gd"": 0.7499999999999999, ""Ca"": 0.25}","{""Zr"": 0.16666666666666669, ""Ti"": 0.8333333333333334}",10.1356,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Mn0.2Mo1.8O7,Gd,"Mn,Mo","{""Gd"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",10.31757,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2Mn0.2Mo1.8O7,Ho,"Mn,Mo","{""Ho"": 1.0}","{""Mo"": 0.9, ""Mn"": 0.1}",10.204,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy2Hf0.4Zr0.4Ti0.4Sn0.4Ge0.4O7,Dy,"Ge,Hf,Sn,Ti,Zr","{""Dy"": 1.0}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Ge"": 0.2, ""Sn"": 0.2}",10.301,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.8Ce1.2Sn2O7,"Ca,Sn",Ce,"{""Ca"": 0.28571428571428575, ""Sn"": 0.7142857142857143}","{""Ce"": 1.0}",10.488,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2ScNbO7,"Nd,Sc",Nb,"{""Nd"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.5336,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr1.9Mn0.1O7,Y,"Mn,Zr","{""Y"": 1.0}","{""Zr"": 0.95, ""Mn"": 0.05}",10.4507,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr1.8Mn0.2O7,Y,"Mn,Zr","{""Y"": 1.0}","{""Zr"": 0.9, ""Mn"": 0.1}",10.4468,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuYTi2O7,"Eu,Y",Ti,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.15355,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ti2Fe0.5Bi1.5O7,"Bi,Fe",Ti,"{""Bi"": 0.75, ""Fe"": 0.25}","{""Ti"": 1.0}",10.3152,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ti2Fe0.5Bi1.5O7,"Bi,Fe",Ti,"{""Bi"": 0.75, ""Fe"": 0.25}","{""Ti"": 1.0}",10.3152,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+CaNdNb2O7,"Ca,Nd",Nb,"{""Ca"": 0.5, ""Nd"": 0.5}","{""Nb"": 1.0}",10.437,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+CaNdNb2O7,"Ca,Nd",Nb,"{""Ca"": 0.5, ""Nd"": 0.5}","{""Nb"": 1.0}",10.4153,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+CaYNb2O7,"Ca,Y",Nb,"{""Ca"": 0.5, ""Y"": 0.5}","{""Nb"": 1.0}",10.3155,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sc0.2Mn2Tl1.8O7,"Sc,Tl",Mn,"{""Tl"": 0.9, ""Sc"": 0.1}","{""Mn"": 1.0}",9.869,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.1Nd2Zr1.9O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.687,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.2Nd2Zr1.8O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.7,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.2Nd2Zr1.8O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.7,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Nd2Zr1.6O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.728,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Nd2Zr1.6O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.728,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr1.2Ti0.8O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.6, ""Ti"": 0.4}",10.291,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.8Ru2Pb0.2O6.962,"Nd,Pb",Ru,"{""Nd"": 0.9, ""Pb"": 0.1}","{""Ru"": 1.0}",10.33705,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.8Ru2Pb0.2O6.962,"Gd,Pb",Ru,"{""Gd"": 0.9, ""Pb"": 0.1}","{""Ru"": 1.0}",10.2302,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr0.6Ti1.4O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.3, ""Ti"": 0.7}",10.1901,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr0.9Ti1.1O7,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.45, ""Ti"": 0.55}",10.2437,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr1.2Ti0.8O6.99,Y,"Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.6, ""Ti"": 0.4}",10.281,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.6Sn2Bi1.4O7,"Bi,Y",Sn,"{""Bi"": 0.7, ""Y"": 0.3}","{""Sn"": 1.0}",10.4816,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.8Sn2Bi1.2O7,"Bi,Y",Sn,"{""Bi"": 0.6, ""Y"": 0.4}","{""Sn"": 1.0}",10.4142,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.8Sn2Bi1.2O7,"Bi,Y",Sn,"{""Bi"": 0.6, ""Y"": 0.4}","{""Sn"": 1.0}",10.4,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YSn2BiO7,"Bi,Y",Sn,"{""Bi"": 0.5, ""Y"": 0.5}","{""Sn"": 1.0}",10.5025,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.2Sn2Bi0.8O7,"Bi,Y",Sn,"{""Bi"": 0.4, ""Y"": 0.6}","{""Sn"": 1.0}",10.4189,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.2Sn2Bi0.8O7,"Bi,Y",Sn,"{""Bi"": 0.4, ""Y"": 0.6}","{""Sn"": 1.0}",10.3746,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.4Sn2Bi0.6O7,"Bi,Y",Sn,"{""Bi"": 0.3, ""Y"": 0.7}","{""Sn"": 1.0}",10.4147,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.4Sn2Bi0.6O7,"Bi,Y",Sn,"{""Bi"": 0.3, ""Y"": 0.7}","{""Sn"": 1.0}",10.3786,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.6Sn2Bi0.4O7,"Bi,Y",Sn,"{""Bi"": 0.2, ""Y"": 0.8}","{""Sn"": 1.0}",10.3697,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.8Sn2Bi0.2O7,"Bi,Y",Sn,"{""Bi"": 0.1, ""Y"": 0.9}","{""Sn"": 1.0}",10.3563,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YSn2BiO7,"Bi,Y",Sn,"{""Bi"": 0.5, ""Y"": 0.5}","{""Sn"": 1.0}",10.5022,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YbSn2BiO7,"Bi,Yb",Sn,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Sn"": 1.0}",10.4661,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NbInBi2O7,"Bi,In",Nb,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.7793,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.5Bi1.5Ru2O6.938,"Bi,Nd",Ru,"{""Bi"": 0.75, ""Nd"": 0.25}","{""Ru"": 1.0}",10.3135,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.75Bi1.25Ru2O6.955,"Bi,Nd",Ru,"{""Bi"": 0.625, ""Nd"": 0.375}","{""Ru"": 1.0}",10.3175,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.825Bi1.175Ru2O6.996,"Bi,Nd",Ru,"{""Bi"": 0.5875, ""Nd"": 0.4125}","{""Ru"": 1.0}",10.3296,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.925Bi1.075Ru2O6.977,"Bi,Nd",Ru,"{""Bi"": 0.5375, ""Nd"": 0.4625}","{""Ru"": 1.0}",10.3345,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1Bi1Ru2O6.963,"Bi,Nd",Ru,"{""Bi"": 0.5, ""Nd"": 0.5}","{""Ru"": 1.0}",10.3303,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.25Bi0.75Ru2O6.978,"Bi,Nd",Ru,"{""Bi"": 0.375, ""Nd"": 0.625}","{""Ru"": 1.0}",10.3374,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.75Bi0.25Ru2O6.988,"Bi,Nd",Ru,"{""Bi"": 0.125, ""Nd"": 0.875}","{""Ru"": 1.0}",10.341,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Nd1Nb1.5Fe0.5O7,"Ca,Nd","Fe,Nb","{""Ca"": 0.5, ""Nd"": 0.5}","{""Nb"": 0.75, ""Fe"": 0.25}",10.4138,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaInBi2O7,"Bi,In",Ta,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Ta"": 1.0}",10.7612,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaGaBi2O7,"Bi,Ga",Ta,"{""Bi"": 0.6666666666666666, ""Ga"": 0.3333333333333333}","{""Ta"": 1.0}",10.4478,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaInBi2O7,"Bi,In",Ta,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Ta"": 1.0}",10.7612,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaCrBi2O7,"Bi,Cr",Ta,"{""Bi"": 0.6666666666666666, ""Cr"": 0.3333333333333333}","{""Ta"": 1.0}",10.45229,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaCrBi2O7,"Bi,Cr",Ta,"{""Bi"": 0.6666666666666666, ""Cr"": 0.3333333333333333}","{""Ta"": 1.0}",10.45097,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.89Mg0.11Ti2O6.945,"Mg,Sm",Ti,"{""Sm"": 0.945, ""Mg"": 0.055}","{""Ti"": 1.0}",10.216,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.89Ti2Co0.11O6.945,"Co,Sm",Ti,"{""Sm"": 0.945, ""Co"": 0.055}","{""Ti"": 1.0}",10.215,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.89Ti2Ni0.11O6.945,"Ni,Sm",Ti,"{""Sm"": 0.945, ""Ni"": 0.055}","{""Ti"": 1.0}",10.219,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2Ti1.85Fe0.15O7,Ho,"Fe,Ti","{""Ho"": 1.0}","{""Ti"": 0.925, ""Fe"": 0.075}",10.1013,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho1.8Ti2Fe0.2O7,"Fe,Ho",Ti,"{""Ho"": 0.9, ""Fe"": 0.1}","{""Ti"": 1.0}",10.0804,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2TaInO7,"In,Sm",Ta,"{""Sm"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Ta"": 1.0}",10.5448,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.78Zn0.22Ru2O7,"Y,Zn",Ru,"{""Y"": 0.89, ""Zn"": 0.11}","{""Ru"": 1.0}",10.1141,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.25Bi1.75Ru2O6.955,"Bi,Yb",Ru,"{""Bi"": 0.875, ""Yb"": 0.125}","{""Ru"": 1.0}",10.2711,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.375Bi1.625Ru2O6.954,"Bi,Yb",Ru,"{""Bi"": 0.8125, ""Yb"": 0.1875}","{""Ru"": 1.0}",10.2599,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.5Bi1.5Ru2O6.97,"Bi,Yb",Ru,"{""Bi"": 0.75, ""Yb"": 0.25}","{""Ru"": 1.0}",10.2478,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.625Bi1.375Ru2O6.958,"Bi,Yb",Ru,"{""Bi"": 0.6875, ""Yb"": 0.3125}","{""Ru"": 1.0}",10.2366,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.75Bi1.25Ru2O6.967,"Bi,Yb",Ru,"{""Bi"": 0.625, ""Yb"": 0.375}","{""Ru"": 1.0}",10.2258,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.875Bi1.125Ru2O6.996,"Bi,Yb",Ru,"{""Bi"": 0.5625, ""Yb"": 0.4375}","{""Ru"": 1.0}",10.212,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YbBiRu2O7,"Bi,Yb",Ru,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Ru"": 1.0}",10.1958,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.125Bi0.875Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.4375, ""Yb"": 0.5625}","{""Ru"": 1.0}",10.1808,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.25Bi0.75Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.375, ""Yb"": 0.625}","{""Ru"": 1.0}",10.1576,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.375Bi0.625Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.3125, ""Yb"": 0.6875}","{""Ru"": 1.0}",10.1405,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.25Bi1.75Ru2O6.955,"Bi,Yb",Ru,"{""Bi"": 0.875, ""Yb"": 0.125}","{""Ru"": 1.0}",10.2711,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.375Bi1.625Ru2O6.954,"Bi,Yb",Ru,"{""Bi"": 0.8125, ""Yb"": 0.1875}","{""Ru"": 1.0}",10.2599,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.5Bi1.5Ru2O6.97,"Bi,Yb",Ru,"{""Bi"": 0.75, ""Yb"": 0.25}","{""Ru"": 1.0}",10.2478,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.625Bi1.375Ru2O6.957,"Bi,Yb",Ru,"{""Bi"": 0.6875, ""Yb"": 0.3125}","{""Ru"": 1.0}",10.2366,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.75Bi1.25Ru2O6.966,"Bi,Yb",Ru,"{""Bi"": 0.625, ""Yb"": 0.375}","{""Ru"": 1.0}",10.2258,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YbBiRu2O7,"Bi,Yb",Ru,"{""Bi"": 0.5, ""Yb"": 0.5}","{""Ru"": 1.0}",10.1958,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.125Bi0.875Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.4375, ""Yb"": 0.5625}","{""Ru"": 1.0}",10.1808,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.25Bi0.75Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.375, ""Yb"": 0.625}","{""Ru"": 1.0}",10.1576,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.375Bi0.625Ru2O7,"Bi,Yb",Ru,"{""Bi"": 0.3125, ""Yb"": 0.6875}","{""Ru"": 1.0}",10.1405,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.99Dy0.01Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.995, ""Dy"": 0.005}","{""Ti"": 1.0}",10.18,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.98Dy0.02Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.99, ""Dy"": 0.01}","{""Ti"": 1.0}",10.18,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.97Dy0.03Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.985, ""Dy"": 0.015}","{""Ti"": 1.0}",10.18,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.96Dy0.04Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.98, ""Dy"": 0.02}","{""Ti"": 1.0}",10.18,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.95Dy0.05Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.975, ""Dy"": 0.025}","{""Ti"": 1.0}",10.18,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.9Co0.1Ru2O7,"Co,Gd",Ru,"{""Gd"": 0.95, ""Co"": 0.05}","{""Ru"": 1.0}",10.225,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.6Co0.4Ru2O7,"Co,Gd",Ru,"{""Gd"": 0.8, ""Co"": 0.2}","{""Ru"": 1.0}",10.2042,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu0.1Y1.9Ti2O7,"Eu,Y",Ti,"{""Y"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",10.1,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu0.2Y1.8Ti2O7,"Eu,Y",Ti,"{""Y"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",10.105,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu0.5Y1.5Ti2O7,"Eu,Y",Ti,"{""Y"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",10.119,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuYTi2O7,"Eu,Y",Ti,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.157,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.05Y1.95Ti2O7,"Sm,Y",Ti,"{""Y"": 0.975, ""Sm"": 0.025}","{""Ti"": 1.0}",10.098,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.1Y1.9Ti2O7,"Sm,Y",Ti,"{""Y"": 0.95, ""Sm"": 0.05}","{""Ti"": 1.0}",10.105,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.2Y1.8Ti2O7,"Sm,Y",Ti,"{""Y"": 0.9, ""Sm"": 0.1}","{""Ti"": 1.0}",10.113,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.5Y1.5Ti2O7,"Sm,Y",Ti,"{""Y"": 0.75, ""Sm"": 0.25}","{""Ti"": 1.0}",10.125,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmYTi2O7,"Sm,Y",Ti,"{""Y"": 0.5, ""Sm"": 0.5}","{""Ti"": 1.0}",10.16,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Ta1.034Cr0.966O7,"Cr,Gd",Ta,"{""Gd"": 0.6743088334457181, ""Cr"": 0.3256911665542818}","{""Ta"": 1.0}",10.29015,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ta0.984Cr1.016O7,"Cr,Y",Ta,"{""Y"": 0.6631299734748011, ""Cr"": 0.33687002652519893}","{""Ta"": 1.0}",10.20068,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2Ta1.154Cr0.846O7,"Cr,Sm",Ta,"{""Sm"": 0.7027406886858749, ""Cr"": 0.2972593113141251}","{""Ta"": 1.0}",10.34059,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmDyTi2O7,"Dy,Sm",Ti,"{""Sm"": 0.5, ""Dy"": 0.5}","{""Ti"": 1.0}",10.175,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmHoTi2O7,"Ho,Sm",Ti,"{""Sm"": 0.5, ""Ho"": 0.5}","{""Ti"": 1.0}",10.162,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YbSmTi2O7,"Sm,Yb",Ti,"{""Sm"": 0.5, ""Yb"": 0.5}","{""Ti"": 1.0}",10.133,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.04Gd2Ti1.96O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.98, ""Ce"": 0.02}",10.1177,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.08Gd2Ti1.92O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.96, ""Ce"": 0.04}",10.1208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.12Gd2Ti1.88O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.94, ""Ce"": 0.06}",10.1247,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.16Gd2Ti1.84O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.92, ""Ce"": 0.08}",10.1332,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.08Gd2Ti1.94O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.9603960396039604, ""Ce"": 0.039603960396039604}",10.1433,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.04Gd2Ti1.96O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.98, ""Ce"": 0.02}",10.1413,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.12Gd2Ti1.88O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.94, ""Ce"": 0.06}",10.1477,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.16Gd2Ti1.84O7,Gd,"Ce,Ti","{""Gd"": 1.0}","{""Ti"": 0.92, ""Ce"": 0.08}",10.1527,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.6Ho0.4Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.8, ""Ho"": 0.2}","{""Ti"": 1.0}",10.1746,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.2Ho0.8Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.6, ""Ho"": 0.4}","{""Ti"": 1.0}",10.16,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd0.8Ho1.2Ti2O7,"Gd,Ho",Ti,"{""Gd"": 0.4, ""Ho"": 0.6}","{""Ti"": 1.0}",10.1428,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmGdTi2O7,"Gd,Sm",Ti,"{""Sm"": 0.5, ""Gd"": 0.5}","{""Ti"": 1.0}",,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmErTi2O7,"Er,Sm",Ti,"{""Sm"": 0.5, ""Er"": 0.5}","{""Ti"": 1.0}",10.156,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NbInBi2O7,"Bi,In",Nb,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.79166,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NbInBi2O7,"Bi,In",Nb,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.7915,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.48Nd0.52Zr2O7,"La,Nd",Zr,"{""La"": 0.74, ""Nd"": 0.26}","{""Zr"": 1.0}",10.78457,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.26Nd0.74Zr2O7,"La,Nd",Zr,"{""La"": 0.63, ""Nd"": 0.37}","{""Zr"": 1.0}",10.75648,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+LaNdZr2O7,"La,Nd",Zr,"{""La"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",10.72892,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.9Nd1.1Zr2O7,"La,Nd",Zr,"{""La"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",10.70252,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2Zr1.556Ti0.444O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.778, ""Ti"": 0.222}",10.5908,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2Zr1.188Ti0.812O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.594, ""Ti"": 0.406}",10.5254,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2Zr0.89Ti1.11O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.445, ""Ti"": 0.555}",10.46209,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2Zr0.89Ti1.11O7,Nd,"Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.445, ""Ti"": 0.555}",10.46015,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2ZrSnO7,Y,"Sn,Zr","{""Y"": 1.0}","{""Zr"": 0.5, ""Sn"": 0.5}",10.3,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu0.02Y1.98Zr1Sn1O7,Y,"Eu,Sn,Zr","{""Y"": 1.0}","{""Zr"": 0.49504950495049505, ""Eu"": 0.009900990099009901, ""Sn"": 0.49504950495049505}",10.35,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YTaBi2O7,"Bi,Y",Ta,"{""Bi"": 0.6666666666666666, ""Y"": 0.3333333333333333}","{""Ta"": 1.0}",10.7859,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+LaTaBi2O7,"Bi,La",Ta,"{""Bi"": 0.6666666666666666, ""La"": 0.3333333333333333}","{""Ta"": 1.0}",10.96,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaIn2BiO7,"Bi,In",Ta,"{""In"": 0.6666666666666666, ""Bi"": 0.3333333333333333}","{""Ta"": 1.0}",10.6972,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.2Ce0.8Y0.8Zr1.2O7,"La,Y","Ce,Zr","{""Y"": 0.4, ""La"": 0.6}","{""Zr"": 0.6, ""Ce"": 0.4}",10.792,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.986Cr0.014O7,"Cr,Y",Ti,"{""Y"": 0.99304865938431, ""Cr"": 0.006951340615690169}","{""Ti"": 1.0}",10.09633,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.916Cr0.084O7,"Cr,Y",Ti,"{""Y"": 0.9596928982725528, ""Cr"": 0.04030710172744722}","{""Ti"": 1.0}",10.09904,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.894Cr0.106O7,"Cr,Y",Ti,"{""Y"": 0.9496676163342831, ""Cr"": 0.050332383665717004}","{""Ti"": 1.0}",10.09639,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.884Cr0.116O7,"Cr,Y",Ti,"{""Y"": 0.9451795841209829, ""Cr"": 0.054820415879017016}","{""Ti"": 1.0}",10.09577,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.904Cr0.096O7,"Cr,Y",Ti,"{""Y"": 0.9541984732824427, ""Cr"": 0.04580152671755725}","{""Ti"": 1.0}",10.09609,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.26Ti2Bi0.74O7,"Bi,Y",Ti,"{""Y"": 0.63, ""Bi"": 0.37}","{""Ti"": 1.0}",10.221,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.3Ti2Bi0.7O7,"Bi,Y",Ti,"{""Y"": 0.65, ""Bi"": 0.35}","{""Ti"": 1.0}",10.206,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.73Ti2Bi0.27O7,"Bi,Y",Ti,"{""Y"": 0.865, ""Bi"": 0.135}","{""Ti"": 1.0}",10.134,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.378,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.21,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Tb1.6La0.4Mo2O7,"La,Tb",Mo,"{""Tb"": 0.8, ""La"": 0.2}","{""Mo"": 1.0}",10.27,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.05Gd1.95Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.975, ""Nd"": 0.025}","{""Zr"": 1.0}",10.5429,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.15Gd1.85Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.925, ""Nd"": 0.075}","{""Zr"": 1.0}",10.5433,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.2Gd1.8Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.9, ""Nd"": 0.1}","{""Zr"": 1.0}",10.5571,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.4Gd1.6Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.8, ""Nd"": 0.2}","{""Zr"": 1.0}",10.5688,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.6Gd0.4Zr2O7,"Gd,Nd",Zr,"{""Gd"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",10.6092,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr2ScNbO7,"Pr,Sc",Nb,"{""Pr"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.5591,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2ScNbO7,"Nd,Sc",Nb,"{""Nd"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.5091,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu2ScNbO7,"Eu,Sc",Nb,"{""Sc"": 0.3333333333333333, ""Eu"": 0.6666666666666666}","{""Nb"": 1.0}",10.45,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2ScNbO7,"Gd,Sc",Nb,"{""Gd"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.4429,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy2ScNbO7,"Dy,Sc",Nb,"{""Dy"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.3657,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.27Ti2Bi0.73O7,"Bi,Gd",Ti,"{""Gd"": 0.635, ""Bi"": 0.365}","{""Ti"": 1.0}",10.2471,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.28Ti2Bi0.72O7,"Bi,Gd",Ti,"{""Gd"": 0.64, ""Bi"": 0.36}","{""Ti"": 1.0}",10.2345,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.2Bi1.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.9, ""Pr"": 0.1}","{""Ru"": 1.0}",10.3048,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.4Bi1.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.8, ""Pr"": 0.2}","{""Ru"": 1.0}",10.3143,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.6Bi1.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.7, ""Pr"": 0.3}","{""Ru"": 1.0}",10.3234,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.8Bi1.2Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.6, ""Pr"": 0.4}","{""Ru"": 1.0}",10.3295,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+PrBiRu2O7,"Bi,Pr",Ru,"{""Bi"": 0.5, ""Pr"": 0.5}","{""Ru"": 1.0}",10.3416,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.2Bi0.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.4, ""Pr"": 0.6}","{""Ru"": 1.0}",10.3434,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.4Bi0.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.3, ""Pr"": 0.7}","{""Ru"": 1.0}",10.354,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.6Bi0.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.2, ""Pr"": 0.8}","{""Ru"": 1.0}",10.362,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.8Bi0.2Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.1, ""Pr"": 0.9}","{""Ru"": 1.0}",10.368,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YTi2BiO7,"Bi,Y",Ti,"{""Y"": 0.5, ""Bi"": 0.5}","{""Ti"": 1.0}",10.1984,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2NbInO7,"In,Sm",Nb,"{""Sm"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.559,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2ScNbO7,"Sc,Sm",Nb,"{""Sm"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.497,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Ti1.85Te0.15O7,Gd,"Te,Ti","{""Gd"": 1.0}","{""Ti"": 0.925, ""Te"": 0.075}",10.1906,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Ti1.8Te0.2O7,Gd,"Te,Ti","{""Gd"": 1.0}","{""Ti"": 0.9, ""Te"": 0.1}",10.1982,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.04La1.96Sn2O7,"Ca,La",Sn,"{""La"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",10.7192,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.04Sm1.96Sn2O7,"Ca,Sm",Sn,"{""Sm"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",10.5225,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.04Yb1.96Sn2O7,"Ca,Yb",Sn,"{""Yb"": 0.98, ""Ca"": 0.02}","{""Sn"": 1.0}",10.3182,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ta3Zn2Bi3O14,"Bi,Zn",Ta,"{""Bi"": 0.6, ""Zn"": 0.4}","{""Ta"": 1.0}",10.531,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2MnRuO7,Ho,"Mn,Ru","{""Ho"": 1.0}","{""Ru"": 0.5, ""Mn"": 0.5}",10.0491,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.1Y1.9Ti2O7,"La,Y",Ti,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",10.11355,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.22Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",10.13428,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.22Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.8883248730964467, ""La"": 0.1116751269035533}","{""Ti"": 1.0}",10.13077,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.23Y1.73Ti2O7,"La,Y",Ti,"{""Y"": 0.8826530612244898, ""La"": 0.11734693877551021}","{""Ti"": 1.0}",10.1347,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.05Y1.95Ti2O7,"La,Y",Ti,"{""Y"": 0.975, ""La"": 0.025}","{""Ti"": 1.0}",10.10199,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.1Y1.9Ti2O7,"La,Y",Ti,"{""Y"": 0.95, ""La"": 0.05}","{""Ti"": 1.0}",10.10484,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.2Y1.8Ti2O7,"La,Y",Ti,"{""Y"": 0.9, ""La"": 0.1}","{""Ti"": 1.0}",10.10901,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.25Y1.75Ti2O7,"La,Y",Ti,"{""Y"": 0.875, ""La"": 0.125}","{""Ti"": 1.0}",10.11306,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.3Y1.7Ti2O7,"La,Y",Ti,"{""Y"": 0.85, ""La"": 0.15}","{""Ti"": 1.0}",10.11981,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.35Y1.65Ti2O7,"La,Y",Ti,"{""Y"": 0.825, ""La"": 0.175}","{""Ti"": 1.0}",10.12344,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.65Y0.35Ti2O7,"La,Y",Ti,"{""Y"": 0.175, ""La"": 0.825}","{""Ti"": 1.0}",10.1315,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.7Y0.3Ti2O7,"La,Y",Ti,"{""Y"": 0.15, ""La"": 0.85}","{""Ti"": 1.0}",10.1316,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.75Y0.25Ti2O7,"La,Y",Ti,"{""Y"": 0.125, ""La"": 0.875}","{""Ti"": 1.0}",10.1145,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.6Y0.4Hf2O7,"La,Y",Hf,"{""La"": 0.8, ""Y"": 0.2}","{""Hf"": 1.0}",10.7212,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.2Y0.8Hf2O7,"La,Y",Hf,"{""La"": 0.6, ""Y"": 0.4}","{""Hf"": 1.0}",10.646,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.8Y1.2Hf2O7,"La,Y",Hf,"{""La"": 0.4, ""Y"": 0.6}","{""Hf"": 1.0}",10.5718,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.4Y1.6Hf2O7,"La,Y",Hf,"{""La"": 0.2, ""Y"": 0.8}","{""Hf"": 1.0}",10.5148,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.6Y0.4Zr2O7,"La,Y",Zr,"{""La"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",10.7484,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.2Y0.8Zr2O7,"La,Y",Zr,"{""La"": 0.6, ""Y"": 0.4}","{""Zr"": 1.0}",10.6714,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.8Y1.2Zr2O7,"La,Y",Zr,"{""La"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",10.6572,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.6Y0.4Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.8, ""Y"": 0.2}","{""Zr"": 1.0}",10.609,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.8Y1.2Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.4, ""Y"": 0.6}","{""Zr"": 1.0}",10.532,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.4Y1.6Zr2O7,"Nd,Y",Zr,"{""Nd"": 0.2, ""Y"": 0.8}","{""Zr"": 1.0}",10.531,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.04Ti1.96O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.98, ""Zr"": 0.02}",10.20079,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.25074,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Fe1.78Bi1.63Te0.59O6.96,Bi,"Fe,Te","{""Bi"": 1.0}","{""Te"": 0.2489451476793249, ""Fe"": 0.7510548523206751}",10.388041,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Fe1.58Bi1.86Te0.59O6.96,Bi,"Fe,Te","{""Bi"": 1.0}","{""Te"": 0.271889400921659, ""Fe"": 0.728110599078341}",10.38807,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La2Ce0.1Zr1.9O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.787,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La2Ce0.2Zr1.8O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.9, ""Ce"": 0.1}",10.776,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La2Ce0.3Zr1.7O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.85, ""Ce"": 0.15}",10.815,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La2Ce0.4Zr1.6O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.8, ""Ce"": 0.2}",10.837,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.925Th0.075Zr1.925Al0.075O7,"Al,Gd","Th,Zr","{""Gd"": 0.9625, ""Al"": 0.0375}","{""Th"": 0.0375, ""Zr"": 0.9625}",10.527,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.9Th0.1Zr1.9Al0.1O7,"Al,Gd","Th,Zr","{""Gd"": 0.95, ""Al"": 0.05}","{""Th"": 0.05, ""Zr"": 0.95}",10.531,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.85Th0.15Zr1.85Al0.15O7,"Al,Gd","Th,Zr","{""Gd"": 0.925, ""Al"": 0.075}","{""Th"": 0.075, ""Zr"": 0.925}",10.537,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.8Th0.2Zr1.8Al0.2O7,"Al,Gd","Th,Zr","{""Gd"": 0.9, ""Al"": 0.1}","{""Th"": 0.1, ""Zr"": 0.9}",10.543,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nb0.66Cr1.88Bi1.46O7,"Bi,Cr",Nb,"{""Bi"": 0.437125748502994, ""Cr"": 0.5628742514970061}","{""Nb"": 1.0}",10.4638,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nb0.66Cr1.88Bi1.46O7,"Bi,Cr",Nb,"{""Bi"": 0.437125748502994, ""Cr"": 0.5628742514970061}","{""Nb"": 1.0}",10.4634,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NdGdZr2O7,"Gd,Nd",Zr,"{""Nd"": 0.5, ""Gd"": 0.5}","{""Zr"": 1.0}",10.61575,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1Gd1Zr1.95Sc0.05O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.48780487804878053, ""Gd"": 0.48780487804878053, ""Sc"": 0.02439024390243903}","{""Zr"": 1.0}",10.61221,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1Gd1Zr1.9Sc0.1O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.47619047619047616, ""Gd"": 0.47619047619047616, ""Sc"": 0.047619047619047616}","{""Zr"": 1.0}",10.61193,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1Gd1Zr1.85Sc0.15O7,"Gd,Nd,Sc",Zr,"{""Nd"": 0.46511627906976744, ""Gd"": 0.46511627906976744, ""Sc"": 0.06976744186046512}","{""Zr"": 1.0}",10.60965,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1.25Sm0.5Ta1Ti1.25O7,"Ca,Sm","Ta,Ti","{""Ca"": 0.7142857142857143, ""Sm"": 0.2857142857142857}","{""Ti"": 0.5555555555555556, ""Ta"": 0.4444444444444444}",10.2715,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Sm0.75Ta0.75Ti1.5O7,"Ca,Sm","Ta,Ti","{""Ca"": 0.5714285714285714, ""Sm"": 0.42857142857142855}","{""Ti"": 0.6666666666666666, ""Ta"": 0.3333333333333333}",10.243,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.75Sm1Ta0.5Ti1.75O7,"Ca,Sm,Ta",Ti,"{""Ca"": 0.3333333333333333, ""Sm"": 0.4444444444444444, ""Ta"": 0.2222222222222222}","{""Ti"": 1.0}",10.2042,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.75Sm1Ta0.375Ti1.75Nb0.125O7,"Ca,Sm,Ta","Nb,Ti","{""Ca"": 0.35294117647058826, ""Sm"": 0.47058823529411764, ""Ta"": 0.17647058823529413}","{""Ti"": 0.9333333333333333, ""Nb"": 0.06666666666666667}",10.2049,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.75Sm1Ta0.25Ti1.75Nb0.25O7,"Ca,Sm,Ta","Nb,Ti","{""Ca"": 0.375, ""Sm"": 0.5, ""Ta"": 0.125}","{""Ti"": 0.875, ""Nb"": 0.125}",10.2206,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.75Sm1Ta0.125Ti1.75Nb0.375O7,"Ca,Sm,Ta","Nb,Ti","{""Ca"": 0.4, ""Sm"": 0.5333333333333333, ""Ta"": 0.06666666666666667}","{""Ti"": 0.8235294117647058, ""Nb"": 0.17647058823529413}",10.22,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.75Sm1Ti1.75Nb0.5O7,"Ca,Sm","Nb,Ti","{""Ca"": 0.42857142857142855, ""Sm"": 0.5714285714285714}","{""Ti"": 0.7777777777777778, ""Nb"": 0.2222222222222222}",10.2257,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Sm0.75Ti1.5Nb0.75O7,"Ca,Sm","Nb,Ti","{""Ca"": 0.5714285714285714, ""Sm"": 0.42857142857142855}","{""Ti"": 0.6666666666666666, ""Nb"": 0.3333333333333333}",10.2454,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1.25Sm0.5Ti1.25Nb1O7,"Ca,Sm","Nb,Ti","{""Ca"": 0.7142857142857143, ""Sm"": 0.2857142857142857}","{""Ti"": 0.5555555555555556, ""Nb"": 0.4444444444444444}",10.2737,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Ce0.8Mn0.2Nb1Sn1O7,"Ca,Ce","Mn,Nb,Sn","{""Ca"": 0.5555555555555556, ""Ce"": 0.4444444444444445}","{""Nb"": 0.45454545454545453, ""Mn"": 0.09090909090909091, ""Sn"": 0.45454545454545453}",10.41883,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Ce0.6Mn0.4Nb1Sn1O7,"Ca,Ce","Mn,Nb,Sn","{""Ca"": 0.625, ""Ce"": 0.37499999999999994}","{""Nb"": 0.4166666666666667, ""Mn"": 0.16666666666666669, ""Sn"": 0.4166666666666667}",10.39855,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Ce0.4Mn0.6Nb1Sn1O7,"Ca,Ce,Sn","Mn,Nb","{""Ca"": 0.4166666666666667, ""Ce"": 0.16666666666666669, ""Sn"": 0.4166666666666667}","{""Nb"": 0.625, ""Mn"": 0.37499999999999994}",10.39391,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.1Y1.9Sn2O7,"Y,Yb",Sn,"{""Y"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",10.37036,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb0.1Gd1.9Sn2O7,"Gd,Yb",Sn,"{""Gd"": 0.95, ""Yb"": 0.05}","{""Sn"": 1.0}",10.45421,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuDyTi2O7,"Dy,Eu",Ti,"{""Dy"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.165,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ti2Fe0.4Bi1.6O7,"Bi,Fe",Ti,"{""Bi"": 0.8, ""Fe"": 0.2}","{""Ti"": 1.0}",10.3328,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Mg1Nb1.5Bi1.5O7,"Bi,Mg",Nb,"{""Bi"": 0.6, ""Mg"": 0.4}","{""Nb"": 1.0}",10.558,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Mg0.8Nb1.4667Zn0.1333Bi1.6O7,"Bi,Mg,Zn",Nb,"{""Bi"": 0.6315872577270754, ""Mg"": 0.3157936288635377, ""Zn"": 0.052619113409386964}","{""Nb"": 1.0}",10.5515,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Mg0.6Nb1.433Zn0.267Bi1.7O7,"Bi,Mg,Zn",Nb,"{""Bi"": 0.662251655629139, ""Mg"": 0.23373587845734317, ""Zn"": 0.10401246591351772}","{""Nb"": 1.0}",10.5657,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nb1.5Cu1Bi1.5O7,"Bi,Cu",Nb,"{""Bi"": 0.6, ""Cu"": 0.4}","{""Nb"": 1.0}",10.52679,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuYTi2O7,"Eu,Y",Ti,"{""Y"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.157,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.4Sm1.2Zr0.4Ti2O7,"Ca,Sm","Ti,Zr","{""Ca"": 0.25, ""Sm"": 0.7499999999999999}","{""Zr"": 0.16666666666666669, ""Ti"": 0.8333333333333334}",10.1696,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.3Sm1.4Zr0.3Ti2O7,"Ca,Sm","Ti,Zr","{""Ca"": 0.17647058823529413, ""Sm"": 0.8235294117647058}","{""Zr"": 0.13043478260869565, ""Ti"": 0.8695652173913044}",10.1891,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.2Sm1.6Zr0.2Ti2O7,"Ca,Sm","Ti,Zr","{""Ca"": 0.11111111111111112, ""Sm"": 0.888888888888889}","{""Zr"": 0.09090909090909091, ""Ti"": 0.9090909090909091}",10.2016,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.1Sm1.8Zr0.1Ti2O7,"Ca,Sm","Ti,Zr","{""Ca"": 0.05263157894736842, ""Sm"": 0.9473684210526315}","{""Zr"": 0.047619047619047616, ""Ti"": 0.9523809523809523}",10.2183,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sc0.5Ti2Bi1.5O7,"Bi,Sc",Ti,"{""Bi"": 0.75, ""Sc"": 0.25}","{""Ti"": 1.0}",10.3105,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ti2In0.5Bi1.5O7,"Bi,In",Ti,"{""Bi"": 0.75, ""In"": 0.25}","{""Ti"": 1.0}",10.3271,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.23104,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.3Ti1.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.85, ""Zr"": 0.15}",10.42,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.5Ti1.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.75, ""Zr"": 0.25}",10.26928,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.5Ti1.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.75, ""Zr"": 0.25}",10.3372,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2ZrTiO7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",10.35152,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2ZrTiO7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3659,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr1.5Ti0.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.75}",10.45829,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr1.5Ti0.5O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.75}",10.46544,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr1.7Ti0.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.15, ""Zr"": 0.85}",10.48699,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.758Dy0.242Ta0.014Ti1.986O7,"Dy,Y","Ta,Ti","{""Y"": 0.879, ""Dy"": 0.121}","{""Ti"": 0.993, ""Ta"": 0.007}",10.1109,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+CoRuPb2O7,Pb,"Co,Ru","{""Pb"": 1.0}","{""Ru"": 0.5, ""Co"": 0.5}",10.1623,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NbInBi2O7,"Bi,In",Nb,"{""Bi"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.7793,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sr0.05La1.95Zr2O6.975,"La,Sr",Zr,"{""La"": 0.975, ""Sr"": 0.025}","{""Zr"": 1.0}",10.8068,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+TaGaBi2O7,"Bi,Ga",Ta,"{""Bi"": 0.6666666666666666, ""Ga"": 0.3333333333333333}","{""Ta"": 1.0}",10.4516,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.625Cu0.375Ru2O7,"Cu,Pr",Ru,"{""Pr"": 0.8125, ""Cu"": 0.1875}","{""Ru"": 1.0}",10.292,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.625Cu0.375Ru2O7,"Cu,Dy",Ru,"{""Dy"": 0.8125, ""Cu"": 0.1875}","{""Ru"": 1.0}",10.157,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.95Ti2Fe0.05O7,"Dy,Fe",Ti,"{""Dy"": 0.975, ""Fe"": 0.025}","{""Ti"": 1.0}",10.1208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.9Ti2Fe0.1O7,"Dy,Fe",Ti,"{""Dy"": 0.95, ""Fe"": 0.05}","{""Ti"": 1.0}",10.1143,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.85Ti2Fe0.15O7,"Dy,Fe",Ti,"{""Dy"": 0.925, ""Fe"": 0.075}","{""Ti"": 1.0}",10.1077,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.4Gd1.6Zr2O7,"Gd,La",Zr,"{""La"": 0.2, ""Gd"": 0.8}","{""Zr"": 1.0}",10.5934,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+CaYTiNbO7,"Ca,Y","Nb,Ti","{""Ca"": 0.5, ""Y"": 0.5}","{""Ti"": 0.5, ""Nb"": 0.5}",10.246,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Zr0.2Sn1.8O7,Y,"Sn,Zr","{""Y"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",10.38564,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Hf0.5Ti1.5O7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.75, ""Hf"": 0.25}",10.179,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2HfTiO7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.5, ""Hf"": 0.5}",10.2524,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Hf1.5Ti0.5O7,Y,"Hf,Ti","{""Y"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.75}",10.3246,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sc0.4Ti2Bi1.6O7,"Bi,Sc",Ti,"{""Bi"": 0.8, ""Sc"": 0.2}","{""Ti"": 1.0}",10.3274,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sc0.4Ti2Bi1.6O7,"Bi,Sc",Ti,"{""Bi"": 0.8, ""Sc"": 0.2}","{""Ti"": 1.0}",10.3276,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca0.63Pr1.37Mo2O7,"Ca,Pr",Mo,"{""Pr"": 0.685, ""Ca"": 0.315}","{""Mo"": 1.0}",10.4329,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr1.3Ti0.7O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.35, ""Zr"": 0.65}",10.4154,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Zr0.7Ti1.3O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.65, ""Zr"": 0.35}",10.3171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu1.33Ti2Bi0.66O7,"Bi,Eu",Ti,"{""Bi"": 0.3316582914572864, ""Eu"": 0.6683417085427136}","{""Ti"": 1.0}",10.25373,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho1.33Ti2Bi0.66O7,"Bi,Ho",Ti,"{""Bi"": 0.3316582914572864, ""Ho"": 0.6683417085427136}","{""Ti"": 1.0}",10.18701,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.33Ti2Bi0.66O7,"Bi,Yb",Ti,"{""Bi"": 0.3316582914572864, ""Yb"": 0.6683417085427136}","{""Ti"": 1.0}",10.1453,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.33Ti2Bi0.66O7,"Bi,Yb",Ti,"{""Bi"": 0.3316582914572864, ""Yb"": 0.6683417085427136}","{""Ti"": 1.0}",10.14548,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr2ScNbO7,"Pr,Sc",Nb,"{""Pr"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.5532,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2ScNbO7,"Nd,Sc",Nb,"{""Nd"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.5266,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu2ScNbO7,"Eu,Sc",Nb,"{""Sc"": 0.3333333333333333, ""Eu"": 0.6666666666666666}","{""Nb"": 1.0}",10.4368,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2ScNbO7,"Gd,Sc",Nb,"{""Gd"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.4237,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy2ScNbO7,"Dy,Sc",Nb,"{""Dy"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.3601,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2NbGaO7,"Ga,Nd",Nb,"{""Nd"": 0.6666666666666666, ""Ga"": 0.3333333333333333}","{""Nb"": 1.0}",10.3534,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Eu2NbGaO7,"Eu,Ga",Nb,"{""Ga"": 0.3333333333333333, ""Eu"": 0.6666666666666666}","{""Nb"": 1.0}",10.2709,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2NbGaO7,"Ga,Gd",Nb,"{""Gd"": 0.6666666666666666, ""Ga"": 0.3333333333333333}","{""Nb"": 1.0}",10.2661,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy2NbGaO7,"Dy,Ga",Nb,"{""Dy"": 0.6666666666666666, ""Ga"": 0.3333333333333333}","{""Nb"": 1.0}",10.1992,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2NbInO7,"In,Nd",Nb,"{""Nd"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.5651,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2NbInO7,"Gd,In",Nb,"{""Gd"": 0.6666666666666666, ""In"": 0.3333333333333333}","{""Nb"": 1.0}",10.4839,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Mn0.6Nb0.6Bi0.8O3.4875,Bi,"Mn,Nb","{""Bi"": 1.0}","{""Nb"": 0.5, ""Mn"": 0.5}",10.47616,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Tb0.6Gd1.4Zr2O7,"Gd,Tb",Zr,"{""Gd"": 0.7, ""Tb"": 0.3}","{""Zr"": 1.0}",10.5036,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Bi0.5Ir2Pb1.5O7,"Bi,Ir",Pb,"{""Bi"": 0.2, ""Ir"": 0.8}","{""Pb"": 1.0}",10.1838,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+BiIr2PbO7,"Bi,Ir",Pb,"{""Bi"": 0.3333333333333333, ""Ir"": 0.6666666666666666}","{""Pb"": 1.0}",10.19191,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Bi1.5Ir2Pb0.5O7,Bi,"Ir,Pb","{""Bi"": 1.0}","{""Pb"": 0.2, ""Ir"": 0.8}",10.21714,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Y1.5Nb1.5O7,"Ca,Y",Nb,"{""Ca"": 0.4, ""Y"": 0.6}","{""Nb"": 1.0}",10.459,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.05Y1.45Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.4081632653061224, ""Y"": 0.5918367346938775}","{""Nb"": 0.9677419354838709, ""Eu"": 0.03225806451612903}",10.4618,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.15Y1.35Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.425531914893617, ""Y"": 0.574468085106383}","{""Nb"": 0.9090909090909092, ""Eu"": 0.09090909090909091}",10.4689,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.25Y1.25Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.4444444444444444, ""Y"": 0.5555555555555556}","{""Nb"": 0.8571428571428571, ""Eu"": 0.14285714285714285}",10.4747,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.375Y1.125Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.47058823529411764, ""Y"": 0.5294117647058824}","{""Nb"": 0.8, ""Eu"": 0.2}",10.4832,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.5Y1Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.5, ""Y"": 0.5}","{""Nb"": 0.75, ""Eu"": 0.25}",10.489,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ca1Eu0.625Y0.875Nb1.5O7,"Ca,Y","Eu,Nb","{""Ca"": 0.5333333333333333, ""Y"": 0.4666666666666667}","{""Nb"": 0.7058823529411765, ""Eu"": 0.29411764705882354}",10.4991,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La2Y0.6667Zr0.6667Nb0.6667O7,"La,Y","Nb,Zr","{""La"": 0.7499906251171861, ""Y"": 0.25000937488281394}","{""Zr"": 0.5, ""Nb"": 0.5}",10.80698,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd2Y0.6667Zr0.6667Nb0.6667O7,"Nd,Y","Nb,Zr","{""Nd"": 0.7499906251171861, ""Y"": 0.25000937488281394}","{""Zr"": 0.5, ""Nb"": 0.5}",10.68908,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2Y0.6667Zr0.6667Nb0.6667O7,"Sm,Y","Nb,Zr","{""Sm"": 0.7499906251171861, ""Y"": 0.25000937488281394}","{""Zr"": 0.5, ""Nb"": 0.5}",10.6231,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf1.6Ti0.4O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",10.42488,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf0.8Ti1.2O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",10.32151,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf0.4Ti1.6O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.2, ""Ti"": 0.8}",10.27171,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf1.6Ti0.4O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.8, ""Ti"": 0.2}",10.42064,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf1.2Ti0.8O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.6, ""Ti"": 0.4}",10.36858,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd2Hf0.8Ti1.2O7,Gd,"Hf,Ti","{""Gd"": 1.0}","{""Hf"": 0.4, ""Ti"": 0.6}",10.31717,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.1Sm1.9Zr1.9Sc0.1O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.95, ""Sc"": 0.05}","{""Zr"": 0.95, ""Ce"": 0.05}",10.5758,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.2Sm1.8Zr1.8Sc0.2O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.9, ""Sc"": 0.09999999999999999}","{""Zr"": 0.9, ""Ce"": 0.09999999999999999}",10.5718,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.3Sm1.7Zr1.7Sc0.3O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.85, ""Sc"": 0.15}","{""Zr"": 0.85, ""Ce"": 0.15}",10.568,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.4Sm1.6Zr1.6Sc0.4O7,"Sc,Sm","Ce,Zr","{""Sm"": 0.8, ""Sc"": 0.2}","{""Zr"": 0.8, ""Ce"": 0.2}",10.56,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.8Ho0.2Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.1, ""Nd"": 0.9}","{""Zr"": 1.0}",10.6049,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.6Ho0.4Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.2, ""Nd"": 0.8}","{""Zr"": 1.0}",10.5871,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.4Ho0.6Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.3, ""Nd"": 0.7}","{""Zr"": 1.0}",10.5652,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.2Ho0.8Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.4, ""Nd"": 0.6}","{""Zr"": 1.0}",10.5607,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.1Ho0.9Zr2O7,"Ho,Nd",Zr,"{""Ho"": 0.45, ""Nd"": 0.55}","{""Zr"": 1.0}",10.5563,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NdHoZr2O7,"Ho,Nd",Zr,"{""Ho"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",10.5093,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.9Eu0.1Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.95, ""Eu"": 0.05}","{""Ti"": 1.0}",10.187,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.8Eu0.2Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.9, ""Eu"": 0.1}","{""Ti"": 1.0}",10.188,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.5Eu0.5Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.75, ""Eu"": 0.25}","{""Ti"": 1.0}",10.191,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+EuGdTi2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.197,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr2Sc0.27Mo1.73O6.97,"Pr,Sc",Mo,"{""Pr"": 0.8810572687224669, ""Sc"": 0.11894273127753305}","{""Mo"": 1.0}",10.5271,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sr0.2Sm1.8Mo2O7,"Sm,Sr",Mo,"{""Sm"": 0.9, ""Sr"": 0.1}","{""Mo"": 1.0}",10.4781,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2Ta0.66Ti1.34O7,Sm,"Ta,Ti","{""Sm"": 1.0}","{""Ti"": 0.67, ""Ta"": 0.33}",10.385,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nb1.48Co0.96Bi1.56O7,Bi,"Co,Nb","{""Bi"": 1.0}","{""Nb"": 0.6065573770491803, ""Co"": 0.39344262295081966}",10.5475,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti0.05Ir1.95O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.025, ""Ir"": 0.975}",10.242,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti0.1Ir1.9O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.05, ""Ir"": 0.95}",10.228,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti0.2Ir1.8O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.1, ""Ir"": 0.9}",10.218,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti0.3Ir1.7O7,Y,"Ir,Ti","{""Y"": 1.0}","{""Ti"": 0.15, ""Ir"": 0.85}",10.212,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ta1.867Cd1.733Bi0.4O7,"Bi,Cd",Ta,"{""Bi"": 0.1875293014533521, ""Cd"": 0.812470698546648}","{""Ta"": 1.0}",10.421,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2ScNbO7,"Ho,Sc",Nb,"{""Ho"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Nb"": 1.0}",10.332,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm2ScTaO7,"Sc,Sm",Ta,"{""Sm"": 0.6666666666666666, ""Sc"": 0.3333333333333333}","{""Ta"": 1.0}",10.466,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ta1.5Zn1Bi1.5O7,"Bi,Zn",Ta,"{""Bi"": 0.6, ""Zn"": 0.4}","{""Ta"": 1.0}",10.54,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.94Pr0.06Zr2O7,"La,Pr",Zr,"{""La"": 0.97, ""Pr"": 0.03}","{""Zr"": 1.0}",10.7807,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.4Yb0.4Sm0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Sm,Yb",Zr,"{""La"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.5763,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.4Yb0.4Nd0.4Eu0.4Gd0.4Zr2O7,"Eu,Gd,La,Nd,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.5858,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La0.4Yb0.4Nd0.4Sm0.4Gd0.4Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.5937,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ce0.1Nd2Zr1.9O7,Nd,"Ce,Zr","{""Nd"": 1.0}","{""Zr"": 0.95, ""Ce"": 0.05}",10.687,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.2Bi1.8Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.9, ""Y"": 0.1}","{""Ru"": 1.0}",10.2775,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.4Bi1.6Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.8, ""Y"": 0.2}","{""Ru"": 1.0}",10.2654,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.5Bi1.5Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.75, ""Y"": 0.25}","{""Ru"": 1.0}",10.2592,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.6Bi1.4Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.7, ""Y"": 0.3}","{""Ru"": 1.0}",10.2565,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y0.8Bi1.2Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.6, ""Y"": 0.4}","{""Ru"": 1.0}",10.2404,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+YBiRu2O7,"Bi,Y",Ru,"{""Bi"": 0.5, ""Y"": 0.5}","{""Ru"": 1.0}",10.2273,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.2Bi0.8Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.4, ""Y"": 0.6}","{""Ru"": 1.0}",10.208,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.4Bi0.6Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.3, ""Y"": 0.7}","{""Ru"": 1.0}",10.1924,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.5Bi0.5Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.25, ""Y"": 0.75}","{""Ru"": 1.0}",10.1834,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.6Bi0.4Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.2, ""Y"": 0.8}","{""Ru"": 1.0}",10.1774,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y1.8Bi0.2Ru2O7,"Bi,Y",Ru,"{""Bi"": 0.1, ""Y"": 0.9}","{""Ru"": 1.0}",10.1525,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.2Bi1.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.9, ""Pr"": 0.1}","{""Ru"": 1.0}",10.3037,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.5Bi1.5Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.75, ""Pr"": 0.25}","{""Ru"": 1.0}",10.319,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr0.6Bi1.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.7, ""Pr"": 0.3}","{""Ru"": 1.0}",10.3217,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+PrBiRu2O7,"Bi,Pr",Ru,"{""Bi"": 0.5, ""Pr"": 0.5}","{""Ru"": 1.0}",10.3362,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.2Bi0.8Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.4, ""Pr"": 0.6}","{""Ru"": 1.0}",10.3489,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.4Bi0.6Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.3, ""Pr"": 0.7}","{""Ru"": 1.0}",10.3554,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.5Bi0.5Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.25, ""Pr"": 0.75}","{""Ru"": 1.0}",10.3565,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Pr1.6Bi0.4Ru2O7,"Bi,Pr",Ru,"{""Bi"": 0.2, ""Pr"": 0.8}","{""Ru"": 1.0}",10.3619,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.2Bi1.8Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.9, ""Nd"": 0.1}","{""Ru"": 1.0}",10.2988,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.5Bi1.5Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.75, ""Nd"": 0.25}","{""Ru"": 1.0}",10.3058,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd0.8Bi1.2Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.6, ""Nd"": 0.4}","{""Ru"": 1.0}",10.3142,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+NdBiRu2O7,"Bi,Nd",Ru,"{""Bi"": 0.5, ""Nd"": 0.5}","{""Ru"": 1.0}",10.3188,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.2Bi0.8Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.4, ""Nd"": 0.6}","{""Ru"": 1.0}",10.326,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.4Bi0.6Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.3, ""Nd"": 0.7}","{""Ru"": 1.0}",10.3311,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.5Bi0.5Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.25, ""Nd"": 0.75}","{""Ru"": 1.0}",10.3306,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.6Bi0.4Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.2, ""Nd"": 0.8}","{""Ru"": 1.0}",10.3341,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Nd1.8Bi0.2Ru2O7,"Bi,Nd",Ru,"{""Bi"": 0.1, ""Nd"": 0.9}","{""Ru"": 1.0}",10.3311,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.2Bi1.8Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.9, ""Sm"": 0.1}","{""Ru"": 1.0}",10.2948,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm0.5Bi1.5Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.75, ""Sm"": 0.25}","{""Ru"": 1.0}",10.2921,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+SmBiRu2O7,"Bi,Sm",Ru,"{""Bi"": 0.5, ""Sm"": 0.5}","{""Ru"": 1.0}",10.2902,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.2Bi0.8Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.4, ""Sm"": 0.6}","{""Ru"": 1.0}",10.2888,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.4Bi0.6Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.3, ""Sm"": 0.7}","{""Ru"": 1.0}",10.2862,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.5Bi0.5Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.25, ""Sm"": 0.75}","{""Ru"": 1.0}",10.2802,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.6Bi0.4Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.2, ""Sm"": 0.8}","{""Ru"": 1.0}",10.2831,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Sm1.8Bi0.2Ru2O7,"Bi,Sm",Ru,"{""Bi"": 0.1, ""Sm"": 0.9}","{""Ru"": 1.0}",10.2779,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy0.2Bi1.8Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.9, ""Dy"": 0.1}","{""Ru"": 1.0}",10.2839,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy0.5Bi1.5Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.75, ""Dy"": 0.25}","{""Ru"": 1.0}",10.2659,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy0.6Bi1.4Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.7, ""Dy"": 0.3}","{""Ru"": 1.0}",10.2649,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+DyBiRu2O7,"Bi,Dy",Ru,"{""Bi"": 0.5, ""Dy"": 0.5}","{""Ru"": 1.0}",10.2398,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.4Bi0.6Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.3, ""Dy"": 0.7}","{""Ru"": 1.0}",10.2016,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.5Bi0.5Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.25, ""Dy"": 0.75}","{""Ru"": 1.0}",10.2016,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.6Bi0.4Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.2, ""Dy"": 0.8}","{""Ru"": 1.0}",10.1931,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Dy1.8Bi0.2Ru2O7,"Bi,Dy",Ru,"{""Bi"": 0.1, ""Dy"": 0.9}","{""Ru"": 1.0}",10.1798,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Lu1.5Bi0.5Ru2O7,"Bi,Lu",Ru,"{""Bi"": 0.25, ""Lu"": 0.75}","{""Ru"": 1.0}",10.1187,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Gd1.5Bi0.5Ru2O7,"Bi,Gd",Ru,"{""Bi"": 0.25, ""Gd"": 0.75}","{""Ru"": 1.0}",10.2468,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Tb2Zr0.2Sn1.8O7,Tb,"Sn,Zr","{""Tb"": 1.0}","{""Zr"": 0.1, ""Sn"": 0.9}",10.423759,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2Ti1.6Ge0.4O7,Ho,"Ge,Ti","{""Ho"": 1.0}","{""Ti"": 0.8, ""Ge"": 0.2}",10.0965,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Ho2Ti1.2Ge0.8O7,Ho,"Ge,Ti","{""Ho"": 1.0}","{""Ti"": 0.6, ""Ge"": 0.4}",10.0551,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Yb1.82Sc0.18Ti2O7,"Sc,Yb",Ti,"{""Yb"": 0.91, ""Sc"": 0.09}","{""Ti"": 1.0}",10.0082,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti1.5Sn0.5O7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.75, ""Sn"": 0.25}",10.3162,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2TiSnO7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.5, ""Sn"": 0.5}",10.2532,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+Y2Ti0.5Sn1.5O7,Y,"Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.25, ""Sn"": 0.75}",10.197,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La1.8Eu0.2Zr2O7,"Eu,La",Zr,"{""La"": 0.9, ""Eu"": 0.1}","{""Zr"": 1.0}",10.7999,,,,,,,,,,,,,,,,,,,,,,,high_entropy,icsd_literature
+La15Dy2Zr14Ce3O63,"La,Dy,Ce",Zr,"{""La"": 0.3333333333333333, ""Dy"": 0.3333333333333333, ""Ce"": 0.3333333333333333}","{""Zr"": 1.0}",,,,1.05e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La18Zr12Ce5O63,"La,Ce",Zr,"{""La"": 0.5, ""Ce"": 0.5}","{""Zr"": 1.0}",,,,1.123e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La3Yb14Zr12Ce5O63,"La,Yb,Ce",Zr,"{""La"": 0.3333333333333333, ""Yb"": 0.3333333333333333, ""Ce"": 0.3333333333333333}","{""Zr"": 1.0}",,,,1.021e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La9Yb9Zr9Ce9O63,"La,Yb,Ce",Zr,"{""La"": 0.3333333333333333, ""Yb"": 0.3333333333333333, ""Ce"": 0.3333333333333333}","{""Zr"": 1.0}",,,,1.043e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Nd16Sc1Zr18O63,"Nd,Sc",Zr,"{""Nd"": 0.5, ""Sc"": 0.5}","{""Zr"": 1.0}",,,,1.129e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Nd16Sc1Zr18O63,"Nd,Sc",Zr,"{""Nd"": 0.5, ""Sc"": 0.5}","{""Zr"": 1.0}",,,,1.079e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Sm12Er5Zr18O63,"Sm,Er",Zr,"{""Sm"": 0.5, ""Er"": 0.5}","{""Zr"": 1.0}",,,,1.199e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Sm18Zr12Ce5O63,"Sm,Ce",Zr,"{""Sm"": 0.5, ""Ce"": 0.5}","{""Zr"": 1.0}",,,,1.086e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd16Sc1Zr18O63,"Gd,Sc",Zr,"{""Gd"": 0.5, ""Sc"": 0.5}","{""Zr"": 1.0}",,,,1.163e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd16Yb1Zr18O63,"Gd,Yb",Zr,"{""Gd"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",,,,1.186e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Yb3Nd3Sm3Eu3Gd3Zr18O63,"Yb,Nd,Sm,Gd,Eu",Zr,"{""Yb"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,1.052e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Nd3Gd3Y3Er3Yb3Zr18O63,"Nd,Gd,Y,Er,Yb",Zr,"{""Nd"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,,,1.29e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Nd10Gd0Y0Er0Yb4Zr18O63,"Nd,Yb",Zr,"{""Nd"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",,,,1.26e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Sm3Eu3Tb3Dy3Lu3Zr18O63,"Sm,Tb,Dy,Lu,Eu",Zr,"{""Sm"": 0.2, ""Tb"": 0.2, ""Dy"": 0.2, ""Lu"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,1.1e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd3Y3Er3Tm3Yb3Zr18O63,"Gd,Y,Er,Tm,Yb",Zr,"{""Gd"": 0.2, ""Y"": 0.2, ""Er"": 0.2, ""Tm"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,,,1.061e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La3Nd3Sm3Gd3Yb3Zr18O63,"La,Nd,Sm,Gd,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,,,1.09e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Y3Gd3Er3Yb3Lu3Zr18O63,"Y,Gd,Er,Yb,Lu",Zr,"{""Y"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Zr"": 1.0}",,,,1.02e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd16Nd1Zr18O63,"Gd,Nd",Zr,"{""Gd"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,1.12e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd14Nd3Zr18O63,"Gd,Nd",Zr,"{""Gd"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,1.14e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd12Nd5Zr18O63,"Gd,Nd",Zr,"{""Gd"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,1.11e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Gd10Nd7Zr18O63,"Gd,Nd",Zr,"{""Gd"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,1.13e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La14Nd3Zr18O63,"La,Nd",Zr,"{""La"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,8.93e-06,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La13Nd4Zr18O63,"La,Nd",Zr,"{""La"": 0.5, ""Nd"": 0.5}","{""Zr"": 1.0}",,,,1.136e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La18Zr16Ce1O63,"La,Ce",Zr,"{""La"": 0.5, ""Ce"": 0.5}","{""Zr"": 1.0}",,,,1.087e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La18Zr15Ce2O63,"La,Ce",Zr,"{""La"": 0.5, ""Ce"": 0.5}","{""Zr"": 1.0}",,,,1.093e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La18Zr14Ce3O63,"La,Ce",Zr,"{""La"": 0.5, ""Ce"": 0.5}","{""Zr"": 1.0}",,,,1.123e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Ca1Gd16Zr16Nb1O63,"Ca,Gd","Zr,Nb","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.5}",,,,1.02e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Ca9Gd9Zr9Nb9O63,"Ca,Gd","Zr,Nb","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.5}",,,,9.4e-06,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Ca1Gd16Zr16Ta1O63,"Ca,Gd","Zr,Ta","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Ta"": 0.5}",,,,1.04e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Ca9Gd9Zr9Ta9O63,"Ca,Gd","Zr,Ta","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Ta"": 0.5}",,,,9.2e-06,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+Ho3Y3Dy3Gd3Eu3Ti18O63,"Ho,Y,Dy,Gd,Eu",Ti,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,,,1.16e-05,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+La5Gd5Ca7Ti3Zr3Hf3Nb3Ta3O63,"La,Gd,Ca","Ti,Zr,Hf,Nb,Ta","{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Ca"": 0.3333333333333333}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Nb"": 0.2, ""Ta"": 0.2}",,,,9e-06,,,,,,,,,,,,,,,,,,,,high_entropy,Jordan_pyrochlore_data
+(Ho0.5Y0.5)2Ti2O7,"Ho,Y",Ti,"{""Ho"": 0.5, ""Y"": 0.5}","{""Ti"": 1.0}",10.0625,,15.5,,97.0,5.783,5.963,,,295.9,0.28,1.554,,,,,1.017,,,1.681,,,,high_entropy,literature_extraction
+(Dy0.3333Ho0.3333Y0.3333)2Ti2O7,"Dy,Ho,Y",Ti,"{""Ho"": 0.3333333333333333, ""Y"": 0.3333333333333333, ""Dy"": 0.3333333333333333}","{""Ti"": 1.0}",10.0362,1.023,15.81,,93.4,5.833,6.246,,,296.3,0.28,1.504,,,,,1.02,,,1.686,,,,high_entropy,literature_extraction
+(Dy0.25Gd0.25Ho0.25Y0.25)2Ti2O7,"Dy,Gd,Ho,Y",Ti,"{""Ho"": 0.25, ""Y"": 0.25, ""Dy"": 0.25, ""Gd"": 0.25}","{""Ti"": 1.0}",10.0977,,15.47,,95.19999999999999,6.028,6.333,,,291.0,0.28,1.428,,,,,1.028,,,1.7,,,,high_entropy,literature_extraction
+(Dy0.2Eu0.2Gd0.2Ho0.2Y0.2)2Ti2O7,"Dy,Eu,Gd,Ho,Y",Ti,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",10.0768,0.947,15.88,1.16e-05,96.3,6.124,6.356,,,295.5,0.28,1.628,,,,,1.036,,,1.712,,,,high_entropy,literature_extraction
+(Ca0.05Gd0.95)2(Nb0.05Zr0.95)2O7,"Ca,Gd","Nb,Zr","{""Ca"": 0.05, ""Gd"": 0.95}","{""Nb"": 0.05, ""Zr"": 0.95}",,,5.5,,,,,,,206.0,,3.12,,,,,,,,1.474,,,,high_entropy,literature_extraction
+(Ca0.25Gd0.75)2(Nb0.25Zr0.75)2O7,"Ca,Gd","Nb,Zr","{""Ca"": 0.25, ""Gd"": 0.75}","{""Nb"": 0.25, ""Zr"": 0.75}",,,8.1,,,,,,,223.0,,1.95,,,,,,,,1.542,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.5Zr0.5)2O7,"Ca,Gd","Nb,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Nb"": 0.5, ""Zr"": 0.5}",,,8.0,,,,,,,235.0,,1.52,,,,,,,,1.632,,,,high_entropy,literature_extraction
+(Ca0.75Gd0.25)2(Nb0.75Zr0.25)2O7,"Ca,Gd","Nb,Zr","{""Ca"": 0.75, ""Gd"": 0.25}","{""Nb"": 0.75, ""Zr"": 0.25}",,,,,,,,,,193.0,,,,,,,,,,1.729,,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Nd0.3333)2Zr2O7,"Gd,La,Nd",Zr,"{""La"": 0.3333333333333333, ""Nd"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 1.0}",,1.54,10.2,1.026e-05,,,,,,189.0,,1.7,,,,,0.1107,0.072,,1.538,3.95,1.12,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Nd0.3333)2(Ce0.25Zr0.75)2O7,"Gd,La,Nd","Ce,Zr","{""La"": 0.3333333333333333, ""Nd"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 0.75, ""Ce"": 0.25}",,1.43,10.6,1.05e-05,,,,,,195.0,,1.81,,,,,0.1107,0.07575,,1.462,9.44,2.16,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,1.64,10.7,1.053e-05,,,,,,200.0,,1.8,,,,,0.10934,0.072,,1.519,3.49,1.66,,high_entropy,literature_extraction
+(Ce0.2381Gd0.1905La0.1905Nd0.1905Sm0.1905)2(Eu0.2105Zr0.7895)2O7,"Ce,Gd,La,Nd,Sm","Eu,Zr","{""La"": 0.19047619047619047, ""Nd"": 0.19047619047619047, ""Sm"": 0.19047619047619047, ""Gd"": 0.19047619047619047, ""Ce"": 0.23809523809523808}","{""Zr"": 0.7894736842105263, ""Eu"": 0.2105263157894737}",,1.46,11.2,1.028e-05,,,,,,205.0,,1.89,,,,,0.10934,0.07575,,1.443,9.25,1.98,,high_entropy,literature_extraction
+La2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.2, ""Hf"": 0.2, ""Ti"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",10.789,1.58,10.3,4.4e-06,,6.438,,,,,,1.14,,0.68,,,,,,1.61,11.92,,,high_entropy,literature_extraction
+Nd2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Nd,"Ce,Hf,Sn,Ti,Zr","{""Nd"": 1.0}","{""Zr"": 0.2, ""Hf"": 0.2, ""Ti"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",10.579,1.4,12.5,2.2e-06,,6.522,,,,,,1.24,,0.6,,,,,,1.54,11.92,,,high_entropy,literature_extraction
+Sm2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Sm,"Ce,Hf,Sn,Ti,Zr","{""Sm"": 1.0}","{""Zr"": 0.2, ""Hf"": 0.2, ""Ti"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",10.4985,1.38,12.9,4.1e-06,,6.916,,,,,,1.16,,0.57,,,,,,1.5,11.92,,,high_entropy,literature_extraction
+(Ce0.1429Eu0.7143Sn0.1429)2(Hf0.3333Ti0.3333Zr0.3333)2O7,"Ce,Eu,Sn","Hf,Ti,Zr","{""Ce"": 0.14285714285714288, ""Sn"": 0.14285714285714288, ""Eu"": 0.7142857142857143}","{""Zr"": 0.3333333333333333, ""Hf"": 0.3333333333333333, ""Ti"": 0.3333333333333333}",10.4684,1.42,13.3,6.7e-06,,7.29,,,,,,1.2,,0.53,,,,,,1.48,11.92,,,high_entropy,literature_extraction
+Gd2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Gd,"Ce,Hf,Sn,Ti,Zr","{""Gd"": 1.0}","{""Zr"": 0.2, ""Hf"": 0.2, ""Ti"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",10.4564,1.38,13.85,5.2e-06,,7.494,,,,,,1.26,,0.54,,,,,,1.46,11.92,,,high_entropy,literature_extraction
+Dy2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Dy,"Ce,Hf,Sn,Ti,Zr","{""Dy"": 1.0}","{""Zr"": 0.2, ""Hf"": 0.2, ""Ti"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",10.3715,1.18,13.4,4.8e-06,,7.635,,,,,,1.18,,0.45,,,,,,1.43,11.92,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.5Zr0.5)2O7,"Ca,Gd","Nb,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.5}",10.5139,,,8e-06,96.46,5.4388,5.6384,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.4Ta0.1Zr0.5)2O7,"Ca,Gd","Nb,Ta,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.4, ""Ta"": 0.1}",10.5134,,,7.9e-06,96.32,5.6109,5.8313,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.3Ta0.2Zr0.5)2O7,"Ca,Gd","Nb,Ta,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.3, ""Ta"": 0.2}",10.513,,,7.7e-06,96.02,5.8019,6.0424,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.2Ta0.3Zr0.5)2O7,"Ca,Gd","Nb,Ta,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.2, ""Ta"": 0.3}",10.5125,,,7.4e-06,95.72,5.9758,6.243,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Nb0.1Ta0.4Zr0.5)2O7,"Ca,Gd","Nb,Ta,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Nb"": 0.1, ""Ta"": 0.4}",10.5122,,,7.3e-06,95.64,6.1653,6.4463,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Ca0.5Gd0.5)2(Ta0.5Zr0.5)2O7,"Ca,Gd","Ta,Zr","{""Ca"": 0.5, ""Gd"": 0.5}","{""Zr"": 0.5, ""Ta"": 0.5}",10.5118,,,7.2e-06,95.56,6.3532,6.6484,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.4167La0.4167Yb0.1667)2(Ce0.25Nb0.25Ta0.25Zr0.25)2O7,"Gd,La,Yb","Ce,Nb,Ta,Zr","{""La"": 0.4166666666666667, ""Gd"": 0.4166666666666667, ""Yb"": 0.16666666666666669}","{""Nb"": 0.25, ""Zr"": 0.25, ""Ce"": 0.25, ""Ta"": 0.25}",,0.83,7.11,7.47e-06,,6.76,7.2,,,,,2.06,,0.362,10.36,,,,,1.48,,6.16,,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.2Nd0.2Yb0.2)2Zr2O7,"Er,Gd,La,Nd,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,1.41,11.705,,98.7,6.85,,,,,,1.693,,0.56,11.1926,,1.062,0.72,,1.475,,,,high_entropy,literature_extraction
+Gd2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,Gd,"Hf,Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""Sn"": 0.25}",10.43,,,,,,,177.98,93.65,239.02,0.28,,,,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Pr0.2Sm0.2)2Sn2O7,"Gd,La,Nd,Pr,Sm",Sn,"{""Gd"": 0.2, ""Nd"": 0.2, ""La"": 0.2, ""Pr"": 0.2, ""Sm"": 0.2}","{""Sn"": 1.0}",10.5736,,4.2,,,,,,,,,,,,8.702,,,,,,,,,high_entropy,literature_extraction
+(Dy0.5Gd0.5)2Ti2O7,"Dy,Gd",Ti,"{""Gd"": 0.5, ""Dy"": 0.5}","{""Ti"": 1.0}",10.0989,2.8,,,,6.62,97.3,,,,,,,0.99,,,1.04,,,1.72,,,,high_entropy,literature_extraction
+(Dy0.3333Gd0.3333Ho0.3333)2Ti2O7,"Dy,Gd,Ho",Ti,"{""Gd"": 0.3333333333333333, ""Dy"": 0.3333333333333333, ""Ho"": 0.3333333333333333}","{""Ti"": 1.0}",10.0563,2.92,,,,6.727,97.0,,,,,,,0.99,,,1.032,,,1.71,,,,high_entropy,literature_extraction
+(Dy0.25Er0.25Gd0.25Ho0.25)2Ti2O7,"Dy,Er,Gd,Ho",Ti,"{""Gd"": 0.25, ""Dy"": 0.25, ""Ho"": 0.25, ""Er"": 0.25}","{""Ti"": 1.0}",10.1006,2.25,,,,6.824,99.1,,,,,,,0.78,,,1.025,,,1.69,,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Ho0.2Yb0.2)2Ti2O7,"Dy,Er,Gd,Ho,Yb",Ti,"{""Gd"": 0.2, ""Dy"": 0.2, ""Ho"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Ti"": 1.0}",10.0999,2.02,,,,6.949,100.2,,,,,,,0.72,,,1.0178,,,1.68,,,,high_entropy,literature_extraction
+(Dy0.1667Er0.1667Gd0.1667Ho0.1667Nd0.1667Yb0.1667)2Ti2O7,"Dy,Er,Gd,Ho,Nd,Yb",Ti,"{""Gd"": 0.16666666666666666, ""Dy"": 0.16666666666666666, ""Ho"": 0.16666666666666666, ""Er"": 0.16666666666666666, ""Yb"": 0.16666666666666666, ""Nd"": 0.16666666666666666}","{""Ti"": 1.0}",10.1273,2.28,,,,6.742,99.3,,,,,,,0.78,,,1.035,,,1.71,,,,high_entropy,literature_extraction
+Gd2(Ti0.5Zr0.5)2O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3856,,,,,,,,,,,,,,,,,,0.32776,1.5894,8.6793,,,high_entropy,literature_extraction
+Gd2(Sn0.3333Ti0.3333Zr0.3333)2O7,Gd,"Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",10.41183,,,,,,,,,,,,,,,,,,0.3332,1.5677,7.2514,,,high_entropy,literature_extraction
+Gd2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,Gd,"Hf,Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""Sn"": 0.25}",10.4426,,,,,,,,,,,,,,,,,,0.33727,1.5457,6.6538,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2Ti2O7,"Eu,Gd",Ti,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 1.0}",10.39893,,,,,,,,,,,,,,,,,,0.33319,1.7512,0.6135,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2(Ti0.5Zr0.5)2O7,"Eu,Gd","Ti,Zr","{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",10.3981,,,,,,,,,,,,,,,,,,0.33864,1.5992,8.7009,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2(Sn0.3333Ti0.3333Zr0.3333)2O7,"Eu,Gd","Sn,Ti,Zr","{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",10.42075,,,,,,,,,,,,,,,,,,0.34244,1.5774,7.2773,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,"Eu,Gd","Hf,Sn,Ti,Zr","{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""Sn"": 0.25}",10.42595,,,,,,,,,,,,,,,,,,0.33743,1.5552,6.682,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2Ti2O7,"Eu,Gd,Sm",Ti,"{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 1.0}",10.42263,,,,,,,,,,,,,,,,,,0.33404,1.6091,8.7362,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Ti0.5Zr0.5)2O7,"Eu,Gd,Sm","Ti,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 0.5, ""Zr"": 0.5}",10.43198,,,,,,,,,,,,,,,,,,0.3408,1.5871,7.3195,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Sn0.3333Ti0.3333Zr0.3333)2O7,"Eu,Gd,Sm","Sn,Ti,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",10.45474,,,,,,,,,,,,,,,,,,0.33982,1.5648,6.7278,,,high_entropy,literature_extraction
+(Dy0.129Gd0.129Ho0.129La0.129Nd0.129Sm0.129Sn0.2258)2(Eu0.16Hf0.28Ti0.28Zr0.28)2O7,"Dy,Gd,Ho,La,Nd,Sm,Sn","Eu,Hf,Ti,Zr","{""La"": 0.12903225806451613, ""Nd"": 0.12903225806451613, ""Sm"": 0.12903225806451613, ""Gd"": 0.12903225806451613, ""Dy"": 0.12903225806451613, ""Ho"": 0.12903225806451613, ""Sn"": 0.22580645161290322}","{""Ti"": 0.28, ""Zr"": 0.28, ""Hf"": 0.28, ""Eu"": 0.16}",10.48606,,,,,,,,,,,,,,,,,,0.32918,1.5725,7.9172,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Y0.2Yb0.2)2Hf2O7,"Dy,Er,Gd,Y,Yb",Hf,"{""Y"": 0.2, ""Gd"": 0.2, ""Dy"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Hf"": 1.0}",,0.93,,,,4.7,9.12,,,,,,,,10.68,,,,,1.43,,25.3,,high_entropy,literature_extraction
+(Eu0.25Gd0.25La0.25Yb0.25)2(Hf0.5Zr0.5)2O7,"Eu,Gd,La,Yb","Hf,Zr","{""La"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Zr"": 0.5, ""Hf"": 0.5}",10.571,1.64,10.88,,97.0,7.76,,,,236.5,,2.4,,,10.77,,,,,1.491,,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25La0.25Yb0.25)2(Hf0.25Zr0.75)2O7,"Eu,Gd,La,Yb","Hf,Zr","{""La"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Zr"": 0.75, ""Hf"": 0.25}",10.588,1.53,11.51,,97.0,7.2,,,,250.1,,2.31,,,11.2,,,,,1.486,,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25La0.25Yb0.25)2(Ce0.05Zr0.95)2O7,"Eu,Gd,La,Yb","Ce,Zr","{""La"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Zr"": 0.95, ""Ce"": 0.05}",10.725,1.48,10.23,,96.8,6.66,,,,221.3,,2.34,,,11.13,,,,,1.465,,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25La0.25Yb0.25)2(Ce0.15Zr0.85)2O7,"Eu,Gd,La,Yb","Ce,Zr","{""La"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Zr"": 0.85, ""Ce"": 0.15}",10.6,,10.23,,96.8,6.69,6.91,,,221.0,,2.3,,,10.81,,,,,1.43,,,,high_entropy,literature_extraction
+La2(Ce0.2Hf0.2Sn0.2Ti0.1Zr0.3)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.3, ""Hf"": 0.2, ""Ti"": 0.1, ""Ce"": 0.2, ""Sn"": 0.2}",10.809,1.91,,,100.0,,,220.2,113.8,291.3,0.28,,,0.8,10.06,,,,,1.584,10.385,,,high_entropy,literature_extraction
+La2(Ce0.2Hf0.1Sn0.2Ti0.1Zr0.4)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.4, ""Hf"": 0.1, ""Ti"": 0.1, ""Ce"": 0.2, ""Sn"": 0.2}",10.826,1.98,,,98.8,,,202.0,106.5,271.7,0.28,,,0.83,10.38,,,,,1.581,10.338,,,high_entropy,literature_extraction
+La2(Ce0.2Hf0.1Sn0.1Ti0.1Zr0.5)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.5, ""Hf"": 0.1, ""Ti"": 0.1, ""Ce"": 0.2, ""Sn"": 0.1}",10.822,1.74,,,99.2,,,194.7,96.8,249.1,0.29,,,0.73,10.45,,,,,1.579,10.29,,,high_entropy,literature_extraction
+(Ce0.2La0.2Pr0.2Sc0.2Y0.2)2Zr2O7,"Ce,La,Pr,Sc,Y",Zr,"{""Sc"": 0.2, ""Y"": 0.2, ""La"": 0.2, ""Pr"": 0.2, ""Ce"": 0.2}","{""Zr"": 1.0}",,1.69,,,,,,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(La0.5Yb0.5)2Zr2O7,"La,Yb",Zr,"{""La"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",10.77,1.24,10.8,9.35e-06,,,,,,233.5,,2.07,,,,,,,,,,,,high_entropy,literature_extraction
+(La0.5Yb0.5)2Zr2O7,"La,Yb",Zr,"{""La"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",10.75,1.29,12.2,9.56e-06,,,,,,223.8,,2.22,,,,,,,,,,,,high_entropy,literature_extraction
+(La0.5Yb0.5)2Zr2O7,"La,Yb",Zr,"{""La"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",10.74,1.33,13.0,9.79e-06,,,,,,222.8,,2.23,,,,,,,,,,,,high_entropy,literature_extraction
+(La0.5Yb0.5)2Zr2O7,"La,Yb",Zr,"{""La"": 0.5, ""Yb"": 0.5}","{""Zr"": 1.0}",10.73,1.42,11.45,1.02e-05,,,,,,229.3,,2.23,,,,,,,,,,,,high_entropy,literature_extraction
+(Sm0.5Yb0.5)2Ti2O7,"Sm,Yb",Ti,"{""Sm"": 0.5, ""Yb"": 0.5}","{""Ti"": 1.0}",10.136,1.4,12.2,,99.4,6.51,,,,,,,,0.86,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.3333Sm0.3333Yb0.3333)2Ti2O7,"Gd,Sm,Yb",Ti,"{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Yb"": 0.3333333333333333}","{""Ti"": 1.0}",10.153,1.47,11.8,,99.5,6.55,,,,,,,,0.84,,,,,,,,,,high_entropy,literature_extraction
+(Er0.25Gd0.25Sm0.25Yb0.25)2Ti2O7,"Er,Gd,Sm,Yb",Ti,"{""Sm"": 0.25, ""Gd"": 0.25, ""Er"": 0.25, ""Yb"": 0.25}","{""Ti"": 1.0}",10.133,1.45,12.2,,99.1,6.61,,,,,,,,0.87,,,,,,,,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Sm0.2Yb0.2)2Ti2O7,"Dy,Er,Gd,Sm,Yb",Ti,"{""Sm"": 0.2, ""Gd"": 0.2, ""Dy"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Ti"": 1.0}",10.13,1.54,9.9,,99.0,6.6,,,,,,,,0.9,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.1875La0.1875Nd0.1875Sm0.1875Yb0.25)2Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.1875, ""Nd"": 0.1875, ""Sm"": 0.1875, ""Gd"": 0.1875, ""Yb"": 0.25}","{""Zr"": 1.0}",,0.22,,,,,,,,,,,,,,,,,,,,52.72,,high_entropy,literature_extraction
+(Dy0.2Eu0.2Gd0.2Ho0.2Y0.2)2Ti2O7,"Dy,Eu,Gd,Ho,Y",Ti,"{""Ho"": 0.2, ""Y"": 0.2, ""Dy"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,0.947,15.9,1.16e-05,96.3,,,,,295.5,,1.596,,,,,,,,,,,,high_entropy,literature_extraction
+(La0.3333Sm0.3333Yb0.3333)2Zr2O7,"La,Sm,Yb",Zr,"{""La"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Yb"": 0.3333333333333333}","{""Zr"": 1.0}",10.653,,,,,,,,,,,0.96,,,,,,,,1.4968,,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Y0.3333)2Zr2O7,"Gd,La,Y",Zr,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Zr"": 1.0}",10.697,,,,,,,,,,,0.94,,,,,,,,1.4926,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Sm0.2Y0.2Yb0.2)2Zr2O7,"Gd,La,Sm,Y,Yb",Zr,"{""La"": 0.2, ""Sm"": 0.2, ""Y"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.603,,,,,,,,,,,1.01,,,,,,,,1.4714,,,,high_entropy,literature_extraction
+(Dy0.25Lu0.25Sm0.25Tb0.25)2(Eu0.5Zr0.5)2O7,"Dy,Lu,Sm,Tb","Eu,Zr","{""Sm"": 0.25, ""Tb"": 0.25, ""Dy"": 0.25, ""Lu"": 0.25}","{""Zr"": 0.5, ""Eu"": 0.5}",,1.46,12.42,,99.0,,,,,,,2.24,,,11.0,,1.038,0.72,,1.441,,,,high_entropy,literature_extraction
+(La0.3333Pr0.3333Sm0.3333)2(Ce0.3333Eu0.3333Hf0.3333)2O7,"La,Pr,Sm","Ce,Eu,Hf","{""La"": 0.3333333333333333, ""Pr"": 0.3333333333333333, ""Sm"": 0.3333333333333333}","{""Hf"": 0.3333333333333333, ""Ce"": 0.3333333333333333, ""Eu"": 0.3333333333333333}",,1.24,,,99.0,,,,,,,,,,11.65,,1.115,0.71,,1.57,,,,high_entropy,literature_extraction
+(Gd0.25La0.25Nd0.25Sm0.25)2(Eu0.5Zr0.5)2O7,"Gd,La,Nd,Sm","Eu,Zr","{""La"": 0.25, ""Nd"": 0.25, ""Sm"": 0.25, ""Gd"": 0.25}","{""Zr"": 0.5, ""Eu"": 0.5}",,,10.75,,96.0,,,,,,,,,,11.03,,1.093,0.72,,1.519,,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Sm0.2Yb0.2)2Ti2O7,"Dy,Er,Gd,Sm,Yb",Ti,"{""Sm"": 0.2, ""Yb"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,1.55,9.9,,99.0,,,,,,,,,,,,1.03,0.605,,1.702,,,,high_entropy,literature_extraction
+(Gd0.25La0.25Sm0.25Y0.25)2(Ce0.5Zr0.5)2O7,"Gd,La,Sm,Y","Ce,Zr","{""La"": 0.25, ""Gd"": 0.25, ""Y"": 0.25, ""Sm"": 0.25}","{""Zr"": 0.5, ""Ce"": 0.5}",,,6.61,,96.0,,,,,,,1.27,,,11.1,,1.091,0.72,,1.515,,,,high_entropy,literature_extraction
+(Gd0.25La0.25Nd0.25Pr0.25)2(Ce0.5Hf0.5)2O7,"Gd,La,Nd,Pr","Ce,Hf","{""La"": 0.25, ""Pr"": 0.25, ""Nd"": 0.25, ""Gd"": 0.25}","{""Hf"": 0.5, ""Ce"": 0.5}",,1.48,12.54,7.78e-06,97.54,7.88,8.078,,,,,2.51,,0.42,11.27,,1.118,0.71,0.33,1.575,,2.45,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Lu0.2Sm0.2Y0.2)2Ti2O7,"Eu,Gd,Lu,Sm,Y",Ti,"{""Sm"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Lu"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,,9.04,,,,,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+Gd2(Ti0.5Zr0.5)2O7,Gd,"Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.5, ""Zr"": 0.5}",,2.24,,,95.0,,,,,,,,,0.58,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.5Sn0.5)2(Ti0.5Zr0.5)2O7,"Gd,Sn","Ti,Zr","{""Gd"": 0.5, ""Sn"": 0.5}","{""Ti"": 0.5, ""Zr"": 0.5}",,1.87,,,95.0,,,,,,,,,0.52,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.5Sn0.5)2(Hf0.3333Ti0.3333Zr0.3333)2O7,"Gd,Sn","Hf,Ti,Zr","{""Gd"": 0.5, ""Sn"": 0.5}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Hf"": 0.3333333333333333}",,1.61,,,95.0,,,,,,,,,0.46,,,,,,,,,,high_entropy,literature_extraction
+(Dy0.1667Gd0.1667Ho0.1667La0.1667Nd0.1667Sm0.1667)2(Eu0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,"Dy,Gd,Ho,La,Nd,Sm","Eu,Hf,Sn,Ti,Zr","{""Gd"": 0.16666666666666666, ""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Dy"": 0.16666666666666666, ""Ho"": 0.16666666666666666}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Eu"": 0.2, ""Sn"": 0.2}",,1.37,,,95.0,,,,,,,,,0.41,,,,,,,0.085,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2Zr2O7,"Eu,Gd",Zr,"{""Gd"": 0.5, ""Eu"": 0.5}","{""Zr"": 1.0}",10.55246,,,,,,,,,,,,,,,,1.0595,0.72,0.33365,1.4735,,,,high_entropy,literature_extraction
+(Gd0.5Sm0.5)2(Eu0.5Zr0.5)2O7,"Gd,Sm","Eu,Zr","{""Gd"": 0.5, ""Sm"": 0.5}","{""Zr"": 0.5, ""Eu"": 0.5}",10.56785,,,,,,,,,,,,,,,,1.066,0.72,0.33438,1.4826,,,,high_entropy,literature_extraction
+(Gd0.3333Nd0.3333Sm0.3333)2(Eu0.5Zr0.5)2O7,"Gd,Nd,Sm","Eu,Zr","{""Gd"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Nd"": 0.3333333333333333}","{""Zr"": 0.5, ""Eu"": 0.5}",10.59656,,,,,,,,,,,,,,,,1.0768,0.72,0.33682,1.4975,,,,high_entropy,literature_extraction
+(Gd0.25La0.25Nd0.25Sm0.25)2(Eu0.5Zr0.5)2O7,"Gd,La,Nd,Sm","Eu,Zr","{""Gd"": 0.25, ""Sm"": 0.25, ""Nd"": 0.25, ""La"": 0.25}","{""Zr"": 0.5, ""Eu"": 0.5}",10.66488,,,,,,,,,,,,,,,,1.0934,0.72,0.33931,1.5179,,,,high_entropy,literature_extraction
+(Dy0.2Gd0.2La0.2Nd0.2Sm0.2)2(Eu0.5Zr0.5)2O7,"Dy,Gd,La,Nd,Sm","Eu,Zr","{""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""La"": 0.2, ""Dy"": 0.2}","{""Zr"": 0.5, ""Eu"": 0.5}",10.61128,,,,,,,,,,,,,,,,1.0823,0.72,0.33311,1.503,,,,high_entropy,literature_extraction
+(Dy0.1667Gd0.1667Ho0.1667La0.1667Nd0.1667Sm0.1667)2(Eu0.5Zr0.5)2O7,"Dy,Gd,Ho,La,Nd,Sm","Eu,Zr","{""Gd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""La"": 0.16666666666666666, ""Dy"": 0.16666666666666666, ""Ho"": 0.16666666666666666}","{""Zr"": 0.5, ""Eu"": 0.5}",10.58564,,,,,,,,,,,,,,,,1.0727,0.72,0.33133,1.4899,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,0.102,,,,,,,,,,,,,,,,,,,,87.99,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,0.045,,,,,,,,,,,,,,,,,,,,96.89,,high_entropy,literature_extraction
+(Ce0.15Eu0.15Nd0.4Sm0.15Yb0.15)2Zr2O7,"Ce,Eu,Nd,Sm,Yb",Zr,"{""Nd"": 0.4, ""Sm"": 0.15, ""Yb"": 0.15, ""Ce"": 0.15, ""Eu"": 0.15}","{""Zr"": 1.0}",10.57,1.74,18.2,,,,,164.6,105.7,259.5,0.24,,,,11.77,,,,,,,0.0,,high_entropy,literature_extraction
+(Ce0.15Eu0.15Nd0.4Sm0.15Yb0.15)2Zr2O7,"Ce,Eu,Nd,Sm,Yb",Zr,"{""Nd"": 0.4, ""Sm"": 0.15, ""Yb"": 0.15, ""Ce"": 0.15, ""Eu"": 0.15}","{""Zr"": 1.0}",10.57,1.6,18.2,,,,,164.6,105.7,259.5,0.24,,,,11.77,,,,,,,5.6,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2}","{""Zr"": 1.0}",,0.044,,,,0.39,,,,,,,,,,,,,,,,88.0,,high_entropy,literature_extraction
+(Ce0.04Gd0.2La0.16Nd0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.16, ""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""Ce"": 0.04}","{""Zr"": 1.0}",,0.047,,,,0.44,,,,,,,,,,,,,,,,83.0,,high_entropy,literature_extraction
+(Ce0.08Gd0.2La0.12Nd0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.12, ""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""Ce"": 0.08}","{""Zr"": 1.0}",,0.052,,,,0.51,,,,,,,,,,,,,,,,76.0,,high_entropy,literature_extraction
+(Ce0.12Gd0.2La0.08Nd0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.08, ""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""Ce"": 0.12}","{""Zr"": 1.0}",,0.051,,,,0.45,,,,,,,,,,,,,,,,83.0,,high_entropy,literature_extraction
+(Ce0.16Gd0.2La0.04Nd0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.04, ""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""Ce"": 0.16}","{""Zr"": 1.0}",,0.057,,,,0.51,,,,,,,,,,,,,,,,77.0,,high_entropy,literature_extraction
+(Ce0.2Gd0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,Nd,Sm,Y",Zr,"{""Y"": 0.2, ""Gd"": 0.2, ""Sm"": 0.2, ""Nd"": 0.2, ""Ce"": 0.2}","{""Zr"": 1.0}",,0.056,,,,0.52,,,,,,,,,,,,,,,,75.0,,high_entropy,literature_extraction
+Y2(Ge0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.2, ""Ti"": 0.2, ""Hf"": 0.2, ""Ge"": 0.2, ""Sn"": 0.2}",10.3222,,,,,,5.962,,,,,,,,,,,,0.33517,1.57,11.19,,,high_entropy,literature_extraction
+Y2(Ge0.15Hf0.085Sn0.3Ti0.315Zr0.15)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.15, ""Ti"": 0.315, ""Hf"": 0.085, ""Ge"": 0.15, ""Sn"": 0.3}",10.2707,,,,,,5.773,,,,,,,,,,,,0.32959,1.58,10.16,,,high_entropy,literature_extraction
+Y2(Ge0.3Hf0.15Sn0.085Ti0.15Zr0.315)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.315, ""Ti"": 0.15, ""Hf"": 0.15, ""Ge"": 0.3, ""Sn"": 0.085}",,,,,,,,,,,,,,,,,,,,1.59,12.83,,,high_entropy,literature_extraction
+Y2(Ge0.1Hf0.1Sn0.3Ti0.1Zr0.4)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.4, ""Ti"": 0.1, ""Hf"": 0.1, ""Ge"": 0.1, ""Sn"": 0.3}",10.365,,,,,,5.893,,,,,,,,,,,,0.33143,1.5,8.8,,,high_entropy,literature_extraction
+Y2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,Y,"Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.25, ""Ti"": 0.25, ""Hf"": 0.25, ""Sn"": 0.25}",10.3408,,,,,,6.105,,,,,,,,,,,,0.33535,1.5,6.65,,,high_entropy,literature_extraction
+Y2(Ge0.25Hf0.25Sn0.25Ti0.25)2O7,Y,"Ge,Hf,Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.25, ""Ge"": 0.25, ""Sn"": 0.25}",,,,,,,,,,,,,,,,,,,,1.61,11.32,,,high_entropy,literature_extraction
+Y2(Ge0.25Sn0.25Ti0.25Zr0.25)2O7,Y,"Ge,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.25, ""Ti"": 0.25, ""Ge"": 0.25, ""Sn"": 0.25}",,,,,,,,,,,,,,,,,,,,1.6,11.7,,,high_entropy,literature_extraction
+Y2(Ge0.25Hf0.25Ti0.25Zr0.25)2O7,Y,"Ge,Hf,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.25, ""Ti"": 0.25, ""Hf"": 0.25, ""Ge"": 0.25}",,,,,,,,,,,,,,,,,,,,1.59,12.23,,,high_entropy,literature_extraction
+Y2(Hf0.065Sn0.435Ti0.435Zr0.065)2O7,Y,"Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.065, ""Ti"": 0.435, ""Hf"": 0.065, ""Sn"": 0.435}",10.2805,,,,,,5.746,,,,,,,,,,,,0.33007,1.55,6.97,,,high_entropy,literature_extraction
+Y2(Ge0.065Hf0.065Sn0.435Ti0.435)2O7,Y,"Ge,Hf,Sn,Ti","{""Y"": 1.0}","{""Ti"": 0.435, ""Hf"": 0.065, ""Ge"": 0.065, ""Sn"": 0.435}",10.254,,,,,,5.761,,,,,,,,,,,,0.3599,1.58,8.08,,,high_entropy,literature_extraction
+Y2(Ge0.065Sn0.435Ti0.435Zr0.065)2O7,Y,"Ge,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.065, ""Ti"": 0.435, ""Ge"": 0.065, ""Sn"": 0.435}",10.26,,,,,,5.611,,,,,,,,,,,,0.33301,1.58,8.21,,,high_entropy,literature_extraction
+Y2(Ge0.065Hf0.065Ti0.435Zr0.435)2O7,Y,"Ge,Hf,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.435, ""Ti"": 0.435, ""Hf"": 0.065, ""Ge"": 0.065}",10.2694,,,,,,5.442,,,,,,,,,,,,0.33617,1.55,9.79,,,high_entropy,literature_extraction
+(La0.6667Y0.1667Yb0.1667)2(Nb0.5Ta0.5)2O7,"La,Y,Yb","Nb,Ta","{""Yb"": 0.16666666666666666, ""Y"": 0.16666666666666666, ""La"": 0.6666666666666666}","{""Nb"": 0.5, ""Ta"": 0.5}",,,,,,,,,,,,,,,,,,,,1.52,,,,high_entropy,literature_extraction
+(La0.678Y0.161Yb0.161)2(Nb0.4524Ta0.4524Zr0.09524)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.16101694915254236, ""Y"": 0.16101694915254236, ""La"": 0.6779661016949152}","{""Zr"": 0.09523809523809523, ""Nb"": 0.45238095238095233, ""Ta"": 0.45238095238095233}",,,,,,,,,,,,,,,,,,,,1.53,,,,high_entropy,literature_extraction
+(La0.6897Y0.1552Yb0.1552)2(Nb0.4091Ta0.4091Zr0.1818)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.15517241379310345, ""Y"": 0.15517241379310345, ""La"": 0.6896551724137931}","{""Zr"": 0.18181818181818182, ""Nb"": 0.40909090909090906, ""Ta"": 0.40909090909090906}",,1.11,,9.44e-06,,4.72,7.04,,,,,,,,,,,,,1.53,,28.9,,high_entropy,literature_extraction
+(La0.7018Y0.1491Yb0.1491)2(Nb0.3696Ta0.3696Zr0.2609)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.14912280701754385, ""Y"": 0.14912280701754385, ""La"": 0.7017543859649122}","{""Zr"": 0.2608695652173913, ""Nb"": 0.3695652173913044, ""Ta"": 0.3695652173913044}",,1.13,,9.91e-06,,4.76,7.17,,,,,,,,,,,,,1.54,,28.36,,high_entropy,literature_extraction
+(La0.7143Y0.1429Yb0.1429)2(Nb0.3333Ta0.3333Zr0.3333)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.14285714285714288, ""Y"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Zr"": 0.3333333333333333, ""Nb"": 0.3333333333333333, ""Ta"": 0.3333333333333333}",10.8308,0.81,,9.9e-06,,5.31,6.7,,,,,,,,,,,,,1.54,,19.73,,high_entropy,literature_extraction
+(La0.7273Y0.1364Yb0.1364)2(Nb0.3Ta0.3Zr0.4)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.13636363636363635, ""Y"": 0.13636363636363635, ""La"": 0.7272727272727273}","{""Zr"": 0.4, ""Nb"": 0.3, ""Ta"": 0.3}",10.817,0.96,,9.82e-06,,4.61,6.68,,,,,,,,,,,,,1.54,,29.26,,high_entropy,literature_extraction
+(La0.7407Y0.1296Yb0.1296)2(Nb0.2692Ta0.2692Zr0.4615)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.12962962962962962, ""Y"": 0.12962962962962962, ""La"": 0.7407407407407407}","{""Zr"": 0.46153846153846156, ""Nb"": 0.2692307692307693, ""Ta"": 0.2692307692307693}",10.8078,1.01,,9.9e-06,,4.89,6.65,,,,,,,,,,,,,1.55,,25.24,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""La"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.5158,3.18,,,high_entropy,literature_extraction
+(Dy0.2Eu0.2Gd0.2Nd0.2Sm0.2)2Zr2O7,"Dy,Eu,Gd,Nd,Sm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Dy"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.4817,2.55,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Ho0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,Ho,Nd,Sm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ho"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.4783,2.9,,,high_entropy,literature_extraction
+(Er0.2Eu0.2Gd0.2Nd0.2Sm0.2)2Zr2O7,"Er,Eu,Gd,Nd,Sm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.4753,3.25,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Nd0.2Sm0.2Tm0.2)2Zr2O7,"Eu,Gd,Nd,Sm,Tm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Tm"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.4725,3.58,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Eu,Gd,Nd,Sm,Yb",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.47,3.89,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Lu0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,Lu,Nd,Sm",Zr,"{""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Lu"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.4686,4.06,,,high_entropy,literature_extraction
+(Gd0.5Y0.5)2Ti2O7,"Gd,Y",Ti,"{""Gd"": 0.5, ""Y"": 0.5}","{""Ti"": 1.0}",,,9.085,,,6.2,,,,208.0,,1.074,,,,,,,,,,0.46,3.92,high_entropy,literature_extraction
+(Gd0.3333Pr0.3333Y0.3333)2Ti2O7,"Gd,Pr,Y",Ti,"{""Gd"": 0.3333333333333333, ""Pr"": 0.3333333333333333, ""Y"": 0.3333333333333333}","{""Ti"": 1.0}",,,9.686,,,6.32,,,,199.0,,0.985,,,,,,,,,,0.97,4.83,high_entropy,literature_extraction
+(Er0.25Gd0.25Sm0.25Yb0.25)2Ti2O7,"Er,Gd,Sm,Yb",Ti,"{""Sm"": 0.25, ""Yb"": 0.25, ""Gd"": 0.25, ""Er"": 0.25}","{""Ti"": 1.0}",,,10.24,,,6.57,,,,220.0,,0.623,,,,,,,,,,0.13,3.4,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Sm0.2Yb0.2)2Ti2O7,"Dy,Er,Gd,Sm,Yb",Ti,"{""Sm"": 0.2, ""Yb"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Dy"": 0.2}","{""Ti"": 1.0}",,,10.14,,,6.52,,,,221.0,,0.857,,,,,,,,,,0.15,2.48,high_entropy,literature_extraction
+(La0.7143Mg0.1429Zn0.1429)2(Ce0.3333Mo0.3333W0.3333)2O7,"La,Mg,Zn","Ce,Mo,W","{""Mg"": 0.14285714285714288, ""Zn"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""W"": 0.3333333333333333, ""Mo"": 0.3333333333333333, ""Ce"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.65,14.61,,,high_entropy,literature_extraction
+(La0.625Y0.125Yb0.125Zn0.125)2(Mo0.5W0.5)2O7,"La,Y,Yb,Zn","Mo,W","{""Zn"": 0.125, ""Yb"": 0.125, ""Y"": 0.125, ""La"": 0.625}","{""W"": 0.5, ""Mo"": 0.5}",,,,,,,,,,,,,,,,,,,,1.57,17.53,,,high_entropy,literature_extraction
+(La0.7143Mg0.1429Zn0.1429)2(Nb0.3333Ta0.3333W0.3333)2O7,"La,Mg,Zn","Nb,Ta,W","{""Mg"": 0.14285714285714288, ""Zn"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Nb"": 0.3333333333333333, ""W"": 0.3333333333333333, ""Ta"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.74,7.94,,,high_entropy,literature_extraction
+(La0.7143Yb0.1429Zn0.1429)2(Nb0.3333Ti0.3333W0.3333)2O7,"La,Yb,Zn","Nb,Ti,W","{""Zn"": 0.14285714285714288, ""Yb"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Ti"": 0.3333333333333333, ""Nb"": 0.3333333333333333, ""W"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.68,14.77,,,high_entropy,literature_extraction
+(La0.8333Zn0.1667)2(Hf0.25Ti0.25W0.25Zr0.25)2O7,"La,Zn","Hf,Ti,W,Zr","{""Zn"": 0.16666666666666669, ""La"": 0.8333333333333334}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""W"": 0.25}",,,,,,,,,,,,,,,,,,,,1.72,8.89,,,high_entropy,literature_extraction
+(La0.8333Zn0.1667)2(Ce0.25Nb0.25Ta0.25Zr0.25)2O7,"La,Zn","Ce,Nb,Ta,Zr","{""Zn"": 0.16666666666666669, ""La"": 0.8333333333333334}","{""Zr"": 0.25, ""Nb"": 0.25, ""Ce"": 0.25, ""Ta"": 0.25}",,,,,,,,,,,,,,,,,,,,1.61,11.7,,,high_entropy,literature_extraction
+(Ga0.125La0.625Y0.125Yb0.125)2(Nb0.5W0.5)2O7,"Ga,La,Y,Yb","Nb,W","{""Yb"": 0.125, ""Y"": 0.125, ""Ga"": 0.125, ""La"": 0.625}","{""Nb"": 0.5, ""W"": 0.5}",,,,,,,,,,,,,,,,,,,,1.6,17.96,,,high_entropy,literature_extraction
+(La0.7143Y0.1429Yb0.1429)2(Ti0.3333W0.3333Zr0.3333)2O7,"La,Y,Yb","Ti,W,Zr","{""Yb"": 0.14285714285714288, ""Y"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""W"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.57,17.15,,,high_entropy,literature_extraction
+(La0.7143Y0.1429Yb0.1429)2(Nb0.3333Ta0.3333Ti0.3333)2O7,"La,Y,Yb","Nb,Ta,Ti","{""Yb"": 0.14285714285714288, ""Y"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Ti"": 0.3333333333333333, ""Nb"": 0.3333333333333333, ""Ta"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.59,17.29,,,high_entropy,literature_extraction
+(La0.8333Yb0.1667)2(Nb0.25Sn0.25Ti0.25Zr0.25)2O7,"La,Yb","Nb,Sn,Ti,Zr","{""Yb"": 0.16666666666666669, ""La"": 0.8333333333333334}","{""Zr"": 0.25, ""Ti"": 0.25, ""Nb"": 0.25, ""Sn"": 0.25}",,,,,,,,,,,,,,,,,,,,1.65,12.89,,,high_entropy,literature_extraction
+La2(Ce0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.2, ""Ti"": 0.2, ""Hf"": 0.2, ""Ce"": 0.2, ""Sn"": 0.2}",,,,,,,,,,,,,,,,,,,,1.61,11.92,,,high_entropy,literature_extraction
+(La0.7143Yb0.1429Zn0.1429)2(Nb0.3333W0.3333Zr0.3333)2O7,"La,Yb,Zn","Nb,W,Zr","{""Zn"": 0.14285714285714288, ""Yb"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Zr"": 0.3333333333333333, ""Nb"": 0.3333333333333333, ""W"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,,12.99,,,high_entropy,literature_extraction
+(La0.7143Y0.1429Yb0.1429)2(Nb0.3333Ta0.3333Zr0.3333)2O7,"La,Y,Yb","Nb,Ta,Zr","{""Yb"": 0.14285714285714288, ""Y"": 0.14285714285714288, ""La"": 0.7142857142857143}","{""Zr"": 0.3333333333333333, ""Nb"": 0.3333333333333333, ""Ta"": 0.3333333333333333}",10.8308,,,,,,6.7,,,,,,,,,,,,,,14.71,,,high_entropy,literature_extraction
+(La0.8333Yb0.1667)2(Hf0.25Nb0.25Sn0.25Zr0.25)2O7,"La,Yb","Hf,Nb,Sn,Zr","{""Yb"": 0.16666666666666669, ""La"": 0.8333333333333334}","{""Zr"": 0.25, ""Hf"": 0.25, ""Nb"": 0.25, ""Sn"": 0.25}",10.8104,,,,,,6.85,,,,,,,,,,,,,,10.52,,,high_entropy,literature_extraction
+Y2(Ge0.2Hf0.2Sn0.2Ti0.2Zr0.2)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.2, ""Ti"": 0.2, ""Hf"": 0.2, ""Ge"": 0.2, ""Sn"": 0.2}",10.2581,,,,,,6.07,,,,,,,,,,,,,,11.19,,,high_entropy,literature_extraction
+(La0.8696Yb0.1304)2(Nb0.1765Sn0.3529Ti0.1176Zr0.3529)2O7,"La,Yb","Nb,Sn,Ti,Zr","{""Yb"": 0.13043478260869565, ""La"": 0.8695652173913044}","{""Zr"": 0.35294117647058826, ""Ti"": 0.11764705882352942, ""Nb"": 0.17647058823529413, ""Sn"": 0.35294117647058826}",10.7655,,,,,,6.44,,,,,,,,,,,,,,10.67,,,high_entropy,literature_extraction
+La2(Ce0.1Hf0.2Sn0.3Ti0.1Zr0.3)2O7,La,"Ce,Hf,Sn,Ti,Zr","{""La"": 1.0}","{""Zr"": 0.3, ""Ti"": 0.1, ""Hf"": 0.2, ""Ce"": 0.1, ""Sn"": 0.3}",10.7713,,,,,,6.64,,,,,,,,,,,,,,8.66,,,high_entropy,literature_extraction
+(La0.3333Mg0.3333Zn0.3333)2(Mo0.3333W0.3333Zr0.3333)2O7,"La,Mg,Zn","Mo,W,Zr","{""Zn"": 0.3333333333333333, ""Mg"": 0.3333333333333333, ""La"": 0.3333333333333333}","{""Zr"": 0.3333333333333333, ""W"": 0.3333333333333333, ""Mo"": 0.3333333333333333}",,1.15,,,,,,,,,,,,,13.9,,,0.674,,,,,,high_entropy,literature_extraction
+(La0.3333Mg0.3333Zn0.3333)2(Hf0.3333Mo0.3333W0.3333)2O7,"La,Mg,Zn","Hf,Mo,W","{""Zn"": 0.3333333333333333, ""Mg"": 0.3333333333333333, ""La"": 0.3333333333333333}","{""Hf"": 0.3333333333333333, ""W"": 0.3333333333333333, ""Mo"": 0.3333333333333333}",,1.28,,,,,,,,,,,,,13.3,,,0.672,,,,,,high_entropy,literature_extraction
+(La0.3333Mg0.3333Zn0.3333)2(Mo0.3333Sn0.3333W0.3333)2O7,"La,Mg,Zn","Mo,Sn,W","{""Zn"": 0.3333333333333333, ""Mg"": 0.3333333333333333, ""La"": 0.3333333333333333}","{""W"": 0.3333333333333333, ""Mo"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,1.24,,,,,,,,,,,,,12.5,,,0.668,,,,,,high_entropy,literature_extraction
+Y2(Ge0.1667Hf0.08333Sn0.25Ti0.3333Zr0.1667)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.16666666666666666, ""Ti"": 0.3333333333333333, ""Hf"": 0.08333333333333333, ""Ge"": 0.16666666666666666, ""Sn"": 0.25}",10.26,1.68,,,,3.89,5.73,,,,,,,,,,,,,1.59,10.48,,0.44,high_entropy,literature_extraction
+Y2(Ge0.1667Hf0.08333Sn0.25Ti0.3333Zr0.1667)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.16666666666666666, ""Ti"": 0.3333333333333333, ""Hf"": 0.08333333333333333, ""Ge"": 0.16666666666666666, ""Sn"": 0.25}",10.26,0.9526,,,,3.89,5.73,,,,,,,,,,,,,1.59,10.48,32.11,0.44,high_entropy,literature_extraction
+Y2(Ge0.25Hf0.1667Sn0.08333Ti0.1667Zr0.3333)2O7,Y,"Ge,Hf,Sn,Ti,Zr","{""Y"": 1.0}","{""Zr"": 0.3333333333333333, ""Ti"": 0.16666666666666666, ""Hf"": 0.16666666666666666, ""Ge"": 0.25, ""Sn"": 0.08333333333333333}",,,,,,,,,,,,,,,,,,,,1.57,12.23,,,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.2Y0.2Yb0.2)2(Ti0.5Zr0.5)2O7,"Er,Gd,La,Y,Yb","Ti,Zr","{""La"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Yb"": 0.2, ""Er"": 0.2}","{""Zr"": 0.5, ""Ti"": 0.5}",10.377,1.2,,,,6.33,6.44,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Sm0.8333Y0.1667)2(Nb0.25Sn0.25Ti0.25Zr0.25)2O7,"Sm,Y","Nb,Sn,Ti,Zr","{""Y"": 0.16666666666666669, ""Sm"": 0.8333333333333334}","{""Nb"": 0.25, ""Ti"": 0.25, ""Zr"": 0.25, ""Sn"": 0.25}",10.464,1.35,,,,,6.83,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+Y2(Hf0.25Ta0.25Ti0.25Zr0.25)2O7,Y,"Hf,Ta,Ti,Zr","{""Y"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""Ta"": 0.25}",10.333,1.8,,,,6.45,6.5,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25Sm0.25Yb0.25)2(Hf0.25Ti0.5Zr0.25)2O7,"Eu,Gd,Sm,Yb","Hf,Ti,Zr","{""Sm"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Ti"": 0.5, ""Hf"": 0.25, ""Zr"": 0.25}",10.333,1.35,,,,,,,,237.0,,,,,,,,,,1.585,,,,high_entropy,literature_extraction
+(Dy0.1653Gd0.1111Sc0.1773Sm0.1111Tm0.164Yb0.2711)2(Eu0.1429Hf0.1429Nb0.2857Ti0.2857Zr0.1429)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.1111111111111111, ""Gd"": 0.1111111111111111, ""Yb"": 0.2711111111111111, ""Sc"": 0.17733333333333334, ""Dy"": 0.16533333333333333, ""Tm"": 0.164}","{""Ti"": 0.2857142857142857, ""Hf"": 0.14285714285714285, ""Zr"": 0.14285714285714285, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.332,1.34,,,,,,,,241.0,,,,,,,,,,1.582,,,,high_entropy,literature_extraction
+(Dy0.1653Gd0.1111Sc0.1773Sm0.1111Tm0.164Yb0.2711)2(Eu0.1429Hf0.1429Nb0.2857Ti0.2857Zr0.1429)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.1111111111111111, ""Gd"": 0.1111111111111111, ""Yb"": 0.2711111111111111, ""Sc"": 0.17733333333333334, ""Dy"": 0.16533333333333333, ""Tm"": 0.164}","{""Ti"": 0.2857142857142857, ""Hf"": 0.14285714285714285, ""Zr"": 0.14285714285714285, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.332,1.31,,,,,,,,237.5,,,,,,,,,,1.572,,,,high_entropy,literature_extraction
+(Dy0.1653Gd0.1111Sc0.1773Sm0.1111Tm0.164Yb0.2711)2(Eu0.1429Hf0.1429Nb0.2857Ti0.2857Zr0.1429)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.1111111111111111, ""Gd"": 0.1111111111111111, ""Yb"": 0.2711111111111111, ""Sc"": 0.17733333333333334, ""Dy"": 0.16533333333333333, ""Tm"": 0.164}","{""Ti"": 0.2857142857142857, ""Hf"": 0.14285714285714285, ""Zr"": 0.14285714285714285, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.333,1.31,,,,,,,,235.0,,,,,,,,,,1.552,,,,high_entropy,literature_extraction
+(Dy0.1653Gd0.1111Sc0.1773Sm0.1111Tm0.164Yb0.2711)2(Eu0.1429Hf0.1429Nb0.2857Ti0.2857Zr0.1429)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.1111111111111111, ""Gd"": 0.1111111111111111, ""Yb"": 0.2711111111111111, ""Sc"": 0.17733333333333334, ""Dy"": 0.16533333333333333, ""Tm"": 0.164}","{""Ti"": 0.2857142857142857, ""Hf"": 0.14285714285714285, ""Zr"": 0.14285714285714285, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.332,1.29,,,,,,,,229.0,,,,,,,,,,1.52,,,,high_entropy,literature_extraction
+(Dy0.1653Gd0.1111Sc0.1773Sm0.1111Tm0.164Yb0.2711)2(Eu0.1429Hf0.1429Nb0.2857Ti0.2857Zr0.1429)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.1111111111111111, ""Gd"": 0.1111111111111111, ""Yb"": 0.2711111111111111, ""Sc"": 0.17733333333333334, ""Dy"": 0.16533333333333333, ""Tm"": 0.164}","{""Ti"": 0.2857142857142857, ""Hf"": 0.14285714285714285, ""Zr"": 0.14285714285714285, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.331,1.29,,,,,,,,223.0,,,,,,,,,,1.49,,,,high_entropy,literature_extraction
+(Dy0.1506Gd0.111Sc0.2219Sm0.111Tm0.1492Yb0.2563)2(Eu0.1429Hf0.09486Nb0.2857Ti0.3491Zr0.1274)2O7,"Dy,Gd,Sc,Sm,Tm,Yb","Eu,Hf,Nb,Ti,Zr","{""Sm"": 0.11103708638685321, ""Gd"": 0.11103708638685321, ""Yb"": 0.2562735953808572, ""Sc"": 0.22185209860093272, ""Dy"": 0.15056628914057296, ""Tm"": 0.14923384410393073}","{""Ti"": 0.34914285714285714, ""Hf"": 0.09485714285714286, ""Zr"": 0.12742857142857142, ""Nb"": 0.2857142857142857, ""Eu"": 0.14285714285714285}",10.295,1.34,,,,,,,,234.0,,,,,,,,,,1.528,,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.627,,,,71.4,,6.554,,,,,,,,,,,,,,,28.9,,high_entropy,literature_extraction
+(Eu0.2Gd0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Eu,Gd,Nd,Sm,Y",Zr,"{""Y"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.555,,,,79.8,,6.461,,,,,,,,,,,,,,,20.0,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Sm0.2Y0.2)2Zr2O7,"Eu,Gd,La,Sm,Y",Zr,"{""La"": 0.2, ""Y"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.558,,,,76.5,,6.427,,,,,,,,,,,,,,,23.5,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Y0.2)2Zr2O7,"Eu,Gd,La,Nd,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Y"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.573,,,,74.0,,6.379,,,,,,,,,,,,,,,23.7,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Y"": 0.2, ""Gd"": 0.2}","{""Zr"": 1.0}",10.59,,,,73.9,,6.341,,,,,,,,,,,,,,,22.8,,high_entropy,literature_extraction
+(Eu0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Eu,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Y"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.596,,,,73.2,,6.308,,,,,,,,,,,,,,,25.4,,high_entropy,literature_extraction
+La2(Hf0.5Zr0.5)2O7,La,"Hf,Zr","{""La"": 1.0}","{""Hf"": 0.5, ""Zr"": 0.5}",,2.29,,,98.1,,,,,250.2,,,,,,,,,,1.62,0.7,,,high_entropy,literature_extraction
+Sm2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,Sm,"Hf,Sn,Ti,Zr","{""Sm"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.25, ""Zr"": 0.25, ""Sn"": 0.25}",,1.73,,,97.7,,,,,250.2,,,,,,,,,,1.58,6.65,,,high_entropy,literature_extraction
+Gd2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,Gd,"Hf,Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.25, ""Hf"": 0.25, ""Zr"": 0.25, ""Sn"": 0.25}",,1.58,,,96.2,,,,,229.4,,,,,,,,,,1.55,6.65,,,high_entropy,literature_extraction
+(Gd0.5Sm0.5)2(Hf0.3333Ti0.3333Zr0.3333)2O7,"Gd,Sm","Hf,Ti,Zr","{""Sm"": 0.5, ""Gd"": 0.5}","{""Ti"": 0.3333333333333333, ""Hf"": 0.3333333333333333, ""Zr"": 0.3333333333333333}",,1.47,,,97.9,,,,,242.0,,,,,,,,,,1.57,7.76,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2(Hf0.3333Ti0.3333Zr0.3333)2O7,"Eu,Gd","Hf,Ti,Zr","{""Gd"": 0.5, ""Eu"": 0.5}","{""Ti"": 0.3333333333333333, ""Hf"": 0.3333333333333333, ""Zr"": 0.3333333333333333}",,1.52,,,97.5,,,,,243.1,,,,,,,,,,1.56,7.69,,,high_entropy,literature_extraction
+(La0.5Pr0.5)2(Hf0.3333Sn0.3333Zr0.3333)2O7,"La,Pr","Hf,Sn,Zr","{""La"": 0.5, ""Pr"": 0.5}","{""Hf"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,2.24,,,94.8,,,,,275.5,,,,,,,,,,1.62,2.31,,,high_entropy,literature_extraction
+(Eu0.5Gd0.5)2(Hf0.3333Sn0.3333Zr0.3333)2O7,"Eu,Gd","Hf,Sn,Zr","{""Gd"": 0.5, ""Eu"": 0.5}","{""Hf"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,2.24,,,93.5,,,,,253.3,,,,,,,,,,1.5,1.87,,,high_entropy,literature_extraction
+(La0.3333Nd0.3333Pr0.3333)2(Hf0.5Zr0.5)2O7,"La,Nd,Pr","Hf,Zr","{""La"": 0.3333333333333333, ""Pr"": 0.3333333333333333, ""Nd"": 0.3333333333333333}","{""Hf"": 0.5, ""Zr"": 0.5}",,2.16,,,96.5,,,,,240.0,,,,,,,,,,1.58,2.0,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Hf0.5Zr0.5)2O7,"Eu,Gd,Sm","Hf,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Hf"": 0.5, ""Zr"": 0.5}",,1.97,,,97.9,,,,,235.7,,,,,,,,,,1.49,1.22,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Hf0.3333Sn0.3333Zr0.3333)2O7,"Eu,Gd,Sm","Hf,Sn,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Hf"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,2.21,,,93.8,,,,,256.7,,,,,,,,,,1.51,2.03,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,"Eu,Gd,Sm","Hf,Sn,Ti,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 0.25, ""Hf"": 0.25, ""Zr"": 0.25, ""Sn"": 0.25}",,1.67,,,96.4,,,,,260.4,,,,,,,,,,1.56,6.73,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25Sm0.25Yb0.25)2(Hf0.25Sn0.25Ti0.25Zr0.25)2O7,"Eu,Gd,Sm,Yb","Hf,Sn,Ti,Zr","{""Sm"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Ti"": 0.25, ""Hf"": 0.25, ""Zr"": 0.25, ""Sn"": 0.25}",,1.45,,,,,,,,249.4,,,,,,,,,,1.54,7.5,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Hf0.1667Sn0.1667Ti0.5Zr0.1667)2O7,"Eu,Gd,Sm","Hf,Sn,Ti,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 0.5, ""Hf"": 0.16666666666666666, ""Zr"": 0.16666666666666666, ""Sn"": 0.16666666666666666}",,1.71,,,,,,,,280.1,,,,,,,,,,1.63,7.93,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2(Hf0.08333Sn0.08333Ti0.75Zr0.08333)2O7,"Eu,Gd,Sm","Hf,Sn,Ti,Zr","{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 0.75, ""Hf"": 0.08333333333333333, ""Zr"": 0.08333333333333333, ""Sn"": 0.08333333333333333}",,1.9,,,,,,,,273.6,,,,,,,,,,1.69,7.12,,,high_entropy,literature_extraction
+(Eu0.3333Gd0.3333Sm0.3333)2Ti2O7,"Eu,Gd,Sm",Ti,"{""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Eu"": 0.3333333333333333}","{""Ti"": 1.0}",,2.88,,,,,,,,281.3,,,,,,,,,,1.76,1.0,,,high_entropy,literature_extraction
+(Eu0.25Gd0.25Sm0.25Yb0.25)2(Hf0.25Ti0.5Zr0.25)2O7,"Eu,Gd,Sm,Yb","Hf,Ti,Zr","{""Sm"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25, ""Eu"": 0.25}","{""Ti"": 0.5, ""Hf"": 0.25, ""Zr"": 0.25}",,1.36,,,,,,,,238.3,,,,,,,,,,1.58,9.04,,,high_entropy,literature_extraction
+(Sm0.75Yb0.25)2(Ti0.5Zr0.5)2O7,"Sm,Yb","Ti,Zr","{""Sm"": 0.75, ""Yb"": 0.25}","{""Ti"": 0.5, ""Zr"": 0.5}",,1.4,,,,,,,,227.7,,,,,,,,,,1.59,9.5,,,high_entropy,literature_extraction
+(Ce0.2Eu0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Ce,Eu,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Ce"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",,2.06,,,,,,,,230.6,,,,,,,,,,1.54,3.24,,,high_entropy,literature_extraction
+(Ce0.1429Eu0.1429Gd0.1429La0.1429Nd0.1429Pr0.1429Sm0.1429)2(Hf0.5Zr0.5)2O7,"Ce,Eu,Gd,La,Nd,Pr,Sm","Hf,Zr","{""La"": 0.14285714285714285, ""Pr"": 0.14285714285714285, ""Nd"": 0.14285714285714285, ""Sm"": 0.14285714285714285, ""Gd"": 0.14285714285714285, ""Ce"": 0.14285714285714285, ""Eu"": 0.14285714285714285}","{""Hf"": 0.5, ""Zr"": 0.5}",,1.97,,,,,,,,242.0,,,,,,,,,,1.55,3.46,,,high_entropy,literature_extraction
+(Eu0.1667Gd0.1667La0.1667Nd0.1667Pr0.1667Sm0.1667)2(Ce0.125Hf0.2917Sn0.2917Zr0.2917)2O7,"Eu,Gd,La,Nd,Pr,Sm","Ce,Hf,Sn,Zr","{""La"": 0.16666666666666666, ""Pr"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Eu"": 0.16666666666666666}","{""Hf"": 0.2916666666666667, ""Zr"": 0.2916666666666667, ""Ce"": 0.125, ""Sn"": 0.2916666666666667}",,2.02,,,,,,,,187.0,,,,,,,,,,1.56,3.82,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Gd0.2Sm0.2Yb0.2)2Ti2O7,"Dy,Er,Gd,Sm,Yb",Ti,"{""Gd"": 0.2, ""Sm"": 0.2, ""Dy"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Ti"": 1.0}",10.1174,,12.68,,,6.66,6.8229,,,,,,,,,,,,,1.72,,,0.564,high_entropy,literature_extraction
+(Dy0.1429Eu0.1429Gd0.1429Ho0.1429La0.1429Nd0.1429Sm0.1429)2Zr2O7,"Dy,Eu,Gd,Ho,La,Nd,Sm",Zr,"{""La"": 0.14285714285714285, ""Nd"": 0.14285714285714285, ""Sm"": 0.14285714285714285, ""Gd"": 0.14285714285714285, ""Dy"": 0.14285714285714285, ""Ho"": 0.14285714285714285, ""Eu"": 0.14285714285714285}","{""Zr"": 1.0}",,,11.56,,97.72,6.57,6.7236,,,225.01,,1.152,,,,,,,,1.4899,,,1.45,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.2Lu0.2Sm0.2)2Zr2O7,"Er,Gd,La,Lu,Sm",Zr,"{""La"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Lu"": 0.2}","{""Zr"": 1.0}",,1.47,,,96.43,,,,,,,,,0.53,,,1.055,,,1.465,,,,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.3Lu0.1Sm0.2)2Zr2O7,"Er,Gd,La,Lu,Sm",Zr,"{""La"": 0.3, ""Sm"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Lu"": 0.1}","{""Zr"": 1.0}",,1.34,,,98.51,,,,,,,,,0.49,,,1.073,,,1.49,,,,high_entropy,literature_extraction
+(Er0.1Gd0.15La0.3Lu0.1Sm0.35)2Zr2O7,"Er,Gd,La,Lu,Sm",Zr,"{""La"": 0.3, ""Sm"": 0.35, ""Gd"": 0.15, ""Er"": 0.1, ""Lu"": 0.1}","{""Zr"": 1.0}",,1.69,,,97.24,,,,,,,,,0.59,,,1.082,,,1.502,,,,high_entropy,literature_extraction
+(Dy0.2Gd0.2La0.2Sm0.2Tm0.2)2Ti2O7,"Dy,Gd,La,Sm,Tm",Ti,"{""La"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Dy"": 0.2, ""Tm"": 0.2}","{""Ti"": 1.0}",,2.05,9.02,,,,,,,,,,,0.73,,,,,,,,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Ti2O7,"Eu,Gd,La,Nd,Sm",Ti,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Ti"": 1.0}",,2.2,7.85,,,,,,,,,,,0.77,,,,,,,,,,high_entropy,literature_extraction
+La2(Ce0.3Zr0.7)2O7,La,"Ce,Zr","{""La"": 1.0}","{""Zr"": 0.7, ""Ce"": 0.3}",10.9056,,,,,,,,,,,,,,,,1.516,,,,8.99,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.6392,,,,,,,,,,,,,,,,1.519,,,,3.49,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2(Ce0.1Zr0.9)2O7,"Eu,Gd,La,Nd,Sm","Ce,Zr","{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 0.9, ""Ce"": 0.1}",10.6632,,,,,,,,,,,,,,,,1.488,,,,7.05,,,high_entropy,literature_extraction
+(Ce0.2727Gd0.1818La0.1818Nd0.1818Sm0.1818)2(Eu0.2222Zr0.7778)2O7,"Ce,Gd,La,Nd,Sm","Eu,Zr","{""La"": 0.18181818181818182, ""Nd"": 0.18181818181818182, ""Sm"": 0.18181818181818182, ""Gd"": 0.18181818181818182, ""Ce"": 0.2727272727272727}","{""Zr"": 0.7777777777777778, ""Eu"": 0.22222222222222227}",10.7464,,,,,,,,,,,,,,,,1.429,,,,9.6,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Nd0.3333)2Zr2O7,"Gd,La,Nd",Zr,"{""La"": 0.3333333333333333, ""Nd"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 1.0}",10.6832,,,,,,,,,,,,,,,,1.538,,,,3.95,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Nd0.3333)2(Ce0.3Zr0.7)2O7,"Gd,La,Nd","Ce,Zr","{""La"": 0.3333333333333333, ""Nd"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 0.7, ""Ce"": 0.3}",10.7456,,,,,,,,,,,,,,,,1.447,,,,9.8,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Yb0.3333)2Zr2O7,"Gd,La,Yb",Zr,"{""La"": 0.3333333333333333, ""Gd"": 0.3333333333333333, ""Yb"": 0.3333333333333333}","{""Zr"": 1.0}",10.6624,,,,,,,,,,,,,,,,1.481,,,,6.76,,,high_entropy,literature_extraction
+(Gd0.25La0.25Nd0.25Yb0.25)2Zr2O7,"Gd,La,Nd,Yb",Zr,"{""La"": 0.25, ""Nd"": 0.25, ""Gd"": 0.25, ""Yb"": 0.25}","{""Zr"": 1.0}",10.6192,,,,,,,,,,,,,,,,1.495,,,,6.05,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.5968,,,,,,,,,,,,,,,,1.496,,,,5.4,,,high_entropy,literature_extraction
+(Eu0.1667Gd0.1667La0.1667Nd0.1667Sm0.1667Yb0.1667)2Zr2O7,"Eu,Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.16666666666666666, ""Nd"": 0.16666666666666666, ""Sm"": 0.16666666666666666, ""Gd"": 0.16666666666666666, ""Yb"": 0.16666666666666666, ""Eu"": 0.16666666666666666}","{""Zr"": 1.0}",10.5864,,,,,,,,,,,,,,,,1.494,,,,5.0,,,high_entropy,literature_extraction
+(Eu0.15Gd0.15La0.15Nd0.15Sm0.15Yb0.25)2Zr2O7,"Eu,Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.15, ""Nd"": 0.15, ""Sm"": 0.15, ""Gd"": 0.15, ""Yb"": 0.25, ""Eu"": 0.15}","{""Zr"": 1.0}",10.5832,,,,,,,,,,,,,,,,1.481,,,,5.38,,,high_entropy,literature_extraction
+(Dy0.2La0.2Sc0.2Y0.2Yb0.2)2Zr2O7,"Dy,La,Sc,Y,Yb",Zr,"{""La"": 0.2, ""Dy"": 0.2, ""Y"": 0.2, ""Yb"": 0.2, ""Sc"": 0.2}","{""Zr"": 1.0}",10.4664,,,,,,,,,,,,,,,,1.406,,,,9.17,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Hf2O7,"Eu,Gd,La,Nd,Sm",Hf,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Hf"": 1.0}",10.6352,,,,,,,,,,,,,,,,1.54,,,,3.49,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.625,,12.3,,99.0,,6.554,,,320.6,,2.8,,,,,,,,,,,2.4,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.625,,11.7,,97.0,,6.554,,,225.8,,1.1,,,,,,,,,,,5.2,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Y"": 0.2}","{""Zr"": 1.0}",,,,,,,,276.0,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Y"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Y0.2)2Zr2O7,"Gd,La,Nd,Sm,Y",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Y"": 0.2}","{""Zr"": 1.0}",,,,,,,,244.0,,,,,,,,,,,,1.4742,,,,high_entropy,literature_extraction
+(Gd0.3564La0.2871Nd0.3564)2Zr2O7,"Gd,La,Nd",Zr,"{""La"": 0.2871287128712871, ""Nd"": 0.3564356435643564, ""Gd"": 0.3564356435643564}","{""Zr"": 1.0}",,2.03,,,,6.359,,,,,,,,0.836,,,1.1036,,,,,1.3,,high_entropy,literature_extraction
+(Gd0.1494Ho0.1494La0.3317Nd0.259Yb0.1106)2Zr2O7,"Gd,Ho,La,Nd,Yb",Zr,"{""La"": 0.3316733067729084, ""Nd"": 0.2589641434262948, ""Gd"": 0.14940239043824702, ""Ho"": 0.14940239043824702, ""Yb"": 0.11055776892430279}","{""Zr"": 1.0}",,1.903,,,,6.489,,,,,,,,0.729,,,1.0937,,,,,1.09,,high_entropy,literature_extraction
+(Dy0.09Gd0.05La0.43Nd0.05Yb0.38)2Zr2O7,"Dy,Gd,La,Nd,Yb",Zr,"{""La"": 0.43, ""Nd"": 0.05, ""Gd"": 0.05, ""Dy"": 0.09, ""Yb"": 0.38}","{""Zr"": 1.0}",,2.029,,,,,,,,,,,,,,,1.0731,,,,,,,high_entropy,literature_extraction
+(Dy0.1Ho0.05La0.45Nd0.05Yb0.35)2Zr2O7,"Dy,Ho,La,Nd,Yb",Zr,"{""La"": 0.45, ""Nd"": 0.05, ""Ho"": 0.05, ""Dy"": 0.1, ""Yb"": 0.35}","{""Zr"": 1.0}",,2.029,,,,,,,,,,,,,,,1.07565,,,,,,,high_entropy,literature_extraction
+(Ce0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Ce,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Ce"": 0.2}","{""Zr"": 1.0}",10.64,,,,,6.457,,,,169.0,,,,,,,,,,1.54,,95.8,2.63,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.69,1.8,12.7,1.1e-05,,6.406,6.64,,,,,,,0.77,11.5,,0.1093,,,1.52,3.5,3.524,4.4,high_entropy,literature_extraction
+(Gd0.3333Nd0.3333Sm0.3333)2Zr2O7,"Gd,Nd,Sm",Zr,"{""Nd"": 0.3333333333333333, ""Sm"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.5,,,,high_entropy,literature_extraction
+(Gd0.3333La0.3333Nd0.3333)2Zr2O7,"Gd,La,Nd",Zr,"{""La"": 0.3333333333333333, ""Nd"": 0.3333333333333333, ""Gd"": 0.3333333333333333}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.54,,,,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Er,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Er"": 0.2}","{""Zr"": 1.0}",,,,,,,,,,,,,,,,,,,,1.5,,,,high_entropy,literature_extraction
+Gd2(Sn0.3333Ti0.3333Zr0.3333)2O7,Gd,"Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.3333333333333333, ""Zr"": 0.3333333333333333, ""Sn"": 0.3333333333333333}",,,,,,,,,,,,,,,,,,,,1.56,,,,high_entropy,literature_extraction
+Gd2(Hf0.2Sn0.2Ta0.2Ti0.2Zr0.2)2O7,Gd,"Hf,Sn,Ta,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Sn"": 0.2, ""Ta"": 0.2}",,,,,,,,,,,,,,,,,,,,1.54,,,,high_entropy,literature_extraction
+Gd2(Hf0.2Nb0.2Sn0.2Ti0.2Zr0.2)2O7,Gd,"Hf,Nb,Sn,Ti,Zr","{""Gd"": 1.0}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Nb"": 0.2, ""Sn"": 0.2}",,,,,,,,,,,,,,,,,,,,1.54,,,,high_entropy,literature_extraction
+(Dy0.2Er0.2Ho0.2Y0.2Yb0.2)2Zr2O7,"Dy,Er,Ho,Y,Yb",Zr,"{""Dy"": 0.2, ""Y"": 0.2, ""Ho"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",,,11.9,,99.3,6.99,7.04,,,,,,,,10.39,,,,,,,,,high_entropy,literature_extraction
+(Er0.2La0.2Nd0.2Y0.2Yb0.2)2Zr2O7,"Er,La,Nd,Y,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Y"": 0.2, ""Er"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.646,,11.47,,,6.53,,,,,,,,,10.45,,,,,,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Gd,La,Nd,Sm,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Yb"": 0.2}","{""Zr"": 1.0}",10.595,,10.96,,,6.57,,,,,,,,,11.02,,,,,,,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.629,,10.75,,96.3,6.3,6.54,,,,,,,,10.9,,,,,,,,,high_entropy,literature_extraction
+(Eu0.2Gd0.2La0.2Nd0.2Sm0.2)2Zr2O7,"Eu,Gd,La,Nd,Sm",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.643,2.17,13.5,1e-05,99.69,6.498,6.518,,,197.51,,1.31,,0.87,,,,,0.3332,,,,1.82,high_entropy,literature_extraction
+(Eu0.2Gd0.2Nd0.2Sm0.2Yb0.2)2Zr2O7,"Eu,Gd,Nd,Sm,Yb",Zr,"{""Yb"": 0.2, ""Nd"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Eu"": 0.2}","{""Zr"": 1.0}",10.537,1.8,9.63,1.052e-05,95.75,6.579,6.871,,,171.55,,1.8,,0.68,,,,,0.3559,,,,1.07,high_entropy,literature_extraction
+Y2(Hf0.2Nb0.2Ta0.2Ti0.2Zr0.2)2O7,Y,"Hf,Nb,Ta,Ti,Zr","{""Y"": 1.0}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Nb"": 0.2, ""Ta"": 0.2}",10.338,1.79,,,,5.78,,,,191.7,,,,,,,,0.666,,1.524,,1.2,3.35,high_entropy,literature_extraction
+Y2(Hf0.25Ta0.25Ti0.25Zr0.25)2O7,Y,"Hf,Ta,Ti,Zr","{""Y"": 1.0}","{""Ti"": 0.25, ""Zr"": 0.25, ""Hf"": 0.25, ""Ta"": 0.25}",10.333,1.8,,,,6.45,,,,228.5,,,,,,,,0.669,,1.518,,1.0,4.69,high_entropy,literature_extraction
+(Er0.2Gd0.2La0.2Y0.2Yb0.2)2(Ti0.5Zr0.5)2O7,"Er,Gd,La,Y,Yb","Ti,Zr","{""La"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Yb"": 0.2, ""Er"": 0.2}","{""Zr"": 0.5, ""Ti"": 0.5}",,1.2,,,,,,,,,,,,0.459,10.84,,,,,,,,,high_entropy,literature_extraction
+(Er0.2Gd0.2Lu0.2Y0.2Yb0.2)2Zr2O7,"Er,Gd,Lu,Y,Yb",Zr,"{""Y"": 0.2, ""Gd"": 0.2, ""Er"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Zr"": 1.0}",,,12.1,1.02e-05,97.0,,7.04,,,,,1.1,,,,,,,,,,,,high_entropy,literature_extraction
+(Gd0.2La0.2Sm0.2Y0.2Yb0.2)2(Nb0.5Ta0.5)2O7,"Gd,La,Sm,Y,Yb","Nb,Ta","{""La"": 0.2, ""Sm"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Yb"": 0.2}","{""Nb"": 0.5, ""Ta"": 0.5}",10.636,0.85,8.68,6.91e-06,94.2,,,,,391.0,,1.82,,0.32,10.72,,,,,,,,3.0,high_entropy,literature_extraction
+(Dy0.1538Gd0.3846La0.1538Nd0.1538Sm0.1538)2(Eu0.2857Ta0.7143)2O7,"Dy,Gd,La,Nd,Sm","Eu,Ta","{""La"": 0.15384615384615385, ""Dy"": 0.15384615384615385, ""Nd"": 0.15384615384615385, ""Sm"": 0.15384615384615385, ""Gd"": 0.3846153846153846}","{""Eu"": 0.28571428571428575, ""Ta"": 0.7142857142857143}",10.636,1.41,8.77,2e-06,91.96,,,,,211.0,,2.49,,0.4,10.6,,,,,,6.84,,,high_entropy,literature_extraction
+(Ce0.2Gd0.2La0.2Sm0.2Y0.2)2Zr2O7,"Ce,Gd,La,Sm,Y",Zr,"{""La"": 0.2, ""Gd"": 0.2, ""Y"": 0.2, ""Sm"": 0.2, ""Ce"": 0.2}","{""Zr"": 1.0}",,,6.61,1.44e-05,,6.41,6.75,,,,,1.27,,,11.1,,,,,1.467,6.01,5.04,,high_entropy,literature_extraction
+(Ca0.4Gd0.3La0.3)2(Hf0.2Nb0.2Ta0.2Ti0.2Zr0.2)2O7,"Ca,Gd,La","Hf,Nb,Ta,Ti,Zr","{""La"": 0.3, ""Gd"": 0.3, ""Ca"": 0.4}","{""Ti"": 0.2, ""Zr"": 0.2, ""Hf"": 0.2, ""Nb"": 0.2, ""Ta"": 0.2}",10.511,1.56,8.88,,,6.07,6.32,,,197.0,,1.68,,0.62,9.0,,,,,1.493,,4.0,9.12,high_entropy,literature_extraction
+(La0.2Lu0.2Nd0.2Y0.2Yb0.2)2Zr2O7,"La,Lu,Nd,Y,Yb",Zr,"{""La"": 0.2, ""Nd"": 0.2, ""Y"": 0.2, ""Yb"": 0.2, ""Lu"": 0.2}","{""Zr"": 1.0}",,1.23,10.03,,85.54,6.08,7.1,,,,,1.04,,0.53,,,,,,1.4583,6.88,,1.65,high_entropy,literature_extraction
+(Ce0.2Eu0.2La0.2Pr0.2Sm0.2)2Hf2O7,"Ce,Eu,La,Pr,Sm",Hf,"{""La"": 0.2, ""Pr"": 0.2, ""Sm"": 0.2, ""Ce"": 0.2, ""Eu"": 0.2}","{""Hf"": 1.0}",10.65,1.24,,6.4e-06,,5.73,8.34,,,,,,,0.56,13.4,,,,,1.57,,14.2,,high_entropy,literature_extraction

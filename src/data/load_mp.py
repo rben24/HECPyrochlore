@@ -39,7 +39,7 @@ from typing import Dict, Optional, Tuple
 
 from pymatgen.core import Composition, Element
 
-from .. import globals
+from src import globals
 
 log = logging.getLogger(__name__)
 
@@ -79,7 +79,7 @@ def _is_pyrochlore_formula(comp: Composition) -> bool:
 
 def _assign_sites(
     comp: Composition,
-) -> Tuple[Dict[str, float], Dict[str, float], Dict[str, float]]:
+) -> tuple[dict[str, float], dict[str, float], dict[str, float]] | None:
     """
     Split cation elements into A-site (3+), B-site (4+), and unknown dicts.
     Stoichiometries are mole fractions (sum to 1 per site).
@@ -262,7 +262,7 @@ def _classify_mp(
     space_group_number: int,
     crystal_system: str,
     lattice_a: float,
-) -> Tuple[str, Dict, Dict, Dict]:
+) -> Tuple[str, Dict, Dict, Dict, Tuple]:
     """
     Classify an MP entry and return (compound_type, a_comp, b_comp, unknown).
     """
@@ -271,50 +271,51 @@ def _classify_mp(
         sg = int(space_group_number)
     except (TypeError, ValueError):
         err_c.append(1)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     if sg != 227 or str(crystal_system).strip().lower() != 'cubic':
         sg_err.append(sg)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     # --- lattice parameter check ---
     try:
         a = float(lattice_a)
     except (TypeError, ValueError):
         err_c.append(2)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     if not (globals.LATTICE_MIN <= a <= globals.LATTICE_MAX):
         latt_err.append(a)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     # --- formula check via pymatgen ---
     try:
         comp = Composition(str(formula_pretty))
     except Exception:
         err_c.append(3)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     if not _is_pyrochlore_formula(comp):
         formula_err.append(comp)
-        return globals.NON_PYROCHLORE, {}, {}, {}
+        return globals.NON_PYROCHLORE, {}, {}, {}, ()
 
     # --- site assignment ---
-    a_comp, b_comp, unknown = _assign_sites(comp)
+    # a_comp, b_comp, unknown = _assign_sites(comp)
+    a_comp, b_comp, unknown, oxi_states = globals.assign_sites(comp)
 
     if unknown:
         unk_err.append(unknown)
-        return globals.NON_PYROCHLORE, a_comp, b_comp, unknown
+        return globals.NON_PYROCHLORE, a_comp, b_comp, unknown, oxi_states
 
     if not a_comp or not b_comp:
         a_b_err.append(comp.reduced_composition)
-        return globals.NON_PYROCHLORE, a_comp, b_comp, unknown
+        return globals.NON_PYROCHLORE, a_comp, b_comp, unknown, oxi_states
 
     # --- pristine vs high_entropy ---
     if len(a_comp) == 1 and len(b_comp) == 1:
-        return globals.PRISTINE, a_comp, b_comp, unknown
+        return globals.PRISTINE, a_comp, b_comp, unknown, oxi_states
 
-    return globals.HIGH_ENTROPY, a_comp, b_comp, unknown
+    return globals.HIGH_ENTROPY, a_comp, b_comp, unknown, oxi_states
 
 
 # ── main loader ──────────────────────────────────────────────────────────────
@@ -369,7 +370,7 @@ def load_mp(
     n_non_pyro = 0
 
     for _, row in df_raw.iterrows():
-        ctype, a_comp, b_comp, unknown = _classify_mp(
+        ctype, a_comp, b_comp, unknown, oxi_state = _classify_mp(
             formula_pretty=row.get('formula_pretty', ''),
             space_group_number=row.get('space_group_number', -1),
             crystal_system=row.get('crystal_system', ''),
@@ -394,6 +395,10 @@ def load_mp(
         sample_a = ','.join(sorted(a_comp.keys()))
         sample_b = ','.join(sorted(b_comp.keys()))
 
+        # Oxidation states of A site and B site
+        oxi_a = oxi_state[0] if oxi_state is not None else np.nan
+        oxi_b = oxi_state[1] if oxi_state is not None else np.nan
+
         # Pretty formula from pymatgen for consistency
         try:
             pretty = Composition(str(row['formula_pretty'])).reduced_formula
@@ -404,8 +409,10 @@ def load_mp(
             'Composition':                      pretty,
             'Sample A':                         sample_a,
             'Sample B':                         sample_b,
+            'Oxidation State A':                oxi_a,
+            'Oxidation State B':                oxi_b,
             'Thermal Conductivity (W/m/K)':     np.nan,
-            'Lattice Parameter (Angstrom)':     float(row.get('a_lattice', np.nan)),
+            'Lattice Parameter (Å)':     float(row.get('a_lattice', np.nan)),
             'Relative Density %':               np.nan,
             'Is Single Phase':                  'Yes',
             'Synthesis Method':                 'DFT',
@@ -479,6 +486,6 @@ if __name__ == '__main__':
     result = load_mp(filepath=fp, verbose=True)
     print(result[[
         'Composition', 'Sample A', 'Sample B',
-        'Lattice Parameter (Angstrom)', 'compound_type', 'mp_id'
+        'Lattice Parameter (Å)', 'compound_type', #'mp_id'
     ]].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")

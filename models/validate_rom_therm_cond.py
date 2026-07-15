@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate_lattice.py
+validate_rom_therm_cond.py
 ===================
 Driver script — trains and validates the **lattice parameter** model.
 
@@ -39,7 +39,7 @@ _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent
 sys.path.insert(0, str(_PROJECT))
 
-from src.data.load_data import get_lattice_rom_dataset, HIGH_ENTROPY
+from src.data.load_data import get_therm_cond_rom_dataset, HIGH_ENTROPY
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
     plot_parity, plot_cv_comparison, plot_r2_vs_cv_folds,
@@ -47,12 +47,12 @@ from src.build_models.train_model import (
 )
 from src.globals import HIGH_ENTROPY
 
-TASK     = 'lattice_param_rom'
+TASK     = 'therm_cond_rom'
 SAVE_DIR = _PROJECT / 'models' / TASK
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Validate lattice parameter ML model.')
+        description='Validate thermal conductivity ML model.')
     parser.add_argument('--splits', type=int, default=6,
                         help='Number of CV folds (default: 6)')
     parser.add_argument('--num_feat', type=int, default=6,
@@ -60,15 +60,15 @@ def main():
     args = parser.parse_args()
 
     print()
-    print("╔══════════════════════════════════════════════════════╗")
-    print("║   Lattice Parameter — Validation & Feature Report    ║")
-    print("╚══════════════════════════════════════════════════════╝")
+    print("╔═════════════════════════════════════════════════════════╗")
+    print("║   Thermal Conductivity — Validation & Feature Report    ║")
+    print("╚═════════════════════════════════════════════════════════╝")
 
-    X, y, feat_names = get_lattice_rom_dataset(verbose=True)
+    X, y, feat_names = get_therm_cond_rom_dataset(verbose=True)
 
     print(f"\n  Samples  : {len(y)}")
     print(f"  Features : {len(feat_names)}")
-    print(f"  Target   : Lattice Parameter (Å)  "
+    print(f"  Target   : Thermal Conductivity (W/m/K)  "
           f"range [{y.min():.4f}, {y.max():.4f}]")
 
     '''
@@ -130,20 +130,20 @@ def main():
     print("\n[plots] Generating figures …")
     plot_parity(
         results['y_test'], results['y_pred'],
-        title='Lattice Parameter — Parity Plot',
-        ylabel='Lattice Parameter (Å)',
-        save_path=SAVE_DIR / 'lattice_parity.png',
+        title='Thermal Conductivity — Parity Plot',
+        ylabel='Thermal Conductivity (W/m/K)',
+        save_path=SAVE_DIR / 'therm_cond_parity.png',
     )
     plot_cv_comparison(
         results['cv_results'],
-        title='Lattice Parameter — Model Comparison (CV)',
-        save_path=SAVE_DIR / 'lattice_cv_comparison.png',
+        title='Thermal Conductivity — Model Comparison (CV)',
+        save_path=SAVE_DIR / 'therm_cond_cv_comparison.png',
     )
     plot_feature_importance(
         results['fi_df'],
-        title=f"Lattice Parameter — Feature Importance ({results['best_name']})",
+        title=f"Thermal Conductivity — Feature Importance ({results['best_name']})",
         top_n=min(20, len(feat_names)),
-        save_path=SAVE_DIR / 'lattice_feature_importance.png',
+        save_path=SAVE_DIR / 'therm_cond_feature_importance.png',
     )
     # plot_r2_vs_feature_count(
     #     X, y, feat_names,
@@ -162,13 +162,13 @@ def main():
 
 
 def _write_report(results, feat_names, n_splits):
-    report_path = SAVE_DIR / 'lattice_validation_report.txt'
+    report_path = SAVE_DIR / 'therm_cond_validation_report.txt'
     fi = results['fi_df']
     cv = results['cv_results']
 
     lines = [
         "=" * 60,
-        "  LATTICE PARAMETER — VALIDATION REPORT",
+        "  THERMAL CONDUCTIVITY — VALIDATION REPORT",
         "=" * 60,
         "",
         f"  Best model      : {results['best_name']}",

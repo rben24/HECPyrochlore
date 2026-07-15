@@ -4,6 +4,8 @@ import pandas as pd
 import time
 from pymatgen.core import Structure, Element
 from pathlib import Path
+from dotenv import load_dotenv
+import os
 
 _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent.parent
@@ -19,7 +21,8 @@ FIELDS = [
     'formation_energy_per_atom',
 ]
 
-API_KEY = 'bmuIgvgjF3hvCwRTifO3LBgl8Pt1BzQb'
+load_dotenv()
+API_KEY = os.getenv("MP_API_KEY")
 
 
 def fetch_material_ids(formula, spacegroup_number):

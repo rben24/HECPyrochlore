@@ -2,5 +2,6 @@
 *.png
 *.pkl
 *.json
+*.env
 !notes.txt
-__pycache__/
+*/__pycache__/

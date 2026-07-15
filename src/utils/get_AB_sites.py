@@ -12,7 +12,8 @@ for key in ptjson:
     else:
         elements.append(key)
 
-B_metals_s = []
+B_metals_s_4 = []
+B_metals_s_5 = []
 B_metals = []
 for el in elements:
     el = Element(el)
@@ -22,16 +23,21 @@ for el in elements:
         #    isValid = True
         if 4 in el.common_oxidation_states:
             isValid = True
+            B_metals_s_4.append(el.symbol)
+        if 5 in el.common_oxidation_states:
+            isValid = True
+            B_metals_s_5.append(el.symbol)
         if isValid:
-            B_metals_s.append(el.symbol)
             B_metals.append(el)
 
 print("---------------B Site Metals------------------")
 for el in B_metals:
     print(f" el: {el.symbol} oxstate: {el.oxidation_states}")
-print(B_metals_s)
+print(f"+4: {B_metals_s_4}")
+print(f"+5: {B_metals_s_5}")
 
-A_metals_s = []
+A_metals_s_3 = []
+A_metals_s_2 = []
 A_metals = []
 for el in elements:
     el = Element(el)
@@ -41,11 +47,15 @@ for el in elements:
         #    isValid = True
         if 3 in el.common_oxidation_states:
             isValid = True
+            A_metals_s_3.append(el.symbol)
+        if 2 in el.common_oxidation_states:
+            isValid = True
+            A_metals_s_2.append(el.symbol)
         if isValid:
-            A_metals_s.append(el.symbol)
             A_metals.append(el)
 
 print("---------------A Site Metals------------------")
 for el in A_metals:
     print(f" el: {el.symbol} oxstate: {el.oxidation_states}")
-print(A_metals_s)
+print(f"+3: {A_metals_s_3}")
+print(f"+2: {A_metals_s_2}")

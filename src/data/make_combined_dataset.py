@@ -18,7 +18,7 @@ Only pristine and high_entropy rows are written to the processed dataset.
 Canonical schema
 ----------------
   Composition | Sample A | Sample B | TPS Cond W/m/K
-  | Lattice Parameter (Angstrom) | Relative Density %
+  | Lattice Parameter (Å) | Relative Density %
   | Is Single Phase | Synthesis Method | data_source
   | b_o_distance | b_o_b_angle | oxygen_param_x
   | compound_type | a_stoich_json | b_stoich_json
@@ -38,6 +38,7 @@ import pandas as pd
 from pathlib import Path
 from typing import Dict, Tuple, List
 from src import globals
+from src.utils.prettyformula import PrettyFormula
 from pymatgen.core import Composition
 
 logging.basicConfig(level=logging.INFO, format='  [%(levelname)s] %(message)s')
@@ -80,7 +81,7 @@ HEC_COLS = globals.HEC_COLS
 
 # ── shared helpers ────────────────────────────────────────────────────────────
 
-def _clean_element_list(raw: str) -> str:
+def _clean_element_list(raw: str) -> float | str:
     """Normalise element strings: strip whitespace, remove unicode superscripts."""
     if pd.isna(raw):
         return np.nan
@@ -195,7 +196,7 @@ def load_safin(columns: List) -> pd.DataFrame:
     out['Sample A']                     = df['Sample A'].apply(_clean_element_list)
     out['Sample B']                     = df['Sample B'].apply(_clean_element_list)
     out['Thermal Conductivity (W/m/K)'] = pd.to_numeric(df['TPS Cond W/m/K'], errors='coerce')
-    out['Lattice Parameter (Angstrom)'] = pd.to_numeric(
+    out['Lattice Parameter (Å)'] = pd.to_numeric(
                                             df['Lattice Parameter (Angstrom)'], errors='coerce')
     out['Relative Density %']           = pd.to_numeric(df['Relative Density %'], errors='coerce')
     out['Is Single Phase']              = df['Is Single Phase'].str.strip().str.lower().map(
@@ -221,7 +222,7 @@ def load_safin(columns: List) -> pd.DataFrame:
     if n_excl:
         log.info(f"Safin: {n_excl} rows classified as non-pyrochlore (kept but flagged)")
     log.info(
-        f"Safin: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice, "
+        f"Safin: {out['Lattice Parameter (Å)'].notna().sum()} lattice, "
         f"{out['Thermal Conductivity (W/m/K)'].notna().sum()} thermal values"
     )
     return out
@@ -270,7 +271,7 @@ def load_nlm() -> pd.DataFrame:
             'Sample A':                     a_str,
             'Sample B':                     b_str,
             'Thermal Conductivity (W/m/K)': np.nan,
-            'Lattice Parameter (Angstrom)': pd.to_numeric(
+            'Lattice Parameter (Å)':        pd.to_numeric(
                                               row.get('Lattice Parameter a (A)', np.nan),
                                               errors='coerce'),
             'Relative Density %':           np.nan,
@@ -287,12 +288,12 @@ def load_nlm() -> pd.DataFrame:
             'a_stoich_json':                _comp_to_fractions_json(a_str),
             'b_stoich_json':                _comp_to_fractions_json(b_str),
             'Temperature':                  np.nan,
-            'density_calc':                 np.nan,
+            'Density Calculated':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
-    out = out[out['Lattice Parameter (Angstrom)'].notna() | out['Sample A'].notna()]
-    log.info(f"NLM: {out['Lattice Parameter (Angstrom)'].notna().sum()} lattice values parsed")
+    out = out[out['Lattice Parameter (Å)'].notna() | out['Sample A'].notna()]
+    log.info(f"NLM: {out['Lattice Parameter (Å)'].notna().sum()} lattice values parsed")
     return out
 
 
@@ -314,7 +315,7 @@ def load_parent_components() -> pd.DataFrame:
             'Sample A':                     a_raw,
             'Sample B':                     b_raw,
             'Thermal Conductivity (W/m/K)': tc_val,
-            'Lattice Parameter (Angstrom)': np.nan,
+            'Lattice Parameter (Å)':        np.nan,
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
             'Synthesis Method':             '',
@@ -326,7 +327,7 @@ def load_parent_components() -> pd.DataFrame:
             'a_stoich_json':                _comp_to_fractions_json(a_raw),
             'b_stoich_json':                _comp_to_fractions_json(b_raw),
             'Temperature':                  np.nan,
-            'density_calc':                 np.nan,
+            'Density Calculated':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
@@ -357,26 +358,28 @@ def load_icsd_source() -> pd.DataFrame:
 # ── Source 5: Jordan Thermal Dataset ──────────────────────────────────────────
 
 def load_jordan_source() -> pd.DataFrame:
-    path = RAW_DIR / 'Jordan_pyrochlore_data.csv'
+    path = RAW_DIR / 'Jordan_smaller.csv'
     df = pd.read_csv(path, na_values=['', 'NA'])
-    log.info(f"Jordan components: {len(df)} rows from {path.name}")
+    log.info(f"Jordan's data: {len(df)} rows from {path.name}")
 
     rows = []
     for _, row in df.iterrows():
-        try:
-            comp = Composition(str(row.get('Composition, ''')))
-        except:
-            comp = np.nan
-        # a_raw = _clean_element_list(str(row.get('A-site Cations', '')))
-        # b_raw = _clean_element_list(str(row.get('B-site Cations', '')))
+        comp = str(row.get('Composition', ''))
+        if comp:
+            # comp = Composition(comp)
+            # comp = comp.reduced_formula
+            comp = PrettyFormula.get(comp, False, 3)
+        a_raw, b_raw, unknown, oxi_states = globals.assign_sites(comp)
         # tc_val = _parse_tc_range(str(row.get('Thermal Conductivity (W/m·K)', '')))
-        # ctype = classify_sample(a_raw, b_raw)
+        a_ele = ','.join(a_raw.keys())
+        b_ele = ','.join(b_raw.keys())
+        ctype = classify_sample(a_ele, b_ele)
         rows.append({
             'Composition':                  comp,
-            'Sample A':                     np.nan, # a_raw,
-            'Sample B':                     np.nan, # b_raw,
+            'Sample A':                     a_ele,
+            'Sample B':                     b_ele,
             'Thermal Conductivity (W/m/K)': np.nan, # tc_val,
-            'Lattice Parameter (Angstrom)': np.nan,
+            'Lattice Parameter (Å)':        np.nan,
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
             'Synthesis Method':             '',
@@ -384,16 +387,16 @@ def load_jordan_source() -> pd.DataFrame:
             'b_o_distance':                 np.nan,
             'b_o_b_angle':                  np.nan,
             'oxygen_param_x':               np.nan,
-            'compound_type':                np.nan, # ctype,
-            'a_stoich_json':                np.nan, # _comp_to_fractions_json(a_raw),
-            'b_stoich_json':                np.nan, # _comp_to_fractions_json(b_raw),
+            'compound_type':                ctype,
+            'a_stoich_json':                _comp_to_fractions_json(a_ele),
+            'b_stoich_json':                _comp_to_fractions_json(b_ele),
             'Temperature':                  row.get('Start Temp'),
-            'Thermal Expansion':            row.get('CTE Value', np.nan),
-            'density_calc':                 np.nan,
+            'CTE (K^-1)':                   row.get('CTE Value', np.nan),
+            'Density Calculated':                 np.nan,
         })
 
     out = pd.DataFrame(rows)
-    log.info(f"Parent components: {out['TPS Cond W/m/K'].notna().sum()} thermal values")
+    log.info(f"Jordan's Data: {out['Thermal Conductivity (W/m/K)'].notna().sum()} thermal values")
     return out
 
 # ── Source 6: Aflow Dataset ──────────────────────────────────────────
@@ -436,6 +439,26 @@ def load_mp_source() -> pd.DataFrame:
     )
     return df
 
+# ── Source 8: ICSD database  ───────────────────────────────────────────────
+
+def load_lit_ext_source() -> pd.DataFrame:
+    """Thin wrapper that calls the dedicated Literature Extraction loader."""
+    try:
+        from src.data.load_lit_extract import load_lit_ext
+    except ImportError:
+        import sys
+        sys.path.insert(0, str(_PROJECT))
+        from src.data.load_lit_extract import load_lit_ext
+
+    lit_ext_path = RAW_DIR / 'Pyrochlore_literature_extraction.csv'
+    df = load_lit_ext(filepath=lit_ext_path, verbose=True, deduplicate=False)
+    log.info(
+        f"Lit Ext: {len(df)} usable rows "
+        f"({(df['compound_type']=='pristine').sum()} pristine, "
+        f"{(df['compound_type']=='high_entropy').sum()} high-entropy)"
+    )
+    return df
+
 # ── Build combined dataset ────────────────────────────────────────────────────
 
 def build_combined_dataset(save: bool = True) -> pd.DataFrame:
@@ -454,12 +477,12 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
 
     for loader, arg, label in [
         (load_safin, CANONICAL_COLS,    'Safin experimental'),
-        (load_nlm, None,                'notebookLM literature'),
+        # (load_nlm, None,                'notebookLM literature'),
         (load_parent_components, None,  'Parent components'),
         (load_icsd_source, None,        'ICSD database'),
     ]:
         try:
-            if arg == None:
+            if arg is None:
                 frm = loader()
             else:
                 frm = loader(arg)
@@ -499,13 +522,13 @@ def build_combined_dataset(save: bool = True) -> pd.DataFrame:
           f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
     print("  " + "-" * 78)
     for src, grp in combined.groupby('data_source'):
-        lat  = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        lat  = grp['Lattice Parameter (Å)'].notna().sum()
         tc   = grp['Thermal Conductivity (W/m/K)'].notna().sum()
         pri  = (grp['compound_type'] == globals.PRISTINE).sum()
         he   = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
         print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
     print("  " + "-" * 78)
-    lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
+    lat_total = combined['Lattice Parameter (Å)'].notna().sum()
     tc_total  = combined['Thermal Conductivity (W/m/K)'].notna().sum()
     pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
     he_total  = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
@@ -549,13 +572,14 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
         # (load_safin, PRISTINE_COLS, 'Safin experimental'),
         # (load_nlm, None, 'notebookLM literature'),
         # (load_parent_components, None, 'Parent components'),
-        (load_icsd_source, None, 'ICSD database'),
+        # (load_icsd_source, None, 'ICSD database'),
         (load_aflow_source, None, 'AFlow database'),
-        (load_mp_source, None, 'Materials Project Database'),
+        # (load_mp_source, None, 'Materials Project Database'),
         # (load_jordan_source, None, 'Jordan\'s data'),
+        (load_lit_ext_source, None, 'Literature Extraction')
     ]:
         try:
-            if arg == None:
+            if arg is None:
                 frm = loader()
             else:
                 frm = loader(arg)
@@ -591,13 +615,13 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
           f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
     print("  " + "-" * 78)
     for src, grp in combined.groupby('data_source'):
-        lat = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        lat = grp['Lattice Parameter (Å)'].notna().sum()
         tc = grp['Thermal Conductivity (W/m/K)'].notna().sum()
         pri = (grp['compound_type'] == globals.PRISTINE).sum()
         he = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
         print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
     print("  " + "-" * 78)
-    lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
+    lat_total = combined['Lattice Parameter (Å)'].notna().sum()
     tc_total = combined['Thermal Conductivity (W/m/K)'].notna().sum()
     pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
     he_total = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
@@ -685,16 +709,27 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
     # en_a = get_electronegativity(combined['Sample A'])
     # en_b = get_electronegativity(combined['Sample B'])
 
-    combined['Ionic Radius A (Angstrom)'] = combined['Sample A'].map(get_ionic_radius_A)
-    combined['Ionic Radius B (Angstrom)'] = combined['Sample B'].map(get_ionic_radius_B)
+    mask_a = combined['Ionic Radius A (Å)'].isna()
+    combined.loc[mask_a, 'Ionic Radius A (Å)'] = combined.loc[mask_a].apply(
+        lambda row: get_ionic_radius_A(row['Sample A'], row['Oxidation State A']),
+        axis=1
+    )
+    mask_b = combined['Ionic Radius B (Å)'].isna()
+    combined.loc[mask_b, 'Ionic Radius B (Å)'] = combined.loc[mask_b].apply(
+        lambda row: get_ionic_radius_B(row['Sample B'], row['Oxidation State B']),
+        axis=1
+    )
+
     combined['Electronegativity A'] = combined['Sample A'].map(get_electronegativity)
     combined['Electronegativity B'] = combined['Sample B'].map(get_electronegativity)
-    # combined.append({
-    #     'Ionic Radius A (Angstrom)': ionic_a,
-    #     'Ionic Radius B (Angstrom)': ionic_b,
-    #     'Electronegativity A': en_a,
-    #     'Electronegativity B': en_b,
-    # })
+
+    combined.fillna({'Synthesis Method': 'EXP'}, inplace=True)
+
+    # compstr = []
+    # for ele in combined['Composition']:
+    #     cstr = PrettyFormula.get(str(ele), False, 2)
+    #     compstr.append(cstr)
+    # combined['Composition'] = compstr
 
     print(f"  Filtered to PRISTINE compounds: {len(combined)} rows")
     print(f"  Output columns: {len(out_cols)}")
@@ -724,12 +759,13 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
     for loader, arg, label in [
         (load_safin, CANONICAL_COLS, 'Safin experimental'),
-        (load_nlm, None, 'notebookLM literature'),
+        # (load_nlm, None, 'notebookLM literature'),
         # (load_parent_components, None, 'Parent components'),
         (load_icsd_source, None, 'ICSD database'),
         # (load_aflow_source, None, 'AFlow database'),
         # (load_mp_source, None, 'Materials Project Database'),
-        # (load_jordan_source, None, 'Jordan\'s data'),
+        (load_jordan_source, None, 'Jordan\'s data'),
+        (load_lit_ext_source, None, 'Literature Extraction')
     ]:
         try:
             if arg == None:
@@ -762,19 +798,19 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
     non_pyro = combined[combined['compound_type'] == globals.NON_PYROCHLORE]
     combined = combined[combined['compound_type'] != globals.NON_PYROCHLORE].reset_index(drop=True)
 
-    # ── Summary table before filtering to pristine ────────────────────────────
+    # ── Summary table before filtering to HEC ────────────────────────────
     print()
     print(f"  {'Source':<38} {'Rows':>5}  {'Lattice':>8}  "
           f"{'Thermal':>8}  {'Pristine':>9}  {'HE':>5}")
     print("  " + "-" * 78)
     for src, grp in combined.groupby('data_source'):
-        lat = grp['Lattice Parameter (Angstrom)'].notna().sum()
+        lat = grp['Lattice Parameter (Å)'].notna().sum()
         tc = grp['Thermal Conductivity (W/m/K)'].notna().sum()
         pri = (grp['compound_type'] == globals.PRISTINE).sum()
         he = (grp['compound_type'] == globals.HIGH_ENTROPY).sum()
         print(f"  {src:<38} {len(grp):>5}  {lat:>8}  {tc:>8}  {pri:>9}  {he:>5}")
     print("  " + "-" * 78)
-    lat_total = combined['Lattice Parameter (Angstrom)'].notna().sum()
+    lat_total = combined['Lattice Parameter (Å)'].notna().sum()
     tc_total = combined['Thermal Conductivity (W/m/K)'].notna().sum()
     pri_total = (combined['compound_type'] == globals.PRISTINE).sum()
     he_total = (combined['compound_type'] == globals.HIGH_ENTROPY).sum()
@@ -848,5 +884,8 @@ if __name__ == '__main__':
     df = build_high_entropy_dataset(save=True)
     print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
-              'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Angstrom)',
-              'compound_type', 'data_source']].to_string(index=False))
+              'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Å)',
+              'compound_type', 'data_source']].head().to_string(index=False))
+
+    # df = load_jordan_source()
+    # print(df.heat(20).to_string())

@@ -1,0 +1,36 @@
+Target,Feature,Avg Importance
+Thermal Conductivity (W/m/K),Enthalpy,0.12429
+Thermal Conductivity (W/m/K),Energy per Atom,0.09195
+Thermal Conductivity (W/m/K),melt_avg,0.09105
+Thermal Conductivity (W/m/K),energy_gap,0.05327
+Thermal Conductivity (W/m/K),MR_avg,0.04841
+Bulk Modulus (VRH),Lattice Parameter (Angstrom),0.18451
+Bulk Modulus (VRH),lattice_vol,0.12044
+Bulk Modulus (VRH),eB_Poissons Ratio,0.08249
+Bulk Modulus (VRH),TE_avg,0.06522
+Bulk Modulus (VRH),IR_sum,0.04837
+Shear Modulus (VRH),Enthalpy,0.21489
+Shear Modulus (VRH),Energy per Atom,0.08612
+Shear Modulus (VRH),BM_avg,0.06639
+Shear Modulus (VRH),IR_sum,0.0598
+Shear Modulus (VRH),melt_avg,0.03587
+Youngs Modulus (VRH),Enthalpy,0.1655
+Youngs Modulus (VRH),Energy per Atom,0.07208
+Youngs Modulus (VRH),IR_sum,0.06081
+Youngs Modulus (VRH),BM_avg,0.04743
+Youngs Modulus (VRH),melt_avg,0.04321
+Poisson Ratio,PR_avg,0.11729
+Poisson Ratio,EN_sum,0.11289
+Poisson Ratio,Enthalpy,0.08075
+Poisson Ratio,eA_Poissons Ratio,0.06111
+Poisson Ratio,Energy per Atom,0.05826
+AEL Debye Temperature,mass_sum,0.39379
+AEL Debye Temperature,Density,0.10375
+AEL Debye Temperature,Enthalpy,0.05604
+AEL Debye Temperature,Energy per Atom,0.04279
+AEL Debye Temperature,eA_Atomic Mass,0.03274
+Thermal Expansion,melt_avg,0.13255
+Thermal Expansion,eB_Thermal Expansion,0.10303
+Thermal Expansion,IR_sum,0.08463
+Thermal Expansion,TE_avg,0.08087
+Thermal Expansion,Ionic Radius B (Angstrom),0.0557

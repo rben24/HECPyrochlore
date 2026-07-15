@@ -99,7 +99,7 @@ def _get_lattice_prediction(a_str: str, b_str: str) -> float:
     lat_model, lat_scaler, _ = load_model(TASK_LAT, MODEL_DIR_LATTICE)
 
     row = pd.Series({'Sample A': a_str, 'Sample B': b_str,
-                     'Lattice Parameter (Angstrom)': np.nan,
+                     'Lattice Parameter (Å)': np.nan,
                      'TPS Cond W/m/K': np.nan})
     feats = build_features_for_row(row)
     X_raw = np.array([feats.get(c, np.nan) for c in FEATURE_COLS], dtype=float)
@@ -114,7 +114,7 @@ def predict_thermal(a_str: str, b_str: str,
     row = pd.Series({
         'Sample A': a_str,
         'Sample B': b_str,
-        'Lattice Parameter (Angstrom)': lattice_a,
+        'Lattice Parameter (Å)': lattice_a,
         'TPS Cond W/m/K': np.nan,
     })
     feats = build_features_for_row(row)
@@ -154,7 +154,7 @@ def _reverse_lookup_dataset(target: float, tol: float, model, scaler, feat_names
         a_str = str(row['Sample A'])
         b_str = str(row['Sample B'])
         # Auto-predict lattice if missing
-        lattice_a = row.get('Lattice Parameter (Angstrom)', np.nan)
+        lattice_a = row.get('Lattice Parameter (Å)', np.nan)
         if pd.isna(lattice_a):
             try:
                 lattice_a = _get_lattice_prediction(a_str, b_str)

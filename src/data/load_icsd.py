@@ -395,7 +395,7 @@ def load_icsd(
             'Sample A':                     _comp_to_str(a_comp),
             'Sample B':                     _comp_to_str(b_comp),
             'Thermal Conductivity W/m/K':   np.nan,
-            'Lattice Parameter (Angstrom)': row['lattice_a'],
+            'Lattice Parameter (Å)': row['lattice_a'],
             'Relative Density %':           np.nan,
             'Is Single Phase':              'Yes',
             'Synthesis Method':             '',
@@ -422,12 +422,13 @@ def load_icsd(
     if not records:
         return pd.DataFrame()
 
-    df = pd.DataFrame(records)
+    df_n = pd.DataFrame(records)
 
     # Remove temperature values beyond range of ROOM_TEMP (300K) ± 15K
     low = globals.ROOM_TEMP - 15
     high = globals.ROOM_TEMP + 15
-    df = df[(df['Temperature'] >= low) & (df['Temperature'] <= high)]
+    df = df_n[(df_n['Temperature'] >= low) & (df_n['Temperature'] <= high)]
+    n_wrong_temp = len(df_n) - len(df)
 
     # --- deduplicate: average lattice param for same composition ---
     if deduplicate:
@@ -436,7 +437,7 @@ def load_icsd(
         for key, grp in df.groupby('_comp_key'):
         # for key, grp in df.groupby(['_comp_key', 'Temperature']):
             base = grp.iloc[0].copy()
-            base['Lattice Parameter (Angstrom)'] = grp['Lattice Parameter (Angstrom)'].mean()
+            base['Lattice Parameter (Å)'] = grp['Lattice Parameter (Å)'].mean()
             base['icsd_collection'] = '|'.join(grp['icsd_collection'].tolist())
             base['n_icsd_duplicates'] = len(grp)
             # Use the most common ChemicalName as Composition label
@@ -456,14 +457,17 @@ def load_icsd(
         log.info(f"({pristine_n} pristine, {he_n} high-entropy)")
         if deduplicate:
             log.info(f"ICSD: {len(df)} unique compositions after deduplication")
+        num_duplicates = len(df_raw) - df['_comp_key'].nunique() - n_non_pyro
         print()
-        print(f"  {'Compound type':<20} {'Count':>6}")
-        print(f"  {'-'*28}")
-        print(f"  {'Pristine':<20} {pristine_n:>6}")
-        print(f"  {'High-entropy':<20} {he_n:>6}")
-        print(f"  {'Non-pyrochlore (excl.)':<20} {n_non_pyro:>6}")
-        print(f"  {'-'*28}")
-        print(f"  {'Total (raw)':<20} {len(df_raw):>6}")
+        print(f"  {'Compound type':<40} {'Count':>6}")
+        print(f"  {'-'*48}")
+        print(f"  {'Pristine':<40} {pristine_n:>6}")
+        print(f"  {'High-entropy':<40} {he_n:>6}")
+        print(f"  {'Non-pyrochlore (excl.)':<40} {n_non_pyro:>6}")
+        print(f"  {'Pyrochlore outside RoomTemp range':<40} {n_wrong_temp:>6}")
+        print(f"  {'Duplicates':<40} {num_duplicates:>6}")
+        print(f"  {'-'*48}")
+        print(f"  {'Total (raw)':<40} {len(df_raw):>6}")
         print()
 
     return df
@@ -477,8 +481,8 @@ if __name__ == '__main__':
     fp = sys.argv[1] if len(sys.argv) > 1 else None
     result = load_icsd(filepath=fp, verbose=True, deduplicate=False)
     print(result[['Composition', 'Sample A', 'Sample B',
-                  'Lattice Parameter (Angstrom)', 'compound_type',
-                  'n_icsd_duplicates']].head(20).to_string(index=False))
+                  'Lattice Parameter (Å)', 'compound_type',
+                  '_comp_key']].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")
     print(f"Unkown error({len(unknown_err)}): {unknown_err}")
     print(f"Structure error({len(struct_err)}): {struct_err}")

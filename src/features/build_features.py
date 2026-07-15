@@ -27,7 +27,7 @@ import pandas as pd
 import numpy as np
 from typing import Dict, Optional
 import warnings
-from src.globals import IONIC_RADII_6, IONIC_RADII_8, ELECTRONEGATIVITY, \
+from src.globals import IONIC_RADII_6_4, IONIC_RADII_8_3, ELECTRONEGATIVITY, \
     MOLAR_MASSES, ATOMIC_NUMBER, R_GAS
 
 warnings.filterwarnings('ignore')
@@ -38,9 +38,9 @@ warnings.filterwarnings('ignore')
 # taken from Shannon, R. D. “Revised Effective Ionic Radii and Systematic Studies of Interatomic Distances in Halides
 # and Chalcogenides.” Acta Crystallographica Section A, vol. 32, no. 5, 1 Sept. 1976, pp. 751–767,
 # https://doi.org/10.1107/s0567739476001551.
-IONIC_RADII_8: Dict[str, float] = IONIC_RADII_8
+IONIC_RADII_8: Dict[str, float] = IONIC_RADII_8_3
 
-IONIC_RADII_6: Dict[str, float] = IONIC_RADII_6
+IONIC_RADII_6: Dict[str, float] = IONIC_RADII_6_4
 
 # Molar masses (g/mol)
 # from https://iupac.qmul.ac.uk/AtWt/

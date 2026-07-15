@@ -6,8 +6,8 @@ from pathlib import Path
 _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent.parent
 DATA_DIR  = _PROJECT / 'data' / 'raw'
-INPUT_FILE = DATA_DIR / 'aflow_pyrochlore_data_extra.json'
-OUTPUT_FILE = DATA_DIR / 'aflow_pyrochlore_data_extra.csv'
+INPUT_FILE = DATA_DIR / 'aflow_pyrochlore_data_coord.json'
+OUTPUT_FILE = DATA_DIR / 'aflow_pyrochlore_data_coord.csv'
 
 def json_to_csv(json_file, csv_file):
     """
