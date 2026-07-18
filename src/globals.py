@@ -278,6 +278,28 @@ ROM_COLS = [
 ]
 
 ROM_LATT_FEAT_COLS = [
+    "Thermal Conductivity (W/m/K)"
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)',  # °K⁻¹
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
+    'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)',  # Jg⁻¹K⁻¹
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
+    'Temperature (K)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'oxygen_param_x',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
     "ROM_Lattice_Parameter",
     "ROM_Lattice_Distortion",
     "ROM_Ionic_Radius_A",
@@ -302,7 +324,6 @@ ROM_LATT_FEAT_COLS = [
 
 ROM_THERM_COND_FEAT_COLS = [
     'Lattice Parameter (Å)',
-    'Thermal Conductivity (W/m/K)',
     'Vickers Hardness (GPa)',
     'CTE (K^-1)',  # °K⁻¹
     'Relative Density %',
@@ -350,7 +371,6 @@ ROM_THERM_COND_FEAT_COLS = [
 ROM_HARDNESS_FEAT_COLS = [
     'Lattice Parameter (Å)',
     'Thermal Conductivity (W/m/K)',
-    'Vickers Hardness (GPa)',
     'CTE (K^-1)',  # °K⁻¹
     'Relative Density %',
     'Density Measured',
@@ -395,6 +415,29 @@ ROM_HARDNESS_FEAT_COLS = [
 # ROM_HARDNESS_FEAT_COLS = ROM_COLS + HEC_COLS
 
 ROM_CTE_FEAT_COLS = [
+    'Lattice Parameter (Å)',
+    'Thermal Conductivity (W/m/K)'
+    'Vickers Hardness (GPa)',
+    'CTE (K^-1)',  # °K⁻¹
+    'Relative Density %',
+    'Density Measured',
+    'Density Calculated',
+    'Bulk Modulus (GPa)',
+    'Shear Modulus (GPa)',
+    'Youngs Modulus (GPa)',
+    'Poisson Ratio',
+    'Fracture Toughness (Mpa*m^.5)',
+    'Specific Heat (Jg^−1K^−1)',  # Jg⁻¹K⁻¹
+    'Thermal Diffusivity  (mm² s⁻¹)',
+    'High Temp CTE',
+    'Temperature (K)',
+    'Ionic Radius A (Å)',
+    'Ionic Radius B (Å)',
+    'oxygen_param_x',
+    'rA/rB (Å)',
+    'Size disorder (δ %)',
+    'Porosity (%)',
+    'Grain Size (μm)',
     "ROM_Lattice_Parameter",
     "ROM_Lattice_Distortion",
     "ROM_Ionic_Radius_A",
@@ -758,7 +801,7 @@ def resolve_ambiguous_element(
         #      letting pymatgen prevalence pick a conflicting oxidation state.
         a_options = [oxi for site, oxi in possible_sites if site == 'A']
         if a_options:
-            # Honour charge balance if possible
+            # Honor charge balance if possible
             if a_oxidation_state is not None and a_oxidation_state in a_options:
                 return 'A', a_oxidation_state
             return 'A', a_options[0]
@@ -833,7 +876,7 @@ def assign_sites(
     2. Ambiguous elements are held aside and resolved last.
     3. For every other cation the KNOWN_* look-up tables are consulted.
     4. Anything not in a known list goes to *unknown*.
-    5. After the first pass, ``required_b_oxi`` is inferred from already-
+    5. After the first pass, ``required_b_oxi`` is inferred from already
        assigned B-site elements (fixing the Eu₂Ru₂O₇-class of errors), then
        ``a_oxidation_state`` is back-derived if still unknown.
     6. Ambiguous elements are resolved with full A/B context available.
@@ -855,6 +898,8 @@ def assign_sites(
         for el, amt in reduced.items()
         if str(el) != 'O'
     }
+    print(raw)
+    exit(0)
 
     a_comp:        Dict[str, float] = {}
     b_comp:        Dict[str, float] = {}
@@ -941,17 +986,231 @@ def assign_sites(
 
 
 
+def reconcile_ambig_to_sites(
+    a_comp: Dict[str, float],
+    b_comp: Dict[str, float],
+    ambig_elements: Dict[str, float],  # elem -> amt
+    a_oxidation_state: Optional[int],  # may be None if not fixed by A_3_ONLY/A_2_ONLY
+    b_oxidation_state: Optional[int],  # may be None if not fixed by B_4_ONLY/B_5_ONLY
+) -> Tuple[Dict[str, float], Dict[str, float], Optional[int], Optional[int], Dict[str, Tuple[str, int]]]:
+    target_A: float = 2.0
+    target_B: float = 2.0
+
+    # Preference: prefer A=3 and B=4 (over A=2 and B=5)
+    def option_priority(site: str, ox: int, curr_a_ox: Optional[int], curr_b_ox: Optional[int], elem: str) -> int:
+        score = 0
+
+        # Strong preference for 3/4
+        if site == "A" and ox == 3:
+            score += 50
+        if site == "B" and ox == 4:
+            score += 50
+
+        # Discourage 2/5
+        if site == "A" and ox == 2:
+            score -= 20
+        if site == "B" and ox == 5:
+            score -= 20
+
+        # If already fixed oxidation on that site, reward exact match (but mismatches should be disallowed anyway)
+        if site == "A" and curr_a_ox is not None:
+            score += 30 if ox == curr_a_ox else -100
+        if site == "B" and curr_b_ox is not None:
+            score += 30 if ox == curr_b_ox else -100
+
+        # # Optional: mild boost for Ta's comment ("prefers +5 as B-site")
+        # if elem == "Ta" and site == "B" and ox == 5:
+        #     score += 10
+
+        return score
+
+    ambig_items = list(ambig_elements.items())
+
+    initial_a_total = sum(a_comp.values())
+    initial_b_total = sum(b_comp.values())
+
+    best = None
+    # best = (err, -score, assignments_dict, final_a_ox, final_b_ox)
+
+    def backtrack(
+        i: int,
+        curr_a: Dict[str, float],
+        curr_b: Dict[str, float],
+        curr_a_total: float,
+        curr_b_total: float,
+        curr_a_ox: Optional[int],
+        curr_b_ox: Optional[int],
+        curr_score: int,
+        assignments: Dict[str, Tuple[str, int]],
+    ):
+        nonlocal best
+
+        if i == len(ambig_items):
+            err = abs(curr_a_total - target_A) + abs(curr_b_total - target_B)
+            cand = (err, -curr_score, dict(assignments), curr_a_ox, curr_b_ox)
+            if best is None or cand < best:
+                best = cand
+            return
+
+        elem, amt = ambig_items[i]
+        options = KNOWN_AMBIGUOUS[elem]  # list of (site, ox)
+
+        for site, ox in options:
+            # Enforce single oxidation per site:
+            if site == "A":
+                if curr_a_ox is not None and ox != curr_a_ox:
+                    continue  # disallow inconsistent oxidation on A-site
+                next_a_ox = curr_a_ox if curr_a_ox is not None else ox
+                next_a_total = curr_a_total + amt
+                next_a = dict(curr_a)
+                next_a[elem] = next_a.get(elem, 0.0) + amt
+
+                pr = option_priority(site, ox, curr_a_ox, curr_b_ox, elem)
+                assignments[elem] = (site, ox)
+                backtrack(
+                    i + 1,
+                    next_a, curr_b,
+                    next_a_total, curr_b_total,
+                    next_a_ox, curr_b_ox,
+                    curr_score + pr,
+                    assignments
+                )
+                del assignments[elem]
+
+            else:  # site == "B"
+                if curr_b_ox is not None and ox != curr_b_ox:
+                    continue  # disallow inconsistent oxidation on B-site
+                next_b_ox = curr_b_ox if curr_b_ox is not None else ox
+                next_b_total = curr_b_total + amt
+                next_b = dict(curr_b)
+                next_b[elem] = next_b.get(elem, 0.0) + amt
+
+                pr = option_priority(site, ox, curr_a_ox, curr_b_ox, elem)
+                assignments[elem] = (site, ox)
+                backtrack(
+                    i + 1,
+                    curr_a, next_b,
+                    curr_a_total, next_b_total,
+                    curr_a_ox, next_b_ox,
+                    curr_score + pr,
+                    assignments
+                )
+                del assignments[elem]
+
+    backtrack(
+        0,
+        dict(a_comp), dict(b_comp),
+        initial_a_total, initial_b_total,
+        a_oxidation_state, b_oxidation_state,
+        curr_score=0,
+        assignments={}
+    )
+
+    if best is None:
+        return a_comp, b_comp, a_oxidation_state, b_oxidation_state, {}
+
+    _, _, assignments, final_a_ox, final_b_ox = best
+
+    # Build final compositions by applying assignments to the provided base comps
+    final_a = dict(a_comp)
+    final_b = dict(b_comp)
+    for elem, amt in ambig_elements.items():
+        site, _ox = assignments[elem]
+        if site == "A":
+            final_a[elem] = final_a.get(elem, 0.0) + amt
+        else:
+            final_b[elem] = final_b.get(elem, 0.0) + amt
+
+    return final_a, final_b, final_a_ox, final_b_ox, assignments
 
 
+def assign_sites_pristine(comp: Composition) -> Tuple[Dict[str, float], Dict[str, float],
+           Dict[str, float], Optional[Tuple[float, float]]]:
+    """
+            Split cation elements into A-site (3+/2+), B-site (4+/5+), and unknown dicts.
+            Stoichiometries are mole fractions (sum to 1 per site).
+
+            Pyrochlore charge balance constraint
+            -------------------------------------
+            A₂B₂O₇  →  2·A_oxi + 2·B_oxi = 14
+                A(+3) / B(+4)   or   A(+2) / B(+5)
+
+            Assignment priority (per element)
+            -----------------------------------
+            1. Oxygen is always skipped.
+            2. Ambiguous elements are held aside and resolved last.
+            3. For every other cation the KNOWN_* look-up tables are consulted.
+            4. Anything not in a known list goes to *unknown*.
+            5. After the first pass, ``required_b_oxi`` is inferred from already
+               assigned B-site elements (fixing the Eu₂Ru₂O₇-class of errors), then
+               ``a_oxidation_state`` is back-derived if still unknown.
+            6. Ambiguous elements are resolved with full A/B context available.
+
+            Parameters
+            ----------
+            comp : pymatgen Composition (need not be reduced; reduced internally)
+
+            Returns
+            -------
+            a_comp     : {element: mole_fraction}  A-site (sums to 1)
+            b_comp     : {element: mole_fraction}  B-site (sums to 1)
+            unknown    : {element: mole_fraction}  unassigned cations
+            oxi_states : (a_site_oxi_state, b_site_oxi_state) or (None, None)
+            """
+
+    reduced = Composition(comp).reduced_composition
+    raw: Dict[str, float] = {
+        str(el): amt
+        for el, amt in reduced.items()
+        if str(el) != 'O'
+    }
 
 
+    a_comp: Dict[str, float] = {}
+    b_comp: Dict[str, float] = {}
+    unknown: Dict[str, float] = {}
+    ambig_elements: Dict[str, float] = {}
+    a_oxidation_state: Optional[int] = None
+    b_oxidation_state: Optional[int] = None
 
+    for elem, amt in raw.items():
+        if elem in KNOWN_AMBIGUOUS:
+            # options = KNOWN_AMBIGUOUS[elem]
+            # sites = {site for site, ox in options}
+            # if sites == {'A', 'B'}:
+            #     ambig_elements[elem] = amt
+            # elif sites == {'A'}:
+            #     a_comp[elem] = amt
+            # elif sites == {'B'}:
+            #     b_comp[elem] = amt
+            # else:
+            ambig_elements[elem] = amt
+        elif elem in KNOWN_A_3_ONLY:
+            a_comp[elem] = amt
+            if a_oxidation_state is None:
+                a_oxidation_state = 3
+        elif elem in KNOWN_A_2_ONLY:
+            a_comp[elem] = amt
+            if a_oxidation_state is None:
+                a_oxidation_state = 2
+        elif elem in KNOWN_B_4_ONLY:
+            b_comp[elem] = amt
+            if b_oxidation_state is None:
+                b_oxidation_state = 4
+        elif elem in KNOWN_B_5_ONLY:
+            b_comp[elem] = amt
+            if b_oxidation_state is None:
+                b_oxidation_state = 5
+        else:
+            unknown[elem] = amt
 
+    if ambig_elements:
+        a_comp, b_comp, a_oxidation_state, b_oxidation_state, _assignments = reconcile_ambig_to_sites(
+            a_comp=a_comp,
+            b_comp=b_comp,
+            ambig_elements=ambig_elements,
+            a_oxidation_state=a_oxidation_state,
+            b_oxidation_state=b_oxidation_state,
+        )
 
-
-
-
-
-
-
-
+    return a_comp, b_comp, unknown, (a_oxidation_state, b_oxidation_state)
