@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import r2_score
 from sklearn.linear_model import LinearRegression
 from src.data.make_combined_dataset import (load_icsd_source, load_aflow_source,
-                                                load_mp_source)
+                                                load_mp_source, load_lit_ext_source)
 from src.build_models.train_model import plot_parity
 
 _HERE    = Path(__file__).resolve().parent
@@ -71,11 +71,12 @@ if __name__ == '__main__':
     df1 = load_icsd_source()
     df2 = load_aflow_source()
     df3 = load_mp_source()
+    df4 = load_lit_ext_source()
 
     # If your composition column has a different name, pass composition_col='YourColumnName'
-    df1_proc, df2_proc = process_and_match(df1, df2,
-                                           composition_col='Composition',
-                                           lattice_col='Lattice Parameter (Å)')
+    # df1_proc, df2_proc = process_and_match(df1, df2,
+    #                                        composition_col='Composition',
+    #                                        lattice_col='Lattice Parameter (Å)')
     # Save processed outputs (optional)
     # df1_proc.to_csv('dataset1_processed.csv')
     # df2_proc.to_csv('dataset2_processed.csv')
@@ -89,19 +90,27 @@ if __name__ == '__main__':
     # plot_parity(df1_proc[latt_col], df3_proc[latt_col], 'ICSD vs MP Lattice Parameters', 'MP lattice param',
     #             SAVE_DIR / 'icsd_vs_mp_latt.png', 'ICSD Lattice Parameter')
 
-    model = LinearRegression()
-    x = df1_proc[[latt_col]]
-    model.fit(x, df2_proc[latt_col].values)
-    y_pred = model.predict(x)
-    r2 = r2_score(df2_proc[latt_col], y_pred)
-    plt.scatter(df1_proc[latt_col], df2_proc[latt_col], color='blue', label='Data Points')  # Scatter plot
-    plt.plot(df1_proc[latt_col], y_pred, color='red', label='Regression Line')  # Regression line
-    plt.xlabel('ICSD Lattice Parameter')
-    plt.ylabel('AFLOW lattice param')
-    plt.title(f'ICSD vs AFLOW Lattice Parameters (r2={r2:.2f})')
-    plt.legend()
-    plt.savefig(SAVE_DIR / 'icsd_vs_aflow_r2.png')
-    plt.show()
+    # df1_proc, df4_proc = process_and_match(df1, df4)
+    # plot_parity(df1_proc[latt_col], df4_proc[latt_col], 'ICSD vs LitExt Lattice Parameters', 'LitExt lattice param',
+    #             SAVE_DIR / 'icsd_vs_lit_latt.png', 'ICSD Lattice Parameter')
+
+    # df2_proc, df4_proc = process_and_match(df2, df4)
+    # plot_parity(df2_proc[latt_col], df4_proc[latt_col], 'AFlow vs LitExt Lattice Parameters', 'LitExt lattice param',
+    #             SAVE_DIR / 'aflow_vs_lit_latt.png', 'AFlow Lattice Parameter')
+
+    # model = LinearRegression()
+    # x = df1_proc[[latt_col]]
+    # model.fit(x, df2_proc[latt_col].values)
+    # y_pred = model.predict(x)
+    # r2 = r2_score(df2_proc[latt_col], y_pred)
+    # plt.scatter(df1_proc[latt_col], df2_proc[latt_col], color='blue', label='Data Points')  # Scatter plot
+    # plt.plot(df1_proc[latt_col], y_pred, color='red', label='Regression Line')  # Regression line
+    # plt.xlabel('ICSD Lattice Parameter')
+    # plt.ylabel('AFLOW lattice param')
+    # plt.title(f'ICSD vs AFLOW Lattice Parameters (r2={r2:.2f})')
+    # plt.legend()
+    # plt.savefig(SAVE_DIR / 'icsd_vs_aflow_r2.png')
+    # plt.show()
     # try:
     #     import matplotlib.pyplot as plt
     #     # Align indices to ensure same order

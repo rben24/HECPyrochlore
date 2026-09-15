@@ -110,80 +110,6 @@ def _parse_aflow_composition(
     )
 
 
-# ── pymatgen formula check (shared logic with load_mp.py) ────────────────────
-
-def _is_pyrochlore_formula(comp: Composition) -> bool:
-    """Return True if reduced formula matches A2B2O7 stoichiometry."""
-    try:
-        reduced = comp.reduced_composition
-        elems = {str(el): amt for el, amt in reduced.items()}
-
-        if 'O' not in elems:
-            return False
-
-        o_amt = elems['O']
-        cation_amts = [v for k, v in elems.items() if k != 'O']
-
-        if len(cation_amts) != 2:
-            return False
-
-        scale = 7.0 / o_amt
-        scaled_cations = [round(a * scale, 3) for a in cation_amts]
-
-        return all(abs(a - 2.0) < 0.15 for a in scaled_cations)
-    except Exception:
-        return False
-
-
-# ── site assignment ───────────────────────────────────────────────────────────
-
-def _assign_sites(
-    comp: Composition,
-) -> Tuple[Dict[str, float], Dict[str, float], Dict[str, float]]:
-    """
-    Split cation elements into A-site, B-site, and unknown dicts.
-    Returns mole fractions (sum to 1 per site).
-    Ce ambiguity resolved identically to load_icsd.py.
-    """
-    reduced = comp.reduced_composition
-    raw: Dict[str, float] = {
-        str(el): amt
-        for el, amt in reduced.items()
-        if str(el) != 'O'
-    }
-
-    a_comp: Dict[str, float] = {}
-    b_comp: Dict[str, float] = {}
-    unknown: Dict[str, float] = {}
-    ce_amt: float = 0.0
-
-    # keep track of oxidation states to ensure balance
-    a_site_ox = -1
-    for elem, amt in raw.items():
-        if elem == globals.CE_AMBIGUOUS:
-            ce_amt = amt
-        if elem in globals.KNOWN_A_3_ONLY:
-            a_comp[elem] = amt
-            a_site_ox = 3
-        elif elem in globals.KNOWN_B_4_ONLY and a_site_ox == 3:
-            b_comp[elem] = amt
-        else:
-            unknown[elem] = amt
-
-    if ce_amt > 0:
-        if a_comp:
-            a_comp[globals.CE_AMBIGUOUS] = ce_amt
-        elif b_comp:
-            b_comp[globals.CE_AMBIGUOUS] = ce_amt
-        else:
-            a_comp[globals.CE_AMBIGUOUS] = ce_amt
-
-    def _to_fracs(d: Dict[str, float]) -> Dict[str, float]:
-        total = sum(d.values())
-        return {k: v / total for k, v in d.items()} if total else {}
-
-    return _to_fracs(a_comp), _to_fracs(b_comp), unknown
-
 
 # ── per-row classifier ────────────────────────────────────────────────────────
 
@@ -210,7 +136,7 @@ def _classify_aflow(
         return globals.NON_PYROCHLORE, {}, {}, {}, (), stoich_reason
 
     # --- Check B: pymatgen reduced formula ---
-    if not _is_pyrochlore_formula(comp):
+    if not globals.is_pyrochlore_formula(comp):
         return (
             globals.NON_PYROCHLORE, {}, {}, {}, (),
             f"pymatgen reduced formula not A2B2O7: "
@@ -300,37 +226,37 @@ def load_aflow(
         composition_str = str(row.get('compound', ''))
         compound = str(row.get('composition', ''))
 
-        # get relaxed parameters and coordinates for site assignment
-        rel_latt_params = row.get('geometry', np.nan)
-        # rel_latt_a = rel_latt_params[0]
-        # rel_latt_angle = rel_latt_params[3]
-        coordstr = row.get('positions_fractional', np.nan)
-        if coordstr is not np.nan:
-            coords = ast.literal_eval(f"[{coordstr}]")
-            # print(coords)
-            # exit(0)
-
-            eles = re.findall(r'[A-Z][a-z]?', composition_str)
-            first_ele = eles[0]
-            second_ele = eles[1]
-            third_ele = eles[2]
-
-            first_coord = []
-            second_coord = []
-            third_coord = []
-
-            if first_ele == 'O':
-                first_coord.append(coords[0:13])
-                second_coord.append(coords[14:17])
-                third_coord.append(coords[18:21])
-            elif second_ele == '0':
-                first_coord.append(coords[0:3])
-                second_coord.append(coords[4:17])
-                third_coord.append(coords[18:21])
-            else:
-                first_coord.append(coords[0:3])
-                second_coord.append(coords[4:7])
-                third_coord.append(coords[8:21])
+        # # get relaxed parameters and coordinates for site assignment
+        # rel_latt_params = row.get('geometry', np.nan)
+        # # rel_latt_a = rel_latt_params[0]
+        # # rel_latt_angle = rel_latt_params[3]
+        # coordstr = row.get('positions_fractional', np.nan)
+        # if coordstr is not np.nan:
+        #     coords = ast.literal_eval(f"[{coordstr}]")
+        #     # print(coords)
+        #     # exit(0)
+        #
+        #     eles = re.findall(r'[A-Z][a-z]?', composition_str)
+        #     first_ele = eles[0]
+        #     second_ele = eles[1]
+        #     third_ele = eles[2]
+        #
+        #     first_coord = []
+        #     second_coord = []
+        #     third_coord = []
+        #
+        #     if first_ele == 'O':
+        #         first_coord.append(coords[0:13])
+        #         second_coord.append(coords[14:17])
+        #         third_coord.append(coords[18:21])
+        #     elif second_ele == '0':
+        #         first_coord.append(coords[0:3])
+        #         second_coord.append(coords[4:17])
+        #         third_coord.append(coords[18:21])
+        #     else:
+        #         first_coord.append(coords[0:3])
+        #         second_coord.append(coords[4:7])
+        #         third_coord.append(coords[8:21])
 
         ctype, a_comp, b_comp, unknown, oxi_state, reason = _classify_aflow(
             compound=compound,
@@ -459,7 +385,7 @@ if __name__ == '__main__':
     print(result[[
         'Composition', 'Sample A', 'Sample B',
         'Lattice Parameter (Å)', 'compound_type', #'auid'
-    ]].to_string(index=False))
-    # ]].head(20).to_string(index=False))
+    # ]].to_string(index=False))
+    ]].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate_rom_therm_cond.py
+validate_rom_vickers.py
 ===================
 Driver script — trains and validates the **lattice parameter** model.
 
@@ -39,7 +39,7 @@ _HERE    = Path(__file__).resolve().parent
 _PROJECT = _HERE.parent
 sys.path.insert(0, str(_PROJECT))
 
-from src.data.load_data import get_therm_cond_rom_dataset, HIGH_ENTROPY
+from src.data.load_data import get_vickers_rom_dataset, HIGH_ENTROPY
 from src.build_models.train_model import (
     train_and_evaluate, plot_feature_importance,
     plot_parity, plot_cv_comparison, plot_r2_vs_cv_folds,
@@ -47,12 +47,12 @@ from src.build_models.train_model import (
 )
 from src.globals import HIGH_ENTROPY
 
-TASK     = 'therm_cond_rom'
+TASK     = 'vickers_rom'
 SAVE_DIR = _PROJECT / 'models' / TASK
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Validate thermal conductivity ML model.')
+        description='Validate Vickers hardness ML model.')
     parser.add_argument('--splits', type=int, default=6,
                         help='Number of CV folds (default: 6)')
     parser.add_argument('--num_feat', type=int, default=6,
@@ -60,25 +60,25 @@ def main():
     args = parser.parse_args()
 
     print()
-    print("╔═════════════════════════════════════════════════════════╗")
-    print("║   Thermal Conductivity — Validation & Feature Report    ║")
-    print("╚═════════════════════════════════════════════════════════╝")
+    print("╔═════════════════════════════════════════════════════╗")
+    print("║   Vickers Hardness — Validation & Feature Report    ║")
+    print("╚═════════════════════════════════════════════════════╝")
 
-    X, y, feat_names = get_therm_cond_rom_dataset(verbose=True)
+    X, y, feat_names = get_vickers_rom_dataset(verbose=True)
 
     print(f"\n  Samples  : {len(y)}")
     print(f"  Features : {len(feat_names)}")
-    print(f"  Target   : Thermal Conductivity (W/m/K)  "
+    print(f"  Target   : Vickers Hardness (GPa)  "
           f"range [{y.min():.4f}, {y.max():.4f}]")
 
-
+    # '''
     import seaborn as sns
     import pandas as pd
     import matplotlib.pyplot as plt
 
     # Convert to DataFrame for easier labeling
     X_df = pd.DataFrame(X, columns=feat_names)
-    X_df['latt param'] = y
+    X_df['vickers hardness'] = y
 
     # Set style
     sns.set_theme(style='whitegrid')
@@ -113,7 +113,7 @@ def main():
     plt.tight_layout()
     plt.savefig(SAVE_DIR / 'sns.png')#, dpi=150, bbox_inches='tight')
     plt.show()
-
+# '''
 
     top_n_feat = args.num_feat
     # top_n_feat = len(feat_names)
@@ -130,20 +130,20 @@ def main():
     print("\n[plots] Generating figures …")
     plot_parity(
         results['y_test'], results['y_pred'],
-        title='Thermal Conductivity — Parity Plot',
-        ylabel='Thermal Conductivity (W/m/K)',
-        save_path=SAVE_DIR / 'therm_cond_parity.png',
+        title='Vickers Harndess — Parity Plot',
+        ylabel='Vickers Harndess (GPa)',
+        save_path=SAVE_DIR / 'vick_hard_parity.png',
     )
     plot_cv_comparison(
         results['cv_results'],
-        title='Thermal Conductivity — Model Comparison (CV)',
-        save_path=SAVE_DIR / 'therm_cond_cv_comparison.png',
+        title='Vickers Harndess — Model Comparison (CV)',
+        save_path=SAVE_DIR / 'vick_hard_cv_comparison.png',
     )
     plot_feature_importance(
         results['fi_df'],
-        title=f"Thermal Conductivity — Feature Importance ({results['best_name']})",
+        title=f"Vickers Harndess — Feature Importance ({results['best_name']})",
         top_n=min(20, len(feat_names)),
-        save_path=SAVE_DIR / 'therm_cond_feature_importance.png',
+        save_path=SAVE_DIR / 'vick_hard_feature_importance.png',
     )
     # plot_r2_vs_feature_count(
     #     X, y, feat_names,
@@ -162,13 +162,13 @@ def main():
 
 
 def _write_report(results, feat_names, n_splits):
-    report_path = SAVE_DIR / 'therm_cond_validation_report.txt'
+    report_path = SAVE_DIR / 'vick_hard_validation_report.txt'
     fi = results['fi_df']
     cv = results['cv_results']
 
     lines = [
         "=" * 60,
-        "  THERMAL CONDUCTIVITY — VALIDATION REPORT",
+        "  VICKERS HARDNESS — VALIDATION REPORT",
         "=" * 60,
         "",
         f"  Best model      : {results['best_name']}",

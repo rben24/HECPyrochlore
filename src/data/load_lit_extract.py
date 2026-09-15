@@ -13,7 +13,7 @@ Key responsibilities
    correctly; zero-contribution elements are dropped automatically.
 
 2. Clean ``Composition`` strings:
-     - Strip invisible Unicode artefacts (zero-width spaces, BOM, etc.)
+     - Strip invisible Unicode artifacts (zero-width spaces, BOM, etc.)
      - Remove trailing whitespace and non-breaking spaces.
      - Deduplicate entries whose formula text was pasted twice.
      - Strip space-separated annotation tags (e.g. "(G5)").
@@ -44,7 +44,7 @@ Pyrochlore filter
   * ``Phase`` column must be ``'P'`` (pyrochlore) or ``'SP'`` (single-phase).
     All other phases (F, DF, F+P, Mix, M, …) are excluded.
   * All cation elements must be in the known A-site or B-site element tables.
-    Entries with unrecognised cations are excluded.
+    Entries with unrecognized cations are excluded.
 
 Thermal Conductivity values
 ---------------------------
@@ -72,9 +72,9 @@ from typing import Dict, Optional, Tuple
 
 import numpy as np
 import pandas as pd
-from pymatgen.core import Composition
-from pymatgen.io.abinit.abiobjects import lattice_from_abivars
-from sympy.tensor.array.expressions import convert_array_to_indexed
+# from pymatgen.core import Composition
+# from pymatgen.io.abinit.abiobjects import lattice_from_abivars
+# from sympy.tensor.array.expressions import convert_array_to_indexed
 
 from src import globals
 
@@ -144,25 +144,6 @@ def _parse_lattice(val) -> Tuple[Optional[float], bool]:
     except Exception:
         return None, False
 
-
-# def _parse_tc(val) -> Tuple[Optional[float], bool]:
-#     """
-#     Parse a Thermal Conductivity value.
-#
-#     Strips ``*`` (AI-estimated from figure) and `` ` `` (unreliable) markers.
-#     Scientific notation (e.g. ``9.47E-01``) is handled natively by ``float()``.
-#
-#     Returns
-#     -------
-#     (numeric_value_or_None, ai_estimated_flag)
-#     """
-#     s, ai_flag = _clean_and_ai(val)
-#     try:
-#         return s, ai_flag
-#     except ValueError:
-#         return None, False
-
-
 def _parse_relative_density(val) -> Tuple[Optional[float], bool]:
     """
     Parse the ``Relative density`` column.
@@ -207,7 +188,7 @@ def _clean_formula(s) -> Optional[str]:
     if pd.isna(s):
         return None
 
-    # 1 & 2: strip invisible unicode and non-breaking spaces
+    # 1 & 2: strip invisible Unicode and non-breaking spaces
     s = ''.join(c for c in str(s) if not unicodedata.category(c).startswith('C'))
     s = s.replace('\xa0', '').strip()
 
@@ -352,7 +333,7 @@ def _comp_to_str(comp: Dict[str, float]) -> str:
 
 
 def _comp_to_fractions(comp: Dict[str, float]) -> Dict[str, float]:
-    """Normalise absolute stoichiometries to mole fractions summing to 1."""
+    """Normalize absolute stoichiometries to mole fractions summing to 1."""
     total = sum(comp.values())
     if total == 0:
         return {}
@@ -414,7 +395,7 @@ def _expand_compound_mixture(
     For each ``(EndMember)fraction`` pair:
       1. Parse ``EndMember`` with ``_parse_lit_formula()`` to get its A/B site
          compositions.
-      2. Normalise each site to mole fractions (handles non-stoichiometric
+      2. Normalize each site to mole fractions (handles non-stoichiometric
          end-members gracefully).
       3. Weight by ``fraction`` and accumulate into the combined dicts.
       4. Drop elements whose combined fraction is < 1e-9 (handles the edge
@@ -475,7 +456,7 @@ def _expand_compound_mixture(
             )
             return None
 
-        # Normalise each end-member's site to fractions, then weight by
+        # Normalize each end-member's site to fractions, then weight by
         # the mixture fraction.
         for elem, val in _comp_to_fractions(a_sub).items():
             a_combined[elem] = a_combined.get(elem, 0.0) + val * frac

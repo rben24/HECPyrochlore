@@ -25,7 +25,7 @@ Pyrochlore sanity checks
   * A-site stoichiometry total must be in [1.5, 2.5]
   * B-site stoichiometry total must be in [1.5, 2.5]
   * All cation elements must be in the known A-site or B-site element tables
-    (entries containing unrecognised cations are excluded, as we cannot
+    (entries containing unrecognized cations are excluded, as we cannot
      compute features for them)
   * Lattice parameter must be parseable and in a physically reasonable range
     (9.5 – 11.5 Å for pyrochlore A₂B₂O₇)
@@ -51,55 +51,6 @@ from pymatgen.core import Composition
 from src import globals
 
 log = logging.getLogger(__name__)
-
-# ── element sets ────────────────────────────────────────────────────────────
-
-# # Rare-earth / Y cations that occupy the 8-coordinated A-site
-# KNOWN_A: frozenset[str] = frozenset({
-#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y', 'Bi', 'Pb', 'Ca',
-# })
-#
-# # Transition-metal cations that occupy the 6-coordinated B-site
-# KNOWN_B: frozenset[str] = frozenset({
-#     # Group IV
-#     'Ti', 'Zr', 'Hf', 'Sn',
-#     # Group V
-#     'V', 'Nb', 'Ta',
-#     # Group VI
-#     'Cr', 'Mo', 'W',
-#     # Group VII
-#     'Mn', 'Re',
-#     # Group VIII/IX (transition metals and 5d metals)
-#     'Fe', 'Co', 'Ni', 'Ru', 'Os', 'Rh', 'Ir',
-#     # Post-transition
-#     'Pb', 'Pt',
-# })
-#
-# # Ce can sit on either site depending on oxidation state; handled separately
-# _CE_AMBIGUOUS = 'Ce'
-#
-# # Pyrochlore structure-type identifiers used in the ICSD file
-# _PYROCHLORE_STRUCTURE_TYPES: frozenset[str] = frozenset({
-#     'Ca2Nb2O7',   # standard Fd-3m pyrochlore prototype
-#     'Eu2Zr2O7',   # alternate ICSD label for the same structure
-# })
-#
-# # Physical bounds
-# _LATTICE_MIN = 9.5    # Å
-# _LATTICE_MAX = 11.5   # Å
-# _TEMP_MIN    = 285.0  # K
-# _TEMP_MAX    = 305.0  # K
-# _A_STOICH_RANGE = (1.5, 2.5)
-# _B_STOICH_RANGE = (1.5, 2.5)
-#
-#
-# # ── Compound-type enum strings ───────────────────────────────────────────────
-#
-# PRISTINE      = 'pristine'
-# HIGH_ENTROPY  = 'high_entropy'
-# NON_PYROCHLORE = 'non_pyrochlore'
-#
 
 # ── lattice-parameter parser ─────────────────────────────────────────────────
 latt_err = []
@@ -133,13 +84,13 @@ def _parse_icsd_formula(
     Parse an ICSD ``StructuredFormula`` string into three composition dicts:
       a_comp   : { element: absolute_stoich }  for A-site cations
       b_comp   : { element: absolute_stoich }  for B-site cations
-      unknown  : { element: absolute_stoich }  for unrecognised cations
+      unknown  : { element: absolute_stoich }  for unrecognized cations
 
     Stoichiometries are *absolute* (i.e. as written in the formula, not
-    normalised to 1).  Normalisation to mole fractions happens later in
+    normalized to 1).  Normalisation to mole fractions happens later in
     ``build_features.py`` via ``parse_composition``.
 
-    Ambigious Element assignment strategy (for element 'X')
+    Ambiguous Element assignment strategy (for element 'X')
     ~~~~~~~~~~~~~~~~~~~~~~
     If X appears together with other A-site lanthanides → A-site.
     If X appears together with known B-site cations only → B-site.
@@ -273,7 +224,7 @@ def _comp_to_str(comp: Dict[str, float]) -> str:
     repeated symbol count (rounded to nearest 0.05 step) — BUT that would
     break the existing feature code.
 
-    Instead we store the absolute stoichiometries separately as
+    Instead, we store the absolute stoichiometries separately as
     ``a_stoich_json`` / ``b_stoich_json`` columns, and generate a
     mole-fraction-based Sample A / Sample B string for the feature builder.
 
@@ -284,7 +235,7 @@ def _comp_to_str(comp: Dict[str, float]) -> str:
 
 
 def _comp_to_fractions(comp: Dict[str, float]) -> Dict[str, float]:
-    """Normalise absolute stoichiometries to mole fractions summing to 1."""
+    """Normalize absolute stoichiometries to mole fractions summing to 1."""
     total = sum(comp.values())
     if total == 0:
         return {}
@@ -484,7 +435,7 @@ if __name__ == '__main__':
                   'Lattice Parameter (Å)', 'compound_type',
                   '_comp_key']].head(20).to_string(index=False))
     print(f"\nTotal rows: {len(result)}")
-    print(f"Unkown error({len(unknown_err)}): {unknown_err}")
+    print(f"Unknown error({len(unknown_err)}): {unknown_err}")
     print(f"Structure error({len(struct_err)}): {struct_err}")
     print(f"Stoich error({len(stoic_err)}): {stoic_err}")
     print(f"Lattice error({len(latt_err)}): {latt_err}")

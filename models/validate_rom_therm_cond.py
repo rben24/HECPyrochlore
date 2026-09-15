@@ -78,7 +78,7 @@ def main():
 
     # Convert to DataFrame for easier labeling
     X_df = pd.DataFrame(X, columns=feat_names)
-    X_df['latt param'] = y
+    X_df['therm cond'] = y
 
     # Set style
     sns.set_theme(style='whitegrid')

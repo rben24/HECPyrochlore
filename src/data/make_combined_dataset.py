@@ -54,35 +54,15 @@ OUTPUT_FILE = OUT_DIR / 'combined_pyrochlore.csv'
 BASE_OUTPUT_FILE = OUT_DIR / 'pristine_pyrochlore.csv'
 HEC_OUTPUT_FILE = OUT_DIR / 'hec_pyrochlore.csv'
 
-# # ── element sets (shared with load_icsd.py) ───────────────────────────────────
-# KNOWN_A: frozenset = frozenset({
-#     'La', 'Ce', 'Pr', 'Nd', 'Sm', 'Eu', 'Gd', 'Tb', 'Dy',
-#     'Ho', 'Er', 'Tm', 'Yb', 'Lu', 'Y',
-# })
-# KNOWN_B: frozenset = frozenset({
-#     'Ti', 'Zr', 'Hf', 'Sn', 'Ir', 'Nb',
-# })
-#
-# # Pyrochlore stability window for r_A/r_B (Shannon ionic radii)
-# # Outside this range → likely defect-fluorite or other polymorph
-# _RA_RB_MIN = 1.40
-# _RA_RB_MAX = 1.90
-
 # ── canonical columns ─────────────────────────────────────────────────────────
 CANONICAL_COLS = globals.CANONICAL_COLS
 PRISTINE_COLS = globals.PRISTINE_COLS
 HEC_COLS = globals.HEC_COLS
 
-# # ── compound-type constants ───────────────────────────────────────────────────
-# PRISTINE       = 'pristine'
-# HIGH_ENTROPY   = 'high_entropy'
-# NON_PYROCHLORE = 'non_pyrochlore'
-
-
 # ── shared helpers ────────────────────────────────────────────────────────────
 
 def _clean_element_list(raw: str) -> float | str:
-    """Normalise element strings: strip whitespace, remove unicode superscripts."""
+    """Normalize element strings: strip whitespace, remove Unicode superscripts."""
     if pd.isna(raw):
         return np.nan
     cleaned = re.sub(r'[⁰¹²³⁴⁵⁶⁷⁸⁹₀₁₂₃₄₅₆₇₈₉⁺⁻]+', '', str(raw))
@@ -151,7 +131,7 @@ def classify_sample(sample_a: str, sample_b: str) -> str:
     if not a_elems or not b_elems:
         return globals.NON_PYROCHLORE
 
-    # All A-site elements must be recognised rare-earth / Y cations
+    # All A-site elements must be recognized rare-earth / Y cations
     if any(e not in globals.KNOWN_A for e in a_elems):
         return globals.NON_PYROCHLORE
 
@@ -412,6 +392,11 @@ def load_aflow_source() -> pd.DataFrame:
 
     aflow_path = RAW_DIR / 'aflow_pyrochlore_data_comb.csv'
     df = load_aflow(filepath=aflow_path, verbose=True)
+
+    # subtract 0.2 from Lattice Parameter (A) for every row
+    # this normalizes the aflow data to be consistent with the other sources
+    df["Lattice Parameter (Å)"] = df["Lattice Parameter (Å)"] - 0.2
+
     log.info(
         f"AFlow: {len(df)} usable rows "
         f"({(df['compound_type']=='pristine').sum()} pristine, "
@@ -572,9 +557,9 @@ def build_single_phase_dataset(save: bool = True) -> pd.DataFrame:
         # (load_safin, PRISTINE_COLS, 'Safin experimental'),
         # (load_nlm, None, 'notebookLM literature'),
         # (load_parent_components, None, 'Parent components'),
-        # (load_icsd_source, None, 'ICSD database'),
+        (load_icsd_source, None, 'ICSD database'),
         (load_aflow_source, None, 'AFlow database'),
-        # (load_mp_source, None, 'Materials Project Database'),
+        (load_mp_source, None, 'Materials Project Database'),
         # (load_jordan_source, None, 'Jordan\'s data'),
         (load_lit_ext_source, None, 'Literature Extraction')
     ]:
@@ -880,11 +865,12 @@ def build_high_entropy_dataset(save: bool = True) -> pd.DataFrame:
 
 if __name__ == '__main__':
     # df = build_combined_dataset(save=True)
-    # df = build_single_phase_dataset(save=True)
-    df = build_high_entropy_dataset(save=True)
+    df = build_single_phase_dataset(save=True)
+    # df = build_high_entropy_dataset(save=True)
     print("\nSample rows:")
     print(df[['Composition', 'Sample A', 'Sample B',
               'Thermal Conductivity (W/m/K)', 'Lattice Parameter (Å)',
+              'Vickers Hardness (GPa)', 'CTE (K^-1)',
               'compound_type', 'data_source']].head().to_string(index=False))
 
     # df = load_jordan_source()
